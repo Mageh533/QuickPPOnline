@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_ymwr0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g5lgy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkbay"]
 atlas = ExtResource("1_ymwr0")
-region = Rect2(0, 0, 68, 64)
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3pkad"]
 atlas = ExtResource("1_ymwr0")
@@ -82,7 +82,7 @@ region = Rect2(506, 719, 63, 61)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g5lgy")
+"texture": SubResource("AtlasTexture_qkbay")
 }],
 "loop": true,
 "name": &"default",
@@ -230,7 +230,8 @@ size = Vector2(64.25, 60.25)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7lx3p")
+animation = &"joined_above_below"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.125, -3.125)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_7kfrt")
