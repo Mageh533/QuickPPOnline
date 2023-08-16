@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://b526hnm8iba4l"]
+
+[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_ymwr0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5lgy"]
+atlas = ExtResource("1_ymwr0")
+region = Rect2(0, 0, 68, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dqee"]
+atlas = ExtResource("1_ymwr0")
+region = Rect2(74, 0, 63, 73)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7lx3p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5lgy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_above",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_above_below",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_above_below_left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_above_below_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_above_left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_above_left_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_above_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_all",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dqee")
+}],
+"loop": true,
+"name": &"joined_below",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_below_left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_below_left_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_below_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_left_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"joined_right",
+"speed": 5.0
+}]
+
+[node name="RedPuyo" type="RigidBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7lx3p")
+animation = &"joined_all"
