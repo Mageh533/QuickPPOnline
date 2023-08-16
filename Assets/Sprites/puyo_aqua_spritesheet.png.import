@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1lgs81wy67hp"
-path="res://.godot/imported/puyo_aqua_tileset.png-357cdc6f0d523a781b9463d6e6efd986.ctex"
+path="res://.godot/imported/puyo_aqua_spritesheet.png-71844978a33d820e67500dcf13532635.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/puyo_aqua_tileset.png"
-dest_files=["res://.godot/imported/puyo_aqua_tileset.png-357cdc6f0d523a781b9463d6e6efd986.ctex"]
+source_file="res://Assets/Sprites/puyo_aqua_spritesheet.png"
+dest_files=["res://.godot/imported/puyo_aqua_spritesheet.png-71844978a33d820e67500dcf13532635.ctex"]
 
 [params]
 
