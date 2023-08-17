@@ -225,7 +225,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kfrt"]
-size = Vector2(15, 16)
+size = Vector2(30, 29)
 
 [node name="RedPuyo" type="Area2D"]
 disable_mode = 1
@@ -235,8 +235,10 @@ script = ExtResource("1_2hd31")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_onuvl")
+animation = &"joined_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_7kfrt")
 
 [node name="RayBottom" type="RayCast2D" parent="."]
@@ -245,9 +247,11 @@ collide_with_areas = true
 
 [node name="RayTop" type="RayCast2D" parent="."]
 target_position = Vector2(0, -50)
+collide_with_areas = true
 
 [node name="RayRight" type="RayCast2D" parent="."]
 target_position = Vector2(50, 0)
+collide_with_areas = true
 
 [node name="RayLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-50, 0)
