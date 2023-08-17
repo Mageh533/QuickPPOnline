@@ -61,6 +61,11 @@ turnRight={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="puyos"
+2d_physics/layer_2="walls"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
