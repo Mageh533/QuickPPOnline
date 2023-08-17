@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://b526hnm8iba4l"]
+[gd_scene load_steps=24 format=3 uid="uid://b526hnm8iba4l"]
 
+[ext_resource type="Script" path="res://Scripts/Game/RedPuyo.gd" id="1_2hd31"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_ymwr0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qkbay"]
@@ -224,15 +225,29 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kfrt"]
-size = Vector2(64.25, 60.25)
+size = Vector2(50, 52)
 
-[node name="RedPuyo" type="RigidBody2D"]
+[node name="RedPuyo" type="Area2D"]
+disable_mode = 1
+collision_mask = 2
+script = ExtResource("1_2hd31")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_onuvl")
-animation = &"joined_all"
-frame_progress = 0.668424
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_7kfrt")
+
+[node name="RayBottom" type="RayCast2D" parent="."]
+
+[node name="RayTop" type="RayCast2D" parent="."]
+target_position = Vector2(0, -50)
+
+[node name="RayRight" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+
+[node name="RayLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-50, 0)
+collide_with_areas = true
