@@ -11,9 +11,9 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("1_ymwr0")
 region = Rect2(144, 0, 63, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ayvyy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh0td"]
 atlas = ExtResource("1_ymwr0")
-region = Rect2(217, 0, 63, 64)
+region = Rect2(219, 0, 60, 68)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t22sl"]
 atlas = ExtResource("1_ymwr0")
@@ -99,7 +99,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ayvyy")
+"texture": SubResource("AtlasTexture_wh0td")
 }],
 "loop": true,
 "name": &"joined_above_below",
@@ -232,10 +232,10 @@ disable_mode = 1
 collision_mask = 2
 script = ExtResource("1_2hd31")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.7, 0.7)
+[node name="PuyoSprites" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_onuvl")
-animation = &"joined_right"
+animation = &"joined_above_below"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
