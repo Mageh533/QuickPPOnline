@@ -206,7 +206,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"joined_right",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -220,7 +220,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"popped",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kfrt"]
@@ -230,6 +230,8 @@ size = Vector2(64.25, 60.25)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_onuvl")
+animation = &"joined_all"
+frame_progress = 0.668424
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
