@@ -3,8 +3,10 @@ extends Area2D
 var tile_size = 58
 
 var moving = false
+var popped = false
 var type = "RED"
 var connected = []
+var connectedCount = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,9 +15,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if !moving:
+	if !moving and !popped:
 		searchOtherPuyos()
-
+		if connectedCount > 3:
+			pop()
 
 # 'Gravity' for the puyos that works similarly to the actual games, also stays within the tilemap
 func _on_gravity_timer_timeout():
@@ -41,6 +44,7 @@ func searchOtherPuyos():
 			connected.append("RIGHT")
 	updateSpriteFrame()
 
+# Update the sprite animation depending on how the its connected to other puyos
 func updateSpriteFrame():
 	if(connected.size() < 1):
 		$PuyoSprites.play("default")
@@ -74,3 +78,28 @@ func updateSpriteFrame():
 		$PuyoSprites.play("joined_below_left_right")
 	else:
 		$PuyoSprites.play("joined_all")
+
+# Starts timers to animate the puyo being popped and removes them
+func pop():
+	popped = true
+	$PuyoSprites.play("popped_start")
+	$PoppedPreTimer.start()
+	$PoppedTimer.start()
+
+func _on_popped_pre_timer_timeout():
+	if($PuyoSprites.visible):
+		$PuyoSprites.visible = false
+	else:
+		$PuyoSprites.visible = true
+	
+	if $PoppedPreTimer.wait_time > 0.01:
+		$PoppedPreTimer.wait_time = $PoppedPreTimer.wait_time - 0.01
+		$PoppedPreTimer.start()
+
+
+func _on_popped_timer_timeout():
+	$PoppedPreTimer.stop()
+	$PuyoSprites.visible = true
+	$PuyoSprites.play("popped_end")
+	await $PuyoSprites.animation_finished
+	queue_free()

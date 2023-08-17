@@ -67,10 +67,6 @@ region = Rect2(861, 0, 69, 64)
 atlas = ExtResource("1_ymwr0")
 region = Rect2(285, 0, 70, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jblk1"]
-atlas = ExtResource("1_ymwr0")
-region = Rect2(0, 867, 70, 52)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpnm8"]
 atlas = ExtResource("1_ymwr0")
 region = Rect2(433, 718, 62, 61)
@@ -78,6 +74,10 @@ region = Rect2(433, 718, 62, 61)
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8t3j"]
 atlas = ExtResource("1_ymwr0")
 region = Rect2(506, 719, 63, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jblk1"]
+atlas = ExtResource("1_ymwr0")
+region = Rect2(0, 867, 70, 52)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_onuvl"]
 animations = [{
@@ -211,16 +211,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jblk1")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_bpnm8")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h8t3j")
 }],
+"loop": false,
+"name": &"popped_end",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jblk1")
+}],
 "loop": true,
-"name": &"popped",
+"name": &"popped_start",
 "speed": 1.0
 }]
 
@@ -235,7 +240,6 @@ script = ExtResource("1_2hd31")
 [node name="PuyoSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_onuvl")
-animation = &"joined_above_below"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)
@@ -261,4 +265,13 @@ collide_with_areas = true
 wait_time = 0.05
 autostart = true
 
+[node name="PoppedPreTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="PoppedTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
+[connection signal="timeout" from="PoppedPreTimer" to="." method="_on_popped_pre_timer_timeout"]
+[connection signal="timeout" from="PoppedTimer" to="." method="_on_popped_timer_timeout"]
