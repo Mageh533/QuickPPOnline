@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=18 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/Sounds/chain1.wav" id="5_hwduy"]
 [ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/YellowPuyo.tscn" id="5_mwb1a"]
 [ext_resource type="AudioStream" uid="uid://mwxcrh8yylc6" path="res://Assets/Sounds/chain2.wav" id="6_5l2rs"]
+[ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/PurplePuyo.tscn" id="7_gf4mj"]
 [ext_resource type="AudioStream" uid="uid://tvki8clelukf" path="res://Assets/Sounds/chain3.wav" id="7_x8yts"]
 [ext_resource type="AudioStream" uid="uid://gmnfjf5to2nx" path="res://Assets/Sounds/chain4.wav" id="8_5sh6p"]
 [ext_resource type="AudioStream" uid="uid://i48fl00ahthh" path="res://Assets/Sounds/chain5.wav" id="9_6u5m2"]
@@ -63,6 +64,7 @@ scenes/2/scene = ExtResource("3_bow3m")
 scenes/3/scene = ExtResource("4_fl7ps")
 scenes/4/scene = ExtResource("5_mwb1a")
 scenes/5/scene = ExtResource("2_m1opx")
+scenes/6/scene = ExtResource("7_gf4mj")
 
 [sub_resource type="TileSet" id="TileSet_nr84w"]
 tile_size = Vector2i(58, 58)
@@ -88,7 +90,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(524288, 1, 196608, 589824, 1, 131072, 655360, 1, 327680, 327681, 1, 131072, 393217, 1, 196608, 458753, 1, 262144, 524289, 1, 196608, 589825, 1, 131072, 655361, 1, 327680, 524290, 1, 196608, 589826, 1, 131072, 655362, 1, 327680, 65536, 1, 262144, 458752, 1, 262144, 262145, 1, 327680, 458754, 1, 262144)
+layer_1/tile_data = PackedInt32Array(524288, 1, 196608, 589824, 1, 131072, 655360, 1, 327680, 458753, 1, 262144, 524289, 1, 196608, 589825, 1, 131072, 655361, 1, 327680, 524290, 1, 196608, 589826, 1, 131072, 655362, 1, 327680, 458752, 1, 262144, 458754, 1, 262144, 393216, 1, 393216, 393217, 1, 393216, 393218, 1, 393216, 196608, 1, 393216, 327681, 1, 262144, 327682, 1, 196608, 262146, 1, 131072, 262145, 1, 327680)
 
 [node name="PoppingTimer" type="Timer" parent="."]
 wait_time = 0.5
