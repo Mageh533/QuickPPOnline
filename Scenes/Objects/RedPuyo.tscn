@@ -232,10 +232,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kfrt"]
 size = Vector2(30, 29)
 
-[node name="RedPuyo" type="Area2D"]
+[node name="RedPuyo" type="Area2D" groups=["Puyos"]]
 disable_mode = 1
 collision_mask = 2
 script = ExtResource("1_2hd31")
+type = "RED"
 
 [node name="PuyoSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.85, 0.85)
