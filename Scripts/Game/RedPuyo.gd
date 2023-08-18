@@ -92,10 +92,11 @@ func updateSpriteFrame():
 
 # Starts timers to animate the puyo blinking and popped and removes them
 func pop():
-	popped = true
-	$PuyoSprites.play("popped_start")
-	$PoppedPreTimer.start()
-	$PoppedTimer.start()
+	if !popped:
+		popped = true
+		$PuyoSprites.play("popped_start")
+		$PoppedPreTimer.start()
+		$PoppedTimer.start()
 
 
 func _on_popped_pre_timer_timeout():

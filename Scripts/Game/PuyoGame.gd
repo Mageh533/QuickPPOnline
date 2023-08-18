@@ -2,6 +2,7 @@ extends Node2D
 
 var puyosObjectArray = []
 var puyosToPop = [] # To pop all of them at the same time
+var connectedPuyos = []
 var checkPopTimer = false
 
 func _ready():
@@ -26,14 +27,12 @@ func _on_puyo_connected():
 
 # Function checks if 4 or more puyos are connected, if so runs their pop function
 func _on_popping_timer_timeout():
-	var connectedPuyos = []
+	puyosToPop.clear()
 	for puyo in puyosObjectArray:
 		connectedPuyos.clear()
-		if puyo.connected.size() > 0 and !puyosToPop.has(puyo):
-			connectedPuyos.append(puyo)
-			connectedPuyos.append_array(puyo.connected)
-			
-		if connectedPuyos.size() > 4:
+		findOutAllConnected(puyo)
+		
+		if connectedPuyos.size() > 3:
 			print(connectedPuyos.size())
 			puyosToPop.append_array(connectedPuyos)
 			
@@ -41,5 +40,8 @@ func _on_popping_timer_timeout():
 		puyoToPop.pop()
 	checkPopTimer = false
 	
-func findOutAllConnected():
-	pass
+func findOutAllConnected(puyo):
+	if puyo.connected.size() > 0 and !connectedPuyos.has(puyo):
+		connectedPuyos.append(puyo)
+		for otherPuyo in puyo.connected:
+			findOutAllConnected(otherPuyo)
