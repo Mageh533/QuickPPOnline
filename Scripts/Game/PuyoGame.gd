@@ -33,7 +33,6 @@ func _on_popping_timer_timeout():
 		findOutAllConnected(puyo)
 		
 		if connectedPuyos.size() > 3:
-			print(connectedPuyos.size())
 			puyosToPop.append_array(connectedPuyos)
 			
 	for puyoToPop in puyosToPop:
