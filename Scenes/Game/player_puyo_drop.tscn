@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://rq2bwcbvu8p4"]
+[gd_scene load_steps=6 format=3 uid="uid://rq2bwcbvu8p4"]
 
 [ext_resource type="Script" path="res://Scripts/Game/PlayerPuyoDrop.gd" id="1_gehna"]
+[ext_resource type="AudioStream" uid="uid://dvqogtw6c6as" path="res://Assets/Sounds/pieceland.wav" id="2_o25ey"]
+[ext_resource type="AudioStream" uid="uid://dafv8dap2l47s" path="res://Assets/Sounds/piecechange.wav" id="3_c2xn7"]
+[ext_resource type="AudioStream" uid="uid://ddqpkof6ib82m" path="res://Assets/Sounds/piecemove.wav" id="4_faqa5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwpa4"]
 size = Vector2(91, 29)
 
 [node name="PlayerPuyoDrop" type="Area2D"]
+rotation = 1.5708
 collision_mask = 3
 script = ExtResource("1_gehna")
 
@@ -13,38 +17,51 @@ script = ExtResource("1_gehna")
 position = Vector2(30.5, -1.5)
 shape = SubResource("RectangleShape2D_cwpa4")
 
-[node name="RayBLeft" type="RayCast2D" parent="."]
+[node name="Puyo1Spawn" type="Marker2D" parent="."]
+
+[node name="Puyo2Spawn" type="Marker2D" parent="."]
+position = Vector2(58, 0)
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="PieceLand" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("2_o25ey")
+
+[node name="PieceRotate" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("3_c2xn7")
+
+[node name="PieceMove" type="AudioStreamPlayer" parent="SoundEffects"]
+stream = ExtResource("4_faqa5")
+
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="RayBLeft" type="RayCast2D" parent="RayCasts"]
 collision_mask = 3
 collide_with_areas = true
 
-[node name="RayBRight" type="RayCast2D" parent="."]
+[node name="RayBRight" type="RayCast2D" parent="RayCasts"]
 position = Vector2(58, 0)
 collision_mask = 3
 collide_with_areas = true
 
-[node name="RayLeft" type="RayCast2D" parent="."]
+[node name="RayLeft" type="RayCast2D" parent="RayCasts"]
 target_position = Vector2(-50, 0)
 collision_mask = 3
 collide_with_areas = true
 
-[node name="RayRight" type="RayCast2D" parent="."]
+[node name="RayRight" type="RayCast2D" parent="RayCasts"]
 position = Vector2(58, 0)
 target_position = Vector2(50, 0)
 collision_mask = 3
 collide_with_areas = true
 
-[node name="RayTRight" type="RayCast2D" parent="."]
+[node name="RayTRight" type="RayCast2D" parent="RayCasts"]
 position = Vector2(58, 0)
 target_position = Vector2(0, -50)
 collision_mask = 3
 collide_with_areas = true
 
-[node name="RayTLeft" type="RayCast2D" parent="."]
+[node name="RayTLeft" type="RayCast2D" parent="RayCasts"]
 target_position = Vector2(0, -50)
 collision_mask = 3
 collide_with_areas = true
-
-[node name="Puyo1Spawn" type="Marker2D" parent="."]
-
-[node name="Puyo2Spawn" type="Marker2D" parent="."]
-position = Vector2(58, 0)
