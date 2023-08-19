@@ -1,19 +1,64 @@
-[gd_scene load_steps=18 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=26 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
-[ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/RedPuyo.tscn" id="2_m1opx"]
-[ext_resource type="PackedScene" uid="uid://4b8n5t827yci" path="res://Scenes/Objects/BluePuyo.tscn" id="3_bow3m"]
-[ext_resource type="PackedScene" uid="uid://4t300lgrkwhu" path="res://Scenes/Objects/GreenPuyo.tscn" id="4_fl7ps"]
+[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_t6ghk"]
+[ext_resource type="PackedScene" uid="uid://4b8n5t827yci" path="res://Scenes/Objects/Puyos/BluePuyo.tscn" id="3_syxk4"]
+[ext_resource type="PackedScene" uid="uid://4t300lgrkwhu" path="res://Scenes/Objects/Puyos/GreenPuyo.tscn" id="4_0opt5"]
+[ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/Puyos/YellowPuyo.tscn" id="5_b2mlv"]
 [ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/Sounds/chain1.wav" id="5_hwduy"]
-[ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/YellowPuyo.tscn" id="5_mwb1a"]
 [ext_resource type="AudioStream" uid="uid://mwxcrh8yylc6" path="res://Assets/Sounds/chain2.wav" id="6_5l2rs"]
-[ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/PurplePuyo.tscn" id="7_gf4mj"]
+[ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="6_rg22k"]
 [ext_resource type="AudioStream" uid="uid://tvki8clelukf" path="res://Assets/Sounds/chain3.wav" id="7_x8yts"]
+[ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/Puyos/PurplePuyo.tscn" id="7_xer8m"]
 [ext_resource type="AudioStream" uid="uid://gmnfjf5to2nx" path="res://Assets/Sounds/chain4.wav" id="8_5sh6p"]
 [ext_resource type="AudioStream" uid="uid://i48fl00ahthh" path="res://Assets/Sounds/chain5.wav" id="9_6u5m2"]
+[ext_resource type="PackedScene" uid="uid://rq2bwcbvu8p4" path="res://Scenes/Game/player_puyo_drop.tscn" id="9_l6p23"]
 [ext_resource type="AudioStream" uid="uid://27mspu334ol5" path="res://Assets/Sounds/chain6.wav" id="10_8pul3"]
 [ext_resource type="AudioStream" uid="uid://cg4mht1v1w3dy" path="res://Assets/Sounds/chain7plus.wav" id="11_4vtwm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(357, 787, 70, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hdei"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(430, 792, 68, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lndgx"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(502, 792, 68, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt50v"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(572, 793, 71, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74owv"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(644, 793, 71, 61)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wxp1r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl8be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hdei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lndgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt50v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74owv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3prtr"]
 texture = ExtResource("1_3by7s")
@@ -60,11 +105,12 @@ texture_region_size = Vector2i(58, 59)
 5:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ip3n8"]
-scenes/2/scene = ExtResource("3_bow3m")
-scenes/3/scene = ExtResource("4_fl7ps")
-scenes/4/scene = ExtResource("5_mwb1a")
-scenes/5/scene = ExtResource("2_m1opx")
-scenes/6/scene = ExtResource("7_gf4mj")
+scenes/1/scene = ExtResource("9_l6p23")
+scenes/2/scene = ExtResource("3_syxk4")
+scenes/3/scene = ExtResource("4_0opt5")
+scenes/4/scene = ExtResource("5_b2mlv")
+scenes/5/scene = ExtResource("6_rg22k")
+scenes/6/scene = ExtResource("7_xer8m")
 
 [sub_resource type="TileSet" id="TileSet_nr84w"]
 tile_size = Vector2i(58, 58)
@@ -77,20 +123,26 @@ sources/1 = SubResource("TileSetScenesCollectionSource_ip3n8")
 script = ExtResource("1_tfcgd")
 metadata/_edit_horizontal_guides_ = [-51.0]
 
+[node name="LoseTile" type="AnimatedSprite2D" parent="."]
+position = Vector2(152, 70)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_wxp1r")
+frame_progress = 0.774176
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(44, 45)
 scale = Vector2(0.75, 0.75)
 tile_set = SubResource("TileSet_nr84w")
 format = 2
 layer_0/name = "Grid"
-layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, 0, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 196608, 0, -65535, 65536, 0, 1, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 196608, 0, -65534, 65536, 0, 327682, 0, 0, 393218, 0, 0, 458754, 0, 0, 524290, 0, 0, 589826, 0, 0, 655362, 0, 0, 720898, 0, 0, 786434, 196608, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 589827, 0, 0, 655363, 0, 0, 720899, 0, 0, 786435, 196608, 0, -65532, 65536, 0, 4, 0, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 589828, 0, 0, 655364, 0, 0, 720900, 0, 0, 786436, 196608, 0, -65531, 65536, 0, 5, 0, 0, 65541, 0, 0, 131077, 0, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 458757, 0, 0, 524293, 0, 0, 589829, 0, 0, 655365, 0, 0, 720901, 0, 0, 786437, 196608, 0, 6, 262144, 0, 65542, 262144, 0, 131078, 262144, 0, 196614, 262144, 0, 262150, 262144, 0, 327686, 262144, 0, 393222, 262144, 0, 458758, 262144, 0, 524294, 262144, 0, 589830, 262144, 0, 655366, 262144, 0, 720902, 262144, 0, 851967, 196608, 1, 786438, 262144, 1, -1, 65536, 1, -65530, 131072, 1, 7, 131072, 0, 65543, 131072, 0, 65545, 327680, 1, 9, 262144, 0, 196618, 262144, 0, 262154, 262144, 0, 262152, 131072, 0, 196616, 327680, 0, 196615, 196608, 1, 131079, 131072, 0, 65546, 131072, 1, 131082, 262144, 0, 327689, 196608, 0, -65528, 65536, 0, -65529, 65536, 1, -65527, 131072, 1, 327688, 196608, 1, 327690, 262144, 1, 2, 0, 0, 65539, 0, 0, 3, 0, 0, -65533, 65536, 0, 262146, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 262145, 0, 0, 196609, 0, 0, 131073, 0, 0, 65537, 0, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0)
+layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, 0, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 196608, 0, -65535, 65536, 0, 1, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 196608, 0, -65534, 65536, 0, 327682, 0, 0, 393218, 0, 0, 458754, 0, 0, 524290, 0, 0, 589826, 0, 0, 655362, 0, 0, 720898, 0, 0, 786434, 196608, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 589827, 0, 0, 655363, 0, 0, 720899, 0, 0, 786435, 196608, 0, -65532, 65536, 0, 4, 0, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 589828, 0, 0, 655364, 0, 0, 720900, 0, 0, 786436, 196608, 0, -65531, 65536, 0, 5, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 458757, 0, 0, 524293, 0, 0, 589829, 0, 0, 655365, 0, 0, 720901, 0, 0, 786437, 196608, 0, 6, 262144, 0, 65542, 262144, 0, 131078, 262144, 0, 196614, 262144, 0, 262150, 262144, 0, 327686, 262144, 0, 393222, 262144, 0, 458758, 262144, 0, 524294, 262144, 0, 589830, 262144, 0, 655366, 262144, 0, 720902, 262144, 0, 851967, 196608, 1, 786438, 262144, 1, -1, 65536, 1, -65530, 131072, 1, 7, 131072, 0, 65543, 131072, 0, 65545, 327680, 1, 9, 262144, 0, 196618, 262144, 0, 262154, 262144, 0, 262152, 131072, 0, 196616, 327680, 0, 196615, 196608, 1, 131079, 131072, 0, 65546, 131072, 1, 131082, 262144, 0, 327689, 196608, 0, -65528, 65536, 0, -65529, 65536, 1, -65527, 131072, 1, 327688, 196608, 1, 327690, 262144, 1, 2, 0, 0, -65533, 65536, 0, 262146, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 262145, 0, 0, 196609, 0, 0, 131073, 0, 0, 65537, 0, 0, 3, 0, 0, 131074, 0, 0, 196610, 0, 0, 196611, 0, 0, 131075, 0, 0, 65539, 0, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 131077, 0, 0, 262147, 0, 0, 262148, 0, 0, 196613, 0, 0, 65541, 0, 0, 65538, 0, 0)
 layer_1/name = "Puyos"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(524288, 1, 196608, 589824, 1, 131072, 655360, 1, 327680, 458753, 1, 262144, 524289, 1, 196608, 589825, 1, 131072, 655361, 1, 327680, 524290, 1, 196608, 589826, 1, 131072, 655362, 1, 327680, 458752, 1, 262144, 458754, 1, 262144, 393216, 1, 393216, 393217, 1, 393216, 393218, 1, 393216, 196608, 1, 393216, 327681, 1, 262144, 327682, 1, 196608, 262146, 1, 131072, 262145, 1, 327680)
+layer_1/tile_data = PackedInt32Array(393216, 1, 393216, 458752, 1, 262144, 524288, 1, 196608, 589824, 1, 131072, 655360, 1, 327680, 262145, 1, 131072, 327681, 1, 196608, 393217, 1, 393216, 458753, 1, 262144, 524289, 1, 196608, 589825, 1, 131072, 655361, 1, 327680, 262143, 1, 393216, 458751, 1, 393216, 524287, 1, 262144, 589823, 1, 196608, 655359, 1, 131072, 720895, 1, 327680, 262144, 1, 327680, 327680, 1, 262144, 65539, 1, 327680, 65540, 1, 196608, 65538, 1, 65536)
 
 [node name="PoppingTimer" type="Timer" parent="."]
 wait_time = 0.5
