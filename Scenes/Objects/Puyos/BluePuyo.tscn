@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://4b8n5t827yci"]
 
-[ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/RedPuyo.tscn" id="1_mp0ix"]
+[ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="1_mp0ix"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_2q0q7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
