@@ -10,9 +10,10 @@ var rotatedState = "VERTICAL"
 func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size/2
+	bottomRayCast = get_node("RayBottom")
 
 
-func _process(delta):
+func _process(_delta):
 	var rotationInDeg = rad_to_deg(transform.get_rotation())
 	if rotationInDeg == 90 or rotationInDeg == -270:
 		rotatedState = "VERTICAL"
@@ -32,13 +33,20 @@ func _process(delta):
 
 
 func _on_gravity_timer_timeout():
-	position += Vector2.DOWN * tile_size
+	if rotatedState == "VERTICAL":
+		if !bottomRayCast.is_colliding():
+			position += Vector2.DOWN * tile_size
+	elif rotatedState == "HORIZONTAL":
+		if !bottomRayCast.is_colliding() and !bottomRayCast2.is_colliding():
+			position += Vector2.DOWN * tile_size
 
 func playerControls():
 	if Input.is_action_just_released("right"):
-		position += Vector2.RIGHT * tile_size
+		if $RayRight.is_colliding():
+			position += Vector2.RIGHT * tile_size
 	if Input.is_action_just_released("left"):
-		position += Vector2.LEFT * tile_size
+		if !$RayLeft.is_colliding():
+			position += Vector2.LEFT * tile_size
 	if Input.is_action_pressed("down"):
 		$GravityTimer.wait_time = fastDropSpeed
 	if Input.is_action_just_released("down"):
