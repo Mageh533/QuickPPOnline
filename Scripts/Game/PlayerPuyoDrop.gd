@@ -14,17 +14,17 @@ func _ready():
 
 func _process(delta):
 	var rotationInDeg = rad_to_deg(transform.get_rotation())
-	if rotationInDeg == 90:
+	if rotationInDeg == 90 or rotationInDeg == -270:
 		rotatedState = "VERTICAL"
 		bottomRayCast = get_node("RayBottom")
-	elif rotationInDeg == 0:
+	elif rotationInDeg == 0 or rotationInDeg == 360 or rotationInDeg == -360:
 		rotatedState = "HORIZONTAL"
 		bottomRayCast = get_node("RayBLeft")
 		bottomRayCast2 = get_node("RayBRight")
-	elif rotationInDeg == -90:
+	elif rotationInDeg == -90 or rotationInDeg == 270:
 		rotatedState = "VERTICAL"
 		bottomRayCast = get_node("RayTop")
-	elif rotationInDeg == 180:
+	elif rotationInDeg == 180 or rotationInDeg == -180:
 		rotatedState = "HORIZONTAL"
 		bottomRayCast = get_node("RayTLeft")
 		bottomRayCast2 = get_node("RayTRight")
