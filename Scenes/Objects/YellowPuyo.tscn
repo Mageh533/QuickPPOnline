@@ -218,7 +218,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"popped_end",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -234,3 +234,4 @@ type = "YELLOW"
 
 [node name="PuyoSprites" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_2b3ey")
+animation = &"default"
