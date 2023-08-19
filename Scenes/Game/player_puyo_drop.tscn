@@ -6,7 +6,6 @@
 size = Vector2(91, 29)
 
 [node name="PlayerPuyoDrop" type="Area2D"]
-collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_gehna")
 
@@ -15,23 +14,35 @@ position = Vector2(30.5, -1.5)
 shape = SubResource("RectangleShape2D_cwpa4")
 
 [node name="RayBLeft" type="RayCast2D" parent="."]
+collision_mask = 3
+collide_with_areas = true
 
 [node name="RayBRight" type="RayCast2D" parent="."]
 position = Vector2(58, 0)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="RayLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-50, 0)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="RayRight" type="RayCast2D" parent="."]
 position = Vector2(58, 0)
 target_position = Vector2(50, 0)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="RayTRight" type="RayCast2D" parent="."]
 position = Vector2(58, 0)
 target_position = Vector2(0, -50)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="RayTLeft" type="RayCast2D" parent="."]
 target_position = Vector2(0, -50)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="GravityTimer" type="Timer" parent="."]
 wait_time = 2.0
