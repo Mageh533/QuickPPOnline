@@ -12,9 +12,7 @@ var connectedPositions = []
 var connected = []
 
 func _ready():
-	position = position.snapped(Vector2.ONE * tile_size)
-	position += Vector2.ONE * tile_size/2
-
+	basicSetup()
 
 func _process(_delta):
 	if !moving and !popped:
@@ -98,6 +96,9 @@ func pop():
 		$PoppedPreTimer.start()
 		$PoppedTimer.start()
 
+func basicSetup():
+	position = position.snapped(Vector2.ONE * tile_size)
+	position += -Vector2.ONE * tile_size/2
 
 func _on_popped_pre_timer_timeout():
 	if($PuyoSprites.visible):
