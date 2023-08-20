@@ -3,15 +3,22 @@ extends Area2D
 var tile_size = 58
 var type = "Player"
 @export var fallSpeed = 100
-var fastDrop = false
+@export var moveCooldownTime = 0.1
+@export var redPuyo: PackedScene
+@export var greenPuyo: PackedScene
+@export var yellowPuyo: PackedScene
+@export var bluePuyo: PackedScene
+@export var purplePuyo: PackedScene
 
 var bottomRaycasts = []
 var leftRaycasts = []
 var rightRaycasts = []
 
+var fastDrop = false
 var leftWallCollide = false
 var rightWallCollide = false
 var groundCollide = false
+var moveCooldown = false
 
 var startingPos
 
@@ -42,14 +49,22 @@ func _process(delta):
 		pieceLand()
 
 func playerControls():
-	if Input.is_action_just_pressed("right"):
-		if !rightWallCollide:
-			$SoundEffects/PieceMove.play()
-			position += Vector2.RIGHT * tile_size
-	if Input.is_action_just_pressed("left"):
-		if !leftWallCollide:
-			$SoundEffects/PieceMove.play()
-			position += Vector2.LEFT * tile_size
+	if Input.is_action_pressed("right"):
+		if !moveCooldown:
+			moveCooldown = true
+			await get_tree().create_timer(moveCooldownTime).timeout
+			if !rightWallCollide:
+				$SoundEffects/PieceMove.play()
+				position += Vector2.RIGHT * tile_size
+			moveCooldown = false
+	if Input.is_action_pressed("left"):
+		if !moveCooldown:
+			moveCooldown = true
+			await get_tree().create_timer(moveCooldownTime).timeout
+			if !leftWallCollide:
+				$SoundEffects/PieceMove.play()
+				position += Vector2.LEFT * tile_size
+			moveCooldown = false
 	if Input.is_action_pressed("down"):
 		fastDrop = true
 	if Input.is_action_just_released("down"):
@@ -112,4 +127,7 @@ func checkForRoationClipping():
 
 func pieceLand():
 	$SoundEffects/PieceLand.play()
+	var puyoSpawn = redPuyo.instantiate()
+	puyoSpawn.position = $Puyo1Spawn.position
+	add_child(puyoSpawn)
 	position = startingPos
