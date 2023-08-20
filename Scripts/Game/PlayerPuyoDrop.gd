@@ -17,6 +17,7 @@ var leftWallCollide = false
 var rightWallCollide = false
 var groundCollide = false
 var moveCooldown = false
+var landCooldown = false
 
 var startingPos
 
@@ -52,7 +53,11 @@ func _process(delta):
 	
 	if groundCollide:
 		groundCollide = false
-		pieceLand()
+		if !landCooldown:
+			landCooldown = true
+			pieceLand()
+			await get_tree().create_timer(0.2).timeout
+			landCooldown = false
 
 func playerControls():
 	if Input.is_action_pressed("right"):
@@ -146,9 +151,11 @@ func pieceLand():
 	$SoundEffects/PieceLand.play()
 	var puyo1 = currentPuyos[0].instantiate()
 	var puyo2 = currentPuyos[1].instantiate()
-	puyo1.position = $Puyo1Spawn.position
-	puyo2.position = $Puyo2Spawn.position
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
+	puyo1.global_position = $Puyo1Spawn.global_position
+	puyo2.global_position = $Puyo2Spawn.global_position
+	puyo1.basicSetup()
+	puyo2.basicSetup()
 	position = startingPos
 	swapPuyos()
