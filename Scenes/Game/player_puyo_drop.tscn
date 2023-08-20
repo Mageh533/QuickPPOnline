@@ -41,7 +41,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bs3e0")
 }],
 "loop": true,
-"name": &"BLUE",
+"name": &"BluePuyo",
 "speed": 5.0
 }, {
 "frames": [{
@@ -49,7 +49,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_rnhu7")
 }],
 "loop": true,
-"name": &"GREEN",
+"name": &"GreenPuyo",
 "speed": 5.0
 }, {
 "frames": [{
@@ -57,7 +57,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_iqvlf")
 }],
 "loop": true,
-"name": &"PURPLE",
+"name": &"PurplePuyo",
 "speed": 5.0
 }, {
 "frames": [{
@@ -65,7 +65,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_qkbay")
 }],
 "loop": false,
-"name": &"RED",
+"name": &"RedPuyo",
 "speed": 5.0
 }, {
 "frames": [{
@@ -73,7 +73,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_wtghr")
 }],
 "loop": true,
-"name": &"YELLOW",
+"name": &"YellowPuyo",
 "speed": 5.0
 }]
 
@@ -83,15 +83,15 @@ script = ExtResource("1_gehna")
 PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"), ExtResource("5_taq0t"), ExtResource("4_toq3k"), ExtResource("6_c8h4w")])
 
 [node name="RemoteTransformP1" type="RemoteTransform2D" parent="."]
+scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../Puyo1Sprite")
 update_rotation = false
-update_scale = false
 
 [node name="RemoteTransformP2" type="RemoteTransform2D" parent="."]
 position = Vector2(58, 0)
-remote_path = NodePath("../Puyo1Sprite2")
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../Puyo2Sprite")
 update_rotation = false
-update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(30.5, -1.5)
@@ -150,11 +150,11 @@ collide_with_areas = true
 top_level = true
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
-animation = &"RED"
+animation = &"RedPuyo"
 
-[node name="Puyo1Sprite2" type="AnimatedSprite2D" parent="."]
+[node name="Puyo2Sprite" type="AnimatedSprite2D" parent="."]
 top_level = true
 position = Vector2(58, 0)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
-animation = &"RED"
+animation = &"RedPuyo"

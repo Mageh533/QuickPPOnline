@@ -27,8 +27,8 @@ func _ready():
 	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
 	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
 	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	$Puyo1Sprite.play(currentPuyos[0].name)
-	$Puyo2Sprite.play(currentPuyos[1].name)
+	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size/2
 
@@ -139,6 +139,8 @@ func swapPuyos():
 	nextPuyos.clear()
 	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
 	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 
 func pieceLand():
 	$SoundEffects/PieceLand.play()
