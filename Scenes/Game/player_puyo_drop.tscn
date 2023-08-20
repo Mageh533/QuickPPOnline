@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://rq2bwcbvu8p4"]
+[gd_scene load_steps=18 format=3 uid="uid://rq2bwcbvu8p4"]
 
 [ext_resource type="Script" path="res://Scripts/Game/PlayerPuyoDrop.gd" id="1_gehna"]
 [ext_resource type="AudioStream" uid="uid://dvqogtw6c6as" path="res://Assets/Sounds/pieceland.wav" id="2_o25ey"]
@@ -9,19 +9,89 @@
 [ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/Puyos/YellowPuyo.tscn" id="4_toq3k"]
 [ext_resource type="PackedScene" uid="uid://4b8n5t827yci" path="res://Scenes/Objects/Puyos/BluePuyo.tscn" id="5_taq0t"]
 [ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/Puyos/PurplePuyo.tscn" id="6_c8h4w"]
+[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="10_euy5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwpa4"]
 size = Vector2(91, 29)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
+atlas = ExtResource("10_euy5q")
+region = Rect2(0, 141, 64, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnhu7"]
+atlas = ExtResource("10_euy5q")
+region = Rect2(0, 68, 66, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqvlf"]
+atlas = ExtResource("10_euy5q")
+region = Rect2(0, 283, 66, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkbay"]
+atlas = ExtResource("10_euy5q")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtghr"]
+atlas = ExtResource("10_euy5q")
+region = Rect2(0, 210, 68, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vineh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs3e0")
+}],
+"loop": true,
+"name": &"BLUE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnhu7")
+}],
+"loop": true,
+"name": &"GREEN",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqvlf")
+}],
+"loop": true,
+"name": &"PURPLE",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkbay")
+}],
+"loop": false,
+"name": &"RED",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtghr")
+}],
+"loop": true,
+"name": &"YELLOW",
+"speed": 5.0
+}]
+
 [node name="PlayerPuyoDrop" type="Area2D"]
-rotation = 1.5708
 collision_mask = 3
 script = ExtResource("1_gehna")
-redPuyo = ExtResource("2_x0pfs")
-greenPuyo = ExtResource("3_m1d6f")
-yellowPuyo = ExtResource("4_toq3k")
-bluePuyo = ExtResource("5_taq0t")
-purplePuyo = ExtResource("6_c8h4w")
+PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"), ExtResource("5_taq0t"), ExtResource("4_toq3k"), ExtResource("6_c8h4w")])
+
+[node name="RemoteTransformP1" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Puyo1Sprite")
+update_rotation = false
+update_scale = false
+
+[node name="RemoteTransformP2" type="RemoteTransform2D" parent="."]
+position = Vector2(58, 0)
+remote_path = NodePath("../Puyo1Sprite2")
+update_rotation = false
+update_scale = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(30.5, -1.5)
@@ -75,3 +145,16 @@ collide_with_areas = true
 target_position = Vector2(0, -50)
 collision_mask = 3
 collide_with_areas = true
+
+[node name="Puyo1Sprite" type="AnimatedSprite2D" parent="."]
+top_level = true
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_vineh")
+animation = &"RED"
+
+[node name="Puyo1Sprite2" type="AnimatedSprite2D" parent="."]
+top_level = true
+position = Vector2(58, 0)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_vineh")
+animation = &"RED"

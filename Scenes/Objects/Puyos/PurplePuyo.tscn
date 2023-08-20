@@ -234,4 +234,3 @@ type = "PURPLE"
 
 [node name="PuyoSprites" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_q8ouq")
-animation = &"default"

@@ -4,15 +4,13 @@ var tile_size = 58
 var type = "Player"
 @export var fallSpeed = 100
 @export var moveCooldownTime = 0.1
-@export var redPuyo: PackedScene
-@export var greenPuyo: PackedScene
-@export var yellowPuyo: PackedScene
-@export var bluePuyo: PackedScene
-@export var purplePuyo: PackedScene
+@export var PuyoScenes: Array[PackedScene]
 
 var bottomRaycasts = []
 var leftRaycasts = []
 var rightRaycasts = []
+var currentPuyos = []
+var nextPuyos = []
 
 var fastDrop = false
 var leftWallCollide = false
@@ -22,8 +20,15 @@ var moveCooldown = false
 
 var startingPos
 
+# Choses puyos 
 func _ready():
 	startingPos = position
+	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	$Puyo1Sprite.play(currentPuyos[0].name)
+	$Puyo2Sprite.play(currentPuyos[1].name)
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size/2
 
@@ -46,6 +51,7 @@ func _process(delta):
 	playerControls()
 	
 	if groundCollide:
+		groundCollide = false
 		pieceLand()
 
 func playerControls():
@@ -89,7 +95,6 @@ func setRayCastsPositions():
 	rightRaycasts.clear()
 	leftWallCollide = false
 	rightWallCollide = false
-	groundCollide = false
 	var currentAngle = round(transform.get_rotation())
 	if currentAngle == 2:
 		bottomRaycasts.append($RayCasts/RayRight)
@@ -125,9 +130,17 @@ func checkForRoationClipping():
 		canRotate = false
 	return canRotate
 
+func processSprites():
+	pass
+
+func swapPuyos():
+	currentPuyos.clear()
+	currentPuyos.append_array(nextPuyos)
+	nextPuyos.clear()
+	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+
 func pieceLand():
 	$SoundEffects/PieceLand.play()
-	var puyoSpawn = redPuyo.instantiate()
-	puyoSpawn.position = $Puyo1Spawn.position
-	add_child(puyoSpawn)
+	swapPuyos()
 	position = startingPos
