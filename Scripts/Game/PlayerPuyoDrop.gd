@@ -119,7 +119,7 @@ func setRayCastsPositions():
 		rightRaycasts.append($RayCasts/RayLeft)
 		leftRaycasts.append($RayCasts/RayRight)
 
-# Prevents clipping
+# Prevents clipping 
 func checkForRoationClipping():
 	var canRotate = true
 	if rightWallCollide and !leftWallCollide:
@@ -144,5 +144,11 @@ func swapPuyos():
 
 func pieceLand():
 	$SoundEffects/PieceLand.play()
-	swapPuyos()
+	var puyo1 = currentPuyos[0].instantiate()
+	var puyo2 = currentPuyos[1].instantiate()
+	puyo1.position = $Puyo1Spawn.position
+	puyo2.position = $Puyo2Spawn.position
+	get_parent().add_child(puyo1)
+	get_parent().add_child(puyo2)
 	position = startingPos
+	swapPuyos()
