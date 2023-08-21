@@ -154,7 +154,6 @@ func pieceLand():
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
 	puyo1.global_position = $Puyo1Spawn.global_position
-	print(round(transform.get_rotation()))
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo1.basicSetup()
 	puyo2.basicSetup()

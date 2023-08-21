@@ -149,7 +149,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="ChainTimer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
 [node name="ChainSoundEffects" type="Node" parent="."]
@@ -172,8 +171,7 @@ stream = ExtResource("9_6u5m2")
 [node name="Chain6" type="AudioStreamPlayer" parent="ChainSoundEffects"]
 stream = ExtResource("10_8pul3")
 
-[node name="Chain7" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+[node name="Chain7plus" type="AudioStreamPlayer" parent="ChainSoundEffects"]
 stream = ExtResource("11_4vtwm")
 
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
-[connection signal="timeout" from="ChainTimer" to="." method="_on_chain_timer_timeout"]
