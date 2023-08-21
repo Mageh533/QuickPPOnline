@@ -101,6 +101,7 @@ func setRayCastsPositions():
 	leftWallCollide = false
 	rightWallCollide = false
 	var currentAngle = round(transform.get_rotation())
+	print(round(transform.get_rotation()))
 	if currentAngle == 2:
 		bottomRaycasts.append($RayCasts/RayRight)
 		leftRaycasts.append($RayCasts/RayBLeft)
@@ -118,7 +119,7 @@ func setRayCastsPositions():
 		rightRaycasts.append($RayCasts/RayBRight)
 		leftRaycasts.append($RayCasts/RayTLeft)
 		leftRaycasts.append($RayCasts/RayTRight)
-	if currentAngle == -3:
+	if currentAngle == -3 or currentAngle == 3:
 		bottomRaycasts.append($RayCasts/RayTLeft)
 		bottomRaycasts.append($RayCasts/RayTRight)
 		rightRaycasts.append($RayCasts/RayLeft)
