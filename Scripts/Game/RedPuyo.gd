@@ -31,6 +31,7 @@ func _on_gravity_timer_timeout():
 # If it counts 4 or more it will then pop
 func searchOtherPuyos():
 	connectedPositions.clear()
+	connected.clear()
 	if $RayTop.is_colliding() and $RayTop.get_collider() is Area2D:
 		if $RayTop.get_collider().type == type:
 			connectedPositions.append("TOP")
