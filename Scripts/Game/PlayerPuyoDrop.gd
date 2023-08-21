@@ -101,7 +101,6 @@ func setRayCastsPositions():
 	leftWallCollide = false
 	rightWallCollide = false
 	var currentAngle = round(transform.get_rotation())
-	print(round(transform.get_rotation()))
 	if currentAngle == 2:
 		bottomRaycasts.append($RayCasts/RayRight)
 		leftRaycasts.append($RayCasts/RayBLeft)
@@ -154,8 +153,12 @@ func pieceLand():
 	var puyo2 = currentPuyos[1].instantiate()
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
+	print(round(transform.get_rotation()))
 	puyo1.global_position = $Puyo1Spawn.global_position
-	puyo2.global_position = $Puyo2Spawn.global_position
+	if round(transform.get_rotation()) == -2:
+		puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	else:
+		puyo2.global_position = $Puyo2Spawn.global_position
 	puyo1.basicSetup()
 	puyo2.basicSetup()
 	position = startingPos

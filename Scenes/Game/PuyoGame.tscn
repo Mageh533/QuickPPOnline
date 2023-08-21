@@ -130,7 +130,7 @@ sprite_frames = SubResource("SpriteFrames_wxp1r")
 frame_progress = 0.774176
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(44, 45)
+position = Vector2(44, 44)
 scale = Vector2(0.75, 0.75)
 tile_set = SubResource("TileSet_nr84w")
 format = 2
@@ -142,7 +142,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(-65534, 1, 65536, 196611, 1, 131072, 196612, 1, 131072, 655360, 1, 196608, 655361, 1, 196608, 655362, 1, 196608)
+layer_1/tile_data = PackedInt32Array(-65534, 1, 65536)
 
 [node name="PoppingTimer" type="Timer" parent="."]
 wait_time = 0.5
