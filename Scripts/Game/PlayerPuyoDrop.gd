@@ -12,12 +12,14 @@ var rightRaycasts = []
 var currentPuyos = []
 var nextPuyos = []
 
+var timeOnGround = 0
+
 var fastDrop = false
-var leftWallCollide = false
-var rightWallCollide = false
 var groundCollide = false
 var moveCooldown = false
 var landCooldown = false
+var leftWallCollide = false
+var rightWallCollide = false
 
 var startingPos
 
@@ -35,10 +37,12 @@ func _ready():
 
 
 func _process(delta):
-	if fastDrop:
-		position += Vector2.DOWN * (fallSpeed * 8) * delta
-	else:
-		position += Vector2.DOWN * fallSpeed * delta
+	if !groundCollide:
+		timeOnGround = 0
+		if fastDrop:
+			position += Vector2.DOWN * (fallSpeed + 800) * delta
+		else:
+			position += Vector2.DOWN * fallSpeed * delta
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
 		if rayCast.is_colliding():
@@ -47,17 +51,21 @@ func _process(delta):
 		if rayCast.is_colliding():
 			rightWallCollide = true
 	for rayCast in bottomRaycasts:
+		groundCollide = false
 		if rayCast.is_colliding():
 			groundCollide = true
 	playerControls()
 	
 	if groundCollide:
-		groundCollide = false
-		if !landCooldown:
+		timeOnGround += delta
+		if fastDrop:
+			timeOnGround += 1
+		if !landCooldown and timeOnGround > 2:
 			landCooldown = true
 			pieceLand()
 			await get_tree().create_timer(0.2).timeout
 			landCooldown = false
+	print(timeOnGround)
 
 func playerControls():
 	if Input.is_action_pressed("right"):
@@ -127,12 +135,13 @@ func setRayCastsPositions():
 # Prevents clipping 
 func checkForRoationClipping():
 	var canRotate = true
-	if rightWallCollide and !leftWallCollide:
-		position += Vector2.LEFT * tile_size
-	elif leftWallCollide and !rightWallCollide:
-		position += Vector2.RIGHT * tile_size
-	elif leftWallCollide and rightWallCollide:
-		canRotate = false
+	if $RayCasts/RayBRight.is_colliding() or $RayCasts/RayTRight.is_colliding():
+		if rightWallCollide and !leftWallCollide:
+			position += Vector2.LEFT * tile_size
+		elif leftWallCollide and !rightWallCollide:
+			position += Vector2.RIGHT * tile_size
+		else:
+			canRotate = false
 	return canRotate
 
 func processSprites():

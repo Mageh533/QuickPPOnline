@@ -82,6 +82,7 @@ rotation = -1.5708
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_gehna")
+fallSpeed = 50
 PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"), ExtResource("5_taq0t"), ExtResource("4_toq3k"), ExtResource("6_c8h4w")])
 
 [node name="RemoteTransformP1" type="RemoteTransform2D" parent="."]
