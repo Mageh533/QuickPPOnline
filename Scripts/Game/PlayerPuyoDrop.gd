@@ -93,13 +93,13 @@ func playerControls():
 		if await checkForRoationClipping():
 			rotate(PI / 2)
 		else:
-			rotate(PI) # If trapped within 2 walls (puyos) then rotate 180 degrees
+			swapPuyo1and2()
 	if Input.is_action_just_released("turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			rotate(-PI / 2)
 		else:
-			rotate(PI)
+			swapPuyo1and2()
 
 # Function to find out where raycasts are after rotating
 func setRayCastsPositions():
@@ -144,8 +144,13 @@ func checkForRoationClipping():
 			canRotate = false
 	return canRotate
 
-func processSprites():
-	pass
+func swapPuyo1and2():
+	var temp = $Puyo1Spawn.position
+	$Puyo1Spawn.position = $Puyo2Spawn.position
+	$Puyo2Spawn.position = temp
+	temp = $RemoteTransformP1.position
+	$RemoteTransformP1.position = $RemoteTransformP2.position
+	$RemoteTransformP2.position = temp
 
 func swapPuyos():
 	currentPuyos.clear()
