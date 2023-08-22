@@ -65,7 +65,6 @@ func _process(delta):
 			pieceLand()
 			await get_tree().create_timer(0.2).timeout
 			landCooldown = false
-	print(timeOnGround)
 
 func playerControls():
 	if Input.is_action_pressed("right"):

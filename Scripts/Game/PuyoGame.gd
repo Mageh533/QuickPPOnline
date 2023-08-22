@@ -49,6 +49,7 @@ func _on_popping_timer_timeout():
 		activeChain = false
 	else:
 		activeChain = true
+		playChainSoundEffects()
 		
 	for puyoToPop in puyosToPop:
 		puyoToPop.pop()
@@ -62,6 +63,7 @@ func findOutAllConnected(puyo):
 
 func playChainSoundEffects():
 	if !soundEffectPlaying:
+		currentChain += 1
 		soundEffectPlaying = true
 		if currentChain < 7:
 			get_node("ChainSoundEffects/Chain" + str(currentChain)).play()
