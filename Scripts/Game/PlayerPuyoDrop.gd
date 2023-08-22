@@ -59,8 +59,8 @@ func _process(delta):
 	if groundCollide:
 		timeOnGround += delta
 		if fastDrop:
-			timeOnGround += 1
-		if !landCooldown and timeOnGround > 2:
+			timeOnGround += 0.2
+		if !landCooldown and timeOnGround > 1:
 			landCooldown = true
 			pieceLand()
 			await get_tree().create_timer(0.2).timeout
@@ -167,7 +167,7 @@ func pieceLand():
 	var puyo2 = currentPuyos[1].instantiate()
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
-	puyo1.global_position = $Puyo1Spawn.global_position
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo1.basicSetup()
 	puyo2.basicSetup()
