@@ -93,7 +93,6 @@ func updateSpriteFrame():
 func pop():
 	if !popped:
 		popped = true
-		$PuyoSprites.play("popped_start")
 		$PoppedPreTimer.start()
 		$PoppedTimer.start()
 
@@ -108,13 +107,15 @@ func _on_popped_pre_timer_timeout():
 		$PuyoSprites.visible = true
 	
 	if $PoppedPreTimer.wait_time > 0.01:
-		$PoppedPreTimer.wait_time = $PoppedPreTimer.wait_time - 0.01
+		$PoppedPreTimer.wait_time = $PoppedPreTimer.wait_time - 0.02
 		$PoppedPreTimer.start()
 
 
 func _on_popped_timer_timeout():
 	$PoppedPreTimer.stop()
 	$PuyoSprites.visible = true
+	$PuyoSprites.play("popped_start")
+	await get_tree().create_timer(0.1).timeout
 	$PuyoSprites.play("popped_end")
 	await $PuyoSprites.animation_finished
 	queue_free()

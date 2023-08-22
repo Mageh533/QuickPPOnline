@@ -271,6 +271,7 @@ wait_time = 0.2
 one_shot = true
 
 [node name="PoppedTimer" type="Timer" parent="."]
+wait_time = 0.7
 one_shot = true
 
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
