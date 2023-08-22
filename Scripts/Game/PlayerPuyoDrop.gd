@@ -92,13 +92,13 @@ func playerControls():
 		if await checkForRoationClipping():
 			rotate(PI / 2)
 		else:
-			swapPuyo1and2()
+			rotate180()
 	if Input.is_action_just_released("turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			rotate(-PI / 2)
 		else:
-			swapPuyo1and2()
+			rotate180()
 
 # Function to find out where raycasts are after rotating
 func setRayCastsPositions():
@@ -143,7 +143,7 @@ func checkForRoationClipping():
 			canRotate = false
 	return canRotate
 
-func swapPuyo1and2():
+func rotate180():
 	var temp = $Puyo1Spawn.position
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
