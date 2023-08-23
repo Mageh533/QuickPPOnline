@@ -63,6 +63,7 @@ func findOutAllConnected(puyo):
 			findOutAllConnected(otherPuyo)
 
 func playChainSoundEffects():
+	await get_tree().create_timer(0.3).timeout
 	if currentChain < 7:
 		get_node("ChainSoundEffects/Chain" + str(currentChain)).play()
 	else:

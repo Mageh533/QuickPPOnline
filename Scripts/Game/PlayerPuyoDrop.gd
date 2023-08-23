@@ -33,7 +33,7 @@ func _ready():
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	position = position.snapped(Vector2.ONE * tile_size)
-	position += Vector2.ONE * tile_size/2
+	position += -Vector2.ONE * tile_size/2
 
 
 func _process(delta):
