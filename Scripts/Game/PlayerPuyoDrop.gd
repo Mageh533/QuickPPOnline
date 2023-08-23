@@ -85,7 +85,7 @@ func playerControls():
 			moveCooldown = false
 	if Input.is_action_pressed("down"):
 		fastDrop = true
-	if Input.is_action_just_released("down"):
+	if Input.is_action_just_released("down") or !Input.is_action_pressed("down"):
 		fastDrop = false
 	if Input.is_action_just_released("turnLeft"):
 		$SoundEffects/PieceRotate.play()
