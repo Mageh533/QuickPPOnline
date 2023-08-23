@@ -37,8 +37,10 @@ func _ready():
 
 
 func _process(delta):
+	print(timeOnGround)
 	if !groundCollide:
-		timeOnGround = 0
+		if timeOnGround > 0:
+			timeOnGround += -delta
 		if fastDrop:
 			position += Vector2.DOWN * (fallSpeed + 800) * delta
 		else:
@@ -50,8 +52,8 @@ func _process(delta):
 	for rayCast in rightRaycasts:
 		if rayCast.is_colliding():
 			rightWallCollide = true
+	groundCollide = false
 	for rayCast in bottomRaycasts:
-		groundCollide = false
 		if rayCast.is_colliding():
 			groundCollide = true
 	playerControls()
@@ -171,4 +173,11 @@ func pieceLand():
 	puyo1.basicSetup()
 	puyo2.basicSetup()
 	position = startingPos
+	timeOnGround = 0
 	swapPuyos()
+
+# The actual collision shape of this object should never touch something else
+func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if !rightWallCollide and !leftWallCollide:
+		timeOnGround += 1
+		position += Vector2.UP * tile_size
