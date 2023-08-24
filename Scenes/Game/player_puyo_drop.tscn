@@ -162,4 +162,4 @@ scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BuePuyo"
 
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

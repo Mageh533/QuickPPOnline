@@ -171,5 +171,5 @@ stream = ExtResource("10_8pul3")
 [node name="Chain7" type="AudioStreamPlayer" parent="ChainSoundEffects"]
 stream = ExtResource("11_4vtwm")
 
-[connection signal="area_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_area_shape_entered" flags=18]
+[connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]

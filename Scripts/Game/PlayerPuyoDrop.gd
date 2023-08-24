@@ -34,6 +34,7 @@ func _ready():
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += -Vector2.ONE * tile_size/2
+	area_shape_entered.connect(_on_area_shape_entered)
 
 
 func _process(delta):
@@ -181,3 +182,8 @@ func _on_area_shape_entered(_area_rid, _area, _area_shape_index, _local_shape_in
 	if !rightWallCollide and !leftWallCollide:
 		timeOnGround += 1
 		position += Vector2.UP * tile_size
+
+
+func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	timeOnGround += 1
+	position += Vector2.UP * tile_size
