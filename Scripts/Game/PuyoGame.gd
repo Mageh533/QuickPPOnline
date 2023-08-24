@@ -1,5 +1,7 @@
 extends Node2D
 
+signal sendDamage(damage: int)
+
 var puyosObjectArray = []
 var puyosToPop = [] # To pop all of them at the same time
 var connectedPuyos = []
