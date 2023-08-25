@@ -77,6 +77,7 @@ func _on_popping_timer_timeout():
 	if puyosToPop.size() > 0:
 		chainCooldown = 2
 		currentChain += 1
+		puyosClearedInChain += puyosToPop.size()
 		playChainSoundEffects()
 	
 	if puyosToPop.size() > 4 and puyosToPop.size() < 11:
@@ -89,12 +90,11 @@ func _on_popping_timer_timeout():
 			colourBonus += 1
 			colours.erase(puyoToPop.type)
 		puyoToPop.pop()
-		puyosClearedInChain += 1
 	
 	checkPopTimer = false
 
 func findOutAllConnected(puyo):
-	if puyo.connected.size() > 0 and !connectedPuyos.has(puyo) and !puyo.popped:
+	if puyo.connected.size() > 0 and !connectedPuyos.has(puyo) and !puyo.popped and !puyosToPop.has(puyo):
 		connectedPuyos.append(puyo)
 		for otherPuyo in puyo.connected:
 			findOutAllConnected(otherPuyo)
