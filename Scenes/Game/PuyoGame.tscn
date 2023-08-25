@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=38 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -16,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://rq2bwcbvu8p4" path="res://Scenes/Game/player_puyo_drop.tscn" id="9_l6p23"]
 [ext_resource type="AudioStream" uid="uid://27mspu334ol5" path="res://Assets/Sounds/chain6.wav" id="10_8pul3"]
 [ext_resource type="AudioStream" uid="uid://cg4mht1v1w3dy" path="res://Assets/Sounds/chain7plus.wav" id="11_4vtwm"]
+[ext_resource type="AudioStream" uid="uid://bxjndxr7gtii7" path="res://Assets/Sounds/damage1.wav" id="17_43n50"]
+[ext_resource type="AudioStream" uid="uid://boqfbxkyhsey1" path="res://Assets/Sounds/damage2.wav" id="18_ubat8"]
+[ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/Sounds/damage3.wav" id="19_04va0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
 atlas = ExtResource("2_t6ghk")
@@ -365,7 +368,14 @@ stream = ExtResource("11_4vtwm")
 
 [node name="MultiplayerSoundEffects" type="Node" parent="."]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+[node name="Damage1" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+stream = ExtResource("17_43n50")
+
+[node name="Damage2" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+stream = ExtResource("18_ubat8")
+
+[node name="Damage3" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+stream = ExtResource("19_04va0")
 
 [node name="NextPuyoSprites" type="Node2D" parent="."]
 
