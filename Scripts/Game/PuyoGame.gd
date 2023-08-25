@@ -3,24 +3,37 @@ extends Node2D
 signal sendDamage(damage: int)
 
 var puyosObjectArray = []
-var puyosToPop = [] # To pop all of them at the same time
+var puyosToPop = []
 var connectedPuyos = []
+var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 
 var checkPopTimer = false
 var soundEffectPlaying = false
+var scoreToAdd = false
 
 var chainCooldown = 0
 var currentChain = 0
+
+var score = 0
+var puyosClearedInChain = 0
+var chainPower = 0
+var colourBonus = 0
+var groupBonus = 0
 
 func _ready():
 	pass
 
 func _process(delta):
 	connectPuyosToGame()
+	print(score)
 	if chainCooldown > 0:
+		scoreToAdd = true
 		chainCooldown += -delta
 		get_tree().get_nodes_in_group("Player")[0].set_process(false)
 	else:
+		if scoreToAdd:
+			score += calculateScore()
+			scoreToAdd = false
 		currentChain = 0
 		get_tree().get_nodes_in_group("Player")[0].set_process(true)
 
@@ -65,9 +78,18 @@ func _on_popping_timer_timeout():
 		chainCooldown = 2
 		currentChain += 1
 		playChainSoundEffects()
-		
+	
+	if puyosToPop.size() > 4 and puyosToPop.size() < 11:
+		groupBonus += 2 + (puyosToPop.size() - 5)
+	elif puyosToPop.size() > 11:
+		groupBonus += 10
+	
 	for puyoToPop in puyosToPop:
+		if puyoToPop.type in colours:
+			colourBonus += 1
+			colours.erase(puyoToPop.type)
 		puyoToPop.pop()
+		puyosClearedInChain += 1
 	
 	checkPopTimer = false
 
@@ -83,3 +105,19 @@ func playChainSoundEffects():
 		get_node("ChainSoundEffects/Chain" + str(currentChain)).play()
 	else:
 		$ChainSoundEffects/Chain7.play()
+
+# Calculate chain power, colour bonus and group bonus. Then the overall score.
+func calculateScore():
+	if currentChain > 1 and currentChain <= 5:
+		chainPower = 2 ** currentChain
+	elif currentChain > 5:
+		chainPower = 64 + (32 * currentChain - 5)
+
+	var calculatedScore = (10 * puyosClearedInChain) * (chainPower + colourBonus + groupBonus)
+	
+	colourBonus = 0
+	groupBonus = 0
+	chainPower = 0
+	puyosClearedInChain = 0
+	colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
+	return calculatedScore

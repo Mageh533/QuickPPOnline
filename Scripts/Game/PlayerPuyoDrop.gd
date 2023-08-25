@@ -48,7 +48,6 @@ func _ready():
 
 
 func _process(delta):
-	print(timeOnGround)
 	if !groundCollide:
 		if timeOnGround > 0:
 			timeOnGround += -delta
