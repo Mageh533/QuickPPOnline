@@ -25,7 +25,7 @@ func _ready():
 
 func _process(delta):
 	connectPuyosToGame()
-	print(score)
+	$ScoreLabel.text = str(score).pad_zeros(8)
 	if chainCooldown > 0:
 		scoreToAdd = true
 		chainCooldown += -delta
@@ -109,7 +109,7 @@ func playChainSoundEffects():
 # Calculate chain power, colour bonus and group bonus. Then the overall score.
 func calculateScore():
 	if currentChain > 1 and currentChain <= 5:
-		chainPower = 2 ** currentChain
+		chainPower = 2 ** (currentChain + 1)
 	elif currentChain > 5:
 		chainPower = 64 + (32 * currentChain - 5)
 
