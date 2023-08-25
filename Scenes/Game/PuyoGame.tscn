@@ -363,6 +363,10 @@ stream = ExtResource("10_8pul3")
 [node name="Chain7" type="AudioStreamPlayer" parent="ChainSoundEffects"]
 stream = ExtResource("11_4vtwm")
 
+[node name="MultiplayerSoundEffects" type="Node" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+
 [node name="NextPuyoSprites" type="Node2D" parent="."]
 
 [node name="Puyo1Set1" type="AnimatedSprite2D" parent="NextPuyoSprites"]
