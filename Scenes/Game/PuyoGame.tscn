@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=40 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -62,6 +62,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1iod"]
+size = Vector2(44, 43)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3prtr"]
 texture = ExtResource("1_3by7s")
@@ -321,11 +324,17 @@ font_size = 44
 script = ExtResource("1_tfcgd")
 metadata/_edit_horizontal_guides_ = [-51.0]
 
-[node name="LoseTile" type="AnimatedSprite2D" parent="."]
-position = Vector2(152, 70)
+[node name="LoseTile" type="Area2D" parent="."]
+position = Vector2(152, 65)
+collision_layer = 0
+
+[node name="LoseTileSprite" type="AnimatedSprite2D" parent="LoseTile"]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_wxp1r")
-frame_progress = 0.774176
+
+[node name="LoseCollision" type="CollisionShape2D" parent="LoseTile"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_y1iod")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(44, 44)
@@ -415,5 +424,13 @@ text = "00000000"
 label_settings = SubResource("LabelSettings_rx3dw")
 horizontal_alignment = 1
 
+[node name="Button" type="Button" parent="."]
+offset_left = 418.0
+offset_top = 311.0
+offset_right = 497.0
+offset_bottom = 359.0
+text = "Restart"
+
 [connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

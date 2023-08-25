@@ -1,6 +1,7 @@
 extends Node2D
 
 signal sendDamage(damage: int)
+signal lost
 
 var puyosObjectArray = []
 var puyosToPop = []
@@ -18,6 +19,7 @@ var score = 0
 var puyosClearedInChain = 0
 var chainPower = 0
 var colourBonus = 0
+var coloursCleared = 0
 var groupBonus = 0
 
 func _ready():
@@ -87,7 +89,6 @@ func _on_popping_timer_timeout():
 	
 	for puyoToPop in puyosToPop:
 		if puyoToPop.type in colours:
-			colourBonus += 1
 			colours.erase(puyoToPop.type)
 		puyoToPop.pop()
 	
@@ -106,13 +107,22 @@ func playChainSoundEffects():
 	else:
 		$ChainSoundEffects/Chain7.play()
 
-# Calculate chain power, colour bonus and group bonus. Then the overall score.
+# Calculate chain power, colour bonus. Then the overall score.
 func calculateScore():
 	if currentChain > 1 and currentChain <= 5:
 		chainPower = 2 ** (currentChain + 1)
 	elif currentChain > 5:
 		chainPower = 64 + (32 * currentChain - 5)
-
+		
+	coloursCleared = 5 - colours.size()
+		
+	if coloursCleared > 1:
+		colourBonus = 3
+		for i in range(coloursCleared - 2):
+			colourBonus *= 2
+	else:
+		colourBonus = 0
+	
 	var calculatedScore = (10 * puyosClearedInChain) * (chainPower + colourBonus + groupBonus)
 	
 	colourBonus = 0
@@ -121,3 +131,6 @@ func calculateScore():
 	puyosClearedInChain = 0
 	colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 	return calculatedScore
+
+func _on_button_pressed():
+	get_tree().reload_current_scene()
