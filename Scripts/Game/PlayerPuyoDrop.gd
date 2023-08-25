@@ -1,5 +1,8 @@
 extends Area2D
 
+signal sendNextPuyos(puyos)
+signal sendAfterPuyos(puyos)
+
 var tile_size = 58
 var type = "Player"
 @export var fallSpeed = 100
@@ -11,6 +14,7 @@ var leftRaycasts = []
 var rightRaycasts = []
 var currentPuyos = []
 var nextPuyos = []
+var afterPuyos = []
 
 var timeOnGround = 0
 
@@ -20,6 +24,7 @@ var moveCooldown = false
 var landCooldown = false
 var leftWallCollide = false
 var rightWallCollide = false
+var active = false
 
 var startingPos
 
@@ -30,11 +35,16 @@ func _ready():
 	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
 	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
 	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += -Vector2.ONE * tile_size/2
 	area_shape_entered.connect(_on_area_shape_entered)
+	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
+	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
+	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 
 
 func _process(delta):
@@ -158,8 +168,12 @@ func swapPuyos():
 	currentPuyos.clear()
 	currentPuyos.append_array(nextPuyos)
 	nextPuyos.clear()
-	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	nextPuyos.append_array(afterPuyos)
+	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
+	afterPuyos.clear()
+	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 
@@ -176,6 +190,7 @@ func pieceLand():
 	position = startingPos
 	timeOnGround = 0
 	swapPuyos()
+
 
 # The actual collision shape of this object should never touch something else
 func _on_area_shape_entered(_area_rid, _area, _area_shape_index, _local_shape_index):

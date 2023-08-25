@@ -27,16 +27,29 @@ func _process(delta):
 # Connects their signals
 func connectPuyosToGame():
 	puyosObjectArray = get_tree().get_nodes_in_group("Puyos")
+	var puyoDropPlayer = get_tree().get_nodes_in_group("Player")
 	for puyo in puyosObjectArray:
 		if !puyo.active:
 			puyo.active = true
 			puyo.puyoConnected.connect(_on_puyo_connected)
+	if !puyoDropPlayer[0].active:
+		puyoDropPlayer[0].active = true
+		puyoDropPlayer[0].sendNextPuyos.connect(_on_next_puyo_sent)
+		puyoDropPlayer[0].sendAfterPuyos.connect(_on_after_puyo_sent)
 
 # If any puyo emits the signal they are connected it starts the popping timer
 func _on_puyo_connected():
 	if !checkPopTimer:
 		checkPopTimer = true
 		$PoppingTimer.start()
+
+func _on_next_puyo_sent(puyos):
+	$NextPuyoSprites/Puyo1Set1.play(puyos[0])
+	$NextPuyoSprites/Puyo2Set1.play(puyos[1])
+
+func _on_after_puyo_sent(puyos):
+	$NextPuyoSprites/Puyo1Set2.play(puyos[0])
+	$NextPuyoSprites/Puyo2Set2.play(puyos[1])
 
 # Function checks if 4 or more puyos are connected, if so runs their pop function
 func _on_popping_timer_timeout():

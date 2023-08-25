@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=35 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -119,6 +119,198 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_3prtr")
 sources/1 = SubResource("TileSetScenesCollectionSource_ip3n8")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(0, 141, 64, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnhu7"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(0, 68, 66, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqvlf"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(0, 283, 66, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkbay"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtghr"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(0, 210, 68, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqu15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs3e0")
+}],
+"loop": true,
+"name": &"BuePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnhu7")
+}],
+"loop": true,
+"name": &"GreenPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqvlf")
+}],
+"loop": true,
+"name": &"PurplePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkbay")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtghr")
+}],
+"loop": true,
+"name": &"YellowPuyo",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_85m4y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs3e0")
+}],
+"loop": true,
+"name": &"BuePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnhu7")
+}],
+"loop": true,
+"name": &"GreenPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqvlf")
+}],
+"loop": true,
+"name": &"PurplePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkbay")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtghr")
+}],
+"loop": true,
+"name": &"YellowPuyo",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jpwnm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs3e0")
+}],
+"loop": true,
+"name": &"BuePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnhu7")
+}],
+"loop": true,
+"name": &"GreenPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqvlf")
+}],
+"loop": true,
+"name": &"PurplePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkbay")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtghr")
+}],
+"loop": true,
+"name": &"YellowPuyo",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pmwj7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs3e0")
+}],
+"loop": true,
+"name": &"BuePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnhu7")
+}],
+"loop": true,
+"name": &"GreenPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqvlf")
+}],
+"loop": true,
+"name": &"PurplePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkbay")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtghr")
+}],
+"loop": true,
+"name": &"YellowPuyo",
+"speed": 5.0
+}]
+
 [node name="PuyoGame" type="Node2D"]
 script = ExtResource("1_tfcgd")
 metadata/_edit_horizontal_guides_ = [-51.0]
@@ -170,6 +362,32 @@ stream = ExtResource("10_8pul3")
 
 [node name="Chain7" type="AudioStreamPlayer" parent="ChainSoundEffects"]
 stream = ExtResource("11_4vtwm")
+
+[node name="NextPuyoSprites" type="Node2D" parent="."]
+
+[node name="Puyo1Set1" type="AnimatedSprite2D" parent="NextPuyoSprites"]
+position = Vector2(414.2, 81.1)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BuePuyo"
+
+[node name="Puyo2Set1" type="AnimatedSprite2D" parent="NextPuyoSprites"]
+position = Vector2(415, 123)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_85m4y")
+animation = &"BuePuyo"
+
+[node name="Puyo1Set2" type="AnimatedSprite2D" parent="NextPuyoSprites"]
+position = Vector2(458, 174)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_jpwnm")
+animation = &"BuePuyo"
+
+[node name="Puyo2Set2" type="AnimatedSprite2D" parent="NextPuyoSprites"]
+position = Vector2(458, 214)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_pmwj7")
+animation = &"BuePuyo"
 
 [connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
