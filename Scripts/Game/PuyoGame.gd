@@ -30,7 +30,7 @@ func _process(delta):
 	$ScoreLabel.text = str(score).pad_zeros(8)
 	if chainCooldown > 0:
 		scoreToAdd = true
-		$ScoreLabel.text = str(10 * puyosClearedInChain) + " + " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
+		$ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		chainCooldown += -delta
 		get_tree().get_nodes_in_group("Player")[0].set_process(false)
 	else:
