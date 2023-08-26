@@ -45,9 +45,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p0iq2")
 
-[node name="PuyoGame" parent="." instance=ExtResource("2_tsy88")]
-position = Vector2(629, 14)
-
 [node name="Player1" parent="." instance=ExtResource("2_tsy88")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
