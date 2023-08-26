@@ -11,6 +11,8 @@ var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 var checkPopTimer = false
 var soundEffectPlaying = false
 var scoreToAdd = false
+var loseTile = false
+var loseTileTimer = false
 
 var chainCooldown = 0
 var currentChain = 0
@@ -144,3 +146,19 @@ func calculateScore():
 
 func _on_button_pressed():
 	get_tree().reload_current_scene()
+
+# If a puyo is on the lose tile for more than a second then its game over
+func _on_lose_tile_area_entered(area):
+	loseTile = true
+	if !loseTileTimer:
+		loseTileTimer = true
+		$LoseTimer.start()
+
+func _on_lose_tile_area_exited(area):
+	loseTile = false
+
+func _on_lose_timer_timeout():
+	if loseTile:
+		emit_signal("lost")
+		print("Player has died")
+	loseTileTimer = false

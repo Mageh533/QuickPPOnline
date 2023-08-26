@@ -355,6 +355,9 @@ layer_1/tile_data = PackedInt32Array(-65534, 1, 65536)
 wait_time = 0.7
 one_shot = true
 
+[node name="LoseTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="ChainSoundEffects" type="Node" parent="."]
 
 [node name="Chain1" type="AudioStreamPlayer" parent="ChainSoundEffects"]
@@ -431,6 +434,9 @@ offset_right = 497.0
 offset_bottom = 359.0
 text = "Restart"
 
+[connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
+[connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
 [connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
+[connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
