@@ -46,18 +46,21 @@ grow_vertical = 2
 script = ExtResource("1_p0iq2")
 
 [node name="PuyoGame" parent="." instance=ExtResource("2_tsy88")]
+position = Vector2(629, 14)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PuyoGame"]
+[node name="Player1" parent="." instance=ExtResource("2_tsy88")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
 libraries = {
 "": SubResource("AnimationLibrary_t6bov")
 }
 
 [node name="Restart" type="Button" parent="."]
 layout_mode = 0
-offset_left = 118.0
-offset_top = 246.0
-offset_right = 214.0
-offset_bottom = 289.0
+offset_left = 540.0
+offset_top = 238.0
+offset_right = 636.0
+offset_bottom = 281.0
 text = "Restart"
 
 [node name="SoundEffects" type="Node" parent="."]
@@ -65,5 +68,5 @@ text = "Restart"
 [node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource("3_bywl5")
 
-[connection signal="lost" from="PuyoGame" to="." method="_on_puyo_game_lost"]
+[connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

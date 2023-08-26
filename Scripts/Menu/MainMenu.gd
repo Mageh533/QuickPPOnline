@@ -9,12 +9,11 @@ func _ready():
 func _process(delta):
 	pass
 
-
-func _on_puyo_game_lost():
-	$PuyoGame.set_process(false)
-	$Restart.visible = true
-	$SoundEffects/Lose.play()
-	$PuyoGame/AnimationPlayer.play("lose")
-
 func _on_restart_pressed():
 	get_tree().reload_current_scene()
+
+func _on_player_1_lost():
+	$Restart.visible = true
+	$SoundEffects/Lose.play()
+	$Player1/AnimationPlayer.play("lose")
+	$Player1.set_process(false)
