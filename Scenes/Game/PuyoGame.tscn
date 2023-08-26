@@ -427,16 +427,7 @@ text = "00000000"
 label_settings = SubResource("LabelSettings_rx3dw")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
-offset_left = 418.0
-offset_top = 311.0
-offset_right = 497.0
-offset_bottom = 359.0
-text = "Restart"
-
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
-[connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

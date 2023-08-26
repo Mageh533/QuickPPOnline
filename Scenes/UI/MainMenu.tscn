@@ -1,4 +1,40 @@
-[gd_scene format=3 uid="uid://brquw0d8ma77b"]
+[gd_scene load_steps=6 format=3 uid="uid://brquw0d8ma77b"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_p0iq2"]
+[ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_tsy88"]
+[ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/Sounds/lose.wav" id="3_bywl5"]
+
+[sub_resource type="Animation" id="Animation_3xduh"]
+resource_name = "lose"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(161, 385), Vector2(308, 734)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.349066, 0.785398]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6bov"]
+_data = {
+"lose": SubResource("Animation_3xduh")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +43,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_p0iq2")
+
+[node name="PuyoGame" parent="." instance=ExtResource("2_tsy88")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PuyoGame"]
+libraries = {
+"": SubResource("AnimationLibrary_t6bov")
+}
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 246.0
+offset_right = 214.0
+offset_bottom = 289.0
+text = "Restart"
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("3_bywl5")
+
+[connection signal="lost" from="PuyoGame" to="." method="_on_puyo_game_lost"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

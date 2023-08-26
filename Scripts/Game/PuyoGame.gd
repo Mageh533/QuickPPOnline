@@ -144,9 +144,6 @@ func calculateScore():
 	colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 	return calculatedScore
 
-func _on_button_pressed():
-	get_tree().reload_current_scene()
-
 # If a puyo is on the lose tile for more than a second then its game over
 func _on_lose_tile_area_entered(area):
 	loseTile = true
