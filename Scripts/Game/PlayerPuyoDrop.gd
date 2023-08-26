@@ -71,7 +71,7 @@ func _process(delta):
 	if groundCollide:
 		timeOnGround += delta
 		if fastDrop:
-			timeOnGround += 0.2
+			timeOnGround += 0.1
 		if !landCooldown and timeOnGround > 1:
 			landCooldown = true
 			pieceLand()
