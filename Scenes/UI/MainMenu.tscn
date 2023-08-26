@@ -52,6 +52,10 @@ libraries = {
 "": SubResource("AnimationLibrary_t6bov")
 }
 
+[node name="Player2" parent="." instance=ExtResource("2_tsy88")]
+position = Vector2(640, 0)
+currentPlayer = 1
+
 [node name="Restart" type="Button" parent="."]
 layout_mode = 0
 offset_left = 126.0

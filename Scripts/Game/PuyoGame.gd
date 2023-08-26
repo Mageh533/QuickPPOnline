@@ -3,6 +3,8 @@ extends Node2D
 signal sendDamage(damage: int)
 signal lost
 
+@export var currentPlayer : int
+
 var puyosObjectArray = []
 var puyosToPop = []
 var connectedPuyos = []
@@ -35,28 +37,28 @@ func _process(delta):
 		$ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		chainCooldown += -delta
 		if !defeated:
-			get_tree().get_nodes_in_group("Player")[0].set_process(false)
+			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(false)
 	else:
 		if scoreToAdd:
 			score += calculateScore()
 			scoreToAdd = false
 		currentChain = 0
 		if !defeated:
-			get_tree().get_nodes_in_group("Player")[0].set_process(true)
+			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(true)
 
 # Connects their signals
 func connectPuyosToGame():
-	puyosObjectArray = get_tree().get_nodes_in_group("Puyos")
+	puyosObjectArray = $TileMap.get_children()
 	var puyoDropPlayer = get_tree().get_nodes_in_group("Player")
 	for puyo in puyosObjectArray:
-		if !puyo.active:
+		if !puyo.active and !puyo.type == "Player":
 			puyo.active = true
 			puyo.puyoConnected.connect(_on_puyo_connected)
 	if !defeated:
-		if !puyoDropPlayer[0].active:
-			puyoDropPlayer[0].active = true
-			puyoDropPlayer[0].sendNextPuyos.connect(_on_next_puyo_sent)
-			puyoDropPlayer[0].sendAfterPuyos.connect(_on_after_puyo_sent)
+		if !puyoDropPlayer[currentPlayer].active:
+			puyoDropPlayer[currentPlayer].active = true
+			puyoDropPlayer[currentPlayer].sendNextPuyos.connect(_on_next_puyo_sent)
+			puyoDropPlayer[currentPlayer].sendAfterPuyos.connect(_on_after_puyo_sent)
 
 # If any puyo emits the signal they are connected it starts the popping timer
 func _on_puyo_connected():
@@ -77,7 +79,8 @@ func _on_popping_timer_timeout():
 	puyosToPop.clear()
 	for puyo in puyosObjectArray:
 		connectedPuyos.clear()
-		findOutAllConnected(puyo)
+		if puyo.type != "Player":
+			findOutAllConnected(puyo)
 		
 		if connectedPuyos.size() > 3:
 			puyosToPop.append_array(connectedPuyos)
@@ -161,6 +164,6 @@ func _on_lose_timer_timeout():
 	if loseTile and !defeated:
 		emit_signal("lost")
 		defeated = true
-		get_tree().get_nodes_in_group("Player")[0].queue_free()
+		get_tree().get_nodes_in_group("Player")[currentPlayer].queue_free()
 		
 	loseTileTimer = false
