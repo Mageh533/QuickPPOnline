@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://brquw0d8ma77b"]
+[gd_scene load_steps=8 format=3 uid="uid://brquw0d8ma77b"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_p0iq2"]
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_tsy88"]
@@ -36,6 +36,14 @@ _data = {
 "lose": SubResource("Animation_3xduh")
 }
 
+[sub_resource type="Animation" id="Animation_byu6y"]
+resource_name = "lose"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_05r23"]
+_data = {
+"lose": SubResource("Animation_byu6y")
+}
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -53,15 +61,20 @@ libraries = {
 }
 
 [node name="Player2" parent="." instance=ExtResource("2_tsy88")]
-position = Vector2(640, 0)
+position = Vector2(801, 2)
 currentPlayer = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
+libraries = {
+"": SubResource("AnimationLibrary_05r23")
+}
 
 [node name="Restart" type="Button" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 263.0
-offset_right = 222.0
-offset_bottom = 306.0
+offset_left = 529.0
+offset_top = 298.0
+offset_right = 625.0
+offset_bottom = 341.0
 text = "Restart"
 
 [node name="SoundEffects" type="Node" parent="."]

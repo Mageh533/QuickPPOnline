@@ -70,10 +70,14 @@ func _on_puyo_connected():
 func _on_next_puyo_sent(puyos):
 	$NextPuyoSprites/Puyo1Set1.play(puyos[0])
 	$NextPuyoSprites/Puyo2Set1.play(puyos[1])
+	$NextPuyoSprites/Puyo1Set1_2.play(puyos[0])
+	$NextPuyoSprites/Puyo2Set1_2.play(puyos[1])
 
 func _on_after_puyo_sent(puyos):
 	$NextPuyoSprites/Puyo1Set2.play(puyos[0])
 	$NextPuyoSprites/Puyo2Set2.play(puyos[1])
+	$NextPuyoSprites/Puyo1Set2_2.play(puyos[0])
+	$NextPuyoSprites/Puyo2Set2_2.play(puyos[1])
 
 # Function checks if 4 or more puyos are connected, if so runs their pop function
 func _on_popping_timer_timeout():
