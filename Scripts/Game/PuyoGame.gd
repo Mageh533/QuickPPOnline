@@ -9,10 +9,10 @@ var connectedPuyos = []
 var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 
 var checkPopTimer = false
-var soundEffectPlaying = false
 var scoreToAdd = false
 var loseTile = false
 var loseTileTimer = false
+var defeated = false
 
 var chainCooldown = 0
 var currentChain = 0
@@ -34,13 +34,15 @@ func _process(delta):
 		scoreToAdd = true
 		$ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		chainCooldown += -delta
-		get_tree().get_nodes_in_group("Player")[0].set_process(false)
+		if !defeated:
+			get_tree().get_nodes_in_group("Player")[0].set_process(false)
 	else:
 		if scoreToAdd:
 			score += calculateScore()
 			scoreToAdd = false
 		currentChain = 0
-		get_tree().get_nodes_in_group("Player")[0].set_process(true)
+		if !defeated:
+			get_tree().get_nodes_in_group("Player")[0].set_process(true)
 
 # Connects their signals
 func connectPuyosToGame():
@@ -50,10 +52,11 @@ func connectPuyosToGame():
 		if !puyo.active:
 			puyo.active = true
 			puyo.puyoConnected.connect(_on_puyo_connected)
-	if !puyoDropPlayer[0].active:
-		puyoDropPlayer[0].active = true
-		puyoDropPlayer[0].sendNextPuyos.connect(_on_next_puyo_sent)
-		puyoDropPlayer[0].sendAfterPuyos.connect(_on_after_puyo_sent)
+	if !defeated:
+		if !puyoDropPlayer[0].active:
+			puyoDropPlayer[0].active = true
+			puyoDropPlayer[0].sendNextPuyos.connect(_on_next_puyo_sent)
+			puyoDropPlayer[0].sendAfterPuyos.connect(_on_after_puyo_sent)
 
 # If any puyo emits the signal they are connected it starts the popping timer
 func _on_puyo_connected():
@@ -145,17 +148,19 @@ func calculateScore():
 	return calculatedScore
 
 # If a puyo is on the lose tile for more than a second then its game over
-func _on_lose_tile_area_entered(area):
+func _on_lose_tile_area_entered(_area):
 	loseTile = true
 	if !loseTileTimer:
 		loseTileTimer = true
 		$LoseTimer.start()
 
-func _on_lose_tile_area_exited(area):
+func _on_lose_tile_area_exited(_area):
 	loseTile = false
 
 func _on_lose_timer_timeout():
-	if loseTile:
+	if loseTile and !defeated:
 		emit_signal("lost")
-		print("Player has died")
+		defeated = true
+		get_tree().get_nodes_in_group("Player")[0].queue_free()
+		
 	loseTileTimer = false
