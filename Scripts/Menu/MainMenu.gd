@@ -15,4 +15,5 @@ func _on_player_1_lost():
 	$SoundEffects/Lose.play()
 	$Player1/AnimationPlayer.play("lose")
 	await $Player1/AnimationPlayer.animation_finished
+	$Player1.process_mode = 4
 	$Restart.visible = true

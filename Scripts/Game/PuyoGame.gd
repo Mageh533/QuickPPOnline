@@ -169,6 +169,7 @@ func _on_lose_timer_timeout():
 	if loseTile and !defeated:
 		emit_signal("lost")
 		defeated = true
-		get_tree().get_nodes_in_group("Player")[currentPlayer].queue_free()
+		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = false
+		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = 4
 		
 	loseTileTimer = false
