@@ -17,6 +17,7 @@ var nextPuyos = []
 var afterPuyos = []
 
 var timeOnGround = 0
+var currentPlayer = 0
 
 var fastDrop = false
 var groundCollide = false
@@ -79,7 +80,7 @@ func _process(delta):
 			landCooldown = false
 
 func playerControls():
-	if Input.is_action_pressed("right"):
+	if Input.is_action_pressed("p" + str(currentPlayer) + "_right"):
 		if !moveCooldown:
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
@@ -87,7 +88,7 @@ func playerControls():
 				$SoundEffects/PieceMove.play()
 				position += Vector2.RIGHT * tile_size
 			moveCooldown = false
-	if Input.is_action_pressed("left"):
+	if Input.is_action_pressed("p" + str(currentPlayer) + "_left"):
 		if !moveCooldown:
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
@@ -95,17 +96,17 @@ func playerControls():
 				$SoundEffects/PieceMove.play()
 				position += Vector2.LEFT * tile_size
 			moveCooldown = false
-	if Input.is_action_pressed("down"):
+	if Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = true
-	if Input.is_action_just_released("down") or !Input.is_action_pressed("down"):
+	if Input.is_action_just_released("p" + str(currentPlayer) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false
-	if Input.is_action_just_released("turnLeft"):
+	if Input.is_action_just_released("p" + str(currentPlayer) + "_turnLeft"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			rotate(PI / 2)
 		else:
 			rotate180()
-	if Input.is_action_just_released("turnRight"):
+	if Input.is_action_just_released("p" + str(currentPlayer) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			rotate(-PI / 2)

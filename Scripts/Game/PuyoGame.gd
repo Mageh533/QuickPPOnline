@@ -56,6 +56,7 @@ func connectPuyosToGame():
 			puyo.puyoConnected.connect(_on_puyo_connected)
 	if !defeated:
 		if !puyoDropPlayer[currentPlayer].active:
+			puyoDropPlayer[currentPlayer].currentPlayer = currentPlayer + 1
 			puyoDropPlayer[currentPlayer].active = true
 			puyoDropPlayer[currentPlayer].sendNextPuyos.connect(_on_next_puyo_sent)
 			puyoDropPlayer[currentPlayer].sendAfterPuyos.connect(_on_after_puyo_sent)
