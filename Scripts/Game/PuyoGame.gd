@@ -30,6 +30,7 @@ func _process(delta):
 	$ScoreLabel.text = str(score).pad_zeros(8)
 	if chainCooldown > 0:
 		scoreToAdd = true
+		$ScoreLabel.text = str(10 * puyosClearedInChain) + " + " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		chainCooldown += -delta
 		get_tree().get_nodes_in_group("Player")[0].set_process(false)
 	else:
@@ -107,22 +108,31 @@ func playChainSoundEffects():
 	else:
 		$ChainSoundEffects/Chain7.play()
 
-# Calculate chain power, colour bonus. Then the overall score.
-func calculateScore():
+# Based on classic tsu rules
+func calculateChainPower():
+	var power = 0
 	if currentChain > 1 and currentChain <= 5:
-		chainPower = 2 ** (currentChain + 1)
+		power = 2 ** (currentChain + 1)
 	elif currentChain > 5:
-		chainPower = 64 + (32 * currentChain - 5)
-		
-	coloursCleared = 5 - colours.size()
-		
-	if coloursCleared > 1:
-		colourBonus = 3
-		for i in range(coloursCleared - 2):
-			colourBonus *= 2
-	else:
-		colourBonus = 0
+		power = 64 + (32 * currentChain - 5)
 	
+	return power
+
+func calculateColourBonus():
+	coloursCleared = 5 - colours.size()
+	var colourB = 0
+	
+	if coloursCleared > 1:
+		colourB = 3
+		for i in range(coloursCleared - 2):
+			colourB *= 2
+	
+	return colourB
+
+# Calculates score and resets values to default
+func calculateScore():
+	chainPower = calculateChainPower()
+	colourBonus = calculateColourBonus()
 	var calculatedScore = (10 * puyosClearedInChain) * (chainPower + colourBonus + groupBonus)
 	
 	colourBonus = 0
