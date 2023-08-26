@@ -12,6 +12,7 @@ func _on_restart_pressed():
 	get_tree().reload_current_scene()
 
 func _on_player_1_lost():
-	$Restart.visible = true
 	$SoundEffects/Lose.play()
 	$Player1/AnimationPlayer.play("lose")
+	await $Player1/AnimationPlayer.animation_finished
+	$Restart.visible = true

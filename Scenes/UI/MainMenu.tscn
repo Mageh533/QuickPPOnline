@@ -54,10 +54,10 @@ libraries = {
 
 [node name="Restart" type="Button" parent="."]
 layout_mode = 0
-offset_left = 540.0
-offset_top = 238.0
-offset_right = 636.0
-offset_bottom = 281.0
+offset_left = 126.0
+offset_top = 263.0
+offset_right = 222.0
+offset_bottom = 306.0
 text = "Restart"
 
 [node name="SoundEffects" type="Node" parent="."]
