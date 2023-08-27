@@ -65,6 +65,7 @@ func _process(delta):
 			var chainScore = calculateScore()
 			score += chainScore
 			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
+			await get_tree().create_timer(0.5).timeout
 			nuisanceProcess()
 		currentChain = 0
 		if !defeated:
