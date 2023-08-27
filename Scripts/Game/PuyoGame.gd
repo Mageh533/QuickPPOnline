@@ -49,9 +49,9 @@ func _process(delta):
 	connectPuyosToGame()
 	$ScorePanel/ScoreLabel.text = str(score).pad_zeros(8)
 	if chainCooldown > 0 or nuisanceCooldown > 0:
-		scoreToAdd = true
 		$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		if chainCooldown > 0:
+			scoreToAdd = true
 			chainCooldown += -delta
 		if nuisanceCooldown > 0:
 			nuisanceCooldown += -delta
@@ -61,10 +61,12 @@ func _process(delta):
 			get_tree().get_nodes_in_group("Player")[currentPlayer].visible = false
 	else:
 		if scoreToAdd:
+			scoreToAdd = false
 			var chainScore = calculateScore()
 			score += chainScore
 			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
-			scoreToAdd = false
+			await get_tree().create_timer(0.5)
+			nuisanceProcess()
 		currentChain = 0
 		if !defeated:
 			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(true)
@@ -219,6 +221,17 @@ func spawnNuisance(nuisanceNum):
 	else:
 		$MultiplayerSoundEffects/Damage2.play()
 
+func nuisanceProcess():
+	if nuisanceQueue > 0:
+		nuisanceCooldown = 2
+		await get_tree().create_timer(0.5).timeout
+		if nuisanceQueue >= 30:
+			spawnNuisance(30)
+			nuisanceQueue -= 30
+		else:
+			spawnNuisance(nuisanceQueue)
+			nuisanceQueue = 0
+
 # If a puyo is on the lose tile for more than a second then its game over
 func _on_lose_tile_area_entered(_area):
 	loseTile = true
@@ -241,12 +254,4 @@ func _on_lose_timer_timeout():
 func _on_piece_landed():
 	await get_tree().create_timer(0.5).timeout
 	if chainCooldown <= 0:
-		if nuisanceQueue > 0:
-			nuisanceCooldown = 2
-			await get_tree().create_timer(0.5).timeout
-			if nuisanceQueue >= 30:
-				spawnNuisance(30)
-				nuisanceQueue -= 30
-			else:
-				spawnNuisance(nuisanceQueue)
-				nuisanceQueue = 0
+		nuisanceProcess()
