@@ -19,8 +19,10 @@ var loseTileTimer = false
 var defeated = false
 
 var chainCooldown = 0
+var nuisanceCooldown = 0
 var currentChain = 0
 var leftOverNuisance = 0
+var nuisanceQueue = 0
 
 var score = 0
 var puyosClearedInChain = 0
@@ -46,12 +48,17 @@ func _ready():
 func _process(delta):
 	connectPuyosToGame()
 	$ScorePanel/ScoreLabel.text = str(score).pad_zeros(8)
-	if chainCooldown > 0:
+	if chainCooldown > 0 or nuisanceCooldown > 0:
 		scoreToAdd = true
 		$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
-		chainCooldown += -delta
+		if chainCooldown > 0:
+			chainCooldown += -delta
+		if nuisanceCooldown > 0:
+			nuisanceCooldown += -delta
 		if !defeated:
 			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(false)
+			get_tree().get_nodes_in_group("Player")[currentPlayer].set_physics_process(false)
+			get_tree().get_nodes_in_group("Player")[currentPlayer].visible = false
 	else:
 		if scoreToAdd:
 			var chainScore = calculateScore()
@@ -61,6 +68,8 @@ func _process(delta):
 		currentChain = 0
 		if !defeated:
 			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(true)
+			get_tree().get_nodes_in_group("Player")[currentPlayer].set_physics_process(true)
+			get_tree().get_nodes_in_group("Player")[currentPlayer].visible = true
 
 # Connects their signals
 func connectPuyosToGame():
@@ -76,6 +85,7 @@ func connectPuyosToGame():
 			puyoDropPlayer[currentPlayer].active = true
 			puyoDropPlayer[currentPlayer].sendNextPuyos.connect(_on_next_puyo_sent)
 			puyoDropPlayer[currentPlayer].sendAfterPuyos.connect(_on_after_puyo_sent)
+			puyoDropPlayer[currentPlayer].pieceLanded.connect(_on_piece_landed)
 
 # If any puyo emits the signal they are connected it starts the popping timer
 func _on_puyo_connected():
@@ -177,6 +187,9 @@ func calculateNuisance(chainScore, targetPoints):
 	leftOverNuisance = nuisancePoints - nuisanceToSend
 	return nuisanceToSend
 
+func queueNuisance(nuisanceNum):
+	nuisanceQueue += nuisanceNum
+
 # Nuisance spawns in rows and stack up
 func spawnNuisance(nuisanceNum):
 	var nuisanceSpawnPoints = $NuisanceSpawns.get_children()
@@ -218,3 +231,10 @@ func _on_lose_timer_timeout():
 		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = Node.PROCESS_MODE_DISABLED
 		
 	loseTileTimer = false
+
+func _on_piece_landed():
+	if nuisanceQueue > 0:
+		nuisanceCooldown = 3
+		await get_tree().create_timer(1).timeout
+		spawnNuisance(nuisanceQueue)
+		nuisanceQueue = 0

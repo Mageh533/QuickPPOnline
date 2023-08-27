@@ -29,9 +29,8 @@ func _on_player_2_lost():
 
 func _on_player_1_send_damage(damage):
 	if damage > 0:
-		$Player2.spawnNuisance(damage)
-
+		$Player2.queueNuisance(damage)
 
 func _on_player_2_send_damage(damage):
 	if damage > 0:
-		$Player1.spawnNuisance(damage)
+		$Player1.queueNuisance(damage)

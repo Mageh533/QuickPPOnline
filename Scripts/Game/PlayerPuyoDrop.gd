@@ -2,6 +2,7 @@ extends Area2D
 
 signal sendNextPuyos(puyos)
 signal sendAfterPuyos(puyos)
+signal pieceLanded
 
 var tile_size = 58
 var type = "Player"
@@ -190,6 +191,7 @@ func pieceLand():
 	position = startingPos
 	timeOnGround = 0
 	swapPuyos()
+	emit_signal("pieceLanded")
 
 # The actual collision shape of this object should never touch something else
 func _on_area_shape_entered(_area_rid, _area, _area_shape_index, _local_shape_index):
