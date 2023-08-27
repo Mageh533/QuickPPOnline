@@ -1,9 +1,11 @@
 extends Node2D
 
-signal sendDamage(damage: int)
+signal sendDamage(damage)
 signal lost
 
 @export var currentPlayer : int
+@export var nuisanceTarget: float
+@export var nuisanceScene : PackedScene
 
 var puyosObjectArray = []
 var puyosToPop = []
@@ -18,6 +20,7 @@ var defeated = false
 
 var chainCooldown = 0
 var currentChain = 0
+var leftOverNuisance = 0
 
 var score = 0
 var puyosClearedInChain = 0
@@ -39,6 +42,7 @@ func _ready():
 		$NextPuyoSprites/Puyo2Set1.visible = false
 		$NextPuyoSprites/Puyo1Set2.visible = false
 		$NextPuyoSprites/Puyo2Set2.visible = false
+	spawnNuisance(6)
 
 func _process(delta):
 	connectPuyosToGame()
@@ -51,7 +55,9 @@ func _process(delta):
 			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(false)
 	else:
 		if scoreToAdd:
-			score += calculateScore()
+			var chainScore = calculateScore()
+			score += chainScore
+			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
 			scoreToAdd = false
 		currentChain = 0
 		if !defeated:
@@ -62,7 +68,7 @@ func connectPuyosToGame():
 	puyosObjectArray = $TileMap.get_children()
 	var puyoDropPlayer = get_tree().get_nodes_in_group("Player")
 	for puyo in puyosObjectArray:
-		if !puyo.active and !puyo.type == "Player":
+		if !puyo.active and !puyo.type == "Player" and !puyo.type == "Nuisance":
 			puyo.active = true
 			puyo.puyoConnected.connect(_on_puyo_connected)
 	if !defeated:
@@ -95,7 +101,7 @@ func _on_popping_timer_timeout():
 	puyosToPop.clear()
 	for puyo in puyosObjectArray:
 		connectedPuyos.clear()
-		if puyo.type != "Player":
+		if puyo.type != "Player" and puyo.type != "Nuisance":
 			findOutAllConnected(puyo)
 		
 		if connectedPuyos.size() > 3:
@@ -166,6 +172,33 @@ func calculateScore():
 	colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 	return calculatedScore
 
+func calculateNuisance(chainScore, targetPoints):
+	var nuisancePoints = chainScore / targetPoints + leftOverNuisance
+	return nuisancePoints
+
+# Nuisance spawns in rows and stack up
+func spawnNuisance(nuisanceNum):
+	var nuisanceSpawnPoints = $NuisanceSpawns.get_children()
+	var tile_size = 58
+	var stack = 0
+	var freeSpawnPoints = [0, 1, 2, 3, 4, 5]
+	var nuisanceToSpawn = nuisanceNum
+	while nuisanceToSpawn > 0:
+		if freeSpawnPoints.size() > 0:
+			var nuisance = nuisanceScene.instantiate()
+			var spawnToUse = freeSpawnPoints[randi() % freeSpawnPoints.size()]
+			freeSpawnPoints.erase(spawnToUse)
+			nuisance.position = nuisanceSpawnPoints[spawnToUse].position + (stack * (Vector2.UP * tile_size))
+			$TileMap.add_child(nuisance)
+			nuisanceToSpawn += -1
+		else:
+			stack += 1
+			freeSpawnPoints = [0, 1, 2, 3, 4, 5]
+	if nuisanceNum < 12:
+		$MultiplayerSoundEffects/Damage1.play()
+	else:
+		$MultiplayerSoundEffects/Damage2.play()
+
 # If a puyo is on the lose tile for more than a second then its game over
 func _on_lose_tile_area_entered(_area):
 	loseTile = true
@@ -184,3 +217,7 @@ func _on_lose_timer_timeout():
 		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = Node.PROCESS_MODE_DISABLED
 		
 	loseTileTimer = false
+
+
+func _on_send_damage(damage):
+	print("Sent: " + str(damage) + " of nuisance!")
