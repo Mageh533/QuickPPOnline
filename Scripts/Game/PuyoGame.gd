@@ -27,14 +27,25 @@ var coloursCleared = 0
 var groupBonus = 0
 
 func _ready():
-	pass
+	if currentPlayer == 0:
+		$PuyoDropBG2.visible = false
+		$NextPuyoSprites/Puyo1Set1_2.visible = false
+		$NextPuyoSprites/Puyo2Set1_2.visible = false
+		$NextPuyoSprites/Puyo1Set2_2.visible = false
+		$NextPuyoSprites/Puyo2Set2_2.visible = false
+	else:
+		$PuyoDropBG1.visible = false
+		$NextPuyoSprites/Puyo1Set1.visible = false
+		$NextPuyoSprites/Puyo2Set1.visible = false
+		$NextPuyoSprites/Puyo1Set2.visible = false
+		$NextPuyoSprites/Puyo2Set2.visible = false
 
 func _process(delta):
 	connectPuyosToGame()
-	$ScoreLabel.text = str(score).pad_zeros(8)
+	$ScorePanel/ScoreLabel.text = str(score).pad_zeros(8)
 	if chainCooldown > 0:
 		scoreToAdd = true
-		$ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
+		$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		chainCooldown += -delta
 		if !defeated:
 			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(false)
@@ -170,6 +181,6 @@ func _on_lose_timer_timeout():
 		emit_signal("lost")
 		defeated = true
 		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = false
-		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = 4
+		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = Node.PROCESS_MODE_DISABLED
 		
 	loseTileTimer = false
