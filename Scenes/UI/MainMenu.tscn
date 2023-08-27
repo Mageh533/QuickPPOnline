@@ -89,6 +89,7 @@ texture = ExtResource("2_s3f7r")
 expand_mode = 2
 
 [node name="Player1" parent="." instance=ExtResource("2_tsy88")]
+position = Vector2(76, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
 libraries = {
@@ -96,7 +97,7 @@ libraries = {
 }
 
 [node name="Player2" parent="." instance=ExtResource("2_tsy88")]
-position = Vector2(801, 2)
+position = Vector2(728, 2)
 currentPlayer = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
