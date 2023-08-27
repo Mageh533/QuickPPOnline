@@ -31,7 +31,20 @@ func _on_player_2_lost():
 func _on_player_1_send_damage(damage):
 	if damage > 0:
 		$Player2.queueNuisance(damage)
+		playDamageSoundEffects(damage)
 
 func _on_player_2_send_damage(damage):
 	if damage > 0:
 		$Player1.queueNuisance(damage)
+		playDamageSoundEffects(damage)
+
+func playDamageSoundEffects(damage):
+	if damage < 12:
+		$SoundEffects/Attack1.play()
+	elif damage >= 12 and damage < 30:
+		$SoundEffects/Attack2.play()
+	elif damage >= 30 and damage < 72:
+		$SoundEffects/Attack3.play()
+	else:
+		$SoundEffects/Attack4.play()
+		
