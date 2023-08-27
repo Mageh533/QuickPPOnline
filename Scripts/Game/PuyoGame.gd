@@ -185,6 +185,12 @@ func calculateNuisance(chainScore, targetPoints):
 	var nuisancePoints = chainScore / targetPoints + leftOverNuisance
 	var nuisanceToSend = floor(nuisancePoints)
 	leftOverNuisance = nuisancePoints - nuisanceToSend
+	if nuisanceQueue > 0:
+		var temp = nuisanceQueue
+		nuisanceQueue -= nuisanceToSend
+		nuisanceToSend -= temp
+		if nuisanceQueue < 0:
+			nuisanceQueue = 0
 	return nuisanceToSend
 
 func queueNuisance(nuisanceNum):
@@ -233,8 +239,10 @@ func _on_lose_timer_timeout():
 	loseTileTimer = false
 
 func _on_piece_landed():
-	if nuisanceQueue > 0:
-		nuisanceCooldown = 2
-		await get_tree().create_timer(0.5).timeout
-		spawnNuisance(nuisanceQueue)
-		nuisanceQueue = 0
+	await get_tree().create_timer(0.5).timeout
+	if chainCooldown <= 0:
+		if nuisanceQueue > 0:
+			nuisanceCooldown = 2
+			await get_tree().create_timer(0.5).timeout
+			spawnNuisance(nuisanceQueue)
+			nuisanceQueue = 0
