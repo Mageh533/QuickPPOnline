@@ -194,10 +194,11 @@ func pieceLand():
 	emit_signal("pieceLanded")
 
 # The actual collision shape of this object should never touch something else
-func _on_area_shape_entered(_area_rid, _area, _area_shape_index, _local_shape_index):
-	if !rightWallCollide and !leftWallCollide:
-		timeOnGround += 1
-		position += Vector2.UP * tile_size
+func _on_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
+	if area.type != "Nuisance":
+		if !rightWallCollide and !leftWallCollide:
+			timeOnGround += 1
+			position += Vector2.UP * tile_size
 
 func _on_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
 	timeOnGround += 1
