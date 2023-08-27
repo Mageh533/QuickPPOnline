@@ -89,12 +89,27 @@ func updateSpriteFrame():
 	else:
 		$PuyoSprites.play("joined_all")
 
+func checkForNuisance():
+	if $RayBottom.is_colliding() and $RayBottom.get_collider() is Area2D:
+		if $RayBottom.get_collider().type == "Nuisance":
+			$RayBottom.get_collider().pop()
+	if $RayTop.is_colliding() and $RayTop.get_collider() is Area2D:
+		if $RayTop.get_collider().type == "Nuisance":
+			$RayTop.get_collider().pop()
+	if $RayRight.is_colliding() and $RayRight.get_collider() is Area2D:
+		if $RayRight.get_collider().type == "Nuisance":
+			$RayRight.get_collider().pop()
+	if $RayLeft.is_colliding() and $RayLeft.get_collider() is Area2D:
+		if $RayLeft.get_collider().type == "Nuisance":
+			$RayLeft.get_collider().pop()
+
 # Starts timers to animate the puyo blinking and popped and removes them
 func pop():
 	if !popped:
 		popped = true
 		$PoppedPreTimer.start()
 		$PoppedTimer.start()
+	checkForNuisance()
 
 func basicSetup():
 	position = position.snapped(Vector2.ONE * tile_size)
@@ -109,7 +124,6 @@ func _on_popped_pre_timer_timeout():
 	if $PoppedPreTimer.wait_time > 0.01:
 		$PoppedPreTimer.wait_time = $PoppedPreTimer.wait_time - 0.02
 		$PoppedPreTimer.start()
-
 
 func _on_popped_timer_timeout():
 	$PoppedPreTimer.stop()
