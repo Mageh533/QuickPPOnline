@@ -19,7 +19,6 @@ func _on_player_1_lost():
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$Restart.visible = true
 
-
 func _on_player_2_lost():
 	$SoundEffects/Lose.play()
 	$Player2/AnimationPlayer.play("lose")
@@ -27,4 +26,12 @@ func _on_player_2_lost():
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Restart.visible = true
-	
+
+func _on_player_1_send_damage(damage):
+	if damage > 0:
+		$Player2.spawnNuisance(damage)
+
+
+func _on_player_2_send_damage(damage):
+	if damage > 0:
+		$Player1.spawnNuisance(damage)

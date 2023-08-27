@@ -351,6 +351,7 @@ animations = [{
 
 [node name="PuyoGame" type="Node2D" groups=["Game"]]
 script = ExtResource("1_tfcgd")
+nuisanceTarget = 70.0
 nuisanceScene = ExtResource("10_7qs3i")
 metadata/_edit_horizontal_guides_ = [-51.0]
 
@@ -509,6 +510,7 @@ sprite_frames = SubResource("SpriteFrames_pmwj7")
 animation = &"BuePuyo"
 
 [node name="NuisanceSpawns" type="Node2D" parent="."]
+position = Vector2(-3, 0)
 
 [node name="0" type="Marker2D" parent="NuisanceSpawns"]
 position = Vector2(63, 21)
@@ -528,9 +530,7 @@ position = Vector2(298, 21)
 [node name="5" type="Marker2D" parent="NuisanceSpawns"]
 position = Vector2(344, 21)
 
-[connection signal="sendDamage" from="." to="." method="_on_send_damage"]
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
-[connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]

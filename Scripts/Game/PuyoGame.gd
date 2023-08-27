@@ -42,7 +42,6 @@ func _ready():
 		$NextPuyoSprites/Puyo2Set1.visible = false
 		$NextPuyoSprites/Puyo1Set2.visible = false
 		$NextPuyoSprites/Puyo2Set2.visible = false
-	spawnNuisance(6)
 
 func _process(delta):
 	connectPuyosToGame()
@@ -174,7 +173,9 @@ func calculateScore():
 
 func calculateNuisance(chainScore, targetPoints):
 	var nuisancePoints = chainScore / targetPoints + leftOverNuisance
-	return nuisancePoints
+	var nuisanceToSend = floor(nuisancePoints)
+	leftOverNuisance = nuisancePoints - nuisanceToSend
+	return nuisanceToSend
 
 # Nuisance spawns in rows and stack up
 func spawnNuisance(nuisanceNum):
@@ -217,7 +218,3 @@ func _on_lose_timer_timeout():
 		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = Node.PROCESS_MODE_DISABLED
 		
 	loseTileTimer = false
-
-
-func _on_send_damage(damage):
-	print("Sent: " + str(damage) + " of nuisance!")

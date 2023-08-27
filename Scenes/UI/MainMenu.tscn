@@ -128,5 +128,7 @@ text = "Restart"
 stream = ExtResource("3_bywl5")
 
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
+[connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]
 [connection signal="lost" from="Player2" to="." method="_on_player_2_lost"]
+[connection signal="sendDamage" from="Player2" to="." method="_on_player_2_send_damage"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
