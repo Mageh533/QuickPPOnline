@@ -65,7 +65,6 @@ func _process(delta):
 			var chainScore = calculateScore()
 			score += chainScore
 			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
-			await get_tree().create_timer(0.5)
 			nuisanceProcess()
 		currentChain = 0
 		if !defeated:
@@ -222,15 +221,17 @@ func spawnNuisance(nuisanceNum):
 		$MultiplayerSoundEffects/Damage2.play()
 
 func nuisanceProcess():
-	if nuisanceQueue > 0:
-		nuisanceCooldown = 2
-		await get_tree().create_timer(0.5).timeout
-		if nuisanceQueue >= 30:
-			spawnNuisance(30)
-			nuisanceQueue -= 30
-		else:
-			spawnNuisance(nuisanceQueue)
-			nuisanceQueue = 0
+	await get_tree().create_timer(0.5)
+	if chainCooldown <= 0:
+		if nuisanceQueue > 0:
+			nuisanceCooldown = 2
+			await get_tree().create_timer(0.5).timeout
+			if nuisanceQueue >= 30:
+				spawnNuisance(30)
+				nuisanceQueue -= 30
+			else:
+				spawnNuisance(nuisanceQueue)
+				nuisanceQueue = 0
 
 # If a puyo is on the lose tile for more than a second then its game over
 func _on_lose_tile_area_entered(_area):
@@ -253,5 +254,4 @@ func _on_lose_timer_timeout():
 
 func _on_piece_landed():
 	await get_tree().create_timer(0.5).timeout
-	if chainCooldown <= 0:
-		nuisanceProcess()
+	nuisanceProcess()
