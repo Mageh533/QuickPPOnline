@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://brquw0d8ma77b"]
+[gd_scene load_steps=9 format=3 uid="uid://brquw0d8ma77b"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_p0iq2"]
+[ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_s3f7r"]
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_tsy88"]
 [ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/Sounds/lose.wav" id="3_bywl5"]
 
@@ -76,6 +77,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p0iq2")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_s3f7r")
+expand_mode = 2
 
 [node name="Player1" parent="." instance=ExtResource("2_tsy88")]
 
