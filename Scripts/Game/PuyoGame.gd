@@ -234,7 +234,7 @@ func _on_lose_timer_timeout():
 
 func _on_piece_landed():
 	if nuisanceQueue > 0:
-		nuisanceCooldown = 3
-		await get_tree().create_timer(1).timeout
+		nuisanceCooldown = 2
+		await get_tree().create_timer(0.5).timeout
 		spawnNuisance(nuisanceQueue)
 		nuisanceQueue = 0
