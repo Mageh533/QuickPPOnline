@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://brquw0d8ma77b"]
+[gd_scene load_steps=14 format=3 uid="uid://brquw0d8ma77b"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_p0iq2"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_s3f7r"]
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_tsy88"]
 [ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/Sounds/lose.wav" id="3_bywl5"]
+[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="5_7yab5"]
 
 [sub_resource type="Animation" id="Animation_3xduh"]
 resource_name = "lose"
@@ -69,6 +70,27 @@ _data = {
 "lose": SubResource("Animation_byu6y")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_ygy2l"]
+font_color = Color(0.184314, 0.184314, 0.184314, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fek1"]
+atlas = ExtResource("5_7yab5")
+region = Rect2(1293, 68, 71, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lcqxn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fek1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s51mq"]
+font_color = Color(0.184314, 0.184314, 0.184314, 1)
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -126,6 +148,35 @@ text = "Restart"
 
 [node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource("3_bywl5")
+
+[node name="P1Queue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 4.0
+offset_right = 169.0
+offset_bottom = 30.0
+text = ":"
+label_settings = SubResource("LabelSettings_ygy2l")
+
+[node name="P1QueueSprite" type="AnimatedSprite2D" parent="P1Queue"]
+position = Vector2(-15, 13)
+scale = Vector2(0.445, 0.445)
+sprite_frames = SubResource("SpriteFrames_lcqxn")
+
+[node name="P2Queue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 983.0
+offset_top = 4.0
+offset_right = 1018.0
+offset_bottom = 30.0
+text = ":"
+label_settings = SubResource("LabelSettings_s51mq")
+horizontal_alignment = 2
+
+[node name="P1QueueSprite" type="AnimatedSprite2D" parent="P2Queue"]
+position = Vector2(50, 13)
+scale = Vector2(0.445, 0.445)
+sprite_frames = SubResource("SpriteFrames_lcqxn")
 
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]

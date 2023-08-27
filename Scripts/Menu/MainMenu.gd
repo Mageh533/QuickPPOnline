@@ -6,7 +6,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	$P1Queue.text = str($Player1.nuisanceQueue)
+	$P2Queue.text = str($Player2.nuisanceQueue)
 
 func _on_restart_pressed():
 	get_tree().reload_current_scene()
