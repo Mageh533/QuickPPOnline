@@ -1,10 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=9 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
+[ext_resource type="Script" path="res://Scripts/Multiplayer/DirectMultiplayer.gd" id="1_n1brc"]
+[ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/MainGame.tscn" id="2_fythm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
+bg_color = Color(0, 0.713726, 0.996078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_detail = 15
+shadow_color = Color(0, 0, 0, 0.160784)
+shadow_size = 1
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="Theme" id="Theme_mb2x8"]
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw75h"]
+bg_color = Color(0.862745, 0.247059, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10thd"]
+bg_color = Color(0.913725, 0.435294, 0.352941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="Theme" id="Theme_80hm2"]
+Button/styles/disabled = SubResource("StyleBoxFlat_iw75h")
+Button/styles/hover = SubResource("StyleBoxFlat_iw75h")
+Button/styles/normal = SubResource("StyleBoxFlat_10thd")
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
 
 [node name="MainMenu" type="Node"]
+script = ExtResource("1_n1brc")
+MainGame = ExtResource("2_fythm")
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +56,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="TextureRect" parent="Control"]
+[node name="Background" type="TextureRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,3 +65,36 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_kgxbb")
 expand_mode = 1
+
+[node name="Net" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 308.0
+offset_right = 714.0
+offset_bottom = 348.0
+theme = SubResource("Theme_mb2x8")
+
+[node name="Options" type="HBoxContainer" parent="UI/Net"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Net/Options"]
+layout_mode = 2
+text = "Direct:"
+
+[node name="Host" type="Button" parent="UI/Net/Options"]
+layout_mode = 2
+theme = SubResource("Theme_80hm2")
+text = "Host"
+
+[node name="Connect" type="Button" parent="UI/Net/Options"]
+layout_mode = 2
+theme = SubResource("Theme_80hm2")
+text = "Connect"
+
+[node name="Remote" type="LineEdit" parent="UI/Net/Options"]
+layout_mode = 2
+text = "127.0.0.1"
+expand_to_text_length = true
+
+[connection signal="pressed" from="UI/Net/Options/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/Net/Options/Connect" to="." method="_on_connect_pressed"]

@@ -136,8 +136,9 @@ sources/0 = SubResource("TileSetAtlasSource_3prtr")
 sources/1 = SubResource("TileSetScenesCollectionSource_ip3n8")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
-bg_color = Color(0, 0.714844, 0.996094, 1)
+bg_color = Color(0, 0.713726, 0.996078, 1)
 border_width_left = 1
+border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
@@ -537,6 +538,5 @@ position = Vector2(344, 21)
 
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
-[connection signal="body_shape_entered" from="TileMap/@Area2D@21500" to="TileMap/@Area2D@21500" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
