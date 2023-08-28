@@ -1,3 +1,23 @@
-[gd_scene format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=2 format=3 uid="uid://cb5vpkwc2mhn3"]
+
+[ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
 
 [node name="MainMenu" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kgxbb")
+expand_mode = 1
