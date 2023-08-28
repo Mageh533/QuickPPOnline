@@ -233,7 +233,7 @@ func checkAllClear():
 	return allClear
 
 func nuisanceProcess():
-	await get_tree().create_timer(0.5)
+	await get_tree().create_timer(0.5).timeout
 	if chainCooldown <= 0:
 		if nuisanceQueue > 0:
 			nuisanceCooldown = 2
