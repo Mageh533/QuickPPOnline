@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=45 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://bxjndxr7gtii7" path="res://Assets/Sounds/damage1.wav" id="17_43n50"]
 [ext_resource type="AudioStream" uid="uid://boqfbxkyhsey1" path="res://Assets/Sounds/damage2.wav" id="18_ubat8"]
 [ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/Sounds/damage3.wav" id="19_04va0"]
+[ext_resource type="AudioStream" uid="uid://ccqnv7lvh8drs" path="res://Assets/Sounds/allClear.wav" id="19_qxvst"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
 atlas = ExtResource("2_t6ghk")
@@ -387,7 +388,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(-65534, 1, 65536, 720899, 1, 131072, 720900, 1, 131072, 720901, 1, 131072, 655363, 1, 196608, 655364, 1, 196608, 655365, 1, 196608, 589827, 1, 262144, 589828, 1, 262144, 589829, 1, 262144, 524291, 1, 327680, 524292, 1, 327680, 524293, 1, 327680, 458755, 1, 393216, 458756, 1, 393216, 458757, 1, 393216, 393219, 1, 327680, 393220, 1, 262144, 327683, 1, 196608, 327684, 1, 131072)
+layer_1/tile_data = PackedInt32Array(-65534, 1, 65536, 131075, 1, 196608, 196611, 1, 327680, 262147, 1, 131072, 327683, 1, 262144, 393219, 1, 196608, 458755, 1, 131072, 524291, 1, 393216, 589827, 1, 327680, 655363, 1, 262144, 131076, 1, 262144, 196612, 1, 393216, 262148, 1, 196608, 327684, 1, 262144, 393220, 1, 196608, 458756, 1, 131072, 524292, 1, 393216, 589828, 1, 327680, 655364, 1, 262144, 327685, 1, 262144, 393221, 1, 196608, 458757, 1, 131072, 524293, 1, 393216, 589829, 1, 327680, 655365, 1, 262144, 720899, 1, 196608, 720900, 1, 196608, 720901, 1, 196608)
 
 [node name="PuyoDropBG1" type="Polygon2D" parent="."]
 position = Vector2(327, 45)
@@ -448,6 +449,9 @@ stream = ExtResource("10_8pul3")
 
 [node name="Chain7" type="AudioStreamPlayer" parent="ChainSoundEffects"]
 stream = ExtResource("11_4vtwm")
+
+[node name="AllClear" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("19_qxvst")
 
 [node name="MultiplayerSoundEffects" type="Node" parent="."]
 
@@ -533,5 +537,6 @@ position = Vector2(344, 21)
 
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
+[connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]

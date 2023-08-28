@@ -21,7 +21,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyw6y"]
 size = Vector2(51, 46)
 
-[node name="NuisancePuyo" type="Area2D"]
+[node name="NuisancePuyo" type="Area2D" groups=["Puyos"]]
 script = ExtResource("1_820i2")
 
 [node name="PuyoSprite" type="AnimatedSprite2D" parent="."]

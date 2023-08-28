@@ -187,6 +187,9 @@ func calculateNuisance(chainScore, targetPoints):
 	var nuisancePoints = chainScore / targetPoints + leftOverNuisance
 	var nuisanceToSend = floor(nuisancePoints)
 	leftOverNuisance = nuisancePoints - nuisanceToSend
+	if checkAllClear():
+		nuisanceToSend += 30
+		$ChainSoundEffects/AllClear.play()
 	if nuisanceQueue > 0:
 		var temp = nuisanceQueue
 		nuisanceQueue -= nuisanceToSend
@@ -220,6 +223,14 @@ func spawnNuisance(nuisanceNum):
 		$MultiplayerSoundEffects/Damage1.play()
 	else:
 		$MultiplayerSoundEffects/Damage2.play()
+
+func checkAllClear():
+	var allClear = true
+	for puyo in $TileMap.get_children():
+		if puyo.type != "Player":
+			allClear = false
+	print("All Clear!")
+	return allClear
 
 func nuisanceProcess():
 	await get_tree().create_timer(0.5)
