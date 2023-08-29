@@ -89,7 +89,6 @@ func _process(delta):
 			$MultiplayerSynchronizer.set_multiplayer_authority(1)
 		else:
 			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
-			print("Second player has it")
 
 func playerControls():
 	if Input.is_action_pressed("p" + str(currentPlayer) + "_right"):
@@ -189,7 +188,7 @@ func swapPuyos():
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func pieceLand():
 	$SoundEffects/PieceLand.play()
 	var puyo1 = currentPuyos[0].instantiate()
