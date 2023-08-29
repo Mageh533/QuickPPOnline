@@ -1,10 +1,65 @@
-[gd_scene load_steps=11 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=17 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
 [ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/MainGame.tscn" id="2_fythm"]
+[ext_resource type="Texture2D" uid="uid://brfhuohmm8tia" path="res://Assets/Sprites/volume-icon.svg" id="4_ueemu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
+bg_color = Color(0.290196, 0.447059, 0.823529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b83h"]
+bg_color = Color(0.14902, 0.627451, 0.972549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4hmw"]
+bg_color = Color(0.317647, 0.513726, 0.470588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
+bg_color = Color(0, 0.713726, 0.996078, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_detail = 15
+shadow_color = Color(0, 0, 0, 0.160784)
+shadow_size = 1
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baad8"]
+bg_color = Color(0.509804, 0.552941, 0.980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_wdnyx"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxFlat_qebv7")
+Button/styles/normal = SubResource("StyleBoxFlat_0b83h")
+Button/styles/pressed = SubResource("StyleBoxFlat_d4hmw")
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_baad8")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwkxl"]
 bg_color = Color(0, 0.713726, 0.996078, 1)
 border_width_left = 1
 border_width_top = 1
@@ -21,27 +76,26 @@ MarginContainer/constants/margin_bottom = 0
 MarginContainer/constants/margin_left = 0
 MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 0
-Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
+Panel/styles/panel = SubResource("StyleBoxFlat_rwkxl")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw75h"]
-bg_color = Color(0.862745, 0.247059, 0.25098, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q34b0"]
+bg_color = Color(1, 1, 1, 0.443137)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10thd"]
-bg_color = Color(0.913725, 0.435294, 0.352941, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
-[sub_resource type="Theme" id="Theme_80hm2"]
-Button/styles/disabled = SubResource("StyleBoxFlat_iw75h")
-Button/styles/hover = SubResource("StyleBoxFlat_iw75h")
-Button/styles/normal = SubResource("StyleBoxFlat_10thd")
-MarginContainer/constants/margin_bottom = 0
-MarginContainer/constants/margin_left = 0
-MarginContainer/constants/margin_right = 0
-MarginContainer/constants/margin_top = 0
-Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_av2cg"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
 
 [sub_resource type="Animation" id="Animation_8k6p7"]
 resource_name = "fadeOut"
@@ -67,6 +121,8 @@ _data = {
 script = ExtResource("1_bnywg")
 MainGame = ExtResource("2_fythm")
 
+[node name="GameContainer" type="Node" parent="."]
+
 [node name="UI" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
@@ -75,6 +131,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_wdnyx")
 
 [node name="Background" type="TextureRect" parent="UI"]
 layout_mode = 1
@@ -107,16 +164,16 @@ layout_mode = 2
 text = "Play Multiplayer (Online)"
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
-position = Vector2i(440, 226)
+position = Vector2i(440, 214)
 size = Vector2i(236, 333)
 visible = true
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 232.0
-offset_bottom = 329.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 234.0
+offset_bottom = 331.0
 theme_override_constants/separation = 16
 
 [node name="OnlineLabel" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
@@ -144,7 +201,6 @@ theme_override_constants/separation = 24
 
 [node name="Host" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
 layout_mode = 2
-theme = SubResource("Theme_80hm2")
 text = "Host"
 
 [node name="Options" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
@@ -159,7 +215,6 @@ expand_to_text_length = true
 
 [node name="Connect" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options"]
 layout_mode = 2
-theme = SubResource("Theme_80hm2")
 text = "Connect"
 
 [node name="PlayerInfo" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
@@ -174,7 +229,39 @@ text = "0 / 0 Players connected"
 layout_mode = 2
 text = "Start"
 
+[node name="SoundButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 587.0
+offset_right = 49.0
+offset_bottom = 628.0
+theme_override_constants/outline_size = 6
+theme_override_constants/icon_max_width = 101
+theme_override_styles/normal = SubResource("StyleBoxFlat_q34b0")
+icon = ExtResource("4_ueemu")
+expand_icon = true
+
+[node name="SoundPopUp" type="PopupPanel" parent="UI"]
+transparent_bg = true
+position = Vector2i(15, 387)
+size = Vector2i(25, 200)
+visible = true
+transparent = true
+mouse_passthrough = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_av2cg")
+
+[node name="VSlider" type="VSlider" parent="UI/SoundPopUp"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 24.0
+offset_bottom = 199.0
+max_value = 1.0
+step = 0.001
+value = 1.0
+scrollable = false
+
 [node name="FadeRect" type="ColorRect" parent="UI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,3 +280,5 @@ libraries = {
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="value_changed" from="UI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]

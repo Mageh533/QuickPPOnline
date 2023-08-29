@@ -3,12 +3,14 @@ extends Node
 @export var MainGame : PackedScene
 
 var currentGame
+var masterVolumeIndex = AudioServer.get_bus_index("Master")
 
 const PORT = 4433
 
 func _ready():
 	# Start paused.
 	get_tree().paused = true
+	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
@@ -86,11 +88,12 @@ func _on_connect_pressed():
 @rpc("any_peer", "call_local")
 func start_game():
 	# Hide the UI and unpause to start the game.
-	$UI.hide()
+	$UI/MenuItems.hide()
+	$UI/Background.hide()
 	$UI/MenuItems/OnlinePopUp.hide()
 	currentGame = MainGame.instantiate()
 	currentGame.restartPressed.connect(on_restart_pressed)
-	add_child(currentGame)
+	$GameContainer.add_child(currentGame)
 	get_tree().paused = false
 	print("Second player is: " + str(GameManager.secondPlayerId))
 
@@ -98,7 +101,7 @@ func start_game():
 func restartGame():
 	currentGame.queue_free()
 	currentGame = MainGame.instantiate()
-	add_child(currentGame)
+	$GameContainer.add_child(currentGame)
 
 func on_restart_pressed():
 	restartGame.rpc()
@@ -111,3 +114,9 @@ func _on_play_mp_online_pressed():
 
 func _on_play_mp_local_pressed():
 	start_game()
+
+func _on_sound_button_pressed():
+	$UI/SoundPopUp.visible = true
+
+func _on_v_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
