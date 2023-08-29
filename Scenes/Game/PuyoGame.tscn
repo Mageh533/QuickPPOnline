@@ -362,7 +362,7 @@ offset_left = 36.0
 offset_top = 36.0
 offset_right = 312.0
 offset_bottom = 574.0
-color = Color(0.164706, 0.164706, 0.164706, 1)
+color = Color(0.164706, 0.164706, 0.164706, 0.745098)
 
 [node name="LoseTile" type="Area2D" parent="."]
 position = Vector2(152, 65)
@@ -538,5 +538,6 @@ position = Vector2(344, 21)
 
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
+[connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
