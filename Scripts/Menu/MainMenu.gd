@@ -9,7 +9,7 @@ const PORT = 4433
 func _ready():
 	# Start paused.
 	get_tree().paused = true
-	$UI/Net/PlayerInfo/Label.hide()
+	$UI/DirectNet/PlayerInfo/Label.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
 	
@@ -23,14 +23,15 @@ func _ready():
 	$UI/FadeRect.hide()
 
 func peer_connected(_id):
-	$UI/Net/PlayerInfo/Label.visible = true
-	$UI/Net/PlayerInfo/Label.text = "2 / 2 Players connected"
+	$UI/DirectNet/PlayerInfo/Label.visible = true
+	$UI/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
 
 func peer_disconnected(_id):
-	$UI/Net/PlayerInfo/Label.text = "1 / 2 Players connected"
+	$UI/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 
 func connected_to_server():
 	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
+	randomize()
 	setUpSeed.rpc_id(1, randi())
 
 # Make sure both players have the same seed
@@ -61,13 +62,13 @@ func _on_host_pressed():
 		OS.alert("Failed to start multiplayer server.")
 		return
 	else:
-		$UI/Net/PlayerInfo/Label.visible = true
-		$UI/Net/PlayerInfo/Label.text = "1 / 2 Players connected"
+		$UI/DirectNet/PlayerInfo/Label.visible = true
+		$UI/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 	multiplayer.multiplayer_peer = peer
 
 func _on_connect_pressed():
 	# Start as client.
-	var txt : String = $UI/Net/Options/Remote.text
+	var txt : String = $UI/DirectNet/Options/Remote.text
 	if txt == "":
 		OS.alert("Need a remote to connect to.")
 		return
