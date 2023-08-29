@@ -71,10 +71,10 @@ func _process(delta):
 		if rayCast.is_colliding():
 			groundCollide = true
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		playerControls()
+		playerControls(1) # if playing multiplayer, use the player 1 controls
 	else:
 		if GameManager.secondPlayerId == 0:
-			playerControls()
+			playerControls(currentPlayer)
 	
 	if groundCollide:
 		timeOnGround += delta
@@ -93,8 +93,8 @@ func _process(delta):
 		else:
 			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
 
-func playerControls():
-	if Input.is_action_pressed("p" + str(currentPlayer) + "_right"):
+func playerControls(controlsToUse):
+	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
 		if !moveCooldown:
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
@@ -102,7 +102,7 @@ func playerControls():
 				$SoundEffects/PieceMove.play()
 				position += Vector2.RIGHT * tile_size
 			moveCooldown = false
-	if Input.is_action_pressed("p" + str(currentPlayer) + "_left"):
+	if Input.is_action_pressed("p" + str(controlsToUse) + "_left"):
 		if !moveCooldown:
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
@@ -110,17 +110,17 @@ func playerControls():
 				$SoundEffects/PieceMove.play()
 				position += Vector2.LEFT * tile_size
 			moveCooldown = false
-	if Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
-		fastDrop = true
-	if Input.is_action_just_released("p" + str(currentPlayer) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
+	if Input.is_action_just_released("p" + str(controlsToUse) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false
-	if Input.is_action_just_released("p" + str(currentPlayer) + "_turnLeft"):
+	if Input.is_action_pressed("p" + str(controlsToUse) + "_down"):
+		fastDrop = true
+	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnLeft"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			rotate(PI / 2)
 		else:
 			rotate180()
-	if Input.is_action_just_released("p" + str(currentPlayer) + "_turnRight"):
+	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			rotate(-PI / 2)
