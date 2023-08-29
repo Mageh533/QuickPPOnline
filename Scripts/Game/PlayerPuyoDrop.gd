@@ -27,6 +27,7 @@ var landCooldown = false
 var leftWallCollide = false
 var rightWallCollide = false
 var active = false
+var playerSet = false
 
 var startingPos
 
@@ -68,7 +69,8 @@ func _process(delta):
 	for rayCast in bottomRaycasts:
 		if rayCast.is_colliding():
 			groundCollide = true
-	playerControls()
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		playerControls()
 	
 	if groundCollide:
 		timeOnGround += delta
@@ -79,6 +81,14 @@ func _process(delta):
 			pieceLand()
 			await get_tree().create_timer(0.2).timeout
 			landCooldown = false
+	
+	if active and !playerSet:
+		playerSet = true
+		if currentPlayer == 1:
+			$MultiplayerSynchronizer.set_multiplayer_authority(1)
+		else:
+			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
+			print("Second player has it")
 
 func playerControls():
 	if Input.is_action_pressed("p" + str(currentPlayer) + "_right"):

@@ -9,12 +9,31 @@ func _ready():
 	get_tree().paused = true
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
+	
+	multiplayer.peer_connected.connect(peer_connected)
+	multiplayer.peer_disconnected.connect(peer_disconnected)
+	multiplayer.connected_to_server.connect(connected_to_server)
+	multiplayer.connection_failed.connect(connection_failed)
 
-	# Automatically start the server in headless mode.
-	if DisplayServer.get_name() == "headless":
-		print("Automatically starting dedicated server.")
-		_on_host_pressed.call_deferred()
+func peer_connected(id):
+	print("Player connected: " + str(id))
 
+func peer_disconnected(id):
+	print("Player disconnected: " + str(id))
+
+func connected_to_server():
+	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
+
+@rpc("any_peer", "call_local")
+func setSecondPlayerId(id):
+	if GameManager.secondPlayerId == 0:
+		GameManager.secondPlayerId = id
+		
+	if multiplayer.is_server():
+		setSecondPlayerId.rpc_id(id, id)
+
+func connection_failed():
+	pass
 
 func _on_host_pressed():
 	# Start as server.
@@ -24,7 +43,6 @@ func _on_host_pressed():
 		OS.alert("Failed to start multiplayer server.")
 		return
 	multiplayer.multiplayer_peer = peer
-	start_game()
 
 
 func _on_connect_pressed():
@@ -39,11 +57,15 @@ func _on_connect_pressed():
 		OS.alert("Failed to start multiplayer client.")
 		return
 	multiplayer.multiplayer_peer = peer
-	start_game()
 
-
+@rpc("any_peer", "call_local")
 func start_game():
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
 	add_child(MainGame.instantiate())
 	get_tree().paused = false
+	print("Second player is: " + str(GameManager.secondPlayerId))
+
+
+func _on_start_pressed():
+	start_game.rpc()

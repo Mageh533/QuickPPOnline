@@ -68,10 +68,10 @@ expand_mode = 1
 
 [node name="Net" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 461.0
-offset_top = 308.0
-offset_right = 714.0
-offset_bottom = 348.0
+offset_left = 433.0
+offset_top = 38.0
+offset_right = 686.0
+offset_bottom = 78.0
 theme = SubResource("Theme_mb2x8")
 
 [node name="Options" type="HBoxContainer" parent="UI/Net"]
@@ -96,5 +96,10 @@ layout_mode = 2
 text = "127.0.0.1"
 expand_to_text_length = true
 
+[node name="Start" type="Button" parent="UI/Net/Options"]
+layout_mode = 2
+text = "Start"
+
 [connection signal="pressed" from="UI/Net/Options/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI/Net/Options/Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="UI/Net/Options/Start" to="." method="_on_start_pressed"]
