@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=33 format=3 uid="uid://5rjlbqosjvt2"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="4_l7oes"]
 [ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/Sounds/lose.wav" id="5_knrda"]
 [ext_resource type="AudioStream" uid="uid://ccfbkpfv8psaa" path="res://Assets/Sounds/attack1.wav" id="6_1t7np"]
+[ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/Sounds/prepare.wav" id="6_w6rx1"]
 [ext_resource type="AudioStream" uid="uid://2ap3imurmp4a" path="res://Assets/Sounds/attack2.wav" id="7_m2br0"]
+[ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/Sounds/matchStart.wav" id="7_rpe6l"]
 [ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/Sounds/attack3.wav" id="8_l8v3d"]
 [ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/Sounds/attack4.wav" id="9_j3vcl"]
 [ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/Sounds/win.wav" id="10_pcdy7"]
@@ -183,6 +185,78 @@ animations = [{
 [sub_resource type="LabelSettings" id="LabelSettings_s51mq"]
 font_color = Color(0.184314, 0.184314, 0.184314, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_owgav"]
+font_size = 35
+font_color = Color(1, 0.219608, 0.231373, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ftehg"]
+font_size = 35
+font_color = Color(0.878431, 0.352941, 0.0627451, 1)
+
+[sub_resource type="Animation" id="Animation_qa1vl"]
+resource_name = "matchStart"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ready:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(117, 128), Vector2(117, 215)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ready:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Start:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SoundEffects/Prepare")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_w6rx1")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_rpe6l")
+}],
+"times": PackedFloat32Array(0.5, 2)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wce1"]
+_data = {
+"matchStart": SubResource("Animation_qa1vl")
+}
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -299,28 +373,15 @@ scale = Vector2(0.65, 0.65)
 sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
 
-[node name="Restart" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -21.5
-offset_right = 48.0
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Return to Lobby"
-
 [node name="SoundEffects" type="Node" parent="."]
 
 [node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource("5_knrda")
 
-[node name="Lose2" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("5_knrda")
+[node name="Prepare" type="AudioStreamPlayer2D" parent="SoundEffects"]
+
+[node name="Start" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("7_rpe6l")
 
 [node name="Attack1" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource("6_1t7np")
@@ -365,6 +426,61 @@ horizontal_alignment = 2
 position = Vector2(50, 13)
 scale = Vector2(0.445, 0.445)
 sprite_frames = SubResource("SpriteFrames_lcqxn")
+
+[node name="UIAnims" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -183.0
+offset_right = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ready" type="Label" parent="UIAnims"]
+visible = false
+layout_mode = 0
+offset_left = 117.0
+offset_top = 128.0
+offset_right = 250.0
+offset_bottom = 195.001
+text = "Ready?"
+label_settings = SubResource("LabelSettings_owgav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Label" parent="UIAnims"]
+visible = false
+layout_mode = 0
+offset_left = 117.0
+offset_top = 214.0
+offset_right = 250.0
+offset_bottom = 281.0
+text = "Start!"
+label_settings = SubResource("LabelSettings_ftehg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Anims" type="AnimationPlayer" parent="UIAnims"]
+libraries = {
+"": SubResource("AnimationLibrary_3wce1")
+}
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -21.5
+offset_right = 48.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
 
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]

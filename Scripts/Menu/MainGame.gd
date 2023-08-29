@@ -1,10 +1,19 @@
 extends Control
 
+signal restartPressed
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Restart.visible = false
 	clearNuisanceQueue("Player1")
 	clearNuisanceQueue("Player2")
+	await get_tree().create_timer(0.01).timeout
+	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
+	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
+	$UIAnims/Anims.play("matchStart")
+	await $UIAnims/Anims.animation_finished
+	$Player1.process_mode = Node.PROCESS_MODE_INHERIT
+	$Player2.process_mode = Node.PROCESS_MODE_INHERIT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -14,7 +23,7 @@ func _process(_delta):
 	$P2Queue.text = str($Player2.nuisanceQueue)
 
 func _on_restart_pressed():
-	get_tree().reload_current_scene()
+	emit_signal("restartPressed")
 
 func _on_player_1_lost():
 	$SoundEffects/Lose.play()
