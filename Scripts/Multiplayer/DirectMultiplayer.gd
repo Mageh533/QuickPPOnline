@@ -23,6 +23,14 @@ func peer_disconnected(id):
 
 func connected_to_server():
 	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
+	setUpSeed.rpc_id(1, randi())
+
+@rpc("any_peer", "call_local")
+func setUpSeed(seed):
+	GameManager.currentSeed = seed
+		
+	if multiplayer.is_server():
+		setUpSeed.rpc_id(GameManager.secondPlayerId, seed)
 
 @rpc("any_peer", "call_local")
 func setSecondPlayerId(id):

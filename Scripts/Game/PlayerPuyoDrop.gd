@@ -33,6 +33,7 @@ var startingPos
 
 # Choses puyos 
 func _ready():
+	seed(GameManager.currentSeed)
 	startingPos = position
 	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
 	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])

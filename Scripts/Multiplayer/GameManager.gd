@@ -1,6 +1,7 @@
 extends Node
 
 var secondPlayerId = 0
+var currentSeed = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
