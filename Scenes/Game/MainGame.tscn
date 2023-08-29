@@ -312,7 +312,7 @@ offset_right = 48.0
 offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Restart"
+text = "Return to Lobby"
 
 [node name="SoundEffects" type="Node" parent="."]
 

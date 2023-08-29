@@ -7,6 +7,7 @@ const PORT = 4433
 func _ready():
 	# Start paused.
 	get_tree().paused = true
+	$UI/Net/PlayerInfo/Label.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
 	
@@ -16,10 +17,11 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 
 func peer_connected(id):
-	print("Player connected: " + str(id))
+	$UI/Net/PlayerInfo/Label.visible = true
+	$UI/Net/PlayerInfo/Label.text = "2 / 2 Players connected"
 
 func peer_disconnected(id):
-	print("Player disconnected: " + str(id))
+	$UI/Net/PlayerInfo/Label.text = "1 / 2 Players connected"
 
 func connected_to_server():
 	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
@@ -50,8 +52,10 @@ func _on_host_pressed():
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start multiplayer server.")
 		return
+	else:
+		$UI/Net/PlayerInfo/Label.visible = true
+		$UI/Net/PlayerInfo/Label.text = "1 / 2 Players connected"
 	multiplayer.multiplayer_peer = peer
-
 
 func _on_connect_pressed():
 	# Start as client.
