@@ -72,6 +72,9 @@ func _process(delta):
 			groundCollide = true
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		playerControls()
+	else:
+		if GameManager.secondPlayerId == 0:
+			playerControls()
 	
 	if groundCollide:
 		timeOnGround += delta
