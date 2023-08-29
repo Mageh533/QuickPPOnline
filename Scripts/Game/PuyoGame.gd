@@ -135,6 +135,10 @@ func _on_popping_timer_timeout():
 		puyoToPop.pop()
 	
 	checkPopTimer = false
+	
+	if checkAllClear():
+		await get_tree().create_timer(0.5).timeout
+		$ChainSoundEffects/AllClear.play()
 
 func findOutAllConnected(puyo):
 	if puyo.connected.size() > 0 and !connectedPuyos.has(puyo) and !puyo.popped and !puyosToPop.has(puyo):
@@ -189,7 +193,6 @@ func calculateNuisance(chainScore, targetPoints):
 	leftOverNuisance = nuisancePoints - nuisanceToSend
 	if checkAllClear():
 		nuisanceToSend += 30
-		$ChainSoundEffects/AllClear.play()
 	if nuisanceQueue > 0:
 		var temp = nuisanceQueue
 		nuisanceQueue -= nuisanceToSend
@@ -227,7 +230,7 @@ func spawnNuisance(nuisanceNum):
 func checkAllClear():
 	var allClear = true
 	for puyo in $TileMap.get_children():
-		if puyo.type != "Player":
+		if puyo.type != "Player" and !puyo.popped:
 			allClear = false
 	return allClear
 
