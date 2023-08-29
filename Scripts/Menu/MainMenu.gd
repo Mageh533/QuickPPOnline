@@ -1,100 +1,89 @@
-extends Control
+extends Node
 
-# Called when the node enters the scene tree for the first time.
+@export var MainGame : PackedScene
+
+const PORT = 4433
+
 func _ready():
-	$Restart.visible = false
-	clearNuisanceQueue("Player1")
-	clearNuisanceQueue("Player2")
+	# Start paused.
+	get_tree().paused = true
+	$UI/Net/PlayerInfo/Label.hide()
+	# You can save bandwidth by disabling server relay and peer notifications.
+	multiplayer.server_relay = false
+	
+	multiplayer.peer_connected.connect(peer_connected)
+	multiplayer.peer_disconnected.connect(peer_disconnected)
+	multiplayer.connected_to_server.connect(connected_to_server)
+	multiplayer.connection_failed.connect(connection_failed)
+	
+	$UI/FadeRect/FadeAnim.play("fadeOut")
+	await $UI/FadeRect/FadeAnim.animation_finished
+	$UI/FadeRect.hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	displayNuisanceQueue("Player1")
-	displayNuisanceQueue("Player2")
-	$P1Queue.text = str($Player1.nuisanceQueue)
-	$P2Queue.text = str($Player2.nuisanceQueue)
+func peer_connected(_id):
+	$UI/Net/PlayerInfo/Label.visible = true
+	$UI/Net/PlayerInfo/Label.text = "2 / 2 Players connected"
 
-func _on_restart_pressed():
-	get_tree().reload_current_scene()
+func peer_disconnected(_id):
+	$UI/Net/PlayerInfo/Label.text = "1 / 2 Players connected"
 
-func _on_player_1_lost():
-	$SoundEffects/Lose.play()
-	$Player1/AnimationPlayer.play("lose")
-	await $Player1/AnimationPlayer.animation_finished
-	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
-	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
-	$Restart.visible = true
+func connected_to_server():
+	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
+	setUpSeed.rpc_id(1, randi())
 
-func _on_player_2_lost():
-	$SoundEffects/Lose.play()
-	$Player2/AnimationPlayer.play("lose")
-	await $Player2/AnimationPlayer.animation_finished
-	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
-	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
-	$Restart.visible = true
-
-func _on_player_1_send_damage(damage):
-	if damage > 0:
-		$Player2.queueNuisance(damage)
-		playDamageSoundEffects(damage)
-
-func _on_player_2_send_damage(damage):
-	if damage > 0:
-		$Player1.queueNuisance(damage)
-		playDamageSoundEffects(damage)
-
-func clearNuisanceQueue(player):
-	for sprite in get_node(player + "/NuisanceQueue").get_children():
-		sprite.visible = false
-
-func displayNuisanceQueue(player):
-	var nuisanceQueueSprites = get_node(player + "/NuisanceQueue").get_children()
-	var nuisanceToShow = get_node(player).nuisanceQueue
-	var spritesUsed = 0
-	clearNuisanceQueue(player)
-	while nuisanceToShow > 0 and spritesUsed < 6:
-		if nuisanceToShow < 6:
-			nuisanceQueueSprites[spritesUsed].visible = true
-			nuisanceQueueSprites[spritesUsed].play("small")
-			spritesUsed += 1
-			nuisanceToShow -= 1
-		elif nuisanceToShow >= 6 and nuisanceToShow < 30:
-			nuisanceQueueSprites[spritesUsed].visible = true
-			nuisanceQueueSprites[spritesUsed].play("large")
-			spritesUsed += 1
-			nuisanceToShow -= 6
-		elif nuisanceToShow >= 30 and nuisanceToShow < 180:
-			nuisanceQueueSprites[spritesUsed].visible = true
-			nuisanceQueueSprites[spritesUsed].play("rock")
-			spritesUsed += 1
-			nuisanceToShow -= 30
-		elif nuisanceToShow >= 180 and nuisanceToShow < 360:
-			nuisanceQueueSprites[spritesUsed].visible = true
-			nuisanceQueueSprites[spritesUsed].play("star")
-			spritesUsed += 1
-			nuisanceToShow -= 180
-		elif nuisanceToShow >= 360 and nuisanceToShow < 720:
-			nuisanceQueueSprites[spritesUsed].visible = true
-			nuisanceQueueSprites[spritesUsed].play("moon")
-			spritesUsed += 1
-			nuisanceToShow -= 360
-		elif nuisanceToShow >= 720 and nuisanceToShow < 1440:
-			nuisanceQueueSprites[spritesUsed].visible = true
-			nuisanceQueueSprites[spritesUsed].play("crown")
-			spritesUsed += 1
-			nuisanceToShow -= 720
-		elif nuisanceToShow >= 1440:
-			nuisanceQueueSprites[spritesUsed].visible = true
-			nuisanceQueueSprites[spritesUsed].play("comet")
-			spritesUsed += 1
-			nuisanceToShow -= 1440
-
-func playDamageSoundEffects(damage):
-	if damage < 12:
-		$SoundEffects/Attack1.play()
-	elif damage >= 12 and damage < 30:
-		$SoundEffects/Attack2.play()
-	elif damage >= 30 and damage < 72:
-		$SoundEffects/Attack3.play()
-	else:
-		$SoundEffects/Attack4.play()
+# Make sure both players have the same seed
+@rpc("any_peer", "call_local")
+func setUpSeed(seedShare):
+	GameManager.currentSeed = seedShare
 		
+	if multiplayer.is_server():
+		setUpSeed.rpc_id(GameManager.secondPlayerId, seedShare)
+
+# Since this is only a 1v1 where one player is the server, we only need to know the id of player 2
+@rpc("any_peer", "call_local")
+func setSecondPlayerId(id):
+	if GameManager.secondPlayerId == 0:
+		GameManager.secondPlayerId = id
+		
+	if multiplayer.is_server():
+		setSecondPlayerId.rpc_id(id, id)
+
+func connection_failed():
+	pass
+
+func _on_host_pressed():
+	# Start as server.
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_server(PORT)
+	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
+		OS.alert("Failed to start multiplayer server.")
+		return
+	else:
+		$UI/Net/PlayerInfo/Label.visible = true
+		$UI/Net/PlayerInfo/Label.text = "1 / 2 Players connected"
+	multiplayer.multiplayer_peer = peer
+
+func _on_connect_pressed():
+	# Start as client.
+	var txt : String = $UI/Net/Options/Remote.text
+	if txt == "":
+		OS.alert("Need a remote to connect to.")
+		return
+	var peer = ENetMultiplayerPeer.new()
+	peer.create_client(txt, PORT)
+	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
+		OS.alert("Failed to start multiplayer client.")
+		return
+	multiplayer.multiplayer_peer = peer
+
+@rpc("any_peer", "call_local")
+func start_game():
+	# Hide the UI and unpause to start the game.
+	$UI.hide()
+	add_child(MainGame.instantiate())
+	get_tree().paused = false
+	print("Second player is: " + str(GameManager.secondPlayerId))
+
+
+func _on_start_pressed():
+	start_game.rpc()
