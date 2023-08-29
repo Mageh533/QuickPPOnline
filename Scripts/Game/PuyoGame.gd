@@ -44,6 +44,7 @@ func _ready():
 		$NextPuyoSprites/Puyo2Set1.visible = false
 		$NextPuyoSprites/Puyo1Set2.visible = false
 		$NextPuyoSprites/Puyo2Set2.visible = false
+	$AllClear.visible = false
 
 func _process(delta):
 	connectPuyosToGame()
@@ -138,7 +139,7 @@ func _on_popping_timer_timeout():
 	
 	if checkAllClear():
 		await get_tree().create_timer(0.5).timeout
-		$ChainSoundEffects/AllClear.play()
+		$Anims.play("all_clear")
 
 func findOutAllConnected(puyo):
 	if puyo.connected.size() > 0 and !connectedPuyos.has(puyo) and !puyo.popped and !puyosToPop.has(puyo):

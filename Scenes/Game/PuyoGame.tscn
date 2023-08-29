@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=48 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -350,6 +350,57 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_wgw74"]
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_dinbi"]
+resource_name = "all_clear"
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChainSoundEffects/AllClear")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_qxvst")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllClear:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AllClear:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(109, 209), Vector2(109, 264)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtlpq"]
+_data = {
+"all_clear": SubResource("Animation_dinbi")
+}
+
 [node name="PuyoGame" type="Node2D" groups=["Game"]]
 script = ExtResource("1_tfcgd")
 nuisanceTarget = 70.0
@@ -451,7 +502,6 @@ stream = ExtResource("10_8pul3")
 stream = ExtResource("11_4vtwm")
 
 [node name="AllClear" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("19_qxvst")
 
 [node name="MultiplayerSoundEffects" type="Node" parent="."]
 
@@ -535,8 +585,21 @@ position = Vector2(298, 21)
 [node name="5" type="Marker2D" parent="NuisanceSpawns"]
 position = Vector2(344, 21)
 
+[node name="AllClear" type="Label" parent="."]
+visible = false
+offset_left = 109.0
+offset_top = 209.0
+offset_right = 245.0
+offset_bottom = 257.0
+text = "All Clear!"
+label_settings = SubResource("LabelSettings_wgw74")
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gtlpq")
+}
+
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
-[connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
