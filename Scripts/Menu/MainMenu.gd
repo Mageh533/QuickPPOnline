@@ -88,9 +88,7 @@ func _on_connect_pressed():
 @rpc("any_peer", "call_local")
 func start_game():
 	# Hide the UI and unpause to start the game.
-	$UI/MenuItems.hide()
-	$UI/Background.hide()
-	$UI/MenuItems/OnlinePopUp.hide()
+	$UI.hide()
 	currentGame = MainGame.instantiate()
 	currentGame.restartPressed.connect(on_restart_pressed)
 	$GameContainer.add_child(currentGame)

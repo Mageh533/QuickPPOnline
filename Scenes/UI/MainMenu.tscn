@@ -18,6 +18,7 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
+shadow_size = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4hmw"]
 bg_color = Color(0.317647, 0.513726, 0.470588, 1)
@@ -43,7 +44,8 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+border_color = Color(0.145098, 0.145098, 0.145098, 0.827451)
+shadow_size = 7
 
 [sub_resource type="Theme" id="Theme_wdnyx"]
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -121,8 +123,6 @@ _data = {
 script = ExtResource("1_bnywg")
 MainGame = ExtResource("2_fythm")
 
-[node name="GameContainer" type="Node" parent="."]
-
 [node name="UI" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
@@ -146,9 +146,9 @@ expand_mode = 1
 [node name="MenuItems" type="VBoxContainer" parent="UI"]
 layout_mode = 0
 offset_left = 458.0
-offset_top = 51.0
+offset_top = 31.0
 offset_right = 657.0
-offset_bottom = 218.0
+offset_bottom = 198.0
 theme_override_constants/separation = 37
 
 [node name="PlaySolo" type="Button" parent="UI/MenuItems"]
@@ -164,17 +164,18 @@ layout_mode = 2
 text = "Play Multiplayer (Online)"
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
-position = Vector2i(440, 214)
-size = Vector2i(236, 333)
+mode = 1
+position = Vector2i(435, 195)
+size = Vector2i(245, 352)
 visible = true
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 234.0
-offset_bottom = 331.0
-theme_override_constants/separation = 16
+offset_right = 243.0
+offset_bottom = 350.0
+theme_override_constants/separation = 17
 
 [node name="OnlineLabel" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
 layout_mode = 2
@@ -191,7 +192,8 @@ text = "Create Game"
 
 [node name="Direct" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
 layout_mode = 2
-text = "Direct Connection"
+text = "___________________________________
+Direct Connection"
 horizontal_alignment = 1
 
 [node name="DirectNet" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
@@ -232,9 +234,9 @@ text = "Start"
 [node name="SoundButton" type="Button" parent="UI"]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 587.0
+offset_top = 546.0
 offset_right = 49.0
-offset_bottom = 628.0
+offset_bottom = 587.0
 theme_override_constants/outline_size = 6
 theme_override_constants/icon_max_width = 101
 theme_override_styles/normal = SubResource("StyleBoxFlat_q34b0")
@@ -243,9 +245,8 @@ expand_icon = true
 
 [node name="SoundPopUp" type="PopupPanel" parent="UI"]
 transparent_bg = true
-position = Vector2i(15, 387)
+position = Vector2i(15, 347)
 size = Vector2i(25, 200)
-visible = true
 transparent = true
 mouse_passthrough = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_av2cg")
@@ -274,6 +275,8 @@ color = Color(0, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
+
+[node name="GameContainer" type="Node" parent="."]
 
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_pressed"]

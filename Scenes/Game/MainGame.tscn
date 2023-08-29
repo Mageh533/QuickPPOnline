@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=39 format=3 uid="uid://5rjlbqosjvt2"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
@@ -12,6 +12,61 @@
 [ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/Sounds/attack3.wav" id="8_l8v3d"]
 [ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/Sounds/attack4.wav" id="9_j3vcl"]
 [ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/Sounds/win.wav" id="10_pcdy7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
+bg_color = Color(0.290196, 0.447059, 0.823529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b83h"]
+bg_color = Color(0.14902, 0.627451, 0.972549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4hmw"]
+bg_color = Color(0.317647, 0.513726, 0.470588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
+bg_color = Color(0, 0.713726, 0.996078, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_detail = 15
+shadow_color = Color(0, 0, 0, 0.160784)
+shadow_size = 1
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baad8"]
+bg_color = Color(0.509804, 0.552941, 0.980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_yuydl"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxFlat_qebv7")
+Button/styles/normal = SubResource("StyleBoxFlat_0b83h")
+Button/styles/pressed = SubResource("StyleBoxFlat_d4hmw")
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_baad8")
 
 [sub_resource type="Animation" id="Animation_3xduh"]
 resource_name = "lose"
@@ -266,6 +321,7 @@ offset_left = -1.0
 offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_yuydl")
 script = ExtResource("1_3biiw")
 
 [node name="Background" type="TextureRect" parent="."]
