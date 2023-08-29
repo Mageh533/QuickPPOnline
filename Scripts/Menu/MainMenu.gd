@@ -2,6 +2,8 @@ extends Node
 
 @export var MainGame : PackedScene
 
+var currentGame
+
 const PORT = 4433
 
 func _ready():
@@ -80,10 +82,20 @@ func _on_connect_pressed():
 func start_game():
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
-	add_child(MainGame.instantiate())
+	currentGame = MainGame.instantiate()
+	currentGame.restartPressed.connect(on_restart_pressed)
+	add_child(currentGame)
 	get_tree().paused = false
 	print("Second player is: " + str(GameManager.secondPlayerId))
 
+@rpc("any_peer", "call_local")
+func restartGame():
+	currentGame.queue_free()
+	currentGame = MainGame.instantiate()
+	add_child(currentGame)
+
+func on_restart_pressed():
+	restartGame.rpc()
 
 func _on_start_pressed():
 	start_game.rpc()
