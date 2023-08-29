@@ -79,7 +79,7 @@ func _process(delta):
 			timeOnGround += 0.1
 		if !landCooldown and timeOnGround > 1:
 			landCooldown = true
-			pieceLand()
+			pieceLand.rpc()
 			await get_tree().create_timer(0.2).timeout
 			landCooldown = false
 	
@@ -189,6 +189,7 @@ func swapPuyos():
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 
+@rpc("any_peer", "call_local")
 func pieceLand():
 	$SoundEffects/PieceLand.play()
 	var puyo1 = currentPuyos[0].instantiate()
