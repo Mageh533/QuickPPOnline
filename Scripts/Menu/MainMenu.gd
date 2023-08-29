@@ -9,7 +9,8 @@ const PORT = 4433
 func _ready():
 	# Start paused.
 	get_tree().paused = true
-	$UI/DirectNet/PlayerInfo/Label.hide()
+	$UI/MenuItems/OnlinePopUp.hide()
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
 	
@@ -23,11 +24,13 @@ func _ready():
 	$UI/FadeRect.hide()
 
 func peer_connected(_id):
-	$UI/DirectNet/PlayerInfo/Label.visible = true
-	$UI/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = false
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
 
 func peer_disconnected(_id):
-	$UI/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 
 func connected_to_server():
 	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
@@ -62,13 +65,14 @@ func _on_host_pressed():
 		OS.alert("Failed to start multiplayer server.")
 		return
 	else:
-		$UI/DirectNet/PlayerInfo/Label.visible = true
-		$UI/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
+		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
+		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
+		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 	multiplayer.multiplayer_peer = peer
 
 func _on_connect_pressed():
 	# Start as client.
-	var txt : String = $UI/DirectNet/Options/Remote.text
+	var txt : String = $UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Remote.text
 	if txt == "":
 		OS.alert("Need a remote to connect to.")
 		return
@@ -83,6 +87,7 @@ func _on_connect_pressed():
 func start_game():
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
+	$UI/MenuItems/OnlinePopUp.hide()
 	currentGame = MainGame.instantiate()
 	currentGame.restartPressed.connect(on_restart_pressed)
 	add_child(currentGame)
@@ -100,3 +105,9 @@ func on_restart_pressed():
 
 func _on_start_pressed():
 	start_game.rpc()
+
+func _on_play_mp_online_pressed():
+	$UI/MenuItems/OnlinePopUp.visible = true
+
+func _on_play_mp_local_pressed():
+	start_game()

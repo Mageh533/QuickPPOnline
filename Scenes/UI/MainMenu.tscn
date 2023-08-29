@@ -86,62 +86,95 @@ grow_vertical = 2
 texture = ExtResource("1_kgxbb")
 expand_mode = 1
 
-[node name="DirectNet" type="VBoxContainer" parent="UI"]
+[node name="MenuItems" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 433.0
-offset_top = 38.0
-offset_right = 732.0
-offset_bottom = 111.0
-theme = SubResource("Theme_mb2x8")
+offset_left = 458.0
+offset_top = 51.0
+offset_right = 657.0
+offset_bottom = 218.0
+theme_override_constants/separation = 37
 
-[node name="PlaySolo" type="Button" parent="UI/DirectNet"]
+[node name="PlaySolo" type="Button" parent="UI/MenuItems"]
 layout_mode = 2
 text = "Play Solo"
 
-[node name="PlayMPLocal" type="Button" parent="UI/DirectNet"]
+[node name="PlayMPLocal" type="Button" parent="UI/MenuItems"]
 layout_mode = 2
 text = "Play Multiplayer (Local)"
 
-[node name="PlayMPOnline" type="Button" parent="UI/DirectNet"]
+[node name="PlayMPOnline" type="Button" parent="UI/MenuItems"]
 layout_mode = 2
 text = "Play Multiplayer (Online)"
 
-[node name="Options" type="HBoxContainer" parent="UI/DirectNet"]
-layout_mode = 2
+[node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
+position = Vector2i(440, 226)
+size = Vector2i(236, 333)
+visible = true
+max_size = Vector2i(31248, 32768)
 
-[node name="Label" type="Label" parent="UI/DirectNet/Options"]
-layout_mode = 2
-text = "Direct:"
+[node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 232.0
+offset_bottom = 329.0
+theme_override_constants/separation = 16
 
-[node name="Host" type="Button" parent="UI/DirectNet/Options"]
+[node name="OnlineLabel" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+text = "Online"
+horizontal_alignment = 1
+
+[node name="FindGames" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+text = "Find Games"
+
+[node name="CreateGame" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+text = "Create Game"
+
+[node name="Direct" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+text = "Direct Connection"
+horizontal_alignment = 1
+
+[node name="DirectNet" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+theme = SubResource("Theme_mb2x8")
+theme_override_constants/separation = 24
+
+[node name="Host" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
 layout_mode = 2
 theme = SubResource("Theme_80hm2")
 text = "Host"
 
-[node name="Connect" type="Button" parent="UI/DirectNet/Options"]
+[node name="Options" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
+layout_mode = 2
+alignment = 1
+
+[node name="Remote" type="LineEdit" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options"]
+layout_mode = 2
+text = "127.0.0.1"
+max_length = 15
+expand_to_text_length = true
+
+[node name="Connect" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options"]
 layout_mode = 2
 theme = SubResource("Theme_80hm2")
 text = "Connect"
 
-[node name="Remote" type="LineEdit" parent="UI/DirectNet/Options"]
-layout_mode = 2
-text = "127.0.0.1"
-expand_to_text_length = true
-
-[node name="Start" type="Button" parent="UI/DirectNet/Options"]
-layout_mode = 2
-text = "Start"
-
-[node name="PlayerInfo" type="HBoxContainer" parent="UI/DirectNet"]
+[node name="PlayerInfo" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/DirectNet/PlayerInfo"]
+[node name="Label" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo"]
 layout_mode = 2
 text = "0 / 0 Players connected"
 
+[node name="Start" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo"]
+layout_mode = 2
+text = "Start"
+
 [node name="FadeRect" type="ColorRect" parent="UI"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -155,6 +188,8 @@ libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
 
-[connection signal="pressed" from="UI/DirectNet/Options/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="UI/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
-[connection signal="pressed" from="UI/DirectNet/Options/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
+[connection signal="pressed" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_pressed"]
+[connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
