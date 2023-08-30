@@ -7,3 +7,4 @@ var client: NakamaClient
 var session: NakamaSession
 var socket: NakamaSocket
 var username = "Unknown"
+var nMatch : NakamaRTAPI.Match

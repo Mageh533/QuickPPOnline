@@ -43,7 +43,10 @@ func ConnectToNakama():
 	print("Connected To server")
 
 func CreateNakamaMatch():
-	var match : NakamaRTAPI.Match = await GameManager.socket.create_match_async()
+	GameManager.nMatch = await GameManager.socket.create_match_async()
+
+func JoinNakamaMatch(match_id):
+	GameManager.nMatch = await GameManager.socket.join_match_async(match_id)
 
 func StartMatchMaking():
 	pass
@@ -146,3 +149,4 @@ func _on_v_slider_value_changed(value):
 func _on_quick_play_pressed():
 	GameManager.username = $UI/MenuItems/OnlinePopUp/VOnlineContainer/SetUsername/UsernameInput.text
 	ConnectToNakama()
+	CreateNakamaMatch()
