@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://Scripts/Multiplayer/GameManager.gd"
-Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 
 [display]
 
