@@ -165,7 +165,7 @@ text = "Play Multiplayer (Online)"
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
 mode = 1
-position = Vector2i(435, 195)
+position = Vector2i(435, 224)
 size = Vector2i(245, 352)
 visible = true
 max_size = Vector2i(31248, 32768)
@@ -190,16 +190,16 @@ text = "Find Games"
 layout_mode = 2
 text = "Create Game"
 
-[node name="Direct" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
-layout_mode = 2
-text = "___________________________________
-Direct Connection"
-horizontal_alignment = 1
-
 [node name="DirectNet" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
 layout_mode = 2
 theme = SubResource("Theme_mb2x8")
 theme_override_constants/separation = 24
+
+[node name="Direct" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
+layout_mode = 2
+text = "___________________________________
+Direct Connection"
+horizontal_alignment = 1
 
 [node name="Host" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
 layout_mode = 2
