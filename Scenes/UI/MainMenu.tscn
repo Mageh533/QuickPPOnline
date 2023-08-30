@@ -166,15 +166,15 @@ text = "Play Multiplayer (Online)"
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
 mode = 1
 position = Vector2i(435, 224)
-size = Vector2i(245, 352)
+size = Vector2i(260, 402)
 visible = true
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 243.0
-offset_bottom = 350.0
+offset_right = 258.0
+offset_bottom = 400.0
 theme_override_constants/separation = 17
 
 [node name="OnlineLabel" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
@@ -182,13 +182,26 @@ layout_mode = 2
 text = "Online"
 horizontal_alignment = 1
 
+[node name="SetUsername" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="UsernameLabel" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/SetUsername"]
+layout_mode = 2
+text = "Username:"
+
+[node name="UsernameInput" type="LineEdit" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/SetUsername"]
+layout_mode = 2
+expand_to_text_length = true
+
+[node name="QuickPlay" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+text = "Quick Play
+"
+
 [node name="FindGames" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
 layout_mode = 2
 text = "Find Games"
-
-[node name="CreateGame" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
-layout_mode = 2
-text = "Create Game"
 
 [node name="DirectNet" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
 layout_mode = 2
