@@ -293,6 +293,7 @@ libraries = {
 
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_pressed"]
+[connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/QuickPlay" to="." method="_on_quick_play_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
