@@ -5,6 +5,11 @@ extends Node
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
 
+var client: NakamaClient
+var session: NakamaSession
+var socket: NakamaSocket
+var username = "Unknown"
+
 const PORT = 4433
 
 func _ready():
@@ -28,25 +33,19 @@ func _ready():
 	$UI/FadeRect.hide()
 
 func ConnectToNakama():
-	GameManager.client = Nakama.create_client('defaultkey', "127.0.0.1", 7350,
+	client = Nakama.create_client('defaultkey', "127.0.0.1", 7350,
 	"http", 3, NakamaLogger.LOG_LEVEL.ERROR)
 	
 	var id = OS.get_unique_id()
-	GameManager.session = await GameManager.client.authenticate_device_async(id, GameManager.username)
-	if GameManager.session.is_exception():
+	session = await client.authenticate_device_async(id, username)
+	if session.is_exception():
 		print("Connection to server has failed!")
 		return
-	await GameManager.client.update_account_async(GameManager.session, GameManager.username)
-	GameManager.socket = Nakama.create_socket_from(GameManager.client)
-	await GameManager.socket.connect_async(GameManager.session)
+		
+	socket = Nakama.create_socket_from(client)
+	await socket.connect_async(session)
 	
 	print("Connected To server")
-
-func CreateNakamaMatch():
-	var match : NakamaRTAPI.Match = await GameManager.socket.create_match_async()
-
-func StartMatchMaking():
-	pass
 
 func peer_connected(_id):
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
@@ -141,8 +140,3 @@ func _on_sound_button_pressed():
 
 func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
-
-
-func _on_quick_play_pressed():
-	GameManager.username = $UI/MenuItems/OnlinePopUp/VOnlineContainer/SetUsername/UsernameInput.text
-	ConnectToNakama()
