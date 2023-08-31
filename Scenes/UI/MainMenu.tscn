@@ -171,15 +171,16 @@ text = "Play Multiplayer (Online)"
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
 mode = 1
-position = Vector2i(455, 205)
-size = Vector2i(245, 402)
+position = Vector2i(455, 130)
+size = Vector2i(259, 481)
+visible = true
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 243.0
-offset_bottom = 400.0
+offset_right = 257.0
+offset_bottom = 479.0
 theme_override_constants/separation = 17
 
 [node name="OnlineLabel" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
@@ -197,7 +198,36 @@ text = "Username:"
 
 [node name="UsernameInput" type="LineEdit" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer"]
 layout_mode = 2
+text = "Mageh533"
 placeholder_text = "Your username"
+expand_to_text_length = true
+
+[node name="HUserContainer2" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer2"]
+layout_mode = 2
+text = "Email:"
+
+[node name="EmailInput" type="LineEdit" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer2"]
+layout_mode = 2
+text = "cicciomesere@gmail.com"
+placeholder_text = "Your email"
+expand_to_text_length = true
+
+[node name="HUserContainer3" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer3"]
+layout_mode = 2
+text = "Password:"
+
+[node name="PasswordInput" type="LineEdit" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer3"]
+layout_mode = 2
+text = "maincra533"
+placeholder_text = "Your password"
 expand_to_text_length = true
 
 [node name="QuickPlay" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]

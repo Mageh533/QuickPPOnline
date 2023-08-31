@@ -9,7 +9,9 @@ var masterVolumeIndex = AudioServer.get_bus_index("Master")
 var client : NakamaClient
 var session : NakamaSession
 var socket : NakamaSocket
-var username = "Uknown"
+var username = ""
+var email = ""
+var password = ""
 var Players = {}
 var ReadyPlayers = []
 
@@ -24,7 +26,7 @@ func _ready():
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
-	multiplayer.server_relay = false
+	# multiplayer.server_relay = false
 	
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
@@ -37,11 +39,10 @@ func _ready():
 	await $UI/FadeRect/FadeAnim.animation_finished
 
 func ConnectToNamaka():
-	client = Nakama.create_client('defaultkey', "localhost", 7350, 
+	client = Nakama.create_client('defaultkey', "92.12.20.158", 7350, 
 	'http', 3, NakamaLogger.LOG_LEVEL.ERROR)
 	
-	var id = OS.get_unique_id()
-	session = await client.authenticate_device_async(id, username)
+	session = await client.authenticate_email_async(email, password, username)
 	if session.is_exception():
 		print("Connection to server has failed with code: " + session.exception.message)
 		return
@@ -209,6 +210,8 @@ func _on_v_slider_value_changed(value):
 
 func _on_quick_play_pressed():
 	username = $UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer/UsernameInput.text
+	email = $UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer2/EmailInput.text
+	password = $UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer3/PasswordInput.text
 	ConnectToNamaka()
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MatchLobby.visible = true

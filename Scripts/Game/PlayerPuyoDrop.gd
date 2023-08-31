@@ -70,6 +70,7 @@ func _process(delta):
 	for rayCast in bottomRaycasts:
 		if rayCast.is_colliding():
 			groundCollide = true
+	
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		playerControls(1) # if playing multiplayer, use the player 1 controls
 	else:
