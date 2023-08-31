@@ -144,11 +144,15 @@ texture = ExtResource("1_kgxbb")
 expand_mode = 1
 
 [node name="MenuItems" type="VBoxContainer" parent="UI"]
-layout_mode = 0
-offset_left = 458.0
-offset_top = 31.0
-offset_right = 657.0
-offset_bottom = 198.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -99.5
+offset_top = 15.0
+offset_right = 99.5
+offset_bottom = 182.0
+grow_horizontal = 2
 theme_override_constants/separation = 37
 
 [node name="PlaySolo" type="Button" parent="UI/MenuItems"]
@@ -165,9 +169,8 @@ text = "Play Multiplayer (Online)"
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
 mode = 1
-position = Vector2i(435, 195)
+position = Vector2i(455, 205)
 size = Vector2i(245, 402)
-visible = true
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
@@ -290,6 +293,70 @@ color = Color(0, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
+
+[node name="MatchLobby" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.5
+offset_top = -116.5
+offset_right = 166.5
+offset_bottom = 116.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/MatchLobby"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LobbyLabel" type="RichTextLabel" parent="UI/MatchLobby/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -29.5
+offset_right = 24.5
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Lobby"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MatchLobby/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -65.0
+offset_right = 81.5
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Looking for players..."
+
+[node name="ReadyBTN" type="Button" parent="UI/MatchLobby/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.5
+offset_top = -50.5
+offset_right = 41.5
+offset_bottom = -22.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ready"
 
 [node name="GameContainer" type="Node" parent="."]
 

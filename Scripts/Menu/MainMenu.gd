@@ -9,6 +9,7 @@ var client : NakamaClient
 var session : NakamaSession
 var socket : NakamaSocket
 var username = "Uknown"
+var Players = {}
 
 const PORT = 4433
 
@@ -31,6 +32,7 @@ func _ready():
 	$UI/FadeRect/FadeAnim.play("fadeOut")
 	await $UI/FadeRect/FadeAnim.animation_finished
 	$UI/FadeRect.hide()
+	$UI/MatchLobby.hide()
 
 func ConnectToNamaka():
 	client = Nakama.create_client('defaultkey', "localhost", 7350, 
@@ -48,6 +50,8 @@ func ConnectToNamaka():
 	await client.update_account_async(session, username)
 	
 	print("Successfully connected to server")
+	
+	StartMatchMaking()
 
 func StartMatchMaking():
 	OnlineMatch.min_players = 2
@@ -66,6 +70,9 @@ func StartMatchMaking():
 	OnlineMatch.match_ready.connect(onOnlineMatchReady)
 	OnlineMatch.match_not_ready.connect(onOnlineMatchNotReady)
 	
+	OnlineMatch.start_matchmaking(socket)
+	print("Matchmaking started...")
+
 func onOnlineMatchDisconnected():
 	pass
 
@@ -75,23 +82,24 @@ func onOnlineMatchError():
 func onOnlineMatchCreated():
 	pass
 
-func onOnlineMatchJoined():
-	pass
+func onOnlineMatchJoined(player):
+	print(player)
 
-func onOnlineMatchMatchmakerMatched():
-	pass
+func onOnlineMatchMatchmakerMatched(players):
+	$UI/MatchLobby/Panel/RichTextLabel.text = "Player Found"
 
-func onOnlineMatchPlayerJoined():
-	pass
+func onOnlineMatchPlayerJoined(player):
+	print(player)
 
 func onOnlineMatchPlayerLeft():
 	pass
 
-func onOnlineMatchPlayerStatusChanged():
-	pass
+func onOnlineMatchPlayerStatusChanged(player, status):
+	print(player, status)
 
-func onOnlineMatchReady():
-	pass
+func onOnlineMatchReady(players):
+	$UI/MatchLobby/Panel/RichTextLabel.text = "Match is ready"
+	Players = players
 
 func onOnlineMatchNotReady():
 	pass
@@ -194,3 +202,5 @@ func _on_v_slider_value_changed(value):
 func _on_quick_play_pressed():
 	username = $UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer/UsernameInput.text
 	ConnectToNamaka()
+	$UI/MenuItems/OnlinePopUp.hide()
+	$UI/MatchLobby.visible = true
