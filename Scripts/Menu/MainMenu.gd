@@ -220,6 +220,10 @@ func setAsReady(id):
 	ReadyPlayers.append(id)
 	if ReadyPlayers.size() == Players.size():
 		print("All players are ready")
+		$UI/MatchLobby/Panel/RichTextLabel.text = "Starting Game..."
+		await get_tree().create_timer(1).timeout
+		GameManager.nakamaMatch = true
+		start_game.rpc()
 
 func _on_ready_btn_pressed():
 	setAsReady.rpc(OnlineMatch.get_my_session_id())
