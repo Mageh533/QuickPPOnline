@@ -18,6 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://Scripts/Multiplayer/GameManager.gd"
+Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+Online="*res://addons/nakama_webrtc/Online.gd"
+OnlineMatch="*res://addons/nakama_webrtc/OnlineMatch.gd"
 
 [display]
 
