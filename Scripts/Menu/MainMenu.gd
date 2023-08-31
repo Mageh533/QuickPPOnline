@@ -1,6 +1,7 @@
 extends Node
 
 @export var MainGame : PackedScene
+@export var ReadyUser: PackedScene
 
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
@@ -10,6 +11,7 @@ var session : NakamaSession
 var socket : NakamaSocket
 var username = "Uknown"
 var Players = {}
+var ReadyPlayers = []
 
 const PORT = 4433
 
@@ -30,9 +32,9 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 	
 	$UI/FadeRect/FadeAnim.play("fadeOut")
-	await $UI/FadeRect/FadeAnim.animation_finished
 	$UI/FadeRect.hide()
 	$UI/MatchLobby.hide()
+	await $UI/FadeRect/FadeAnim.animation_finished
 
 func ConnectToNamaka():
 	client = Nakama.create_client('defaultkey', "localhost", 7350, 
@@ -76,8 +78,8 @@ func StartMatchMaking():
 func onOnlineMatchDisconnected():
 	pass
 
-func onOnlineMatchError():
-	pass
+func onOnlineMatchError(errorMessage):
+	print(errorMessage)
 
 func onOnlineMatchCreated():
 	pass
@@ -85,7 +87,7 @@ func onOnlineMatchCreated():
 func onOnlineMatchJoined(player):
 	print(player)
 
-func onOnlineMatchMatchmakerMatched(players):
+func onOnlineMatchMatchmakerMatched(_players):
 	$UI/MatchLobby/Panel/RichTextLabel.text = "Player Found"
 
 func onOnlineMatchPlayerJoined(player):
@@ -100,6 +102,12 @@ func onOnlineMatchPlayerStatusChanged(player, status):
 func onOnlineMatchReady(players):
 	$UI/MatchLobby/Panel/RichTextLabel.text = "Match is ready"
 	Players = players
+	$UI/MatchLobby/Panel/ReadyBTN.disabled = false
+	for player in players.values():
+		var readyUser = ReadyUser.instantiate()
+		readyUser.name = player.session_id
+		readyUser.setUsername(player.username)
+		$UI/MatchLobby/Panel/PlayerList.add_child(readyUser)
 
 func onOnlineMatchNotReady():
 	pass
@@ -204,3 +212,14 @@ func _on_quick_play_pressed():
 	ConnectToNamaka()
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MatchLobby.visible = true
+	
+
+@rpc("any_peer", "call_local")
+func setAsReady(id):
+	$UI/MatchLobby/Panel/PlayerList.get_node_or_null(id).setReadyStatus("Ready")
+	ReadyPlayers.append(id)
+	if ReadyPlayers.size() == Players.size():
+		print("All players are ready")
+
+func _on_ready_btn_pressed():
+	setAsReady.rpc(OnlineMatch.get_my_session_id())
