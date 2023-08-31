@@ -5,6 +5,11 @@ extends Node
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
 
+var client : NakamaClient
+var session : NakamaSession
+var socket : NakamaSocket
+var username = "Uknown"
+
 const PORT = 4433
 
 func _ready():
@@ -26,6 +31,23 @@ func _ready():
 	$UI/FadeRect/FadeAnim.play("fadeOut")
 	await $UI/FadeRect/FadeAnim.animation_finished
 	$UI/FadeRect.hide()
+
+func ConnectToNamaka():
+	client = Nakama.create_client('defaultkey', "127.0.0.1", 7350, 
+	'http', 3, NakamaLogger.LOG_LEVEL.ERROR)
+	
+	var id = OS.get_unique_id()
+	session = await client.authenticate_device_async(id, username)
+	if session.is_exception():
+		print("Connection to server has failed with code: " + session.exception.message)
+		return
+		
+	socket = Nakama.create_socket_from(client)
+	await socket.connect_async(session)
+	
+	await client.update_account_async(session, username)
+	
+	print("Successfully connected to server")
 
 func peer_connected(_id):
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
@@ -120,3 +142,8 @@ func _on_sound_button_pressed():
 
 func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
+
+
+func _on_quick_play_pressed():
+	username = $UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer/UsernameInput.text
+	ConnectToNamaka()
