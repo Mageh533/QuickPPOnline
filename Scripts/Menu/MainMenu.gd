@@ -33,7 +33,7 @@ func _ready():
 	$UI/FadeRect.hide()
 
 func ConnectToNamaka():
-	client = Nakama.create_client('defaultkey', "127.0.0.1", 7350, 
+	client = Nakama.create_client('defaultkey', "localhost", 7350, 
 	'http', 3, NakamaLogger.LOG_LEVEL.ERROR)
 	
 	var id = OS.get_unique_id()
@@ -48,6 +48,53 @@ func ConnectToNamaka():
 	await client.update_account_async(session, username)
 	
 	print("Successfully connected to server")
+
+func StartMatchMaking():
+	OnlineMatch.min_players = 2
+	OnlineMatch.min_players = 2
+	OnlineMatch.client_version = 'dev'
+	OnlineMatch.use_network_relay = OnlineMatch.NetworkRelay.AUTO
+	
+	OnlineMatch.disconnected.connect(onOnlineMatchDisconnected)
+	OnlineMatch.error.connect(onOnlineMatchError)
+	OnlineMatch.match_created.connect(onOnlineMatchCreated)
+	OnlineMatch.match_joined.connect(onOnlineMatchJoined)
+	OnlineMatch.matchmaker_matched.connect(onOnlineMatchMatchmakerMatched)
+	OnlineMatch.player_joined.connect(onOnlineMatchPlayerJoined)
+	OnlineMatch.player_left.connect(onOnlineMatchPlayerLeft)
+	OnlineMatch.player_status_changed.connect(onOnlineMatchPlayerStatusChanged)
+	OnlineMatch.match_ready.connect(onOnlineMatchReady)
+	OnlineMatch.match_not_ready.connect(onOnlineMatchNotReady)
+	
+func onOnlineMatchDisconnected():
+	pass
+
+func onOnlineMatchError():
+	pass
+
+func onOnlineMatchCreated():
+	pass
+
+func onOnlineMatchJoined():
+	pass
+
+func onOnlineMatchMatchmakerMatched():
+	pass
+
+func onOnlineMatchPlayerJoined():
+	pass
+
+func onOnlineMatchPlayerLeft():
+	pass
+
+func onOnlineMatchPlayerStatusChanged():
+	pass
+
+func onOnlineMatchReady():
+	pass
+
+func onOnlineMatchNotReady():
+	pass
 
 func peer_connected(_id):
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
