@@ -71,11 +71,7 @@ func _process(delta):
 		if rayCast.is_colliding():
 			groundCollide = true
 	
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		playerControls(1) # if playing multiplayer, use the player 1 controls
-	else:
-		if GameManager.secondPlayerId == 0:
-			playerControls(currentPlayer)
+	playerControls(currentPlayer)
 	
 	if groundCollide:
 		timeOnGround += delta
@@ -86,13 +82,6 @@ func _process(delta):
 			pieceLand.rpc()
 			await get_tree().create_timer(0.2).timeout
 			landCooldown = false
-	
-	if active and !playerSet:
-		playerSet = true
-		if currentPlayer == 1:
-			$MultiplayerSynchronizer.set_multiplayer_authority(1)
-		else:
-			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
 
 func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
