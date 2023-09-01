@@ -39,7 +39,7 @@ func _ready():
 	await $UI/FadeRect/FadeAnim.animation_finished
 
 func ConnectToNamaka():
-	client = Nakama.create_client('defaultkey', "92.12.20.158", 7350, 
+	client = Nakama.create_client('defaultkey', "localhost", 7350, 
 	'http', 3, NakamaLogger.LOG_LEVEL.ERROR)
 	
 	session = await client.authenticate_email_async(email, password, username)
@@ -207,7 +207,6 @@ func _on_sound_button_pressed():
 func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
 
-
 func _on_quick_play_pressed():
 	username = $UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer/UsernameInput.text
 	email = $UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer2/EmailInput.text
@@ -215,7 +214,6 @@ func _on_quick_play_pressed():
 	ConnectToNamaka()
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MatchLobby.visible = true
-	
 
 @rpc("any_peer", "call_local", "reliable")
 func setAsReady(id):
@@ -226,7 +224,7 @@ func setAsReady(id):
 		$UI/MatchLobby/Panel/RichTextLabel.text = "Starting Game..."
 		await get_tree().create_timer(1).timeout
 		GameManager.nakamaMatch = true
-		start_game.rpc()
+		start_game()
 
 func _on_ready_btn_pressed():
 	setAsReady.rpc(OnlineMatch.get_my_session_id())
