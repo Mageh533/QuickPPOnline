@@ -128,7 +128,7 @@ func connected_to_server():
 	setUpSeed.rpc_id(1, randi())
 
 # Make sure both players have the same seed
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func setUpSeed(seedShare):
 	GameManager.currentSeed = seedShare
 		
@@ -136,7 +136,7 @@ func setUpSeed(seedShare):
 		setUpSeed.rpc_id(GameManager.secondPlayerId, seedShare)
 
 # Since this is only a 1v1 where one player is the server, we only need to know the id of player 2
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func setSecondPlayerId(id):
 	if GameManager.secondPlayerId == 0:
 		GameManager.secondPlayerId = id
@@ -173,7 +173,7 @@ func _on_connect_pressed():
 		return
 	multiplayer.multiplayer_peer = peer
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func start_game():
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
@@ -183,7 +183,7 @@ func start_game():
 	get_tree().paused = false
 	print("Second player is: " + str(GameManager.secondPlayerId))
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func restartGame():
 	currentGame.queue_free()
 	currentGame = MainGame.instantiate()
@@ -217,7 +217,7 @@ func _on_quick_play_pressed():
 	$UI/MatchLobby.visible = true
 	
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func setAsReady(id):
 	$UI/MatchLobby/Panel/PlayerList.get_node_or_null(id).setReadyStatus("Ready")
 	ReadyPlayers.append(id)
