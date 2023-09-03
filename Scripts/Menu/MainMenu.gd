@@ -22,6 +22,11 @@ func _ready():
 	get_tree().paused = true
 	if OS.get_name() == "Web":
 		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet.hide()
+	else:
+		$UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer2/EmailInput.hide()
+		$UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer3/PasswordInput.hide()
+		$UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer2.hide()
+		$UI/MenuItems/OnlinePopUp/VOnlineContainer/HUserContainer3.hide()
 	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
@@ -39,18 +44,20 @@ func _ready():
 	await $UI/FadeRect/FadeAnim.animation_finished
 
 func ConnectToNamaka():
-	client = Nakama.create_client('defaultkey', "localhost", 7350, 
-	'http', 3, NakamaLogger.LOG_LEVEL.ERROR)
+	client = Nakama.create_client('defaultkey', "204.48.28.159", 7350, 
+	'http', 10, NakamaLogger.LOG_LEVEL.ERROR)
 	
-	session = await client.authenticate_email_async(email, password, username)
+	if OS.get_name() == "Web":
+		session = await client.authenticate_email_async(email, password, username)
+	else:
+		var id = OS.get_unique_id()
+		session = await client.authenticate_device_async(id, username)
 	if session.is_exception():
-		print("Connection to server has failed with code: " + session.exception.message)
+		print("Connection to server has failed with code: " + str(session.exception))
 		return
 		
 	socket = Nakama.create_socket_from(client)
 	await socket.connect_async(session)
-	
-	await client.update_account_async(session, username)
 	
 	print("Successfully connected to server")
 	
