@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://Scripts/Multiplayer/GameManager.gd"
+Client="*res://Scripts/Multiplayer/Client.gd"
+Server="*res://Scripts/Multiplayer/Server.gd"
 
 [display]
 

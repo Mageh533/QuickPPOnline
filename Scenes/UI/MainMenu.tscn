@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=20 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
 [ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/MainGame.tscn" id="2_fythm"]
 [ext_resource type="Texture2D" uid="uid://brfhuohmm8tia" path="res://Assets/Sprites/volume-icon.svg" id="4_ueemu"]
+[ext_resource type="Script" path="res://Scripts/Multiplayer/Lobby.gd" id="5_gewi5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
@@ -119,6 +120,21 @@ _data = {
 "fadeOut": SubResource("Animation_8k6p7")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pujc6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3kbc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_bnywg")
 MainGame = ExtResource("2_fythm")
@@ -145,7 +161,7 @@ expand_mode = 1
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI"]
 mode = 1
-position = Vector2i(435, 199)
+position = Vector2i(435, 195)
 size = Vector2i(245, 352)
 visible = true
 max_size = Vector2i(31248, 32768)
@@ -276,8 +292,105 @@ libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
 
+[node name="Lobby" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 736.0
+offset_top = 150.0
+offset_right = 1114.0
+offset_bottom = 534.0
+theme = SubResource("Theme_wdnyx")
+script = ExtResource("5_gewi5")
+
+[node name="BG" type="Panel" parent="Lobby"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatPanel" type="Panel" parent="Lobby/BG"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 11.0
+offset_right = 252.0
+offset_bottom = 334.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pujc6")
+
+[node name="VBoxChat" type="VBoxContainer" parent="Lobby/BG/ChatPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SendMSG" type="Button" parent="Lobby/BG"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -41.0
+offset_right = -6.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = ">"
+
+[node name="MSG" type="LineEdit" parent="Lobby/BG"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -41.0
+offset_right = -34.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+placeholder_text = "Message"
+max_length = 200
+
+[node name="PlayerListPanel" type="Panel" parent="Lobby/BG"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 12.0
+offset_right = 367.0
+offset_bottom = 199.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h3kbc")
+
+[node name="VBoxPlayers" type="VBoxContainer" parent="Lobby/BG/PlayerListPanel"]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 17.0
+offset_right = 252.0
+offset_bottom = 57.0
+
+[node name="ReadyBTN" type="Button" parent="Lobby/BG"]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 238.0
+offset_right = 356.0
+offset_bottom = 263.0
+text = "Ready"
+
+[node name="Disconnect" type="Button" parent="Lobby/BG"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 300.0
+offset_right = 358.0
+offset_bottom = 325.0
+text = "Disconnect"
+
 [node name="GameContainer" type="Node" parent="."]
 
+[connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/FindGames" to="." method="_on_find_games_pressed"]
+[connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/CreateGame" to="." method="_on_create_game_pressed"]
 [connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
 [connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
@@ -285,3 +398,6 @@ libraries = {
 [connection signal="pressed" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_pressed"]
 [connection signal="pressed" from="UI/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="value_changed" from="UI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]
+[connection signal="pressed" from="Lobby/BG/SendMSG" to="Lobby" method="_on_send_msg_pressed"]
+[connection signal="pressed" from="Lobby/BG/ReadyBTN" to="Lobby" method="_on_ready_btn_pressed"]
+[connection signal="pressed" from="Lobby/BG/Disconnect" to="Lobby" method="_on_disconnect_pressed"]

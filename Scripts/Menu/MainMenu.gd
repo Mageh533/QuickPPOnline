@@ -7,9 +7,8 @@ var masterVolumeIndex = AudioServer.get_bus_index("Master")
 
 const PORT = 4433
 
-func _ready():
-	# Start paused.
-	get_tree().paused = true
+func _ready(): 
+	$Lobby.hide()
 	if OS.get_name() == "Web":
 		$UI/OnlinePopUp/VOnlineContainer/DirectNet.hide()
 	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
@@ -120,3 +119,12 @@ func _on_sound_button_pressed():
 
 func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
+
+# ==================== Webrtc stuff is below ====================
+func _on_find_games_pressed():
+	Client.connectToServer("127.0.0.1")
+	$Lobby.show()
+
+func _on_create_game_pressed():
+	Server.startServer()
+	$Lobby.show()
