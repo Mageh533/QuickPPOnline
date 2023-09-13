@@ -45,6 +45,17 @@ func JoinLobby(userId, lobbyId):
 		lobbies[lobbyId] = Lobby.new(userId)
 	
 	var player = lobbies[lobbyId].AddPlayer(userId)
+	
+	var data = {
+		"message" : Message.userConnected,
+		"id" : userId,
+		"host" : lobbies[lobbyId].HostId,
+		"player" : lobbies[lobbyId].Players[userId]
+	}
+	sendToPlayer(userId, data)
+
+func sendToPlayer(userId, data):
+	peer.get_peer(userId).put_packet(JSON.stringify(data).to_utf32_buffer())
 
 func generateRandomString():
 	var result = ""
