@@ -1,25 +1,16 @@
-extends Control
+extends RefCounted
+class_name Lobby
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var HostId : int
+var Players : Dictionary = {}
 
+func _init(id):
+	HostId = id
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func _on_send_msg_pressed():
-	var msgText = $BG/MSG.text
-	var message = {
-		"message" : Client.Message.join,
-		"data" : msgText
+func AddPlayer(id, pName):
+	Players[id] = {
+		"name" : pName,
+		"id" : id,
+		"index" : Players.size() + 1
 	}
-	
-	Client.peer.put_packet(JSON.stringify(message).to_utf32_buffer())
-
-func _on_ready_btn_pressed():
-	pass # Replace with function body.
-
-func _on_disconnect_pressed():
-	pass # Replace with function body.
+	return Players[id]

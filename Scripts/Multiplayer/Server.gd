@@ -14,6 +14,7 @@ enum Message{
 
 var peer = WebSocketMultiplayerPeer.new()
 var users = {}
+var lobby = {}
 
 func _ready():
 	peer.connect("peer_connected", peer_connected)
@@ -38,7 +39,8 @@ func startServer():
 func peer_connected(id):
 	print("Peer connected: " + str(id))
 	users[id] = {
-		"id" : id
+		"id" : id,
+		"message": Message.id
 	}
 	peer.get_peer(id).put_packet(JSON.stringify(users[id]).to_utf32_buffer())
 

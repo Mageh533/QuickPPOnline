@@ -13,6 +13,7 @@ enum Message{
 }
 
 var peer = WebSocketMultiplayerPeer.new()
+var id = 0
 
 func _ready():
 	peer.connect("peer_connected", peer_connected)
@@ -28,6 +29,9 @@ func poll():
 		if packet != null:
 			var data = JSON.parse_string(packet.get_string_from_utf32())
 			print(data)
+			if data.message == Message.id:
+				id = data.id
+				print("Connected with Id: " + str(id))
 
 func connectToServer(ip):
 	peer.create_client("ws://127.0.0.1:4433")

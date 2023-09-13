@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
 [ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/MainGame.tscn" id="2_fythm"]
 [ext_resource type="Texture2D" uid="uid://brfhuohmm8tia" path="res://Assets/Sprites/volume-icon.svg" id="4_ueemu"]
-[ext_resource type="Script" path="res://Scripts/Multiplayer/Lobby.gd" id="5_gewi5"]
+[ext_resource type="Script" path="res://Scripts/Multiplayer/LobbyUI.gd" id="5_ejjb1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
@@ -300,7 +300,7 @@ offset_top = 150.0
 offset_right = 1114.0
 offset_bottom = 534.0
 theme = SubResource("Theme_wdnyx")
-script = ExtResource("5_gewi5")
+script = ExtResource("5_ejjb1")
 
 [node name="BG" type="Panel" parent="Lobby"]
 layout_mode = 1
