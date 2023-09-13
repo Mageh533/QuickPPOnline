@@ -12,9 +12,11 @@ enum Message{
 	checkIn
 }
 
+const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
 var peer = WebSocketMultiplayerPeer.new()
 var users = {}
-var lobby = {}
+var lobbies = {}
 
 func _ready():
 	peer.connect("peer_connected", peer_connected)
@@ -35,6 +37,21 @@ func poll():
 func startServer():
 	peer.create_server(4433)
 	print("Started server")
+
+func JoinLobby(userId, lobbyId):
+	var result = ""
+	if lobbyId == "":
+		lobbyId = result
+		lobbies[lobbyId] = Lobby.new(userId)
+	
+	var player = lobbies[lobbyId].AddPlayer(userId)
+
+func generateRandomString():
+	var result = ""
+	for i in range(32):
+		var index = randi() % ALFNUM.length()
+		result += ALFNUM[index]
+	return result
 
 func peer_connected(id):
 	print("Peer connected: " + str(id))
