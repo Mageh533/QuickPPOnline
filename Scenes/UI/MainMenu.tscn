@@ -160,7 +160,7 @@ texture = ExtResource("1_kgxbb")
 expand_mode = 1
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI"]
-position = Vector2i(435, 195)
+position = Vector2i(435, 153)
 size = Vector2i(245, 394)
 visible = true
 max_size = Vector2i(31248, 32768)

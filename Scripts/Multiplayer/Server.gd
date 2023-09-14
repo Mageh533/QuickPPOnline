@@ -51,7 +51,7 @@ func JoinLobby(userId, lobbyId, username):
 	for p in lobbies[lobbyId].Players:
 		var lobbyInfo = {
 			"message" : Message.lobby,
-			"lobby" : JSON.stringify(lobbies[lobbyId].Players)
+			"players" : JSON.stringify(lobbies[lobbyId].Players)
 		}
 		sendToPlayer(p, lobbyInfo)
 	

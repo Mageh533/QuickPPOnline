@@ -35,6 +35,9 @@ func poll():
 				
 			if data.message == Message.userConnected:
 				createPeer(data.id)
+				
+			if data.message == Message.lobby:
+				GameManager.Players = data.players
 
 #Webrtc connection
 func createPeer(id):
