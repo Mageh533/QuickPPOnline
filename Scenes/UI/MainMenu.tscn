@@ -373,7 +373,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 7.0
 offset_top = -41.0
-offset_right = -34.0
+offset_right = -41.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -419,7 +419,7 @@ offset_right = 119.0
 offset_bottom = 37.0
 text = "Match Code:"
 
-[node name="LineEdit" type="LineEdit" parent="Lobby/BG"]
+[node name="MatchCode" type="LineEdit" parent="Lobby/BG"]
 layout_mode = 0
 offset_left = 117.0
 offset_top = 9.0

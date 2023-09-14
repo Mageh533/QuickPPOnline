@@ -32,6 +32,13 @@ func poll():
 			if data.message == Message.id:
 				id = data.id
 				print("Connected with Id: " + str(id))
+				
+			if data.message == Message.userConnected:
+				createPeer(data.id)
+
+#Webrtc connection
+func createPeer(id):
+	pass
 
 func connectToServer(ip):
 	peer.create_client("ws://127.0.0.1:4433")

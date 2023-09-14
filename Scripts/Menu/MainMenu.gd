@@ -128,6 +128,7 @@ func _on_find_games_pressed():
 
 func _on_create_game_pressed():
 	Client.connectToServer("127.0.0.1")
+	await get_tree().create_timer(1).timeout
 	var message = {
 		"id" : Client.id,
 		"message" : Client.Message.lobby,

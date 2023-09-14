@@ -48,6 +48,13 @@ func JoinLobby(userId, lobbyId, username):
 	
 	var player = lobbies[lobbyId].AddPlayer(userId, username)
 	
+	for p in lobbies[lobbyId].Players:
+		var lobbyInfo = {
+			"message" : Message.lobby,
+			"lobby" : JSON.stringify(lobbies[lobbyId].Players)
+		}
+		sendToPlayer(p, lobbyInfo)
+	
 	var data = {
 		"message" : Message.userConnected,
 		"id" : userId,
