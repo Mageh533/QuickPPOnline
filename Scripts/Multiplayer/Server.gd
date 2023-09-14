@@ -36,6 +36,10 @@ func poll():
 			
 			if data.message == Message.lobby:
 				JoinLobby(data.id, data.lobbyValue, data.name)
+				
+			if data.message == Message.offer or data.message == Message.answer or data.message == Message.candidate:
+				print("Source id is: " + str(data.orgPeer))
+				sendToPlayer(data.peer, data)
 
 func startServer():
 	peer.create_server(4433)
@@ -49,9 +53,24 @@ func JoinLobby(userId, lobbyId, username):
 	var player = lobbies[lobbyId].AddPlayer(userId, username)
 	
 	for p in lobbies[lobbyId].Players:
+		
+		var data = {
+			"message" : Message.userConnected,
+			"id" : userId,
+		}
+		sendToPlayer(p, data)
+		
+		var data2 = {
+			"message" : Message.userConnected,
+			"id" : p,
+		}
+		sendToPlayer(p, data2)
+		
 		var lobbyInfo = {
 			"message" : Message.lobby,
-			"players" : JSON.stringify(lobbies[lobbyId].Players)
+			"players" : JSON.stringify(lobbies[lobbyId].Players),
+			"lobbyValue" : lobbyId,
+			"host" : lobbies[lobbyId].HostId
 		}
 		sendToPlayer(p, lobbyInfo)
 	
@@ -59,8 +78,10 @@ func JoinLobby(userId, lobbyId, username):
 		"message" : Message.userConnected,
 		"id" : userId,
 		"host" : lobbies[lobbyId].HostId,
-		"player" : lobbies[lobbyId].Players[userId]
+		"player" : lobbies[lobbyId].Players[userId],
+		"lobbyValue" : lobbyId
 	}
+	print("Lobby created: " + lobbyId)
 	sendToPlayer(userId, data)
 
 func sendToPlayer(userId, data):
