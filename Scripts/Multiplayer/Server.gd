@@ -33,18 +33,20 @@ func poll():
 			var dataString = packet.get_string_from_utf32()
 			var data = JSON.parse_string(dataString)
 			print(data)
+			
+			if data.message == Message.lobby:
+				JoinLobby(data.id, data.lobbyValue, data.name)
 
 func startServer():
 	peer.create_server(4433)
 	print("Started server")
 
-func JoinLobby(userId, lobbyId):
-	var result = ""
+func JoinLobby(userId, lobbyId, username):
 	if lobbyId == "":
-		lobbyId = result
+		lobbyId = generateRandomString()
 		lobbies[lobbyId] = Lobby.new(userId)
 	
-	var player = lobbies[lobbyId].AddPlayer(userId)
+	var player = lobbies[lobbyId].AddPlayer(userId, username)
 	
 	var data = {
 		"message" : Message.userConnected,

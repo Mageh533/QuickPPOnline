@@ -9,6 +9,7 @@ const PORT = 4433
 
 func _ready(): 
 	$Lobby.hide()
+	$Browser.hide()
 	if OS.get_name() == "Web":
 		$UI/OnlinePopUp/VOnlineContainer/DirectNet.hide()
 	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
@@ -123,8 +124,27 @@ func _on_v_slider_value_changed(value):
 # ==================== Webrtc stuff is below ====================
 func _on_find_games_pressed():
 	Client.connectToServer("127.0.0.1")
-	$Lobby.show()
+	$Browser.show()
 
 func _on_create_game_pressed():
-	Server.startServer()
+	Client.connectToServer("127.0.0.1")
+	var message = {
+		"id" : Client.id,
+		"message" : Client.Message.lobby,
+		"name" : $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text,
+		"lobbyValue" : ""
+	}
+	Client.peer.put_packet(JSON.stringify(message).to_utf32_buffer())
 	$Lobby.show()
+
+func _on_join_btn_pressed():
+	var message = {
+		"id" : Client.id,
+		"message" : Client.Message.lobby,
+		"name" : $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text,
+		"lobbyValue" : $Browser/BG/CodeText.text
+	}
+	Client.peer.put_packet(JSON.stringify(message).to_utf32_buffer())
+
+func _on_dev_server_pressed():
+	Server.startServer()
