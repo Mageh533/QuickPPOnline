@@ -15,132 +15,142 @@ enum Message{
 }
 
 var peer = WebSocketMultiplayerPeer.new()
-var rtcPeer : WebRTCMultiplayerPeer = WebRTCMultiplayerPeer.new()
 var id = 0
-var hostId : int
+var rtcPeer : WebRTCMultiplayerPeer = WebRTCMultiplayerPeer.new()
+var hostId :int
 var lobbyValue = ""
+var lobbyInfo = {}
 
 var username : String
 
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	multiplayer.connected_to_server.connect(RTCServerConnected)
 	multiplayer.peer_connected.connect(RTCPeerConnected)
 	multiplayer.peer_disconnected.connect(RTCPeerDisconnected)
+	pass # Replace with function body.
 
 func RTCServerConnected():
-	print("RTC Server connected")
+	print("RTC server connected")
 
-func RTCPeerConnected(pId):
-	print("RTC Peer connected: " + str(pId))
+func RTCPeerConnected(id):
+	print("rtc peer connected " + str(id))
+	
+func RTCPeerDisconnected(id):
+	print("rtc peer disconnected " + str(id))
 
-func RTCPeerDisconnected(pId):
-	print("RTC Peer disconnected: " + str(pId))
 
-func _process(_delta):
-	poll()
-
-func poll():
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
 	peer.poll()
 	if peer.get_available_packet_count() > 0:
 		var packet = peer.get_packet()
 		if packet != null:
-			var data = JSON.parse_string(packet.get_string_from_utf32())
+			var dataString = packet.get_string_from_utf8()
+			var data = JSON.parse_string(dataString)
 			print(data)
+			
 			if data.message == Message.id:
 				id = data.id
-				print("CONNECTED WITH ID: " + str(id))
+				
 				connected(id)
 				
 			if data.message == Message.userConnected:
+				#GameManager.Players[data.id] = data.player
 				createPeer(data.id)
 				
 			if data.message == Message.lobby:
-				lobbyValue = data.lobbyValue
-				hostId = data.host
-				print("HOST ID HAS BEEN SET AS: " + str(hostId))
 				GameManager.Players = JSON.parse_string(data.players)
+				hostId = data.host
+				lobbyValue = data.lobbyValue
+				
 			if data.message == Message.candidate:
 				if rtcPeer.has_peer(data.orgPeer):
-					print("Got candidate: " + str(data.orgPeer) + ". My id is: " + str(id))
+					print("Got Candididate: " + str(data.orgPeer) + " my id is " + str(id))
 					rtcPeer.get_peer(data.orgPeer).connection.add_ice_candidate(data.mid, data.index, data.sdp)
-				
+			
 			if data.message == Message.offer:
 				if rtcPeer.has_peer(data.orgPeer):
 					rtcPeer.get_peer(data.orgPeer).connection.set_remote_description("offer", data.data)
-					
+			
 			if data.message == Message.answer:
 				if rtcPeer.has_peer(data.orgPeer):
 					rtcPeer.get_peer(data.orgPeer).connection.set_remote_description("answer", data.data)
+#			if data.message == Message.serverLobbyInfo:
+#
+#				$LobbyBrowser.InstanceLobbyInfo(data.name,data.userCount)
+	pass
 
-func connected(pId):
-	rtcPeer.create_mesh(pId)
-	print("Mesh created")
+func connected(id):
+	rtcPeer.create_mesh(id)
 	multiplayer.multiplayer_peer = rtcPeer
 
-#Webrtc connection
-func createPeer(pId):
-	print("ATTEMPTING TO CREATE PEER WITH ID: " + str(pId) + " AND MY ID: " + str(id))
-	
-	if pId != self.id:
-		print("PEER CREATED: " + str(pId))
-		var wPeer : WebRTCPeerConnection = WebRTCPeerConnection.new()
-		wPeer.initialize({
+#web rtc connection
+func createPeer(id):
+	if id != self.id:
+		var peer : WebRTCPeerConnection = WebRTCPeerConnection.new()
+		peer.initialize({
 			"iceServers" : [{ "urls": ["stun:stun.l.google.com:19302"] }]
 		})
-		print("Binding id: " + str(pId) + " to my id is: " + str(self.id))
-		wPeer.session_description_created.connect(self.offerCreated.bind(pId))
-		wPeer.ice_candidate_created.connect(self.iceCandidateCreated.bind(pId))
-		rtcPeer.add_peer(wPeer, pId)
+		print("binding id " + str(id) + "my id is " + str(self.id))
 		
-		print("HOST ID: " + str(hostId) + " SELF ID: " + str(self.id))
+		peer.session_description_created.connect(self.offerCreated.bind(id))
+		peer.ice_candidate_created.connect(self.iceCandidateCreated.bind(id))
+		rtcPeer.add_peer(peer, id)
 		
 		if !hostId == self.id:
-			print("Offer created")
 			peer.create_offer()
+		pass
+		
+
+func offerCreated(type, data, id):
+	if !rtcPeer.has_peer(id):
+		return
+		
+	rtcPeer.get_peer(id).connection.set_local_description(type, data)
+	
+	if type == "offer":
+		sendOffer(id, data)
+	else:
+		sendAnswer(id, data)
+	pass
+	
+	
+func sendOffer(id, data):
+	var message = {
+		"peer" : id,
+		"orgPeer" : self.id,
+		"message" : Message.offer,
+		"data": data,
+		"Lobby": lobbyValue
+	}
+	peer.put_packet(JSON.stringify(message).to_utf8_buffer())
+	pass
+
+func sendAnswer(id, data):
+	var message = {
+		"peer" : id,
+		"orgPeer" : self.id,
+		"message" : Message.answer,
+		"data": data,
+		"Lobby": lobbyValue
+	}
+	peer.put_packet(JSON.stringify(message).to_utf8_buffer())
+	pass
+
+func iceCandidateCreated(midName, indexName, sdpName, id):
+	var message = {
+		"peer" : id,
+		"orgPeer" : self.id,
+		"message" : Message.candidate,
+		"mid": midName,
+		"index": indexName,
+		"sdp": sdpName,
+		"Lobby": lobbyValue
+	}
+	peer.put_packet(JSON.stringify(message).to_utf8_buffer())
+	pass
 
 func connectToServer(_pId):
 	peer.create_client("ws://127.0.0.1:4433")
 	print("Client created")
-
-func sendOffer(pId, data):
-	var message = {
-		"peer" : pId,
-		"orgPeer" : self.id,
-		"message" : Message.offer,
-		"data" : data,
-		"Lobby" : lobbyValue
-	}
-	peer.put_packet(JSON.stringify(message).to_utf32_buffer())
-
-func sendAnswer(pId, data):
-	var message = {
-		"peer" : pId,
-		"orgPeer" : self.id,
-		"message" : Message.answer,
-		"data" : data,
-		"Lobby" : lobbyValue
-	}
-	peer.put_packet(JSON.stringify(message).to_utf32_buffer())
-
-func iceCandidateCreated(midName, indexName, sdpName, pId):
-	var message = {
-		"peer" : pId,
-		"orgPeer" : self.id,
-		"message" : Message.candidate,
-		"mid" : midName,
-		"index" : indexName,
-		"sdp" : sdpName,
-		"lobbyValue" : lobbyValue
-	}
-	peer.put_packet(JSON.stringify(message).to_utf32_buffer())
-
-func offerCreated(type, data, pId):
-	if !rtcPeer.has_peer(pId):
-		return
-	
-	rtcPeer.get_peer(pId).connection.set_local_description(type, data)
-	
-	if type == "offer":
-		sendOffer(pId, data)
-	else:
-		sendAnswer(pId, data)

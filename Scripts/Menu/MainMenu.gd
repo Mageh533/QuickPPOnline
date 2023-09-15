@@ -135,7 +135,7 @@ func _on_create_game_pressed():
 		"name" : $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text,
 		"lobbyValue" : ""
 	}
-	Client.peer.put_packet(JSON.stringify(message).to_utf32_buffer())
+	Client.peer.put_packet(JSON.stringify(message).to_utf8_buffer())
 	Client.username = $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text
 	$Lobby.show()
 
@@ -146,7 +146,7 @@ func _on_join_btn_pressed():
 		"name" : $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text,
 		"lobbyValue" : $Browser/BG/CodeText.text
 	}
-	Client.peer.put_packet(JSON.stringify(message).to_utf32_buffer())
+	Client.peer.put_packet(JSON.stringify(message).to_utf8_buffer())
 	Client.username = $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text
 	$Lobby.show()
 

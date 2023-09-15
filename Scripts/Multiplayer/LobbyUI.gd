@@ -9,23 +9,17 @@ func _ready():
 func _process(_delta):
 	pass
 
-@rpc("any_peer" ,"reliable")
-func sendMsg(msgText):
+@rpc("any_peer", "call_local")
+func sendMsg(msgText, username):
 	var msg = Label.new()
-	msg.text = Client.username + ": " + msgText
+	msg.text = username + ": " + msgText
 	$BG/ChatPanel/VBoxChat.add_child(msg)
 	if $BG/ChatPanel/VBoxChat.get_child_count() > 6:
 		$BG/ChatPanel/VBoxChat.get_child(0).queue_free()
 
 func _on_send_msg_pressed():
 	var msgText = $BG/MSG.text
-	var message = {
-		"message" : Client.Message.join,
-		"data" : msgText
-	}
-	
-	sendMsg.rpc(msgText)
-	Client.peer.put_packet(JSON.stringify(message).to_utf32_buffer())
+	sendMsg.rpc(msgText, Client.username)
 
 func _on_ready_btn_pressed():
 	pass # Replace with function body.

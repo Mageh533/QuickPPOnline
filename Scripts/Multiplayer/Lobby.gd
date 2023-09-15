@@ -1,11 +1,11 @@
 extends RefCounted
 class_name Lobby
 
-var HostId : int
+var HostID : int
 var Players : Dictionary = {}
 
 func _init(id):
-	HostId = id
+	HostID = id
 
 func AddPlayer(id, pName):
 	Players[id] = {
