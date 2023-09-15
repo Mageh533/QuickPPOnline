@@ -85,7 +85,10 @@ func createPeer(pId):
 		wPeer.ice_candidate_created.connect(self.iceCandidateCreated.bind(pId))
 		rtcPeer.add_peer(wPeer, pId)
 		
+		print("HOST ID IS: " + str(hostId))
+		
 		if !hostId == self.id:
+			print("Offer sent")
 			wPeer.create_offer()
 
 func connectToServer(_pId):
@@ -125,7 +128,6 @@ func iceCandidateCreated(midName, indexName, sdpName, pId):
 	peer.put_packet(JSON.stringify(message).to_utf32_buffer())
 
 func offerCreated(type, data, pId):
-	print("OFFER CREATED")
 	if !rtcPeer.has_peer(pId):
 		return
 	
