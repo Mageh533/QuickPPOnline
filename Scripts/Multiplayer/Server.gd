@@ -105,15 +105,13 @@ func JoinLobby(user):
 	}
 	
 	sendToPlayer(user.id, data)
-	
-	
-	
+
 func sendToPlayer(userId, data):
 	peer.get_peer(userId).put_packet(JSON.stringify(data).to_utf8_buffer())
 	
 func generateRandomString():
 	var result = ""
-	for i in range(32):
+	for i in range(6):
 		var index = randi() % Characters.length()
 		result += Characters[index]
 	return result
