@@ -66,32 +66,32 @@ func poll():
 				if rtcPeer.has_peer(data.orgPeer):
 					rtcPeer.get_peer(data.orgPeer).connection.set_remote_description("answer", data.data)
 
-func connected(id):
-	rtcPeer.create_mesh(id)
+func connected(pId):
+	rtcPeer.create_mesh(pId)
 	multiplayer.multiplayer_peer = rtcPeer
 
 #Webrtc connection
-func createPeer(id):
-	if id != self.id:
+func createPeer(pId):
+	if pId != self.id:
 		var peer = WebRTCPeerConnection.new()
 		peer.initialize({
 			"iceServers" : [{"urls" : ["stun:stun.l.google.com:19302"]}]
 		})
-		print("Binding id: " + str(id) + " to my id is: " + str(self.id))
-		peer.session_description_created.connect(self.offer_created.bind(id))
-		peer.ice_candidate_created.connect(self.ice_candidate_created.bind(id))
-		rtcPeer.add_peer(peer, id)
+		print("Binding id: " + str(pId) + " to my id is: " + str(self.id))
+		peer.session_description_created.connect(self.offer_created.bind(pId))
+		peer.ice_candidate_created.connect(self.ice_candidate_created.bind(pId))
+		rtcPeer.add_peer(peer, pId)
 		
-		if id < rtcPeer.get_unique_id():
+		if pId < rtcPeer.get_unique_id():
 			peer.create_offer()
 
-func connectToServer(ip):
+func connectToServer(_pId):
 	peer.create_client("ws://127.0.0.1:4433")
 	print("Client created")
 
-func sendOffer(id, data):
+func sendOffer(pId, data):
 	var message = {
-		"peer" : id,
+		"peer" : pId,
 		"orgPeer" : self.id,
 		"message" : Message.offer,
 		"data" : data,
@@ -99,9 +99,9 @@ func sendOffer(id, data):
 	}
 	peer.put_packet(JSON.stringify(message).to_utf32_buffer())
 
-func sendAnswer(id, data):
+func sendAnswer(pId, data):
 	var message = {
-		"peer" : id,
+		"peer" : pId,
 		"orgPeer" : self.id,
 		"message" : Message.answer,
 		"data" : data,
@@ -109,9 +109,9 @@ func sendAnswer(id, data):
 	}
 	peer.put_packet(JSON.stringify(message).to_utf32_buffer())
 
-func ice_candidate_created(midName, indexName, sdpName, id):
+func ice_candidate_created(midName, indexName, sdpName, pId):
 	var message = {
-		"peer" : id,
+		"peer" : pId,
 		"orgPeer" : self.id,
 		"message" : Message.candidate,
 		"mid" : midName,
@@ -121,13 +121,13 @@ func ice_candidate_created(midName, indexName, sdpName, id):
 	}
 	peer.put_packet(JSON.stringify(message).to_utf32_buffer())
 
-func offer_created(type, data, id):
-	if !rtcPeer.has_peer(id):
+func offer_created(type, data, pId):
+	if !rtcPeer.has_peer(pId):
 		return
 	
-	rtcPeer.get_peer(id).connection.set_local_description(type, data)
+	rtcPeer.get_peer(pId).connection.set_local_description(type, data)
 	
 	if type == "offer":
-		sendOffer(id, data)
+		sendOffer(pId, data)
 	else:
-		sendAnswer(id, data)
+		sendAnswer(pId, data)
