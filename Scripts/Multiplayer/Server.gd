@@ -9,7 +9,9 @@ enum Message{
 	candidate,
 	offer,
 	answer,
-	checkIn
+	checkIn,
+	serverLobbyInfo,
+	removeLobby 
 }
 
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -38,7 +40,7 @@ func poll():
 				JoinLobby(data.id, data.lobbyValue, data.name)
 				
 			if data.message == Message.offer or data.message == Message.answer or data.message == Message.candidate:
-				print("Source id is: " + str(data.orgPeer))
+				print("Source id of peer sending data: " + str(data.orgPeer))
 				sendToPlayer(data.peer, data)
 
 func startServer():

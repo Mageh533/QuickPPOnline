@@ -9,7 +9,9 @@ enum Message{
 	candidate,
 	offer,
 	answer,
-	checkIn
+	checkIn,
+	serverLobbyInfo,
+	removeLobby 
 }
 
 var peer = WebSocketMultiplayerPeer.new()
@@ -17,6 +19,8 @@ var rtcPeer : WebRTCMultiplayerPeer = WebRTCMultiplayerPeer.new()
 var id = 0
 var hostId : int
 var lobbyValue = ""
+
+var username : String
 
 func _ready():
 	multiplayer.connected_to_server.connect(RTCServerConnected)
@@ -44,7 +48,7 @@ func poll():
 			print(data)
 			if data.message == Message.id:
 				id = data.id
-				print("Connected with Id: " + str(id))
+				print("CONNECTED WITH ID: " + str(id))
 				connected(id)
 				
 			if data.message == Message.userConnected:
@@ -53,8 +57,8 @@ func poll():
 			if data.message == Message.lobby:
 				lobbyValue = data.lobbyValue
 				hostId = data.host
+				print("HOST ID HAS BEEN SET AS: " + str(hostId))
 				GameManager.Players = JSON.parse_string(data.players)
-				
 			if data.message == Message.candidate:
 				if rtcPeer.has_peer(data.orgPeer):
 					print("Got candidate: " + str(data.orgPeer) + ". My id is: " + str(id))
@@ -75,21 +79,24 @@ func connected(pId):
 
 #Webrtc connection
 func createPeer(pId):
+	print("ATTEMPTING TO CREATE PEER WITH ID: " + str(pId) + " AND MY ID: " + str(id))
+	
 	if pId != self.id:
-		var wPeer = WebRTCPeerConnection.new()
+		print("PEER CREATED: " + str(pId))
+		var wPeer : WebRTCPeerConnection = WebRTCPeerConnection.new()
 		wPeer.initialize({
-			"iceServers" : [{"urls" : ["stun:stun.l.google.com:19302"]}]
+			"iceServers" : [{ "urls": ["stun:stun.l.google.com:19302"] }]
 		})
 		print("Binding id: " + str(pId) + " to my id is: " + str(self.id))
 		wPeer.session_description_created.connect(self.offerCreated.bind(pId))
 		wPeer.ice_candidate_created.connect(self.iceCandidateCreated.bind(pId))
 		rtcPeer.add_peer(wPeer, pId)
 		
-		print("HOST ID IS: " + str(hostId))
+		print("HOST ID: " + str(hostId) + " SELF ID: " + str(self.id))
 		
 		if !hostId == self.id:
-			print("Offer sent")
-			wPeer.create_offer()
+			print("Offer created")
+			peer.create_offer()
 
 func connectToServer(_pId):
 	peer.create_client("ws://127.0.0.1:4433")
