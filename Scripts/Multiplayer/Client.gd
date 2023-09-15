@@ -35,9 +35,11 @@ func RTCServerConnected():
 
 func RTCPeerConnected(id):
 	print("rtc peer connected " + str(id))
+	GameManager.webRTCConnection = true
 	
 func RTCPeerDisconnected(id):
 	print("rtc peer disconnected " + str(id))
+	GameManager.webRTCConnection = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,11 +54,9 @@ func _process(delta):
 			
 			if data.message == Message.id:
 				id = data.id
-				
 				connected(id)
 				
 			if data.message == Message.userConnected:
-				#GameManager.Players[data.id] = data.player
 				createPeer(data.id)
 				
 			if data.message == Message.lobby:

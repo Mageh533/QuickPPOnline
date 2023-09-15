@@ -122,6 +122,13 @@ func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
 
 # ==================== Webrtc stuff is below ====================
+func _process(_delta):
+	if GameManager.webRTCConnection and !GameManager.gameStarted:
+		if GameManager.readyRTCPlayers.size() == GameManager.Players.size():
+			print("All players ready. Starting game...")
+			GameManager.gameStarted = true
+			start_game.rpc()
+
 func _on_find_games_pressed():
 	Client.connectToServer("127.0.0.1")
 	$Browser.show()
