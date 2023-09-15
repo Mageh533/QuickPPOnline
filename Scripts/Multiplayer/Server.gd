@@ -50,7 +50,7 @@ func JoinLobby(userId, lobbyId, username):
 		lobbyId = generateRandomString()
 		lobbies[lobbyId] = Lobby.new(userId)
 	
-	var player = lobbies[lobbyId].AddPlayer(userId, username)
+	var _player = lobbies[lobbyId].AddPlayer(userId, username)
 	
 	for p in lobbies[lobbyId].Players:
 		
