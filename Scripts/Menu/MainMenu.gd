@@ -19,31 +19,6 @@ func _ready():
 	await $UI/FadeRect/FadeAnim.animation_finished
 	$UI/FadeRect.hide()
 
-func connected_to_server():
-	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
-	randomize()
-	setUpSeed.rpc_id(1, randi())
-
-# Make sure both players have the same seed
-@rpc("any_peer", "call_local")
-func setUpSeed(seedShare):
-	GameManager.currentSeed = seedShare
-		
-	if multiplayer.is_server():
-		setUpSeed.rpc_id(GameManager.secondPlayerId, seedShare)
-
-# Since this is only a 1v1 where one player is the server, we only need to know the id of player 2
-@rpc("any_peer", "call_local")
-func setSecondPlayerId(id):
-	if GameManager.secondPlayerId == 0:
-		GameManager.secondPlayerId = id
-		
-	if multiplayer.is_server():
-		setSecondPlayerId.rpc_id(id, id)
-
-func connection_failed():
-	pass
-
 @rpc("any_peer", "call_local")
 func start_game():
 	# Hide the UI and unpause to start the game.
