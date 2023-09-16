@@ -36,11 +36,19 @@ func RTCServerConnected():
 func RTCPeerConnected(id):
 	print("rtc peer connected " + str(id))
 	GameManager.webRTCConnection = true
-	
+	if GameManager.Players.size() > 1:
+		randomize()
+		setUpSeed.rpc(randi())
+		print("Second player is: " + str(GameManager.Players.keys()[1]))
+
 func RTCPeerDisconnected(id):
 	print("rtc peer disconnected " + str(id))
 	GameManager.webRTCConnection = false
 
+# Make sure both players have the same seed
+@rpc("any_peer", "call_local")
+func setUpSeed(seedShare):
+	GameManager.currentSeed = seedShare
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

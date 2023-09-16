@@ -71,12 +71,12 @@ func _process(delta):
 		if rayCast.is_colliding():
 			groundCollide = true
 	
-	if GameManager.secondPlayerId != 0:
-		if multiplayer.get_unique_id() == 1 and currentPlayer == 1:
+	if GameManager.webRTCConnection:
+		if multiplayer.get_unique_id() == int(GameManager.Players.keys()[0]) and currentPlayer == 1:
 			playerControls(1)
-			syncMultiplayerPositions.rpc_id(GameManager.secondPlayerId, position, rotation)
-		elif multiplayer.get_unique_id() != 1 and currentPlayer == 2:
-			syncMultiplayerPositions.rpc_id(1, position, rotation)
+			syncMultiplayerPositions.rpc_id(int(GameManager.Players.keys()[1]), position, rotation)
+		elif multiplayer.get_unique_id() == int(GameManager.Players.keys()[1]) and currentPlayer == 2:
+			syncMultiplayerPositions.rpc_id(int(GameManager.Players.keys()[0]), position, rotation)
 			playerControls(1)
 	else:
 		playerControls(currentPlayer)
