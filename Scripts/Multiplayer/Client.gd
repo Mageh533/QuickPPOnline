@@ -38,7 +38,7 @@ func RTCPeerConnected(id):
 	GameManager.webRTCConnection = true
 	if GameManager.Players.size() > 1:
 		randomize()
-		setUpSeed.rpc(randi())
+		setUpSeed.rpc_id(int(GameManager.Players.keys()[0]), randi())
 		print("Second player is: " + str(GameManager.Players.keys()[1]))
 
 func RTCPeerDisconnected(id):
@@ -49,6 +49,9 @@ func RTCPeerDisconnected(id):
 @rpc("any_peer", "call_local")
 func setUpSeed(seedShare):
 	GameManager.currentSeed = seedShare
+	
+	if id == int(GameManager.Players.keys()[0]):
+		setUpSeed.rpc_id(int(GameManager.Players.keys()[1]), seedShare)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -160,5 +163,5 @@ func iceCandidateCreated(midName, indexName, sdpName, id):
 	pass
 
 func connectToServer(_pId):
-	peer.create_client("ws://127.0.0.1:4433")
+	peer.create_client("ws://92.12.20.182:4433")
 	print("Client created")

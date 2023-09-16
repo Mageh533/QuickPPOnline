@@ -19,7 +19,8 @@ var Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
 @export var hostPort = 4433
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if "--server" in OS.get_cmdline_args():
+	if OS.has_feature("server"):
+		print("Started Server")
 		print("hosting on " + str(hostPort))
 		peer.create_server(hostPort)
 		

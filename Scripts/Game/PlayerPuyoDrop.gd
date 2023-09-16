@@ -71,6 +71,7 @@ func _process(delta):
 		if rayCast.is_colliding():
 			groundCollide = true
 	
+	# If playing on webrtc, both players use player 1 controls.
 	if GameManager.webRTCConnection:
 		if multiplayer.get_unique_id() == int(GameManager.Players.keys()[0]) and currentPlayer == 1:
 			playerControls(1)
