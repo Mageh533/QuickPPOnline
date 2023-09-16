@@ -70,11 +70,16 @@ func _process(delta):
 	for rayCast in bottomRaycasts:
 		if rayCast.is_colliding():
 			groundCollide = true
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		playerControls(1) # if playing multiplayer, use the player 1 controls
+	
+	if GameManager.secondPlayerId != 0:
+		if multiplayer.get_unique_id() == 1 and currentPlayer == 1:
+			playerControls(1)
+			syncMultiplayerPositions.rpc_id(GameManager.secondPlayerId, position, rotation)
+		elif multiplayer.get_unique_id() != 1 and currentPlayer == 2:
+			syncMultiplayerPositions.rpc_id(1, position, rotation)
+			playerControls(1)
 	else:
-		if GameManager.secondPlayerId == 0:
-			playerControls(currentPlayer)
+		playerControls(currentPlayer)
 	
 	if groundCollide:
 		timeOnGround += delta
@@ -85,13 +90,11 @@ func _process(delta):
 			pieceLand.rpc()
 			await get_tree().create_timer(0.2).timeout
 			landCooldown = false
-	
-	if active and !playerSet:
-		playerSet = true
-		if currentPlayer == 1:
-			$MultiplayerSynchronizer.set_multiplayer_authority(1)
-		else:
-			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
+
+@rpc("any_peer", "call_local")
+func syncMultiplayerPositions(mpPos, mpRot):
+	position = mpPos
+	rotation = mpRot
 
 func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
