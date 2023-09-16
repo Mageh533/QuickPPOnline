@@ -10,31 +10,14 @@ const PORT = 4433
 func _ready(): 
 	$Lobby.hide()
 	$Browser.hide()
-	if OS.get_name() == "Web":
-		$UI/OnlinePopUp/VOnlineContainer/DirectNet.hide()
 	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
 	$UI/OnlinePopUp.hide()
-	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
-	
-	multiplayer.peer_connected.connect(peer_connected)
-	multiplayer.peer_disconnected.connect(peer_disconnected)
-	multiplayer.connected_to_server.connect(connected_to_server)
-	multiplayer.connection_failed.connect(connection_failed)
 	
 	$UI/FadeRect/FadeAnim.play("fadeOut")
 	await $UI/FadeRect/FadeAnim.animation_finished
 	$UI/FadeRect.hide()
-
-func peer_connected(_id):
-	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
-	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = false
-	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
-
-func peer_disconnected(_id):
-	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
-	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 
 func connected_to_server():
 	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
@@ -60,32 +43,6 @@ func setSecondPlayerId(id):
 
 func connection_failed():
 	pass
-
-func _on_host_pressed():
-	# Start as server.
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(PORT)
-	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-		OS.alert("Failed to start multiplayer server.")
-		return
-	else:
-		$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
-		$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
-		$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
-	multiplayer.multiplayer_peer = peer
-
-func _on_connect_pressed():
-	# Start as client.
-	var txt : String = $UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Remote.text
-	if txt == "":
-		OS.alert("Need a remote to connect to.")
-		return
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(txt, PORT)
-	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
-		OS.alert("Failed to start multiplayer client.")
-		return
-	multiplayer.multiplayer_peer = peer
 
 @rpc("any_peer", "call_local")
 func start_game():
@@ -122,13 +79,6 @@ func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
 
 # ==================== Webrtc stuff is below ====================
-func _process(_delta):
-	if GameManager.webRTCConnection and !GameManager.gameStarted:
-		if GameManager.readyRTCPlayers.size() == GameManager.Players.size():
-			print("All players ready. Starting game...")
-			GameManager.gameStarted = true
-			start_game.rpc()
-
 func _on_find_games_pressed():
 	Client.connectToServer("127.0.0.1")
 	$Browser.show()
@@ -159,3 +109,7 @@ func _on_join_btn_pressed():
 
 func _on_dev_server_pressed():
 	Server.startServer()
+
+func _on_lobby_player_ready():
+	if GameManager.Players.size() == GameManager.readyRTCPlayers.size():
+		start_game()
