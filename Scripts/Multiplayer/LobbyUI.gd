@@ -1,5 +1,7 @@
 extends Control
 
+signal playerReady
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -19,6 +21,7 @@ func sendMsg(msgText, username):
 @rpc("any_peer", "call_local", "reliable")
 func setAsReady(id):
 	GameManager.readyRTCPlayers.append(id)
+	emit_signal("playerReady")
 
 func _on_send_msg_pressed():
 	var msgText = $BG/MSG.text

@@ -27,7 +27,6 @@ func start_game():
 	currentGame.restartPressed.connect(on_restart_pressed)
 	$GameContainer.add_child(currentGame)
 	get_tree().paused = false
-	print("Second player is: " + str(GameManager.secondPlayerId))
 
 @rpc("any_peer", "call_local")
 func restartGame():
