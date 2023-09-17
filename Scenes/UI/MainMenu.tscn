@@ -142,16 +142,15 @@ texture = ExtResource("1_kgxbb")
 expand_mode = 1
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI"]
-position = Vector2i(435, 153)
-size = Vector2i(245, 394)
-visible = true
+position = Vector2i(440, 208)
+size = Vector2i(245, 204)
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/OnlinePopUp"]
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 243.0
-offset_bottom = 392.0
+offset_bottom = 202.0
 theme_override_constants/separation = 17
 
 [node name="OnlineLabel" type="Label" parent="UI/OnlinePopUp/VOnlineContainer"]
@@ -248,10 +247,10 @@ libraries = {
 [node name="Lobby" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 736.0
-offset_top = 283.0
-offset_right = 1114.0
-offset_bottom = 534.0
+offset_left = 369.0
+offset_top = 290.0
+offset_right = 747.0
+offset_bottom = 541.0
 theme = SubResource("Theme_wdnyx")
 script = ExtResource("5_ejjb1")
 

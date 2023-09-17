@@ -69,6 +69,7 @@ func _on_create_game_pressed():
 	Client.peer.put_packet(JSON.stringify(message).to_utf8_buffer())
 	Client.username = $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text
 	$Lobby.show()
+	$UI/OnlinePopUp.hide()
 
 func _on_join_btn_pressed():
 	var message = {
@@ -80,6 +81,7 @@ func _on_join_btn_pressed():
 	Client.peer.put_packet(JSON.stringify(message).to_utf8_buffer())
 	Client.username = $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text
 	$Lobby.show()
+	$UI/OnlinePopUp.hide()
 
 func _on_lobby_player_ready():
 	if GameManager.Players.size() == GameManager.readyRTCPlayers.size():
