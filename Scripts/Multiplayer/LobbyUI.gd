@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	pass
+	$BG/MatchCode.text = GameManager.lobbyCode
 
 @rpc("any_peer", "call_local", "reliable")
 func sendMsg(msgText, username):
@@ -32,3 +32,6 @@ func _on_ready_btn_pressed():
 
 func _on_disconnect_pressed():
 	pass # Replace with function body.
+
+func _on_button_pressed():
+	DisplayServer.clipboard_set($BG/MatchCode.text)
