@@ -12,7 +12,7 @@ const PORT = 4433
 func _ready():
 	if OS.get_name() == "Web":
 		$UI/MenuItems/PlayMPOnline.disabled = true
-	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
+	$PermaUI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
@@ -30,10 +30,14 @@ func _ready():
 func _on_play_mp_local_pressed():
 	randomize()
 	GameManager.currentSeed = randi()
+	$PermaUI/SettingsButton.disabled = true
 	start_game()
 
 func _on_sound_button_pressed():
-	$UI/SoundPopUp.visible = true
+	$PermaUI/SoundPopUp.show()
+
+func _on_settings_button_pressed():
+	$PermaUI/SettingsPopUp.show()
 
 func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
