@@ -9,6 +9,20 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	$BG/MatchCode.text = GameManager.lobbyCode
+	if GameManager.Players.size() == 1:
+		$BG/PlayerListPanel/VBoxPlayers/Player1.text = GameManager.Players[GameManager.Players.keys()[0]].name
+		$BG/PlayerListPanel/VBoxPlayers/Player2.text = ""
+	elif GameManager.Players.size() == 2:
+		$BG/PlayerListPanel/VBoxPlayers/Player1.text = GameManager.Players[GameManager.Players.keys()[0]].name
+		$BG/PlayerListPanel/VBoxPlayers/Player2.text = GameManager.Players[GameManager.Players.keys()[1]].name
+		if GameManager.Players[GameManager.Players.keys()[0]].id in GameManager.readyRTCPlayers:
+			$BG/PlayerListPanel/VBoxPlayers/Player1.modulate = Color.GREEN
+		else:
+			$BG/PlayerListPanel/VBoxPlayers/Player1.modulate = Color.RED
+		if GameManager.Players[GameManager.Players.keys()[1]].id in GameManager.readyRTCPlayers:
+			$BG/PlayerListPanel/VBoxPlayers/Player2.modulate = Color.GREEN
+		else:
+			$BG/PlayerListPanel/VBoxPlayers/Player2.modulate = Color.RED
 
 @rpc("any_peer", "call_local", "reliable")
 func sendMsg(msgText, username):
