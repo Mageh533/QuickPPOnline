@@ -1,7 +1,7 @@
 extends Control
 
 signal restartPressed
-var matchTime = 0
+var matchStarted = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +15,8 @@ func _ready():
 	await $UIAnims/Anims.animation_finished
 	$Player1.process_mode = Node.PROCESS_MODE_INHERIT
 	$Player2.process_mode = Node.PROCESS_MODE_INHERIT
+	matchStarted = true
+	GameManager.matchInfo.matchTime = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -22,9 +24,12 @@ func _process(delta):
 	displayNuisanceQueue("Player2")
 	$P1Queue.text = str($Player1.nuisanceQueue)
 	$P2Queue.text = str($Player2.nuisanceQueue)
-	matchTime += delta
-	var minutes = int(matchTime) / 60
-	$MatchTimer.text = str(minutes).pad_zeros(2) + ":" + str(int(matchTime) % 60).pad_zeros(2)
+	$Player1/WinCounter.text = "Wins: " + str(GameManager.matchInfo.p1Wins)
+	$Player2/WinCounter.text = "Wins: " + str(GameManager.matchInfo.p2Wins)
+	if matchStarted:
+		GameManager.matchInfo.matchTime += delta
+		var minutes = int(GameManager.matchInfo.matchTime) / 60
+		$MatchTimer.text = str(minutes).pad_zeros(2) + ":" + str(int(GameManager.matchInfo.matchTime) % 60).pad_zeros(2)
 
 func _on_restart_pressed():
 	emit_signal("restartPressed")
@@ -36,6 +41,7 @@ func _on_player_1_lost():
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$Restart.visible = true
+	GameManager.matchInfo.p2Wins += 1
 
 func _on_player_2_lost():
 	$SoundEffects/Lose.play()
@@ -44,6 +50,7 @@ func _on_player_2_lost():
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Restart.visible = true
+	GameManager.matchInfo.p1Wins += 1
 
 func _on_player_1_send_damage(damage):
 	if damage > 0:
