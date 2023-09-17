@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://rq2bwcbvu8p4"]
+[gd_scene load_steps=19 format=3 uid="uid://rq2bwcbvu8p4"]
 
 [ext_resource type="Script" path="res://Scripts/Game/PlayerPuyoDrop.gd" id="1_gehna"]
 [ext_resource type="AudioStream" uid="uid://dvqogtw6c6as" path="res://Assets/Sounds/pieceland.wav" id="2_o25ey"]
@@ -76,6 +76,16 @@ animations = [{
 "name": &"YellowPuyo",
 "speed": 5.0
 }]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_egw02"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
 
 [node name="PlayerPuyoDrop" type="Area2D" groups=["Player"]]
 rotation = -1.5708
@@ -161,5 +171,8 @@ position = Vector2(-0.000209959, -58)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BuePuyo"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_egw02")
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
