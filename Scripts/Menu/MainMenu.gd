@@ -8,10 +8,6 @@ var masterVolumeIndex = AudioServer.get_bus_index("Master")
 const PORT = 4433
 
 func _ready():
-	# Start paused.
-	get_tree().paused = true
-	if OS.get_name() == "Web":
-		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet.hide()
 	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
