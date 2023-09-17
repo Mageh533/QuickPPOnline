@@ -1,6 +1,7 @@
 extends Control
 
 signal restartPressed
+var matchTime = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,11 +17,14 @@ func _ready():
 	$Player2.process_mode = Node.PROCESS_MODE_INHERIT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(delta):
 	displayNuisanceQueue("Player1")
 	displayNuisanceQueue("Player2")
 	$P1Queue.text = str($Player1.nuisanceQueue)
 	$P2Queue.text = str($Player2.nuisanceQueue)
+	matchTime += delta
+	var minutes = int(matchTime) / 60
+	$MatchTimer.text = str(minutes).pad_zeros(2) + ":" + str(int(matchTime) % 60).pad_zeros(2)
 
 func _on_restart_pressed():
 	emit_signal("restartPressed")

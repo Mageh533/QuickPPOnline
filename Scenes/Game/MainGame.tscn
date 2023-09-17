@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=40 format=3 uid="uid://5rjlbqosjvt2"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
@@ -312,6 +312,11 @@ _data = {
 "matchStart": SubResource("Animation_qa1vl")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_f6vhb"]
+font_size = 72
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -381,6 +386,13 @@ scale = Vector2(0.65, 0.65)
 sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
 
+[node name="WinCounter" type="RichTextLabel" parent="Player1"]
+offset_left = 241.0
+offset_top = 46.0
+offset_right = 301.0
+offset_bottom = 73.0
+text = "Wins: 0"
+
 [node name="Player2" parent="." instance=ExtResource("3_qhxpw")]
 position = Vector2(733, 12)
 currentPlayer = 1
@@ -428,6 +440,13 @@ position = Vector2(3, 0)
 scale = Vector2(0.65, 0.65)
 sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
+
+[node name="WinCounter" type="RichTextLabel" parent="Player2"]
+offset_left = 47.0
+offset_top = 47.0
+offset_right = 107.0
+offset_bottom = 74.0
+text = "Wins: 0"
 
 [node name="SoundEffects" type="Node" parent="."]
 
@@ -537,6 +556,15 @@ offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Restart"
+
+[node name="MatchTimer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 10.0
+offset_right = 665.0
+offset_bottom = 112.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_f6vhb")
 
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]
