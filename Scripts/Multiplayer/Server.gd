@@ -22,7 +22,7 @@ func _ready():
 	if OS.has_feature("server"):
 		print("Started Server")
 		print("hosting on " + str(hostPort))
-		peer.create_server(hostPort)
+		startServer()
 		
 	peer.connect("peer_connected", peer_connected)
 	peer.connect("peer_disconnected", peer_disconnected)
@@ -118,5 +118,7 @@ func generateRandomString():
 	return result
 
 func startServer():
-	peer.create_server(4433)
-	print("Started Server")
+	var crypto = Crypto.new()
+	var key = crypto.generate_rsa(4096)
+	var cert = crypto.generate_self_signed_certificate(key, "CN=localhost,O=MagehGames,C=IT", "20140101000000", "20340101000000")
+	peer.create_server(hostPort, "*", TLSOptions.server(key, cert))

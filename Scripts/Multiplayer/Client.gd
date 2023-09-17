@@ -164,5 +164,8 @@ func iceCandidateCreated(midName, indexName, sdpName, id):
 	pass
 
 func connectToServer(_pId):
-	peer.create_client("ws://92.12.20.182:4433")
-	print("Client created")
+	var error = peer.create_client("wss://92.12.20.182:4433")
+	if error != 0:
+		print("Failed to connect to server")
+	else:
+		print("Connected to server")
