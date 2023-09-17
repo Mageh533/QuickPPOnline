@@ -194,7 +194,6 @@ text = "Play Multiplayer (Online)"
 mode = 1
 position = Vector2i(455, 212)
 size = Vector2i(245, 217)
-visible = true
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
@@ -261,10 +260,10 @@ libraries = {
 [node name="OnlineWarning" type="Label" parent="UI"]
 visible = false
 layout_mode = 0
-offset_left = 357.0
-offset_top = 195.0
-offset_right = 769.0
-offset_bottom = 247.0
+offset_left = 364.0
+offset_top = 267.0
+offset_right = 776.0
+offset_bottom = 319.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Online multiplayer currently does not work on html5. 
 Support coming soon!"

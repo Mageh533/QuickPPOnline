@@ -69,6 +69,7 @@ func on_restart_pressed():
 	restartGame.rpc()
 
 func _on_start_pressed():
+	GameManager.onlineMatch = true
 	start_game.rpc()
 
 func _on_play_mp_online_pressed():

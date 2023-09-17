@@ -13,6 +13,3 @@ func _ready():
 	$VerticalContainer/P2Controls1/FastButton.text
 	$VerticalContainer/P2Controls2/LeftTurnButton.text
 	$VerticalContainer/P2Controls2/RightTurnLAbel.text
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
