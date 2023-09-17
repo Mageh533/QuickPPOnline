@@ -1,6 +1,8 @@
 extends Node
 
+@export var SoloGame : PackedScene
 @export var MainGame : PackedScene
+@export var OnlineGame : PackedScene
 
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
@@ -8,6 +10,8 @@ var masterVolumeIndex = AudioServer.get_bus_index("Master")
 const PORT = 4433
 
 func _ready():
+	if OS.get_name() == "Web":
+		$UI/MenuItems/PlayMPOnline.disabled = true
 	$UI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
@@ -23,14 +27,18 @@ func _ready():
 	await $UI/FadeRect/FadeAnim.animation_finished
 	$UI/FadeRect.hide()
 
-func peer_connected(_id):
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = false
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
+func _on_play_mp_local_pressed():
+	randomize()
+	GameManager.currentSeed = randi()
+	start_game()
 
-func peer_disconnected(_id):
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
+func _on_sound_button_pressed():
+	$UI/SoundPopUp.visible = true
+
+func _on_v_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
+
+# ======================== Online related ========================
 
 func connected_to_server():
 	setSecondPlayerId.rpc_id(1, multiplayer.get_unique_id())
@@ -45,17 +53,38 @@ func setUpSeed(seedShare):
 	if multiplayer.is_server():
 		setUpSeed.rpc_id(GameManager.secondPlayerId, seedShare)
 
-# Since this is only a 1v1 where one player is the server, we only need to know the id of player 2
-@rpc("any_peer", "call_local")
-func setSecondPlayerId(id):
-	if GameManager.secondPlayerId == 0:
-		GameManager.secondPlayerId = id
-		
-	if multiplayer.is_server():
-		setSecondPlayerId.rpc_id(id, id)
+func _on_play_mp_online_mouse_entered():
+	if OS.get_name() == "Web":
+		$UI/OnlineWarning.show()
 
-func connection_failed():
-	pass
+func _on_play_mp_online_mouse_exited():
+	if OS.get_name() == "Web":
+		$UI/OnlineWarning.hide()
+
+func on_restart_pressed():
+	restartGame.rpc()
+
+func _on_start_pressed():
+	start_game.rpc()
+
+func _on_play_mp_online_pressed():
+	$UI/MenuItems/OnlinePopUp.visible = true
+
+@rpc("any_peer", "call_local")
+func start_game():
+	# Hide the UI and unpause to start the game.
+	$UI.hide()
+	currentGame = MainGame.instantiate()
+	currentGame.restartPressed.connect(on_restart_pressed)
+	$GameContainer.add_child(currentGame)
+	get_tree().paused = false
+	print("Second player is: " + str(GameManager.secondPlayerId))
+
+@rpc("any_peer", "call_local")
+func restartGame():
+	currentGame.queue_free()
+	currentGame = MainGame.instantiate()
+	$GameContainer.add_child(currentGame)
 
 func _on_host_pressed():
 	# Start as server.
@@ -83,36 +112,24 @@ func _on_connect_pressed():
 		return
 	multiplayer.multiplayer_peer = peer
 
+
+# Since this is only a 1v1 where one player is the server, we only need to know the id of player 2
 @rpc("any_peer", "call_local")
-func start_game():
-	# Hide the UI and unpause to start the game.
-	$UI.hide()
-	currentGame = MainGame.instantiate()
-	currentGame.restartPressed.connect(on_restart_pressed)
-	$GameContainer.add_child(currentGame)
-	get_tree().paused = false
-	print("Second player is: " + str(GameManager.secondPlayerId))
+func setSecondPlayerId(id):
+	if GameManager.secondPlayerId == 0:
+		GameManager.secondPlayerId = id
+		
+	if multiplayer.is_server():
+		setSecondPlayerId.rpc_id(id, id)
 
-@rpc("any_peer", "call_local")
-func restartGame():
-	currentGame.queue_free()
-	currentGame = MainGame.instantiate()
-	$GameContainer.add_child(currentGame)
+func peer_connected(_id):
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = false
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
 
-func on_restart_pressed():
-	restartGame.rpc()
+func peer_disconnected(_id):
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
+	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 
-func _on_start_pressed():
-	start_game.rpc()
-
-func _on_play_mp_online_pressed():
-	$UI/MenuItems/OnlinePopUp.visible = true
-
-func _on_play_mp_local_pressed():
-	start_game()
-
-func _on_sound_button_pressed():
-	$UI/SoundPopUp.visible = true
-
-func _on_v_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
+func connection_failed():
+	pass

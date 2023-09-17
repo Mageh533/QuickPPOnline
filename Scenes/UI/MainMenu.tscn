@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=18 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
+[ext_resource type="PackedScene" uid="uid://caeh4snxqjfaa" path="res://Scenes/Game/SoloGame.tscn" id="2_c1prm"]
 [ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/MainGame.tscn" id="2_fythm"]
 [ext_resource type="Texture2D" uid="uid://brfhuohmm8tia" path="res://Assets/Sprites/volume-icon.svg" id="4_ueemu"]
 
@@ -121,6 +122,7 @@ _data = {
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_bnywg")
+SoloGame = ExtResource("2_c1prm")
 MainGame = ExtResource("2_fythm")
 
 [node name="UI" type="Control" parent="."]
@@ -166,15 +168,14 @@ text = "Play Multiplayer (Online)"
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
 mode = 1
 position = Vector2i(435, 207)
-size = Vector2i(245, 352)
-visible = true
+size = Vector2i(245, 217)
 max_size = Vector2i(31248, 32768)
 
 [node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 243.0
-offset_bottom = 350.0
+offset_bottom = 215.0
 theme_override_constants/separation = 17
 
 [node name="DirectNet" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
@@ -248,7 +249,6 @@ value = 1.0
 scrollable = false
 
 [node name="FadeRect" type="ColorRect" parent="UI"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -262,9 +262,23 @@ libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
 
+[node name="OnlineWarning" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 357.0
+offset_top = 195.0
+offset_right = 769.0
+offset_bottom = 247.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Online multiplayer currently does not work on html5. 
+Support coming soon!"
+horizontal_alignment = 1
+
 [node name="GameContainer" type="Node" parent="."]
 
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
+[connection signal="mouse_entered" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_exited"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
