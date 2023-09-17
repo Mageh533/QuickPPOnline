@@ -244,14 +244,6 @@ libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
 
-[node name="devServer" type="Button" parent="UI"]
-layout_mode = 0
-offset_left = 62.0
-offset_top = 40.0
-offset_right = 200.0
-offset_bottom = 82.0
-text = "dev StartServer"
-
 [node name="Lobby" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -410,7 +402,6 @@ alignment = 1
 [connection signal="pressed" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_pressed"]
 [connection signal="pressed" from="UI/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="value_changed" from="UI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]
-[connection signal="pressed" from="UI/devServer" to="." method="_on_dev_server_pressed"]
 [connection signal="playerReady" from="Lobby" to="." method="_on_lobby_player_ready"]
 [connection signal="pressed" from="Lobby/BG/SendMSG" to="Lobby" method="_on_send_msg_pressed"]
 [connection signal="pressed" from="Lobby/BG/ReadyBTN" to="Lobby" method="_on_ready_btn_pressed"]

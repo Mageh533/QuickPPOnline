@@ -81,9 +81,6 @@ func _on_join_btn_pressed():
 	Client.username = $UI/OnlinePopUp/VOnlineContainer/UsernameContainer/UsernameInput.text
 	$Lobby.show()
 
-func _on_dev_server_pressed():
-	Server.startServer()
-
 func _on_lobby_player_ready():
 	if GameManager.Players.size() == GameManager.readyRTCPlayers.size():
 		start_game()
