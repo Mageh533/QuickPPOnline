@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=43 format=3 uid="uid://5rjlbqosjvt2"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
@@ -80,7 +80,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(161, 385), Vector2(308, 734)]
+"values": [Vector2(71, 0), Vector2(0, 0), Vector2(161, 385), Vector2(308, 734)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -199,7 +199,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(801, 2), Vector2(801, 2), Vector2(648, 501), Vector2(624, 972)]
+"values": [Vector2(733, 2), Vector2(801, 2), Vector2(648, 501), Vector2(624, 972)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -307,10 +307,73 @@ tracks/3/keys = {
 }
 tracks/3/use_blend = true
 
+[sub_resource type="Animation" id="Animation_kae8g"]
+resource_name = "roundEnd"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player1EndText:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-255, 196), Vector2(-255, 277)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player1EndText:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Player2EndText:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(411, 196), Vector2(411, 277)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Player2EndText:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3wce1"]
 _data = {
-"matchStart": SubResource("Animation_qa1vl")
+"matchStart": SubResource("Animation_qa1vl"),
+"roundEnd": SubResource("Animation_kae8g")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_mly3m"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4itk"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6vhb"]
 font_size = 72
@@ -340,7 +403,7 @@ texture = ExtResource("2_sflig")
 expand_mode = 2
 
 [node name="Player1" parent="." instance=ExtResource("3_qhxpw")]
-position = Vector2(71, 13)
+position = Vector2(71, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
 libraries = {
@@ -394,7 +457,7 @@ offset_bottom = 73.0
 text = "Wins: 0"
 
 [node name="Player2" parent="." instance=ExtResource("3_qhxpw")]
-position = Vector2(733, 12)
+position = Vector2(733, 2)
 currentPlayer = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
@@ -542,20 +605,29 @@ libraries = {
 "": SubResource("AnimationLibrary_3wce1")
 }
 
-[node name="Restart" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -21.5
-offset_right = 48.0
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Restart"
+[node name="Player1EndText" type="Label" parent="UIAnims"]
+visible = false
+layout_mode = 0
+offset_left = -255.0
+offset_top = 196.0
+offset_right = -46.0
+offset_bottom = 244.0
+text = "You Lose/Win"
+label_settings = SubResource("LabelSettings_mly3m")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player2EndText" type="Label" parent="UIAnims"]
+visible = false
+layout_mode = 0
+offset_left = 411.0
+offset_top = 196.0
+offset_right = 620.0
+offset_bottom = 244.0
+text = "You Lose/Win"
+label_settings = SubResource("LabelSettings_q4itk")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MatchTimer" type="Label" parent="."]
 layout_mode = 0
@@ -570,4 +642,3 @@ label_settings = SubResource("LabelSettings_f6vhb")
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]
 [connection signal="lost" from="Player2" to="." method="_on_player_2_lost"]
 [connection signal="sendDamage" from="Player2" to="." method="_on_player_2_send_damage"]
-[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

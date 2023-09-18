@@ -1,11 +1,10 @@
 extends Control
 
-signal restartPressed
+signal restartGame
 var matchStarted = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Restart.visible = false
 	clearNuisanceQueue("Player1")
 	clearNuisanceQueue("Player2")
 	await get_tree().create_timer(0.01).timeout
@@ -31,9 +30,17 @@ func _process(delta):
 		var minutes = int(GameManager.matchInfo.matchTime) / 60
 		$MatchTimer.text = str(minutes).pad_zeros(2) + ":" + str(int(GameManager.matchInfo.matchTime) % 60).pad_zeros(2)
 
-func _on_restart_pressed():
-	print("Restarting game.")
-	emit_signal("restartPressed")
+func roundEnd(winner):
+	if winner == 1:
+		$UIAnims/Player1EndText.text = "You Win!"
+		$UIAnims/Player2EndText.text = "You Lose..."
+	else:
+		$UIAnims/Player1EndText.text = "You Lose..."
+		$UIAnims/Player2EndText.text = "You Win!"
+	$UIAnims/Anims.play("roundEnd")
+	await $UIAnims/Anims.animation_finished
+	await get_tree().create_timer(1).timeout
+	emit_signal("restartGame")
 
 func _on_player_1_lost():
 	$SoundEffects/Lose.play()
@@ -41,8 +48,8 @@ func _on_player_1_lost():
 	await $Player1/AnimationPlayer.animation_finished
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
-	$Restart.visible = true
 	GameManager.matchInfo.p2Wins += 1
+	roundEnd(2)
 
 func _on_player_2_lost():
 	$SoundEffects/Lose.play()
@@ -50,8 +57,8 @@ func _on_player_2_lost():
 	await $Player2/AnimationPlayer.animation_finished
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
-	$Restart.visible = true
 	GameManager.matchInfo.p1Wins += 1
+	roundEnd(1)
 
 func _on_player_1_send_damage(damage):
 	if damage > 0:
