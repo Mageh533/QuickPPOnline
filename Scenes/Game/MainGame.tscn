@@ -243,10 +243,14 @@ font_color = Color(0.184314, 0.184314, 0.184314, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_owgav"]
 font_size = 35
 font_color = Color(1, 0.219608, 0.231373, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ftehg"]
 font_size = 35
 font_color = Color(0.878431, 0.352941, 0.0627451, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_qa1vl"]
 resource_name = "matchStart"
