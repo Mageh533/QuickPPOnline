@@ -1,6 +1,7 @@
 extends Control
 
 signal restartGame
+signal gameEnd
 var matchStarted = false
 
 # Called when the node enters the scene tree for the first time.
@@ -40,9 +41,13 @@ func roundEnd(winner):
 	$UIAnims/Anims.play("roundEnd")
 	await $UIAnims/Anims.animation_finished
 	await get_tree().create_timer(1).timeout
-	emit_signal("restartGame")
+	if GameManager.matchInfo.p1Wins >= GameManager.matchSettings.roundsToWin or GameManager.matchInfo.p1Wins >= GameManager.matchSettings.roundsToWin:
+		emit_signal("gameEnd")
+	else:
+		emit_signal("restartGame")
 
 func _on_player_1_lost():
+	matchStarted = false
 	$SoundEffects/Lose.play()
 	$Player1/AnimationPlayer.play("lose")
 	await $Player1/AnimationPlayer.animation_finished
@@ -52,6 +57,7 @@ func _on_player_1_lost():
 	roundEnd(2)
 
 func _on_player_2_lost():
+	matchStarted = false
 	$SoundEffects/Lose.play()
 	$Player2/AnimationPlayer.play("lose")
 	await $Player2/AnimationPlayer.animation_finished

@@ -36,6 +36,9 @@ func on_restart_pressed():
 	await playFadeAnims("fadeIn")
 	restartGame.rpc()
 
+func on_game_end():
+	pass
+
 func _on_sound_button_pressed():
 	$PermaUI/SoundPopUp.show()
 
@@ -87,6 +90,7 @@ func start_game():
 	$UI.hide()
 	currentGame = MainGame.instantiate()
 	currentGame.restartGame.connect(on_restart_pressed)
+	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)
 	await playFadeAnims("fadeOut")
 	get_tree().paused = false

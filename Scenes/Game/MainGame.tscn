@@ -407,7 +407,7 @@ texture = ExtResource("2_sflig")
 expand_mode = 2
 
 [node name="Player1" parent="." instance=ExtResource("3_qhxpw")]
-position = Vector2(71, 0)
+position = Vector2(74, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
 libraries = {
