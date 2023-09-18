@@ -32,6 +32,7 @@ func _process(delta):
 		$MatchTimer.text = str(minutes).pad_zeros(2) + ":" + str(int(GameManager.matchInfo.matchTime) % 60).pad_zeros(2)
 
 func _on_restart_pressed():
+	print("Restarting game.")
 	emit_signal("restartPressed")
 
 func _on_player_1_lost():

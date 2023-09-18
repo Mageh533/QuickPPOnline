@@ -33,6 +33,9 @@ func _on_play_mp_local_pressed():
 	$PermaUI/SettingsButton.disabled = true
 	start_game()
 
+func on_restart_pressed():
+	restartGame.rpc()
+
 func _on_sound_button_pressed():
 	$PermaUI/SoundPopUp.show()
 
@@ -65,9 +68,6 @@ func _on_play_mp_online_mouse_exited():
 	if OS.get_name() == "Web":
 		$UI/OnlineWarning.hide()
 
-func on_restart_pressed():
-	restartGame.rpc()
-
 func _on_start_pressed():
 	GameManager.onlineMatch = true
 	start_game.rpc()
@@ -88,8 +88,7 @@ func start_game():
 @rpc("any_peer", "call_local")
 func restartGame():
 	currentGame.queue_free()
-	currentGame = MainGame.instantiate()
-	$GameContainer.add_child(currentGame)
+	start_game()
 
 func _on_host_pressed():
 	# Start as server.
