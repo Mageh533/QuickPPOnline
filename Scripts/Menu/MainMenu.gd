@@ -37,7 +37,7 @@ func on_restart_pressed():
 	restartGame.rpc()
 
 func on_game_end():
-	pass
+	$PermaUI/ReturnButton.show()
 
 func _on_sound_button_pressed():
 	$PermaUI/SoundPopUp.show()
@@ -47,6 +47,10 @@ func _on_settings_button_pressed():
 
 func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
+
+func _on_return_button_pressed():
+	await playFadeAnims("fadeIn")
+	get_tree().reload_current_scene()
 
 func playFadeAnims(anim):
 	$PermaUI/FadeRect.show()

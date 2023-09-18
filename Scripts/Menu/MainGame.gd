@@ -42,7 +42,7 @@ func roundEnd(winner):
 	$UIAnims/Anims.play("roundEnd")
 	await $UIAnims/Anims.animation_finished
 	await get_tree().create_timer(1).timeout
-	if GameManager.matchInfo.p1Wins >= GameManager.matchSettings.roundsToWin or GameManager.matchInfo.p1Wins >= GameManager.matchSettings.roundsToWin:
+	if GameManager.matchInfo.p1Wins >= GameManager.matchSettings.roundsToWin or GameManager.matchInfo.p2Wins >= GameManager.matchSettings.roundsToWin:
 		emit_signal("gameEnd")
 	else:
 		emit_signal("restartGame")

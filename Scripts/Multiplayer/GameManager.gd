@@ -3,7 +3,7 @@ extends Node
 var onlineMatch = false
 
 var matchSettings = {
-	"roundsToWin" : 0
+	"roundsToWin" : 2
 }
 
 var matchInfo = {

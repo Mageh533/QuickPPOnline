@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=24 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
@@ -83,41 +83,10 @@ MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 0
 Panel/styles/panel = SubResource("StyleBoxFlat_rwkxl")
 
-[sub_resource type="Animation" id="Animation_qfptl"]
-resource_name = "fadeIn"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8k6p7"]
-resource_name = "fadeOut"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hieni"]
-_data = {
-"fadeIn": SubResource("Animation_qfptl"),
-"fadeOut": SubResource("Animation_8k6p7")
-}
+[sub_resource type="LabelSettings" id="LabelSettings_w71jw"]
+font_color = Color(0.901961, 0.901961, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q34b0"]
 bg_color = Color(1, 1, 1, 0.443137)
@@ -153,6 +122,42 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_qfptl"]
+resource_name = "fadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8k6p7"]
+resource_name = "fadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hieni"]
+_data = {
+"fadeIn": SubResource("Animation_qfptl"),
+"fadeOut": SubResource("Animation_8k6p7")
+}
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_bnywg")
@@ -200,11 +205,11 @@ text = "Play Solo"
 
 [node name="PlayMPLocal" type="Button" parent="UI/MenuItems"]
 layout_mode = 2
-text = "Play Multiplayer (Local)"
+text = "Play Local Multiplayer"
 
 [node name="PlayMPOnline" type="Button" parent="UI/MenuItems"]
 layout_mode = 2
-text = "Play Multiplayer (Online)"
+text = "Play Online"
 
 [node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
 mode = 1
@@ -266,9 +271,9 @@ offset_left = 364.0
 offset_top = 267.0
 offset_right = 776.0
 offset_bottom = 319.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "Online multiplayer currently does not work on html5. 
 Support coming soon!"
+label_settings = SubResource("LabelSettings_w71jw")
 horizontal_alignment = 1
 
 [node name="GameContainer" type="Node" parent="."]
@@ -282,21 +287,7 @@ anchor_bottom = 1.0
 offset_top = -138.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="FadeRect" type="ColorRect" parent="PermaUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -510.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="FadeAnim" type="AnimationPlayer" parent="PermaUI/FadeRect"]
-libraries = {
-"": SubResource("AnimationLibrary_hieni")
-}
+theme = SubResource("Theme_wdnyx")
 
 [node name="SoundButton" type="Button" parent="PermaUI"]
 layout_mode = 0
@@ -461,6 +452,38 @@ text = "Turn Right:"
 layout_mode = 2
 text = "LEFT ARROW"
 
+[node name="ReturnButton" type="Button" parent="PermaUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -152.0
+offset_right = 75.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return To Menu"
+
+[node name="FadeRect" type="ColorRect" parent="PermaUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -510.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FadeAnim" type="AnimationPlayer" parent="PermaUI/FadeRect"]
+libraries = {
+"": SubResource("AnimationLibrary_hieni")
+}
+
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
 [connection signal="mouse_entered" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_exited"]
@@ -471,3 +494,4 @@ text = "LEFT ARROW"
 [connection signal="pressed" from="PermaUI/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="value_changed" from="PermaUI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]
 [connection signal="pressed" from="PermaUI/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PermaUI/ReturnButton" to="." method="_on_return_button_pressed"]
