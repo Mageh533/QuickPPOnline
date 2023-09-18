@@ -24,8 +24,9 @@ func _process(delta):
 	displayNuisanceQueue("Player2")
 	$P1Queue.text = str($Player1.nuisanceQueue)
 	$P2Queue.text = str($Player2.nuisanceQueue)
-	$Player1/WinCounter.text = "Wins: " + str(GameManager.matchInfo.p1Wins)
-	$Player2/WinCounter.text = "Wins: " + str(GameManager.matchInfo.p2Wins)
+	$UIAnims/WinsPanel/WinCounterP1.text = str(GameManager.matchInfo.p1Wins)
+	$UIAnims/WinsPanel/WinCounterP2.text = str(GameManager.matchInfo.p2Wins)
+	$UIAnims/WinsPanel/WinsInfo.text = "First to: " + str(GameManager.matchSettings.roundsToWin)
 	if matchStarted:
 		GameManager.matchInfo.matchTime += delta
 		var minutes = int(GameManager.matchInfo.matchTime) / 60

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=46 format=3 uid="uid://5rjlbqosjvt2"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
@@ -38,6 +38,7 @@ border_width_bottom = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
 bg_color = Color(0, 0.713726, 0.996078, 1)
 border_width_left = 1
+border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
@@ -379,6 +380,21 @@ font_size = 32
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_dppm7"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dw3yc"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yhe0d"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_f6vhb"]
 font_size = 72
 outline_size = 3
@@ -453,13 +469,6 @@ scale = Vector2(0.65, 0.65)
 sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
 
-[node name="WinCounter" type="RichTextLabel" parent="Player1"]
-offset_left = 241.0
-offset_top = 46.0
-offset_right = 301.0
-offset_bottom = 73.0
-text = "Wins: 0"
-
 [node name="Player2" parent="." instance=ExtResource("3_qhxpw")]
 position = Vector2(733, 2)
 currentPlayer = 1
@@ -507,13 +516,6 @@ position = Vector2(3, 0)
 scale = Vector2(0.65, 0.65)
 sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
-
-[node name="WinCounter" type="RichTextLabel" parent="Player2"]
-offset_left = 47.0
-offset_top = 47.0
-offset_right = 107.0
-offset_bottom = 74.0
-text = "Wins: 0"
 
 [node name="SoundEffects" type="Node" parent="."]
 
@@ -632,6 +634,55 @@ text = "You Lose/Win"
 label_settings = SubResource("LabelSettings_q4itk")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WinsPanel" type="Panel" parent="UIAnims"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 561.0
+offset_right = 308.0
+offset_bottom = 622.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ks2fx")
+
+[node name="WinsLabel" type="Label" parent="UIAnims/WinsPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.5
+offset_right = 37.5
+offset_bottom = 48.0
+grow_horizontal = 2
+text = "Wins"
+label_settings = SubResource("LabelSettings_dppm7")
+
+[node name="WinCounterP1" type="Label" parent="UIAnims/WinsPanel"]
+layout_mode = 1
+offset_right = 55.0
+offset_bottom = 48.0
+text = "0"
+label_settings = SubResource("LabelSettings_dw3yc")
+horizontal_alignment = 1
+
+[node name="WinCounterP2" type="Label" parent="UIAnims/WinsPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_bottom = 48.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_yhe0d")
+horizontal_alignment = 1
+
+[node name="WinsInfo" type="RichTextLabel" parent="UIAnims/WinsPanel"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 37.0
+offset_right = 165.0
+offset_bottom = 60.0
+text = "First to:"
+scroll_active = false
 
 [node name="MatchTimer" type="Label" parent="."]
 layout_mode = 0
