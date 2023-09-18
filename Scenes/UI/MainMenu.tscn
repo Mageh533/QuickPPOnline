@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=23 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
@@ -98,8 +98,24 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_qfptl"]
+resource_name = "fadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hieni"]
 _data = {
+"fadeIn": SubResource("Animation_qfptl"),
 "fadeOut": SubResource("Animation_8k6p7")
 }
 
@@ -243,20 +259,6 @@ text = "0 / 0 Players connected"
 layout_mode = 2
 text = "Start"
 
-[node name="FadeRect" type="ColorRect" parent="UI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
-[node name="FadeAnim" type="AnimationPlayer" parent="UI/FadeRect"]
-libraries = {
-"": SubResource("AnimationLibrary_hieni")
-}
-
 [node name="OnlineWarning" type="Label" parent="UI"]
 visible = false
 layout_mode = 0
@@ -280,6 +282,21 @@ anchor_bottom = 1.0
 offset_top = -138.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="FadeRect" type="ColorRect" parent="PermaUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -510.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FadeAnim" type="AnimationPlayer" parent="PermaUI/FadeRect"]
+libraries = {
+"": SubResource("AnimationLibrary_hieni")
+}
 
 [node name="SoundButton" type="Button" parent="PermaUI"]
 layout_mode = 0

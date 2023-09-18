@@ -23,17 +23,17 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	
-	$UI/FadeRect/FadeAnim.play("fadeOut")
-	await $UI/FadeRect/FadeAnim.animation_finished
-	$UI/FadeRect.hide()
+	playFadeAnims("fadeOut")
 
 func _on_play_mp_local_pressed():
 	randomize()
 	GameManager.currentSeed = randi()
 	$PermaUI/SettingsButton.disabled = true
+	await playFadeAnims("fadeIn")
 	start_game()
 
 func on_restart_pressed():
+	await playFadeAnims("fadeIn")
 	restartGame.rpc()
 
 func _on_sound_button_pressed():
@@ -44,6 +44,12 @@ func _on_settings_button_pressed():
 
 func _on_v_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(masterVolumeIndex, linear_to_db(value))
+
+func playFadeAnims(anim):
+	$PermaUI/FadeRect.show()
+	$PermaUI/FadeRect/FadeAnim.play(anim)
+	await $PermaUI/FadeRect/FadeAnim.animation_finished
+	$PermaUI/FadeRect.hide()
 
 # ======================== Online related ========================
 
@@ -80,8 +86,9 @@ func start_game():
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
 	currentGame = MainGame.instantiate()
-	currentGame.restartPressed.connect(on_restart_pressed)
+	currentGame.restartGame.connect(on_restart_pressed)
 	$GameContainer.add_child(currentGame)
+	await playFadeAnims("fadeOut")
 	get_tree().paused = false
 	print("Second player is: " + str(GameManager.secondPlayerId))
 
