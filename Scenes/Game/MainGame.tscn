@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=47 format=3 uid="uid://5rjlbqosjvt2"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
@@ -400,6 +400,12 @@ font_size = 72
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g7mdf"]
+properties/0/path = NodePath("MatchTimer:text")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -707,6 +713,9 @@ offset_right = 665.0
 offset_bottom = 112.0
 text = "00:00"
 label_settings = SubResource("LabelSettings_f6vhb")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_g7mdf")
 
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]

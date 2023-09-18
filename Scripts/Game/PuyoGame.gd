@@ -22,7 +22,7 @@ var chainCooldown = 0
 var nuisanceCooldown = 0
 var currentChain = 0
 var leftOverNuisance = 0
-var nuisanceQueue = 0
+@export var nuisanceQueue = 0
 
 var score = 0
 var puyosClearedInChain = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b526hnm8iba4l"]
+[gd_scene load_steps=25 format=3 uid="uid://b526hnm8iba4l"]
 
 [ext_resource type="Script" path="res://Scripts/Game/RedPuyo.gd" id="1_2hd31"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_ymwr0"]
@@ -232,6 +232,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kfrt"]
 size = Vector2(59, 62)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y8bqo"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:type")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
 [node name="RedPuyo" type="Area2D" groups=["Puyos"]]
 disable_mode = 1
 collision_mask = 2
@@ -273,6 +283,9 @@ one_shot = true
 [node name="PoppedTimer" type="Timer" parent="."]
 wait_time = 0.7
 one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_y8bqo")
 
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="PoppedPreTimer" to="." method="_on_popped_pre_timer_timeout"]

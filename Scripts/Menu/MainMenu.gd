@@ -2,7 +2,6 @@ extends Node
 
 @export var SoloGame : PackedScene
 @export var MainGame : PackedScene
-@export var OnlineGame : PackedScene
 
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
