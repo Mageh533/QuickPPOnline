@@ -109,7 +109,7 @@ func _on_after_puyo_sent(puyos):
 	$NextPuyoSprites/Puyo2Set2_2.play(puyos[1])
 
 # Function checks if 4 or more puyos are connected, if so runs their pop function
-func checkForPops():
+func _on_popping_timer_timeout():
 	puyosToPop.clear()
 	for puyo in puyosObjectArray:
 		connectedPuyos.clear()
@@ -140,9 +140,6 @@ func checkForPops():
 	if checkAllClear():
 		await get_tree().create_timer(0.5).timeout
 		$Anims.play("all_clear")
-
-func _on_popping_timer_timeout():
-	checkForPops()
 
 func findOutAllConnected(puyo):
 	if puyo.connected.size() > 0 and !connectedPuyos.has(puyo) and !puyo.popped and !puyosToPop.has(puyo):
@@ -239,11 +236,11 @@ func checkAllClear():
 	return allClear
 
 func nuisanceProcess():
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.5).timeout
 	if chainCooldown <= 0:
 		if nuisanceQueue > 0:
-			nuisanceCooldown = 3
-			await get_tree().create_timer(1).timeout
+			nuisanceCooldown = 2
+			await get_tree().create_timer(0.5).timeout
 			if nuisanceQueue >= 30:
 				spawnNuisance(30)
 				nuisanceQueue -= 30
@@ -271,5 +268,5 @@ func _on_lose_timer_timeout():
 	loseTileTimer = false
 
 func _on_piece_landed():
-	checkForPops()
+	await get_tree().create_timer(0.5).timeout
 	nuisanceProcess()
