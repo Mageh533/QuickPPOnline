@@ -482,6 +482,7 @@ wait_time = 0.7
 one_shot = true
 
 [node name="LoseTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="ChainSoundEffects" type="Node" parent="."]
