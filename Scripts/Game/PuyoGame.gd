@@ -110,6 +110,9 @@ func _on_after_puyo_sent(puyos):
 
 # Function checks if 4 or more puyos are connected, if so runs their pop function
 func _on_popping_timer_timeout():
+	checkForChain()
+
+func checkForChain():
 	puyosToPop.clear()
 	for puyo in puyosObjectArray:
 		connectedPuyos.clear()
@@ -236,17 +239,19 @@ func checkAllClear():
 	return allClear
 
 func nuisanceProcess():
-	await get_tree().create_timer(0.5).timeout
 	if chainCooldown <= 0:
 		if nuisanceQueue > 0:
 			nuisanceCooldown = 2
-			await get_tree().create_timer(0.5).timeout
-			if nuisanceQueue >= 30:
-				spawnNuisance(30)
-				nuisanceQueue -= 30
+			await get_tree().create_timer(1).timeout
+			if chainCooldown > 0:
+				return
 			else:
-				spawnNuisance(nuisanceQueue)
-				nuisanceQueue = 0
+				if nuisanceQueue >= 30:
+					spawnNuisance(30)
+					nuisanceQueue -= 30
+				else:
+					spawnNuisance(nuisanceQueue)
+					nuisanceQueue = 0
 
 # If a puyo is on the lose tile for more than a second then its game over
 func _on_lose_tile_area_entered(_area):
