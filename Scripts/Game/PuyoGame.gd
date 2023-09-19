@@ -268,5 +268,4 @@ func _on_lose_timer_timeout():
 	loseTileTimer = false
 
 func _on_piece_landed():
-	await get_tree().create_timer(0.5).timeout
 	nuisanceProcess()
