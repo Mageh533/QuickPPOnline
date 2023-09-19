@@ -12,7 +12,6 @@ var puyosToPop = []
 var connectedPuyos = []
 var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 
-var checkPopTimer = false
 var scoreToAdd = false
 var loseTile = false
 var loseTileTimer = false
@@ -92,9 +91,8 @@ func connectPuyosToGame():
 
 # If any puyo emits the signal they are connected it starts the popping timer
 func _on_puyo_connected():
-	if !checkPopTimer:
-		checkPopTimer = true
-		$PoppingTimer.start()
+	if chainCooldown <= 0:
+		checkForPops()
 
 func _on_next_puyo_sent(puyos):
 	$NextPuyoSprites/Puyo1Set1.play(puyos[0])
@@ -120,7 +118,7 @@ func checkForPops():
 			puyosToPop.append_array(connectedPuyos)
 			
 	if puyosToPop.size() > 0:
-		chainCooldown = 2
+		chainCooldown = 1.5
 		currentChain += 1
 		puyosClearedInChain += puyosToPop.size()
 		playChainSoundEffects()
@@ -135,14 +133,24 @@ func checkForPops():
 			colours.erase(puyoToPop.type)
 		puyoToPop.pop()
 	
-	checkPopTimer = false
-	
 	if checkAllClear():
 		await get_tree().create_timer(0.5).timeout
 		$Anims.play("all_clear")
 
-func _on_popping_timer_timeout():
-	checkForPops()
+func nuisanceProcess():
+	if chainCooldown <= 0:
+		if nuisanceQueue > 0:
+			nuisanceCooldown = 3
+			await get_tree().create_timer(1).timeout
+			if nuisanceQueue >= 30:
+				spawnNuisance(30)
+				nuisanceQueue -= 30
+			else:
+				spawnNuisance(nuisanceQueue)
+				nuisanceQueue = 0
+
+func _on_piece_landed():
+	nuisanceProcess()
 
 func findOutAllConnected(puyo):
 	if puyo.connected.size() > 0 and !connectedPuyos.has(puyo) and !puyo.popped and !puyosToPop.has(puyo):
@@ -238,19 +246,6 @@ func checkAllClear():
 			allClear = false
 	return allClear
 
-func nuisanceProcess():
-	await get_tree().create_timer(0.1).timeout
-	if chainCooldown <= 0:
-		if nuisanceQueue > 0:
-			nuisanceCooldown = 3
-			await get_tree().create_timer(1).timeout
-			if nuisanceQueue >= 30:
-				spawnNuisance(30)
-				nuisanceQueue -= 30
-			else:
-				spawnNuisance(nuisanceQueue)
-				nuisanceQueue = 0
-
 # If a puyo is on the lose tile for more than a second then its game over
 func _on_lose_tile_area_entered(_area):
 	loseTile = true
@@ -269,7 +264,3 @@ func _on_lose_timer_timeout():
 		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = Node.PROCESS_MODE_DISABLED
 		
 	loseTileTimer = false
-
-func _on_piece_landed():
-	checkForPops()
-	nuisanceProcess()
