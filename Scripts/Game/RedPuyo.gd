@@ -13,11 +13,10 @@ var connected = []
 
 func _ready():
 	basicSetup()
-	searchOtherPuyos()
 
 func _process(_delta):
 	if !moving and !popped:
-		searchOtherPuyos()
+		await searchOtherPuyos()
 
 # 'Gravity' for the puyos that works similarly to the actual games, also stays within the tilemap
 func _on_gravity_timer_timeout():
@@ -28,6 +27,8 @@ func _on_gravity_timer_timeout():
 		moving = false
 
 # Searches for other puyos that are connectedPositions, adds to the array if it finds one to update the spritesheet
+# As well as running a recursive function to find out if the other puyos are connectedPositions to others and keeps count
+# If it counts 4 or more it will then pop
 func searchOtherPuyos():
 	connectedPositions.clear()
 	connected.clear()
