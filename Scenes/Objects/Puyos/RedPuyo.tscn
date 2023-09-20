@@ -273,7 +273,7 @@ target_position = Vector2(-50, 0)
 collide_with_areas = true
 
 [node name="GravityTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.001
 autostart = true
 
 [node name="PoppedPreTimer" type="Timer" parent="."]
