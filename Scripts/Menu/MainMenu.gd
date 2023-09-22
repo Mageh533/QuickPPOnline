@@ -33,6 +33,8 @@ func _on_play_mp_local_pressed():
 
 func on_restart_pressed():
 	await playFadeAnims("fadeIn")
+	randomize()
+	GameManager.currentSeed = randi()
 	restartGame.rpc()
 
 func on_game_end():
