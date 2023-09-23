@@ -27,7 +27,9 @@ func _on_gravity_timer_timeout():
 		moving = true
 	else:
 		tween.kill()
-		moving = false
+		if moving:
+			playSquashAnim()
+			moving = false
 
 # Searches for other puyos that are connectedPositions, adds to the array if it finds one to update the spritesheet
 # As well as running a recursive function to find out if the other puyos are connectedPositions to others and keeps count
@@ -105,6 +107,12 @@ func checkForNuisance():
 	if $RayLeft.is_colliding() and $RayLeft.get_collider() is Area2D:
 		if $RayLeft.get_collider().type == "Nuisance":
 			$RayLeft.get_collider().pop()
+
+# Blob!
+func playSquashAnim():
+	var tween = get_tree().create_tween()
+	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, 0.5), 0.2)
+	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, 0.85), 0.1)
 
 # Starts timers to animate the puyo blinking and popped and removes them
 func pop():
