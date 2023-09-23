@@ -116,9 +116,9 @@ func playSquashAnim(force):
 	var tween = get_tree().create_tween()
 	if force > 0.85:
 		force = 0.75
-	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, force), 0.1)
-	tween.tween_property($PuyoSprites, "scale", Vector2(force, 1), 0.2)
-	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, 0.85), 0.1)
+	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, force), 0.05)
+	tween.tween_property($PuyoSprites, "scale", Vector2(force, 1), 0.05)
+	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, 0.85), 0.05)
 	if $RayBottom.is_colliding() and $RayBottom.get_collider() is Area2D:
 		var theirType = $RayBottom.get_collider().type
 		if theirType == "RED" or theirType == "GREEN" or theirType == "PURPLE" or theirType == "BLUE" or theirType == "YELLOW":
