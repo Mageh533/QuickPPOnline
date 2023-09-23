@@ -9,6 +9,7 @@ var type = "Player"
 @export var fallSpeed = 100
 @export var moveCooldownTime = 0.1
 @export var PuyoScenes: Array[PackedScene]
+var rng = RandomNumberGenerator.new()
 
 var bottomRaycasts = []
 var leftRaycasts = []
@@ -33,14 +34,14 @@ var startingPos
 
 # Choses puyos 
 func _ready():
-	seed(GameManager.currentSeed)
+	rng.seed = GameManager.currentSeed
 	startingPos = position
-	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	currentPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	nextPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	position = position.snapped(Vector2.ONE * tile_size)
@@ -186,8 +187,8 @@ func swapPuyos():
 	nextPuyos.append_array(afterPuyos)
 	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
 	afterPuyos.clear()
-	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
