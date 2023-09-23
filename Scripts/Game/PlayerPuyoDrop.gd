@@ -46,7 +46,6 @@ func _ready():
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += -Vector2.ONE * tile_size/2
-	area_shape_entered.connect(_on_area_shape_entered)
 	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
 	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
@@ -168,6 +167,10 @@ func setRayCastsPositions():
 		rightRaycasts.append($RayCasts/RayLeft)
 		leftRaycasts.append($RayCasts/RayRight)
 
+func wallOrGroundKicking():
+	timeOnGround += 1
+	position += Vector2.UP * tile_size
+
 # Prevents clipping 
 func checkForRoationClipping():
 	var canRotate = true
@@ -219,12 +222,5 @@ func pieceLand():
 	emit_signal("pieceLanded")
 
 # The actual collision shape of this object should never touch something else
-func _on_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
-	if area.type != "Nuisance":
-		if !rightWallCollide and !leftWallCollide:
-			timeOnGround += 1
-			position += Vector2.UP * tile_size
-
 func _on_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
-	timeOnGround += 1
-	position += Vector2.UP * tile_size
+	wallOrGroundKicking()

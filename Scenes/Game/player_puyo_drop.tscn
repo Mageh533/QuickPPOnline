@@ -167,7 +167,7 @@ animation = &"BuePuyo"
 
 [node name="Puyo2Sprite" type="AnimatedSprite2D" parent="."]
 top_level = true
-position = Vector2(-2.53526e-06, 58)
+position = Vector2(-0.000209959, 58)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BuePuyo"
