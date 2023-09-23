@@ -101,16 +101,20 @@ func playerControls(controlsToUse):
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !rightWallCollide:
+				var tween = get_tree().create_tween()
 				$SoundEffects/PieceMove.play()
-				position += Vector2.RIGHT * tile_size
+				var newPos = position.x + (tile_size)
+				tween.tween_property(self, "position:x", newPos, 0.1)
 			moveCooldown = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_left"):
 		if !moveCooldown:
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !leftWallCollide:
+				var tween = get_tree().create_tween()
 				$SoundEffects/PieceMove.play()
-				position += Vector2.LEFT * tile_size
+				var newPos = position.x + (-tile_size)
+				tween.tween_property(self, "position:x", newPos, 0.1)
 			moveCooldown = false
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false
@@ -119,13 +123,17 @@ func playerControls(controlsToUse):
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnLeft"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
-			rotate(PI / 2)
+			var tween = get_tree().create_tween()
+			var newRot = rotation + (PI / 2)
+			tween.tween_property(self, "rotation", newRot, 0.1)
 		else:
 			rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
-			rotate(-PI / 2)
+			var tween = get_tree().create_tween()
+			var newRot = rotation + (-PI / 2)
+			tween.tween_property(self, "rotation", newRot, 0.1)
 		else:
 			rotate180()
 

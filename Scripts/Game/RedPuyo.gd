@@ -20,7 +20,7 @@ func _process(_delta):
 
 # 'Gravity' for the puyos that works similarly to the actual games, also stays within the tilemap
 func _on_gravity_timer_timeout():
-	var tween = get_tree().create_tween()
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
 	if(!$RayBottom.is_colliding()):
 		position += Vector2.DOWN * tile_size
 		tween.tween_property($PuyoSprites, "global_position", global_position, 0.1).set_trans(Tween.TRANS_SINE)
