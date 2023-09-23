@@ -7,8 +7,8 @@ var tile_size = 58
 var active = false
 var moving = true
 var popped = false
+var squashAnim = false
 @export var type = ""
-var pieceType = "puyo"
 var connectedPositions = []
 var connected = []
 
@@ -62,38 +62,39 @@ func searchOtherPuyos():
 
 # Update the sprite animation depending on how the its connectedPositions to other puyos
 func updateSpriteFrame():
-	if(connectedPositions.size() < 1):
-		$PuyoSprites.play("default")
-	elif(connectedPositions.size() == 1 and "TOP" in connectedPositions):
-		$PuyoSprites.play("joined_above")
-	elif(connectedPositions.size() == 1 and "BOTTOM" in connectedPositions):
-		$PuyoSprites.play("joined_below")
-	elif(connectedPositions.size() == 1 and "LEFT" in connectedPositions):
-		$PuyoSprites.play("joined_left")
-	elif(connectedPositions.size() == 1 and "RIGHT" in connectedPositions):
-		$PuyoSprites.play("joined_right")
-	elif(connectedPositions.size() == 2 and "TOP" in connectedPositions and "BOTTOM" in connectedPositions):
-		$PuyoSprites.play("joined_above_below")
-	elif(connectedPositions.size() == 2 and "TOP" in connectedPositions and "LEFT" in connectedPositions):
-		$PuyoSprites.play("joined_above_left")
-	elif(connectedPositions.size() == 2 and "TOP" in connectedPositions and "RIGHT" in connectedPositions):
-		$PuyoSprites.play("joined_above_right")
-	elif(connectedPositions.size() == 2 and "BOTTOM" in connectedPositions and "RIGHT" in connectedPositions):
-		$PuyoSprites.play("joined_below_right")
-	elif(connectedPositions.size() == 2 and "BOTTOM" in connectedPositions and "LEFT" in connectedPositions):
-		$PuyoSprites.play("joined_below_left")
-	elif(connectedPositions.size() == 2 and "LEFT" in connectedPositions and "RIGHT" in connectedPositions):
-		$PuyoSprites.play("joined_left_right")
-	elif(connectedPositions.size() == 3 and "TOP" in connectedPositions and "BOTTOM" in connectedPositions and "LEFT" in connectedPositions):
-		$PuyoSprites.play("joined_above_below_left")
-	elif(connectedPositions.size() == 3 and "TOP" in connectedPositions and "BOTTOM" in connectedPositions and "RIGHT" in connectedPositions):
-		$PuyoSprites.play("joined_above_below_right")
-	elif(connectedPositions.size() == 3 and "TOP" in connectedPositions and "LEFT" in connectedPositions and "RIGHT" in connectedPositions):
-		$PuyoSprites.play("joined_above_left_right")
-	elif(connectedPositions.size() == 3 and "BOTTOM" in connectedPositions and "LEFT" in connectedPositions and "RIGHT" in connectedPositions):
-		$PuyoSprites.play("joined_below_left_right")
-	else:
-		$PuyoSprites.play("joined_all")
+	if !squashAnim:
+		if(connectedPositions.size() < 1):
+			$PuyoSprites.play("default")
+		elif(connectedPositions.size() == 1 and "TOP" in connectedPositions):
+			$PuyoSprites.play("joined_above")
+		elif(connectedPositions.size() == 1 and "BOTTOM" in connectedPositions):
+			$PuyoSprites.play("joined_below")
+		elif(connectedPositions.size() == 1 and "LEFT" in connectedPositions):
+			$PuyoSprites.play("joined_left")
+		elif(connectedPositions.size() == 1 and "RIGHT" in connectedPositions):
+			$PuyoSprites.play("joined_right")
+		elif(connectedPositions.size() == 2 and "TOP" in connectedPositions and "BOTTOM" in connectedPositions):
+			$PuyoSprites.play("joined_above_below")
+		elif(connectedPositions.size() == 2 and "TOP" in connectedPositions and "LEFT" in connectedPositions):
+			$PuyoSprites.play("joined_above_left")
+		elif(connectedPositions.size() == 2 and "TOP" in connectedPositions and "RIGHT" in connectedPositions):
+			$PuyoSprites.play("joined_above_right")
+		elif(connectedPositions.size() == 2 and "BOTTOM" in connectedPositions and "RIGHT" in connectedPositions):
+			$PuyoSprites.play("joined_below_right")
+		elif(connectedPositions.size() == 2 and "BOTTOM" in connectedPositions and "LEFT" in connectedPositions):
+			$PuyoSprites.play("joined_below_left")
+		elif(connectedPositions.size() == 2 and "LEFT" in connectedPositions and "RIGHT" in connectedPositions):
+			$PuyoSprites.play("joined_left_right")
+		elif(connectedPositions.size() == 3 and "TOP" in connectedPositions and "BOTTOM" in connectedPositions and "LEFT" in connectedPositions):
+			$PuyoSprites.play("joined_above_below_left")
+		elif(connectedPositions.size() == 3 and "TOP" in connectedPositions and "BOTTOM" in connectedPositions and "RIGHT" in connectedPositions):
+			$PuyoSprites.play("joined_above_below_right")
+		elif(connectedPositions.size() == 3 and "TOP" in connectedPositions and "LEFT" in connectedPositions and "RIGHT" in connectedPositions):
+			$PuyoSprites.play("joined_above_left_right")
+		elif(connectedPositions.size() == 3 and "BOTTOM" in connectedPositions and "LEFT" in connectedPositions and "RIGHT" in connectedPositions):
+			$PuyoSprites.play("joined_below_left_right")
+		else:
+			$PuyoSprites.play("joined_all")
 
 func checkForNuisance():
 	if $RayBottom.is_colliding() and $RayBottom.get_collider() is Area2D:
@@ -111,17 +112,19 @@ func checkForNuisance():
 
 # Blop!
 func playSquashAnim(force):
+	squashAnim = true
 	var tween = get_tree().create_tween()
 	if force > 0.85:
 		force = 0.75
 	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, force), 0.1)
 	tween.tween_property($PuyoSprites, "scale", Vector2(force, 1), 0.2)
 	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, 0.85), 0.1)
-	
 	if $RayBottom.is_colliding() and $RayBottom.get_collider() is Area2D:
 		var theirType = $RayBottom.get_collider().type
 		if theirType == "RED" or theirType == "GREEN" or theirType == "PURPLE" or theirType == "BLUE" or theirType == "YELLOW":
 			$RayBottom.get_collider().playSquashAnim(force * 1.1)
+	await tween.finished
+	squashAnim = false
 
 # Starts timers to animate the puyo blinking and popped and removes them
 func pop():
