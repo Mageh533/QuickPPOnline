@@ -29,6 +29,7 @@ var leftWallCollide = false
 var rightWallCollide = false
 var active = false
 var playerSet = false
+var clipping = false
 
 var startingPos
 
@@ -81,7 +82,7 @@ func _process(delta):
 		timeOnGround += delta
 		if fastDrop:
 			timeOnGround += 0.1
-		if !landCooldown and timeOnGround > 1:
+		if !landCooldown and timeOnGround > 1 and !clipping:
 			landCooldown = true
 			pieceLand.rpc()
 			await get_tree().create_timer(0.2).timeout
@@ -93,6 +94,9 @@ func _process(delta):
 			$MultiplayerSynchronizer.set_multiplayer_authority(1)
 		else:
 			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
+	
+	if !has_overlapping_areas() or !has_overlapping_bodies():
+		clipping = false
 
 func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
@@ -168,19 +172,28 @@ func setRayCastsPositions():
 		leftRaycasts.append($RayCasts/RayRight)
 
 func wallOrGroundKicking():
-	timeOnGround += 1
-	position += Vector2.UP * tile_size
+	clipping = true
+	timeOnGround = 0
+	var clipDir = ""
+	for raycast in rightRaycasts:
+		if raycast.is_colliding():
+			clipDir = "Right"
+	for raycast in leftRaycasts:
+		if raycast.is_colliding():
+			clipDir = "Left"
+	
+	if clipDir == "Right":
+		position += Vector2.LEFT * tile_size
+	elif clipDir == "Left":
+		position += Vector2.RIGHT * tile_size
+	else:
+		position += Vector2.UP * tile_size
 
 # Prevents clipping 
 func checkForRoationClipping():
 	var canRotate = true
-	if $RayCasts/RayBRight.is_colliding() or $RayCasts/RayTRight.is_colliding():
-		if rightWallCollide and !leftWallCollide:
-			position += Vector2.LEFT * tile_size
-		elif leftWallCollide and !rightWallCollide:
-			position += Vector2.RIGHT * tile_size
-		else:
-			canRotate = false
+	if rightWallCollide and leftWallCollide:
+		canRotate = false
 	return canRotate
 
 func rotate180():
@@ -223,4 +236,7 @@ func pieceLand():
 
 # The actual collision shape of this object should never touch something else
 func _on_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
+	wallOrGroundKicking()
+
+func _on_area_shape_entered(area_rid, _area, area_shape_index, local_shape_index):
 	wallOrGroundKicking()
