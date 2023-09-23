@@ -207,6 +207,7 @@ func pieceLand():
 	position = startingPos
 	timeOnGround = 0
 	swapPuyos()
+	rotation = deg_to_rad(90)
 	emit_signal("pieceLanded")
 
 # The actual collision shape of this object should never touch something else
