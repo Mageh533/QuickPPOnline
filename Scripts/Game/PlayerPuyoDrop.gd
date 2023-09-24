@@ -11,6 +11,7 @@ var type = "Player"
 @export var PuyoScenes: Array[PackedScene]
 var rng = RandomNumberGenerator.new()
 
+var topRaycasts = []
 var bottomRaycasts = []
 var leftRaycasts = []
 var rightRaycasts = []
@@ -22,6 +23,7 @@ var timeOnGround = 0
 var currentPlayer = 0
 
 var fastDrop = false
+var ceilingCollide = false
 var groundCollide = false
 var moveCooldown = false
 var landCooldown = false
@@ -29,7 +31,6 @@ var leftWallCollide = false
 var rightWallCollide = false
 var active = false
 var playerSet = false
-var clipping = false
 
 var startingPos
 
@@ -71,6 +72,13 @@ func _process(delta):
 	for rayCast in bottomRaycasts:
 		if rayCast.is_colliding():
 			groundCollide = true
+	ceilingCollide = false
+	for rayCast in topRaycasts:
+		if rayCast.is_colliding():
+			ceilingCollide = true
+	
+	if groundCollide and ceilingCollide:
+		wallOrGroundKicking()
 	
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		playerControls(1) # if playing multiplayer, use the player 1 controls
@@ -82,7 +90,7 @@ func _process(delta):
 		timeOnGround += delta
 		if fastDrop:
 			timeOnGround += 0.1
-		if !landCooldown and timeOnGround > 1 and !clipping:
+		if !landCooldown and timeOnGround > 1:
 			landCooldown = true
 			pieceLand.rpc()
 			await get_tree().create_timer(0.2).timeout
@@ -94,9 +102,6 @@ func _process(delta):
 			$MultiplayerSynchronizer.set_multiplayer_authority(1)
 		else:
 			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
-	
-	if !has_overlapping_areas() or !has_overlapping_bodies():
-		clipping = false
 
 func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
@@ -149,32 +154,43 @@ func setRayCastsPositions():
 	rightWallCollide = false
 	var currentAngle = round(transform.get_rotation())
 	if currentAngle == 2:
+		topRaycasts.append($RayCasts/RayLeft)
 		bottomRaycasts.append($RayCasts/RayRight)
 		leftRaycasts.append($RayCasts/RayBLeft)
 		leftRaycasts.append($RayCasts/RayBRight)
 		rightRaycasts.append($RayCasts/RayTLeft)
 		rightRaycasts.append($RayCasts/RayTRight)
 	if currentAngle == 0:
+		topRaycasts.append($RayCasts/RayTLeft)
+		topRaycasts.append($RayCasts/RayTRight)
 		bottomRaycasts.append($RayCasts/RayBLeft)
 		bottomRaycasts.append($RayCasts/RayBRight)
 		leftRaycasts.append($RayCasts/RayLeft)
 		rightRaycasts.append($RayCasts/RayRight)
 	if currentAngle == -2:
+		bottomRaycasts.append($RayCasts/RayRight)
 		bottomRaycasts.append($RayCasts/RayLeft)
 		rightRaycasts.append($RayCasts/RayBLeft)
 		rightRaycasts.append($RayCasts/RayBRight)
 		leftRaycasts.append($RayCasts/RayTLeft)
 		leftRaycasts.append($RayCasts/RayTRight)
 	if currentAngle == -3 or currentAngle == 3:
+		topRaycasts.append($RayCasts/RayBLeft)
+		topRaycasts.append($RayCasts/RayBRight)
 		bottomRaycasts.append($RayCasts/RayTLeft)
 		bottomRaycasts.append($RayCasts/RayTRight)
 		rightRaycasts.append($RayCasts/RayLeft)
 		leftRaycasts.append($RayCasts/RayRight)
 
 func wallOrGroundKicking():
-	clipping = true
 	timeOnGround = 0
-	position += Vector2.UP * tile_size
+	var currentAngle = round(transform.get_rotation())
+	if currentAngle == -3 or currentAngle == 3:
+		position += Vector2.RIGHT * tile_size
+	elif currentAngle == 0:
+		position += Vector2.LEFT * tile_size
+	else:
+		position += Vector2.UP * tile_size
 
 # Prevents clipping 
 func checkForRoationClipping():
@@ -187,9 +203,9 @@ func rotate180():
 	var temp = $Puyo1Spawn.position
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
-	temp = $RemoteTransformP1.position
-	$RemoteTransformP1.position = $RemoteTransformP2.position
-	$RemoteTransformP2.position = temp
+	temp = $Transforms/RemoteTransformP1.position
+	$Transforms/RemoteTransformP1.position = $Transforms/RemoteTransformP2.position
+	$Transforms/RemoteTransformP2.position = temp
 
 func swapPuyos():
 	currentPuyos.clear()
