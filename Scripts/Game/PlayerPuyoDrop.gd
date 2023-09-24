@@ -127,16 +127,16 @@ func playerControls(controlsToUse):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			var tween = get_tree().create_tween()
-			var newRot = rotation + (PI / 2)
-			tween.tween_property(self, "rotation", newRot, 0.1)
+			rotate(PI / 2)
+			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
 		else:
 			rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if await checkForRoationClipping():
 			var tween = get_tree().create_tween()
-			var newRot = rotation + (-PI / 2)
-			tween.tween_property(self, "rotation", newRot, 0.1)
+			rotate(-PI / 2)
+			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
 		else:
 			rotate180()
 
@@ -174,20 +174,7 @@ func setRayCastsPositions():
 func wallOrGroundKicking():
 	clipping = true
 	timeOnGround = 0
-	var clipDir = ""
-	for raycast in rightRaycasts:
-		if raycast.is_colliding():
-			clipDir = "Right"
-	for raycast in leftRaycasts:
-		if raycast.is_colliding():
-			clipDir = "Left"
-	
-	if clipDir == "Right":
-		position += Vector2.LEFT * tile_size
-	elif clipDir == "Left":
-		position += Vector2.RIGHT * tile_size
-	else:
-		position += Vector2.UP * tile_size
+	position += Vector2.UP * tile_size
 
 # Prevents clipping 
 func checkForRoationClipping():
@@ -232,6 +219,7 @@ func pieceLand():
 	timeOnGround = 0
 	swapPuyos()
 	rotation = deg_to_rad(90)
+	$Transforms.rotation = rotation
 	emit_signal("pieceLanded")
 
 # The actual collision shape of this object should never touch something else
