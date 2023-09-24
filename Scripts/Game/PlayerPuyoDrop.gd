@@ -22,6 +22,8 @@ var afterPuyos = []
 var timeOnGround = 0
 var currentPlayer = 0
 
+var wallKick = false
+var groundKick = false
 var fastDrop = false
 var ceilingCollide = false
 var groundCollide = false
@@ -68,11 +70,9 @@ func _process(delta):
 	for rayCast in rightRaycasts:
 		if rayCast.is_colliding():
 			rightWallCollide = true
-	groundCollide = false
 	for rayCast in bottomRaycasts:
 		if rayCast.is_colliding():
 			groundCollide = true
-	ceilingCollide = false
 	for rayCast in topRaycasts:
 		if rayCast.is_colliding():
 			ceilingCollide = true
@@ -83,7 +83,7 @@ func _process(delta):
 		if !GameManager.onlineMatch:
 			playerControls(currentPlayer)
 	
-	if groundCollide:
+	if groundCollide and !ceilingCollide:
 		timeOnGround += delta
 		if fastDrop:
 			timeOnGround += 0.1
@@ -105,7 +105,7 @@ func playerControls(controlsToUse):
 		if !moveCooldown:
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
-			if !rightWallCollide:
+			if !rightWallCollide and !ceilingCollide:
 				var tween = get_tree().create_tween()
 				$SoundEffects/PieceMove.play()
 				var newPos = position.x + (tile_size)
@@ -115,7 +115,7 @@ func playerControls(controlsToUse):
 		if !moveCooldown:
 			moveCooldown = true
 			await get_tree().create_timer(moveCooldownTime).timeout
-			if !leftWallCollide:
+			if !leftWallCollide and !ceilingCollide:
 				var tween = get_tree().create_tween()
 				$SoundEffects/PieceMove.play()
 				var newPos = position.x + (-tile_size)
@@ -144,11 +144,14 @@ func playerControls(controlsToUse):
 
 # Function to find out where raycasts are after rotating
 func setRayCastsPositions():
+	topRaycasts.clear()
 	bottomRaycasts.clear()
 	leftRaycasts.clear()
 	rightRaycasts.clear()
 	leftWallCollide = false
 	rightWallCollide = false
+	groundCollide = false
+	ceilingCollide = false
 	var currentAngle = round(transform.get_rotation())
 	if currentAngle == 2:
 		topRaycasts.append($RayCasts/RayLeft)
@@ -179,15 +182,28 @@ func setRayCastsPositions():
 		rightRaycasts.append($RayCasts/RayLeft)
 		leftRaycasts.append($RayCasts/RayRight)
 
+# Floor and wall kick mechanics
 func wallOrGroundKicking():
 	timeOnGround = 0
 	var currentAngle = round(transform.get_rotation())
 	if currentAngle == -3 or currentAngle == 3:
-		position += Vector2.RIGHT * tile_size
+		if !wallKick:
+			wallKick = true
+			position += Vector2.RIGHT * tile_size
+			await get_tree().create_timer(0.5).timeout
+			wallKick = false
 	elif currentAngle == 0:
-		position += Vector2.LEFT * tile_size
+		if !wallKick:
+			wallKick = true
+			position += Vector2.LEFT * tile_size
+			await get_tree().create_timer(0.5).timeout
+			wallKick = false
 	else:
-		position += Vector2.UP * tile_size
+		if !ceilingCollide and !groundKick:
+			groundKick = true
+			position += Vector2.UP * tile_size
+			await get_tree().create_timer(0.5).timeout
+			groundKick = false
 
 # Prevents clipping 
 func checkForRoationClipping():
