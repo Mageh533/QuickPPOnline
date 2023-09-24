@@ -27,7 +27,7 @@ func _ready():
 func _on_play_mp_local_pressed():
 	randomize()
 	GameManager.currentSeed = randi()
-	$PermaUI/SettingsButton.disabled = true
+	$PermaUI/SettingsPopUp/VBoxContainer/Controls.disabled = true
 	await playFadeAnims("fadeIn")
 	start_game()
 

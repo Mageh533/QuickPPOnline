@@ -330,127 +330,31 @@ icon = ExtResource("6_yc3yo")
 expand_icon = true
 
 [node name="SettingsPopUp" type="PopupPanel" parent="PermaUI"]
-position = Vector2i(470, 288)
-size = Vector2i(671, 271)
+position = Vector2i(1010, 288)
+size = Vector2i(136, 256)
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2oke")
 script = ExtResource("7_wysld")
 
-[node name="VerticalContainer" type="VBoxContainer" parent="PermaUI/SettingsPopUp"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PermaUI/SettingsPopUp"]
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 669.0
-offset_bottom = 269.0
-
-[node name="P1CLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer"]
-layout_mode = 2
-text = "Player 1 Controls (Online and Local)"
-horizontal_alignment = 1
-
-[node name="P1Controls1" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VerticalContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
+offset_right = 134.0
+offset_bottom = 254.0
+theme_override_constants/separation = 50
 alignment = 1
 
-[node name="LeftLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls1"]
+[node name="Controls" type="Button" parent="PermaUI/SettingsPopUp/VBoxContainer"]
 layout_mode = 2
-text = "Move Left:"
+text = "Change Controls"
 
-[node name="LeftButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls1"]
+[node name="ReturnToMenu" type="Button" parent="PermaUI/SettingsPopUp/VBoxContainer"]
 layout_mode = 2
-text = "LEFT ARROW"
+text = "Return To Menu
+"
 
-[node name="RightLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls1"]
+[node name="Exit" type="Button" parent="PermaUI/SettingsPopUp/VBoxContainer"]
 layout_mode = 2
-text = "Move Right:"
-
-[node name="RightButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls1"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="FastLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls1"]
-layout_mode = 2
-text = "Fast Drop:"
-
-[node name="FastButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls1"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="P1Controls2" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VerticalContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="LeftTurnLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls2"]
-layout_mode = 2
-text = "Turn Left:"
-
-[node name="LeftTurnButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls2"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="RightTurnLAbel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls2"]
-layout_mode = 2
-text = "Turn Right:"
-
-[node name="RightButton2" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P1Controls2"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="P2CLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer"]
-layout_mode = 2
-text = "_________________________________________________________________________________________________
-Player 2 Controls (Local)"
-horizontal_alignment = 1
-
-[node name="P2Controls1" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VerticalContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="LeftLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls1"]
-layout_mode = 2
-text = "Move Left:"
-
-[node name="LeftButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls1"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="RightLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls1"]
-layout_mode = 2
-text = "Move Right:"
-
-[node name="RightButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls1"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="FastLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls1"]
-layout_mode = 2
-text = "Fast Drop:"
-
-[node name="FastButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls1"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="P2Controls2" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VerticalContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="LeftTurnLabel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls2"]
-layout_mode = 2
-text = "Turn Left:"
-
-[node name="LeftTurnButton" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls2"]
-layout_mode = 2
-text = "LEFT ARROW"
-
-[node name="RightTurnLAbel" type="Label" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls2"]
-layout_mode = 2
-text = "Turn Right:"
-
-[node name="RightButton2" type="Button" parent="PermaUI/SettingsPopUp/VerticalContainer/P2Controls2"]
-layout_mode = 2
-text = "LEFT ARROW"
+text = "Exit Game"
 
 [node name="ReturnButton" type="Button" parent="PermaUI"]
 visible = false
@@ -494,4 +398,6 @@ libraries = {
 [connection signal="pressed" from="PermaUI/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="value_changed" from="PermaUI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]
 [connection signal="pressed" from="PermaUI/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/ReturnToMenu" to="PermaUI/SettingsPopUp" method="_on_return_to_menu_pressed"]
+[connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Exit" to="PermaUI/SettingsPopUp" method="_on_exit_pressed"]
 [connection signal="pressed" from="PermaUI/ReturnButton" to="." method="_on_return_button_pressed"]
