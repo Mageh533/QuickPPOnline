@@ -77,9 +77,6 @@ func _process(delta):
 		if rayCast.is_colliding():
 			ceilingCollide = true
 	
-	if groundCollide and ceilingCollide:
-		wallOrGroundKicking()
-	
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		playerControls(1) # if playing multiplayer, use the player 1 controls
 	else:
