@@ -118,6 +118,10 @@ texture_region_size = Vector2i(58, 59)
 6:1/0 = 0
 6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ip3n8"]
 scenes/1/scene = ExtResource("9_l6p23")
@@ -438,7 +442,7 @@ scale = Vector2(0.75, 0.75)
 tile_set = SubResource("TileSet_nr84w")
 format = 2
 layer_0/name = "Grid"
-layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, 786432, 196608, 0, -65535, 65536, 0, 786433, 196608, 0, -65534, 65536, 0, 786434, 196608, 0, 786435, 196608, 0, -65532, 65536, 0, 786436, 196608, 0, -65531, 65536, 0, 786437, 196608, 0, 6, 262144, 0, 65542, 262144, 0, 131078, 262144, 0, 196614, 262144, 0, 262150, 262144, 0, 327686, 262144, 0, 393222, 262144, 0, 458758, 262144, 0, 524294, 262144, 0, 589830, 262144, 0, 655366, 262144, 0, 720902, 262144, 0, 851967, 196608, 1, 786438, 262144, 1, -1, 65536, 1, -65530, 131072, 1, -65533, 65536, 0)
+layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, 786432, 196608, 0, -65535, 65536, 0, 786433, 196608, 0, -65534, 65536, 0, 786434, 196608, 0, 786435, 196608, 0, -65532, 65536, 0, 786436, 196608, 0, -65531, 65536, 0, 786437, 196608, 0, 6, 262144, 0, 65542, 262144, 0, 131078, 262144, 0, 196614, 262144, 0, 262150, 262144, 0, 327686, 262144, 0, 393222, 262144, 0, 458758, 262144, 0, 524294, 262144, 0, 589830, 262144, 0, 655366, 262144, 0, 720902, 262144, 0, 851967, 196608, 1, 786438, 262144, 1, -1, 65536, 1, -65530, 131072, 1, -65533, 65536, 0, 786439, 0, 1, 720903, 0, 1, 655367, 0, 1, 589831, 0, 1, 524295, 0, 1, 458759, 0, 1, 393223, 0, 1, 327687, 0, 1, 262151, 0, 1, 196615, 0, 1, 131079, 0, 1, 65543, 0, 1, 7, 0, 1, 851975, 0, 1, 851974, 0, 1, 851973, 0, 1, 851972, 0, 1, 851971, 0, 1, 851970, 0, 1, 851969, 0, 1, 851968, 0, 1, 917503, 0, 1, 917502, 0, 1, 851966, 0, 1, 786430, 0, 1, 720894, 0, 1, 655358, 0, 1, 589822, 0, 1, 524286, 0, 1, 458750, 0, 1, 393214, 0, 1, 327678, 0, 1, 262142, 0, 1, 196606, 0, 1, 131070, 0, 1, 65534, 0, 1, -65529, 0, 1, -2, 0, 1)
 layer_1/name = "Puyos"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
@@ -611,5 +615,7 @@ replication_config = SubResource("SceneReplicationConfig_or1r5")
 
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
+[connection signal="area_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_area_shape_entered" flags=18]
+[connection signal="body_shape_entered" from="TileMap/PlayerPuyoDrop" to="TileMap/PlayerPuyoDrop" method="_on_body_shape_entered" flags=18]
 [connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]

@@ -24,6 +24,7 @@ var currentPlayer = 0
 
 var wallKick = false
 var groundKick = false
+var clippingCooldown = false
 var fastDrop = false
 var ceilingCollide = false
 var groundCollide = false
@@ -33,6 +34,9 @@ var leftWallCollide = false
 var rightWallCollide = false
 var active = false
 var playerSet = false
+
+var movedRight = false
+var movedLeft = false
 
 var startingPos
 
@@ -54,8 +58,7 @@ func _ready():
 	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 
-
-func _process(delta):
+func _physics_process(delta):
 	if !groundCollide:
 		if timeOnGround > 0:
 			timeOnGround += -delta
@@ -63,6 +66,19 @@ func _process(delta):
 			position += Vector2.DOWN * (fallSpeed + 800) * delta
 		else:
 			position += Vector2.DOWN * fallSpeed * delta
+	
+	if groundCollide and !ceilingCollide:
+		timeOnGround += delta
+		if fastDrop:
+			timeOnGround += 0.1
+		if !landCooldown and timeOnGround > 0.7:
+			landCooldown = true
+			pieceLand.rpc()
+			await get_tree().create_timer(0.2).timeout
+			landCooldown = false
+	pass
+
+func _process(delta):
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
 		if rayCast.is_colliding():
@@ -83,16 +99,6 @@ func _process(delta):
 		if !GameManager.onlineMatch:
 			playerControls(currentPlayer)
 	
-	if groundCollide and !ceilingCollide:
-		timeOnGround += delta
-		if fastDrop:
-			timeOnGround += 0.1
-		if !landCooldown and timeOnGround > 1:
-			landCooldown = true
-			pieceLand.rpc()
-			await get_tree().create_timer(0.2).timeout
-			landCooldown = false
-	
 	if active and !playerSet:
 		playerSet = true
 		if currentPlayer == 1:
@@ -104,6 +110,7 @@ func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
 		if !moveCooldown:
 			moveCooldown = true
+			movedRight = true
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !rightWallCollide and !ceilingCollide:
 				var tween = get_tree().create_tween()
@@ -111,9 +118,11 @@ func playerControls(controlsToUse):
 				var newPos = position.x + (tile_size)
 				tween.tween_property(self, "position:x", newPos, 0.1)
 			moveCooldown = false
+			movedRight = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_left"):
 		if !moveCooldown:
 			moveCooldown = true
+			movedLeft = true
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !leftWallCollide and !ceilingCollide:
 				var tween = get_tree().create_tween()
@@ -121,6 +130,7 @@ func playerControls(controlsToUse):
 				var newPos = position.x + (-tile_size)
 				tween.tween_property(self, "position:x", newPos, 0.1)
 			moveCooldown = false
+			movedLeft = false
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_down"):
@@ -251,9 +261,19 @@ func pieceLand():
 	$Transforms.rotation = rotation
 	emit_signal("pieceLanded")
 
+func preventClipping():
+	if movedRight:
+		if !clippingCooldown:
+			position += Vector2.LEFT * tile_size
+	elif movedLeft:
+		if !clippingCooldown:
+			position += Vector2.RIGHT * tile_size
+
 # The actual collision shape of this object should never touch something else
 func _on_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
 	wallOrGroundKicking()
+	preventClipping()
 
 func _on_area_shape_entered(area_rid, _area, area_shape_index, local_shape_index):
 	wallOrGroundKicking()
+	preventClipping()
