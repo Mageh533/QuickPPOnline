@@ -60,8 +60,6 @@ func _ready():
 
 func _physics_process(delta):
 	if !groundCollide:
-		if timeOnGround > 0:
-			timeOnGround += -delta
 		if fastDrop:
 			position += Vector2.DOWN * (fallSpeed + 800) * delta
 		else:
@@ -194,7 +192,6 @@ func setRayCastsPositions():
 
 # Floor and wall kick mechanics
 func wallOrGroundKicking():
-	timeOnGround = 0
 	var currentAngle = round(transform.get_rotation())
 	if currentAngle == -3 or currentAngle == 3:
 		if !wallKick:
@@ -213,6 +210,7 @@ func wallOrGroundKicking():
 			groundKick = true
 			position += Vector2.UP * tile_size
 			await get_tree().create_timer(0.5).timeout
+			timeOnGround += 0.3
 			groundKick = false
 
 # Prevents clipping 
