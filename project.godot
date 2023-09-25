@@ -91,6 +91,12 @@ p2_turnRight={
 2d_physics/layer_1="puyos"
 2d_physics/layer_2="walls"
 
+[physics]
+
+2d/run_on_separate_thread=true
+common/max_physics_steps_per_frame=16
+2d/solver/solver_iterations=32
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
