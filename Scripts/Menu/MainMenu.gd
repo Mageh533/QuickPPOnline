@@ -25,11 +25,18 @@ func _ready():
 	playFadeAnims("fadeOut")
 
 func _on_play_mp_local_pressed():
-	randomize()
-	GameManager.currentSeed = randi()
-	$PermaUI/SettingsPopUp/VBoxContainer/Controls.disabled = true
+	setUpLocalGame()
 	await playFadeAnims("fadeIn")
 	start_game()
+
+func _on_play_solo_pressed():
+	setUpLocalGame()
+	await playFadeAnims("fadeIn")
+	currentGame = SoloGame.instantiate()
+	$GameContainer.add_child(currentGame)
+	await playFadeAnims("fadeOut")
+	get_tree().paused = false
+
 
 func on_restart_pressed():
 	await playFadeAnims("fadeIn")
@@ -58,6 +65,11 @@ func playFadeAnims(anim):
 	$PermaUI/FadeRect/FadeAnim.play(anim)
 	await $PermaUI/FadeRect/FadeAnim.animation_finished
 	$PermaUI/FadeRect.hide()
+
+func setUpLocalGame():
+	randomize()
+	GameManager.currentSeed = randi()
+	$PermaUI/SettingsPopUp/VBoxContainer/Controls.disabled = true
 
 # ======================== Online related ========================
 
@@ -153,3 +165,4 @@ func peer_disconnected(_id):
 
 func connection_failed():
 	pass
+

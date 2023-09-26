@@ -1,3 +1,25 @@
-[gd_scene format=3 uid="uid://caeh4snxqjfaa"]
+[gd_scene load_steps=3 format=3 uid="uid://caeh4snxqjfaa"]
 
-[node name="SoloGame" type="Node"]
+[ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="1_pr7mx"]
+[ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_flro5"]
+
+[node name="SoloGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_pr7mx")
+expand_mode = 2
+
+[node name="PuyoGame" parent="." instance=ExtResource("2_flro5")]
+position = Vector2(179, 0)

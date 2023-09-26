@@ -388,6 +388,7 @@ libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
 
+[connection signal="pressed" from="UI/MenuItems/PlaySolo" to="." method="_on_play_solo_pressed"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
 [connection signal="mouse_entered" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_exited"]
