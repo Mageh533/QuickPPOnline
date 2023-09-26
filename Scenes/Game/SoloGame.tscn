@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://caeh4snxqjfaa"]
+[gd_scene load_steps=4 format=3 uid="uid://caeh4snxqjfaa"]
 
+[ext_resource type="Script" path="res://Scripts/Game/SoloGame.gd" id="1_3dbq3"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="1_pr7mx"]
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_flro5"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3dbq3")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -23,3 +25,116 @@ expand_mode = 2
 
 [node name="PuyoGame" parent="." instance=ExtResource("2_flro5")]
 position = Vector2(179, 0)
+
+[node name="GameModePanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 668.0
+offset_top = 74.0
+offset_right = 1018.0
+offset_bottom = 120.0
+
+[node name="ModeLabel" type="Label" parent="GameModePanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 37.0
+offset_top = -13.0
+offset_right = 86.0
+offset_bottom = 13.0
+grow_vertical = 2
+text = "Mode:"
+
+[node name="Mode" type="Label" parent="GameModePanel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -229.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Endless"
+vertical_alignment = 1
+
+[node name="InfoPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 667.0
+offset_top = 147.0
+offset_right = 1017.0
+offset_bottom = 361.0
+
+[node name="CurrentGameInfo" type="Label" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.5
+offset_right = 72.5
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Current Game Info"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 41.0
+offset_top = -59.0
+offset_right = 150.0
+offset_bottom = 104.0
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Chain" type="HBoxContainer" parent="InfoPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="MaxChainLabel" type="Label" parent="InfoPanel/VBoxContainer/Chain"]
+layout_mode = 2
+text = "Max chain:"
+
+[node name="MaxChain" type="Label" parent="InfoPanel/VBoxContainer/Chain"]
+layout_mode = 2
+
+[node name="Time" type="HBoxContainer" parent="InfoPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="TimeLabel" type="Label" parent="InfoPanel/VBoxContainer/Time"]
+layout_mode = 2
+text = "Time:"
+
+[node name="Time" type="Label" parent="InfoPanel/VBoxContainer/Time"]
+layout_mode = 2
+
+[node name="Speed" type="HBoxContainer" parent="InfoPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="SpeedLabel" type="Label" parent="InfoPanel/VBoxContainer/Speed"]
+layout_mode = 2
+text = "Speed:"
+
+[node name="Speed" type="Label" parent="InfoPanel/VBoxContainer/Speed"]
+layout_mode = 2
+
+[node name="GarbageSentPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 665.0
+offset_top = 411.0
+offset_right = 1015.0
+offset_bottom = 470.0
+
+[node name="Label" type="Label" parent="GarbageSentPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = -13.0
+offset_right = 143.0
+offset_bottom = 13.0
+grow_vertical = 2
+text = "Nuisance Sent:"

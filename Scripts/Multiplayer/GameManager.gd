@@ -2,6 +2,13 @@ extends Node
 
 var onlineMatch = false
 
+var soloInfo = {
+	"Mode" : "Endless",
+	"matchTime" : 0,
+	"maxChain" : 0,
+	"speed" : 0
+}
+
 var matchSettings = {
 	"roundsToWin" : 2
 }
