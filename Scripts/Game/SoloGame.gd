@@ -1,5 +1,7 @@
 extends Control
 
+signal gameEnd
+
 var matchStarted = false
 
 # Called when the node enters the scene tree for the first time.
@@ -30,3 +32,5 @@ func _process(delta):
 func _on_puyo_game_lost():
 	$PuyoGame/GameAnims.play("lose")
 	$UIAnims/AnimationPlayer.play("End")
+	await $UIAnims/AnimationPlayer.animation_finished
+	emit_signal("gameEnd")
