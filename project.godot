@@ -93,9 +93,7 @@ p2_turnRight={
 
 [physics]
 
-2d/run_on_separate_thread=true
 common/max_physics_steps_per_frame=16
-2d/solver/solver_iterations=32
 
 [rendering]
 
