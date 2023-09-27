@@ -1,8 +1,137 @@
-[gd_scene load_steps=4 format=3 uid="uid://caeh4snxqjfaa"]
+[gd_scene load_steps=18 format=3 uid="uid://caeh4snxqjfaa"]
 
 [ext_resource type="Script" path="res://Scripts/Game/SoloGame.gd" id="1_3dbq3"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="1_pr7mx"]
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_flro5"]
+[ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/Sounds/lose.wav" id="4_qs63m"]
+[ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/Sounds/prepare.wav" id="5_ahetw"]
+[ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/Sounds/matchStart.wav" id="6_6xc70"]
+[ext_resource type="AudioStream" uid="uid://ccfbkpfv8psaa" path="res://Assets/Sounds/attack1.wav" id="7_1somt"]
+[ext_resource type="AudioStream" uid="uid://2ap3imurmp4a" path="res://Assets/Sounds/attack2.wav" id="8_tjqh4"]
+[ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/Sounds/attack3.wav" id="9_ljw7g"]
+[ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/Sounds/attack4.wav" id="10_jcqiu"]
+[ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/Sounds/win.wav" id="11_ha2ch"]
+
+[sub_resource type="Animation" id="Animation_cv65l"]
+resource_name = "lose"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(179, 0), Vector2(179, -23), Vector2(179, 20), Vector2(179, 720)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.341069, 0.693421]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mqbs"]
+_data = {
+"lose": SubResource("Animation_cv65l")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_y5fwk"]
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_dfkki"]
+resource_name = "Start"
+length = 2.5
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SoundEffects/Prepare")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_ahetw")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_6xc70")
+}],
+"times": PackedFloat32Array(0.5, 2)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ready:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Go:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_t57r5"]
+resource_name = "End"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SoundEffects/Lose")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_qs63m")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ntpme"]
+_data = {
+"End": SubResource("Animation_t57r5"),
+"Start": SubResource("Animation_dfkki")
+}
 
 [node name="SoloGame" type="Control"]
 layout_mode = 3
@@ -25,6 +154,11 @@ expand_mode = 2
 
 [node name="PuyoGame" parent="." instance=ExtResource("2_flro5")]
 position = Vector2(179, 0)
+
+[node name="GameAnims" type="AnimationPlayer" parent="PuyoGame"]
+libraries = {
+"": SubResource("AnimationLibrary_2mqbs")
+}
 
 [node name="GameModePanel" type="Panel" parent="."]
 layout_mode = 0
@@ -130,3 +264,72 @@ offset_right = 143.0
 offset_bottom = 13.0
 grow_vertical = 2
 text = "Nuisance Sent:"
+
+[node name="UIAnims" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ready" type="Label" parent="UIAnims"]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 409.0
+offset_bottom = 298.0
+text = "Ready?"
+label_settings = SubResource("LabelSettings_y5fwk")
+
+[node name="Go" type="Label" parent="UIAnims"]
+visible = false
+layout_mode = 0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 386.0
+offset_bottom = 298.0
+text = "Start!"
+label_settings = SubResource("LabelSettings_y5fwk")
+
+[node name="GameOver" type="Label" parent="UIAnims"]
+visible = false
+layout_mode = 0
+offset_left = 261.0
+offset_top = 250.0
+offset_right = 443.0
+offset_bottom = 298.0
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_y5fwk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UIAnims"]
+libraries = {
+"": SubResource("AnimationLibrary_ntpme")
+}
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
+
+[node name="Prepare" type="AudioStreamPlayer2D" parent="SoundEffects"]
+
+[node name="Start" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("6_6xc70")
+
+[node name="Attack1" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("7_1somt")
+
+[node name="Attack2" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("8_tjqh4")
+
+[node name="Attack3" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("9_ljw7g")
+
+[node name="Attack4" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("10_jcqiu")
+
+[node name="Win" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("11_ha2ch")
+
+[connection signal="lost" from="PuyoGame" to="." method="_on_puyo_game_lost"]
