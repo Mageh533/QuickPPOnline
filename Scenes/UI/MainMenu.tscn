@@ -346,16 +346,17 @@ icon = ExtResource("6_yc3yo")
 expand_icon = true
 
 [node name="SettingsPopUp" type="PopupPanel" parent="PermaUI"]
-position = Vector2i(1010, 288)
-size = Vector2i(136, 256)
+position = Vector2i(1010, 258)
+size = Vector2i(138, 289)
+visible = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2oke")
 script = ExtResource("7_wysld")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PermaUI/SettingsPopUp"]
 offset_left = 2.0
 offset_top = 2.0
-offset_right = 134.0
-offset_bottom = 254.0
+offset_right = 136.0
+offset_bottom = 287.0
 theme_override_constants/separation = 50
 alignment = 1
 
@@ -371,6 +372,14 @@ text = "Return To Menu
 [node name="Exit" type="Button" parent="PermaUI/SettingsPopUp/VBoxContainer"]
 layout_mode = 2
 text = "Exit Game"
+
+[node name="FPsCounter" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="PermaUI/SettingsPopUp/VBoxContainer/FPsCounter"]
+layout_mode = 2
+text = "FPS Counter"
 
 [node name="ReturnButton" type="Button" parent="PermaUI"]
 visible = false
@@ -428,6 +437,14 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Paused!"
 label_settings = SubResource("LabelSettings_rx1eu")
+
+[node name="FPSCounter" type="Label" parent="PermaUI"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -510.0
+offset_right = 43.0
+offset_bottom = -487.0
+text = "FPS: "
 
 [connection signal="pressed" from="UI/MenuItems/PlaySolo" to="." method="_on_play_solo_pressed"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]

@@ -26,6 +26,7 @@ func _ready():
 	playFadeAnims("fadeOut")
 
 func _process(delta):
+	$PermaUI/FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
 	if !GameManager.onlineMatch:
 		if $PermaUI/SettingsPopUp.visible == true:
 			get_tree().paused = true
@@ -46,6 +47,7 @@ func _on_play_solo_pressed():
 	setUpLocalGame()
 	await playFadeAnims("fadeIn")
 	currentGame = SoloGame.instantiate()
+	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)
 	await playFadeAnims("fadeOut")
 	get_tree().paused = false
