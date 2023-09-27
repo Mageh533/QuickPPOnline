@@ -405,6 +405,7 @@ libraries = {
 }
 
 [node name="PausedPanel" type="Panel" parent="PermaUI"]
+visible = false
 layout_mode = 0
 offset_left = 470.0
 offset_top = -496.0
