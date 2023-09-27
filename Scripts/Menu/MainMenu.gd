@@ -12,6 +12,7 @@ func _ready():
 	$PermaUI/PausedPanel.hide()
 	if OS.get_name() == "Web":
 		$UI/MenuItems/PlayMPOnline.disabled = true
+		$PermaUI/SettingsPopUp/VBoxContainer/Exit.queue_free()
 	$PermaUI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
 	$UI/MenuItems/OnlinePopUp.hide()
 	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
