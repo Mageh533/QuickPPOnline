@@ -9,6 +9,7 @@ var masterVolumeIndex = AudioServer.get_bus_index("Master")
 const PORT = 4433
 
 func _ready():
+	$PermaUI/PausedPanel.hide()
 	if OS.get_name() == "Web":
 		$UI/MenuItems/PlayMPOnline.disabled = true
 	$PermaUI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
@@ -23,6 +24,18 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 	
 	playFadeAnims("fadeOut")
+
+func _process(delta):
+	if !GameManager.onlineMatch:
+		if $PermaUI/SettingsPopUp.visible == true:
+			get_tree().paused = true
+	if get_tree().paused and $GameContainer.get_child_count() > 0:
+		$PermaUI/PausedPanel.show()
+	else:
+		$PermaUI/PausedPanel.hide()
+
+func _on_settings_pop_up_popup_hide():
+	get_tree().paused = false
 
 func _on_play_mp_local_pressed():
 	setUpLocalGame()
@@ -165,4 +178,3 @@ func peer_disconnected(_id):
 
 func connection_failed():
 	pass
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=26 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
@@ -159,6 +159,20 @@ _data = {
 "fadeOut": SubResource("Animation_8k6p7")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tapnf"]
+bg_color = Color(0.239216, 0.65098, 0.815686, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.34902)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rx1eu"]
+font_size = 32
+font_color = Color(0.8, 0.8, 0.8, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_bnywg")
 SoloGame = ExtResource("2_c1prm")
@@ -277,8 +291,10 @@ label_settings = SubResource("LabelSettings_w71jw")
 horizontal_alignment = 1
 
 [node name="GameContainer" type="Node" parent="."]
+process_mode = 1
 
 [node name="PermaUI" type="Control" parent="."]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
@@ -388,6 +404,30 @@ libraries = {
 "": SubResource("AnimationLibrary_hieni")
 }
 
+[node name="PausedPanel" type="Panel" parent="PermaUI"]
+layout_mode = 0
+offset_left = 470.0
+offset_top = -496.0
+offset_right = 669.0
+offset_bottom = -414.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tapnf")
+
+[node name="Label" type="Label" parent="PermaUI/PausedPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Paused!"
+label_settings = SubResource("LabelSettings_rx1eu")
+
 [connection signal="pressed" from="UI/MenuItems/PlaySolo" to="." method="_on_play_solo_pressed"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
 [connection signal="mouse_entered" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_entered"]
@@ -399,6 +439,7 @@ libraries = {
 [connection signal="pressed" from="PermaUI/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="value_changed" from="PermaUI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]
 [connection signal="pressed" from="PermaUI/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="popup_hide" from="PermaUI/SettingsPopUp" to="." method="_on_settings_pop_up_popup_hide"]
 [connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/ReturnToMenu" to="PermaUI/SettingsPopUp" method="_on_return_to_menu_pressed"]
 [connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Exit" to="PermaUI/SettingsPopUp" method="_on_exit_pressed"]
 [connection signal="pressed" from="PermaUI/ReturnButton" to="." method="_on_return_button_pressed"]
