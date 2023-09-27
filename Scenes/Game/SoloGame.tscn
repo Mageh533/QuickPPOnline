@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://caeh4snxqjfaa"]
+[gd_scene load_steps=24 format=3 uid="uid://caeh4snxqjfaa"]
 
 [ext_resource type="Script" path="res://Scripts/Game/SoloGame.gd" id="1_3dbq3"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="1_pr7mx"]
@@ -11,6 +11,61 @@
 [ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/Sounds/attack3.wav" id="9_ljw7g"]
 [ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/Sounds/attack4.wav" id="10_jcqiu"]
 [ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/Sounds/win.wav" id="11_ha2ch"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scksh"]
+bg_color = Color(0.290196, 0.447059, 0.823529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_katm3"]
+bg_color = Color(0.14902, 0.627451, 0.972549, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcmnw"]
+bg_color = Color(0.317647, 0.513726, 0.470588, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bplcu"]
+bg_color = Color(0, 0.713726, 0.996078, 0.623529)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_detail = 15
+shadow_color = Color(0, 0, 0, 0.160784)
+shadow_size = 1
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37yav"]
+bg_color = Color(0.509804, 0.552941, 0.980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.145098, 0.145098, 0.145098, 0.827451)
+shadow_size = 7
+
+[sub_resource type="Theme" id="Theme_jqlrh"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_scksh")
+Button/styles/normal = SubResource("StyleBoxFlat_katm3")
+Button/styles/pressed = SubResource("StyleBoxFlat_wcmnw")
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_bplcu")
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_37yav")
 
 [sub_resource type="Animation" id="Animation_cv65l"]
 resource_name = "lose"
@@ -48,6 +103,49 @@ _data = {
 font_size = 32
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_t57r5"]
+resource_name = "End"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SoundEffects/Lose")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_qs63m")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameOver:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(261, 196), Vector2(261, 250)]
+}
 
 [sub_resource type="Animation" id="Animation_dfkki"]
 resource_name = "Start"
@@ -108,49 +206,6 @@ tracks/3/keys = {
 "values": [Vector2(300, 177), Vector2(300, 250)]
 }
 
-[sub_resource type="Animation" id="Animation_t57r5"]
-resource_name = "End"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GameOver:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "audio"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../SoundEffects/Lose")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("4_qs63m")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/1/use_blend = true
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GameOver:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(261, 196), Vector2(261, 250)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ntpme"]
 _data = {
 "End": SubResource("Animation_t57r5"),
@@ -164,6 +219,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_jqlrh")
 script = ExtResource("1_3dbq3")
 
 [node name="Background" type="TextureRect" parent="."]
