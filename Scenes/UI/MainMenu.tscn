@@ -348,7 +348,6 @@ expand_icon = true
 [node name="SettingsPopUp" type="PopupPanel" parent="PermaUI"]
 position = Vector2i(1010, 258)
 size = Vector2i(138, 289)
-visible = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2oke")
 script = ExtResource("7_wysld")
 
@@ -373,11 +372,11 @@ text = "Return To Menu
 layout_mode = 2
 text = "Exit Game"
 
-[node name="FPsCounter" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VBoxContainer"]
+[node name="FPSCounter" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="PermaUI/SettingsPopUp/VBoxContainer/FPsCounter"]
+[node name="CheckBox" type="CheckBox" parent="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter"]
 layout_mode = 2
 text = "FPS Counter"
 
@@ -439,6 +438,8 @@ text = "Paused!"
 label_settings = SubResource("LabelSettings_rx1eu")
 
 [node name="FPSCounter" type="Label" parent="PermaUI"]
+process_mode = 3
+visible = false
 layout_mode = 0
 offset_left = 3.0
 offset_top = -510.0
@@ -460,4 +461,5 @@ text = "FPS: "
 [connection signal="popup_hide" from="PermaUI/SettingsPopUp" to="." method="_on_settings_pop_up_popup_hide"]
 [connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/ReturnToMenu" to="PermaUI/SettingsPopUp" method="_on_return_to_menu_pressed"]
 [connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Exit" to="PermaUI/SettingsPopUp" method="_on_exit_pressed"]
+[connection signal="toggled" from="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter/CheckBox" to="PermaUI/SettingsPopUp" method="_on_check_box_toggled"]
 [connection signal="pressed" from="PermaUI/ReturnButton" to="." method="_on_return_button_pressed"]

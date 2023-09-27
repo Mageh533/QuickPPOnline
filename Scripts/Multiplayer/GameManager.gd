@@ -2,6 +2,8 @@ extends Node
 
 var onlineMatch = false
 
+var fpsCounter = false
+
 var soloInfo = {
 	"Mode" : "Endless",
 	"matchTime" : 0,

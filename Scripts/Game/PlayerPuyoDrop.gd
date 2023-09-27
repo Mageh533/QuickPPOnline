@@ -76,7 +76,7 @@ func _physics_process(delta):
 			landCooldown = false
 	pass
 
-func _process(delta):
+func _process(_delta):
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
 		if rayCast.is_colliding():
@@ -272,6 +272,6 @@ func _on_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_in
 	wallOrGroundKicking()
 	preventClipping()
 
-func _on_area_shape_entered(area_rid, _area, area_shape_index, local_shape_index):
+func _on_area_shape_entered(_area_rid, _area, _area_shape_index, _local_shape_index):
 	wallOrGroundKicking()
 	preventClipping()

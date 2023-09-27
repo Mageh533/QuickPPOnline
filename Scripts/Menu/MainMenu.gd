@@ -25,8 +25,13 @@ func _ready():
 	
 	playFadeAnims("fadeOut")
 
-func _process(delta):
-	$PermaUI/FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
+func _process(_delta):
+	if GameManager.fpsCounter == true:
+		$PermaUI/FPSCounter.show()
+		$PermaUI/FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
+	else:
+		$PermaUI/FPSCounter.hide()
+	
 	if !GameManager.onlineMatch:
 		if $PermaUI/SettingsPopUp.visible == true:
 			get_tree().paused = true
