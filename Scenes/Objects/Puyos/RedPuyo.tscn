@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b526hnm8iba4l"]
+[gd_scene load_steps=26 format=3 uid="uid://b526hnm8iba4l"]
 
 [ext_resource type="Script" path="res://Scripts/Game/RedPuyo.gd" id="1_2hd31"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_ymwr0"]
@@ -242,9 +242,12 @@ properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
 
-[node name="RedPuyo" type="Area2D" groups=["Puyos"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ql1xf"]
+size = Vector2(49, 54)
+
+[node name="RedPuyo" type="StaticBody2D" groups=["Puyos"]]
 disable_mode = 1
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_2hd31")
 type = "RED"
 
@@ -286,6 +289,13 @@ one_shot = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_y8bqo")
+
+[node name="LoseDetection" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseDetection"]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_ql1xf")
 
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="PoppedPreTimer" to="." method="_on_popped_pre_timer_timeout"]

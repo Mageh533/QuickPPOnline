@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhcsxdylpaexb"]
+[gd_scene load_steps=8 format=3 uid="uid://dhcsxdylpaexb"]
 
 [ext_resource type="Script" path="res://Scripts/Game/NuisancePuyo.gd" id="1_820i2"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_hy5h8"]
@@ -27,7 +27,10 @@ properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = false
 
-[node name="NuisancePuyo" type="Area2D" groups=["Puyos"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvph7"]
+size = Vector2(51, 46)
+
+[node name="NuisancePuyo" type="StaticBody2D" groups=["Puyos"]]
 script = ExtResource("1_820i2")
 
 [node name="PuyoSprite" type="AnimatedSprite2D" parent="."]
@@ -54,6 +57,13 @@ one_shot = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_2j6p5")
+
+[node name="LoseDetection" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseDetection"]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_yvph7")
 
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="PoppedPreTimer" to="." method="_on_pre_popped_timer_timeout"]

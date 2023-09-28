@@ -90,6 +90,7 @@ p2_turnRight={
 
 2d_physics/layer_1="puyos"
 2d_physics/layer_2="walls"
+2d_physics/layer_3="playerGroup"
 
 [physics]
 

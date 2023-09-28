@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 signal puyoConnected
 
@@ -17,7 +17,7 @@ func _ready():
 
 func _process(_delta):
 	if !moving and !popped:
-		await searchOtherPuyos()
+		searchOtherPuyos()
 
 # 'Gravity' for the puyos that works similarly to the actual games, also stays within the tilemap
 func _on_gravity_timer_timeout():
@@ -38,19 +38,19 @@ func _on_gravity_timer_timeout():
 func searchOtherPuyos():
 	connectedPositions.clear()
 	connected.clear()
-	if $RayTop.is_colliding() and $RayTop.get_collider() is Area2D:
+	if $RayTop.is_colliding() and $RayTop.get_collider() is StaticBody2D:
 		if $RayTop.get_collider().type == type:
 			connectedPositions.append("TOP")
 			connected.append($RayTop.get_collider())
-	if $RayBottom.is_colliding() and $RayBottom.get_collider() is Area2D:
+	if $RayBottom.is_colliding() and $RayBottom.get_collider() is StaticBody2D:
 		if $RayBottom.get_collider().type == type:
 			connectedPositions.append("BOTTOM")
 			connected.append($RayBottom.get_collider())
-	if $RayLeft.is_colliding() and $RayLeft.get_collider() is Area2D:
+	if $RayLeft.is_colliding() and $RayLeft.get_collider() is StaticBody2D:
 		if $RayLeft.get_collider().type == type:
 			connectedPositions.append("LEFT")
 			connected.append($RayLeft.get_collider())
-	if $RayRight.is_colliding() and $RayRight.get_collider() is Area2D:
+	if $RayRight.is_colliding() and $RayRight.get_collider() is StaticBody2D:
 		if $RayRight.get_collider().type == type:
 			connectedPositions.append("RIGHT")
 			connected.append($RayRight.get_collider())
@@ -97,16 +97,16 @@ func updateSpriteFrame():
 			$PuyoSprites.play("joined_all")
 
 func checkForNuisance():
-	if $RayBottom.is_colliding() and $RayBottom.get_collider() is Area2D:
+	if $RayBottom.is_colliding() and $RayBottom.get_collider() is StaticBody2D:
 		if $RayBottom.get_collider().type == "Nuisance":
 			$RayBottom.get_collider().pop()
-	if $RayTop.is_colliding() and $RayTop.get_collider() is Area2D:
+	if $RayTop.is_colliding() and $RayTop.get_collider() is StaticBody2D:
 		if $RayTop.get_collider().type == "Nuisance":
 			$RayTop.get_collider().pop()
-	if $RayRight.is_colliding() and $RayRight.get_collider() is Area2D:
+	if $RayRight.is_colliding() and $RayRight.get_collider() is StaticBody2D:
 		if $RayRight.get_collider().type == "Nuisance":
 			$RayRight.get_collider().pop()
-	if $RayLeft.is_colliding() and $RayLeft.get_collider() is Area2D:
+	if $RayLeft.is_colliding() and $RayLeft.get_collider() is StaticBody2D:
 		if $RayLeft.get_collider().type == "Nuisance":
 			$RayLeft.get_collider().pop()
 
@@ -119,7 +119,7 @@ func playSquashAnim(force):
 	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, force), 0.05)
 	tween.tween_property($PuyoSprites, "scale", Vector2(force, 1), 0.05)
 	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, 0.85), 0.05)
-	if $RayBottom.is_colliding() and $RayBottom.get_collider() is Area2D:
+	if $RayBottom.is_colliding() and $RayBottom.get_collider() is StaticBody2D:
 		var theirType = $RayBottom.get_collider().type
 		if theirType == "RED" or theirType == "GREEN" or theirType == "PURPLE" or theirType == "BLUE" or theirType == "YELLOW":
 			$RayBottom.get_collider().playSquashAnim(force * 1.1)

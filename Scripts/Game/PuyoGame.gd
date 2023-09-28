@@ -253,16 +253,6 @@ func nuisanceProcess():
 					spawnNuisance(nuisanceQueue)
 					nuisanceQueue = 0
 
-# If a puyo is on the lose tile for more than a second then its game over
-func _on_lose_tile_area_entered(_area):
-	loseTile = true
-	if !loseTileTimer:
-		loseTileTimer = true
-		$LoseTimer.start()
-
-func _on_lose_tile_area_exited(_area):
-	loseTile = false
-
 func _on_lose_timer_timeout():
 	if loseTile and !defeated:
 		emit_signal("lost")
@@ -274,3 +264,13 @@ func _on_lose_timer_timeout():
 
 func _on_piece_landed():
 	nuisanceProcess()
+
+func _on_lose_tile_area_entered(_area):
+	loseTile = true
+	if !loseTileTimer:
+		loseTileTimer = true
+		$LoseTimer.start()
+
+
+func _on_lose_tile_area_exited(_area):
+	loseTile = false
