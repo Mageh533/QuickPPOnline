@@ -75,7 +75,13 @@ func _physics_process(delta):
 			pieceLand.rpc()
 			await get_tree().create_timer(0.2).timeout
 			landCooldown = false
-	pass
+	
+	if playerSet:
+		if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+			playerControls(1) # if playing multiplayer, use the player 1 controls
+		else:
+			if !GameManager.onlineMatch:
+				playerControls(currentPlayer)
 
 func _process(_delta):
 	setRayCastsPositions()
@@ -91,12 +97,6 @@ func _process(_delta):
 	for rayCast in topRaycasts:
 		if rayCast.is_colliding():
 			ceilingCollide = true
-	
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		playerControls(1) # if playing multiplayer, use the player 1 controls
-	else:
-		if !GameManager.onlineMatch:
-			playerControls(currentPlayer)
 	
 	if active and !playerSet:
 		playerSet = true
