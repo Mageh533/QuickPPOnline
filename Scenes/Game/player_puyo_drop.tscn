@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="10_euy5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwpa4"]
-size = Vector2(112, 52.9996)
+size = Vector2(55, 52.9996)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
 atlas = ExtResource("10_euy5q")
@@ -111,8 +111,17 @@ scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../../Puyo2Sprite")
 update_rotation = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(30, 0.49989)
+[node name="RemoteTransformP3" type="RemoteTransform2D" parent="Transforms"]
+position = Vector2(58, -0.000209808)
+remote_path = NodePath("../../Puyo1Collision2")
+update_rotation = false
+
+[node name="Puyo1Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1.49999, 0.49989)
+shape = SubResource("RectangleShape2D_cwpa4")
+
+[node name="Puyo1Collision2" type="CollisionShape2D" parent="."]
+position = Vector2(58, -0.000209808)
 shape = SubResource("RectangleShape2D_cwpa4")
 
 [node name="Puyo1Spawn" type="Marker2D" parent="."]

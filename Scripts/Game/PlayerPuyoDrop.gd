@@ -191,29 +191,6 @@ func setRayCastsPositions():
 		rightRaycasts.append($RayCasts/RayLeft)
 		leftRaycasts.append($RayCasts/RayRight)
 
-# Floor and wall kick mechanics
-func wallOrGroundKicking():
-	var currentAngle = round(transform.get_rotation())
-	if currentAngle == -3 or currentAngle == 3:
-		if !wallKick:
-			wallKick = true
-			position += Vector2.RIGHT * tile_size
-			await get_tree().create_timer(0.5).timeout
-			wallKick = false
-	elif currentAngle == 0:
-		if !wallKick:
-			wallKick = true
-			position += Vector2.LEFT * tile_size
-			await get_tree().create_timer(0.5).timeout
-			wallKick = false
-	else:
-		if !ceilingCollide and !groundKick:
-			groundKick = true
-			position += Vector2.UP * tile_size
-			await get_tree().create_timer(0.5).timeout
-			timeOnGround += 0.3
-			groundKick = false
-
 # Prevents clipping 
 func checkForRoationClipping():
 	var canRotate = true
