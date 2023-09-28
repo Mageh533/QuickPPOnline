@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="10_euy5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwpa4"]
-size = Vector2(91, 29)
+size = Vector2(112, 52.9996)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
 atlas = ExtResource("10_euy5q")
@@ -87,11 +87,11 @@ properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
 
-[node name="PlayerPuyoDrop" type="Area2D" groups=["Player"]]
+[node name="PlayerPuyoDrop" type="CharacterBody2D" groups=["Player"]]
 rotation = 1.5708
 collision_layer = 0
 collision_mask = 3
-collision_priority = 100.0
+platform_wall_layers = 2
 script = ExtResource("1_gehna")
 fallSpeed = 50
 PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"), ExtResource("5_taq0t"), ExtResource("4_toq3k"), ExtResource("6_c8h4w")])
@@ -112,7 +112,7 @@ remote_path = NodePath("../../Puyo2Sprite")
 update_rotation = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(30.5, -1.5)
+position = Vector2(30, 0.49989)
 shape = SubResource("RectangleShape2D_cwpa4")
 
 [node name="Puyo1Spawn" type="Marker2D" parent="."]
@@ -185,6 +185,3 @@ replication_config = SubResource("SceneReplicationConfig_egw02")
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../Transforms")
 update_rotation = false
-
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
-[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

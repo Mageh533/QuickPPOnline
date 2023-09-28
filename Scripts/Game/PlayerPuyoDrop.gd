@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 signal sendNextPuyos(puyos)
 signal sendAfterPuyos(puyos)
@@ -59,11 +59,12 @@ func _ready():
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 
 func _physics_process(delta):
-	if !groundCollide:
-		if fastDrop:
-			position += Vector2.DOWN * (fallSpeed + 800) * delta
-		else:
-			position += Vector2.DOWN * fallSpeed * delta
+	if fastDrop:
+		velocity.y = (fallSpeed + 800) * delta * 50
+		move_and_slide()
+	else:
+		velocity.y = fallSpeed * delta * 50
+		move_and_slide()
 	
 	if groundCollide and !ceilingCollide:
 		timeOnGround += delta
@@ -258,20 +259,3 @@ func pieceLand():
 	rotation = deg_to_rad(90)
 	$Transforms.rotation = rotation
 	emit_signal("pieceLanded")
-
-func preventClipping():
-	if movedRight:
-		if !clippingCooldown:
-			position += Vector2.LEFT * tile_size
-	elif movedLeft:
-		if !clippingCooldown:
-			position += Vector2.RIGHT * tile_size
-
-# The actual collision shape of this object should never touch something else
-func _on_body_shape_entered(_body_rid, _body, _body_shape_index, _local_shape_index):
-	wallOrGroundKicking()
-	preventClipping()
-
-func _on_area_shape_entered(_area_rid, _area, _area_shape_index, _local_shape_index):
-	wallOrGroundKicking()
-	preventClipping()
