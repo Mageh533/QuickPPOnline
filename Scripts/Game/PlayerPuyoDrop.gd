@@ -181,7 +181,9 @@ func setRayCastsPositions():
 func checkForRoationClipping():
 	var canRotate = true
 	if rightWallCollide and leftWallCollide:
-		canRotate = false
+		var currentAngle = round(transform.get_rotation())
+		if currentAngle == -2 or currentAngle == 2:
+			canRotate = false
 	return canRotate
 
 func rotate180():

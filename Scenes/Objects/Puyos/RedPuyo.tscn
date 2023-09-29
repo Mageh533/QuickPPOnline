@@ -243,7 +243,7 @@ properties/1/sync = true
 properties/1/watch = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ql1xf"]
-size = Vector2(49, 54)
+size = Vector2(58, 58)
 
 [node name="RedPuyo" type="StaticBody2D" groups=["Puyos"]]
 disable_mode = 1
@@ -294,7 +294,6 @@ replication_config = SubResource("SceneReplicationConfig_y8bqo")
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LoseDetection"]
-position = Vector2(0.5, -2)
 shape = SubResource("RectangleShape2D_ql1xf")
 
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
