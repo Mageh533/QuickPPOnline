@@ -60,7 +60,7 @@ func _physics_process(delta):
 		velocity.y = fallSpeed * delta * 50
 		move_and_slide()
 	
-	if groundCollide and !ceilingCollide:
+	if (groundCollide or is_on_floor()) and !ceilingCollide:
 		timeOnGround += delta
 		if fastDrop:
 			timeOnGround += 0.1
@@ -189,12 +189,12 @@ func checkForRoationClipping():
 func rotate180():
 	var tween = get_tree().create_tween()
 	var tween2 = get_tree().create_tween()
-	var temp = $Puyo1Spawn.position
+	var temp = $Puyo1Spawn.poszition
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
-	temp = $Transforms/RemoteTransformP1.position
-	tween.tween_property($Transforms/RemoteTransformP1, "position", $Transforms/RemoteTransformP2.position, 0.1)
-	tween2.tween_property($Transforms/RemoteTransformP2, "position", temp, 0.1)
+	temp = $Transforms/SpritesTransforms/PuyoSprite1.position
+	tween.tween_property($Transforms/SpritesTransforms/PuyoSprite1, "position", $Transforms/SpritesTransforms/PuyoSprite2.position, 0.1)
+	tween2.tween_property($Transforms/SpritesTransforms/PuyoSprite2, "position", temp, 0.1)
 
 func swapPuyos():
 	currentPuyos.clear()
