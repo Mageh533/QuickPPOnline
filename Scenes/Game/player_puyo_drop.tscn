@@ -89,10 +89,10 @@ properties/1/watch = false
 
 [node name="PlayerPuyoDrop" type="CharacterBody2D" groups=["Player"]]
 rotation = 1.5708
-collision_layer = 0
+collision_layer = 4
 collision_mask = 3
 slide_on_ceiling = false
-platform_wall_layers = 3
+platform_wall_layers = 2
 script = ExtResource("1_gehna")
 fallSpeed = 50
 moveCooldownTime = 0.08
