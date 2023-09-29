@@ -22,9 +22,6 @@ var afterPuyos = []
 var timeOnGround = 0
 var currentPlayer = 0
 
-var wallKick = false
-var groundKick = false
-var clippingCooldown = false
 var fastDrop = false
 var ceilingCollide = false
 var groundCollide = false
@@ -34,9 +31,6 @@ var leftWallCollide = false
 var rightWallCollide = false
 var active = false
 var playerSet = false
-
-var movedRight = false
-var movedLeft = false
 
 var startingPos
 
@@ -109,27 +103,19 @@ func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
 		if !moveCooldown:
 			moveCooldown = true
-			movedRight = true
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !rightWallCollide and !ceilingCollide:
-				var tween = get_tree().create_tween()
 				$SoundEffects/PieceMove.play()
-				var newPos = position.x + (tile_size)
-				tween.tween_property(self, "position:x", newPos, 0.1)
+				move_and_collide(Vector2.RIGHT * (tile_size * 0.75))
 			moveCooldown = false
-			movedRight = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_left"):
 		if !moveCooldown:
 			moveCooldown = true
-			movedLeft = true
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !leftWallCollide and !ceilingCollide:
-				var tween = get_tree().create_tween()
 				$SoundEffects/PieceMove.play()
-				var newPos = position.x + (-tile_size)
-				tween.tween_property(self, "position:x", newPos, 0.1)
+				move_and_collide(Vector2.LEFT * (tile_size * 0.75))
 			moveCooldown = false
-			movedLeft = false
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_down"):

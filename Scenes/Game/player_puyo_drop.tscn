@@ -95,6 +95,7 @@ slide_on_ceiling = false
 platform_wall_layers = 3
 script = ExtResource("1_gehna")
 fallSpeed = 50
+moveCooldownTime = 0.08
 PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"), ExtResource("5_taq0t"), ExtResource("4_toq3k"), ExtResource("6_c8h4w")])
 
 [node name="Transforms" type="Node2D" parent="."]
