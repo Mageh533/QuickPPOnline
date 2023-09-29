@@ -285,12 +285,13 @@ one_shot = true
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_y8bqo")
 
-[node name="LoseDetection" type="Area2D" parent="."]
+[node name="AreaCol" type="Area2D" parent="."]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseDetection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaCol"]
 shape = SubResource("RectangleShape2D_ql1xf")
 
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="PoppedPreTimer" to="." method="_on_popped_pre_timer_timeout"]
 [connection signal="timeout" from="PoppedTimer" to="." method="_on_popped_timer_timeout"]
+[connection signal="area_entered" from="AreaCol" to="." method="_on_area_col_area_entered"]
