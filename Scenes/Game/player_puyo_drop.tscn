@@ -118,8 +118,12 @@ position = Vector2(58, -0.000209808)
 remote_path = NodePath("../../Puyo1Collision2")
 update_rotation = false
 
+[node name="RemoteTransformP4" type="RemoteTransform2D" parent="Transforms"]
+remote_path = NodePath("../../Puyo1Collision")
+update_rotation = false
+update_scale = false
+
 [node name="Puyo1Collision" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_cwpa4")
 
 [node name="Puyo1Collision2" type="CollisionShape2D" parent="."]
@@ -193,6 +197,6 @@ animation = &"BuePuyo"
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_egw02")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="RemoteTransformForTransforms" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../Transforms")
 update_rotation = false
