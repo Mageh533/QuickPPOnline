@@ -156,3 +156,8 @@ func _on_popped_timer_timeout():
 	$PuyoSprites.play("popped_end")
 	await $PuyoSprites.animation_finished
 	queue_free()
+
+# Prevent puyos from clipping
+func _on_area_col_area_entered(area):
+	if area.name != "LoseTile":
+		area.get_parent().position += Vector2.UP * tile_size
