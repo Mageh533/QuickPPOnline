@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="10_euy5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwpa4"]
-size = Vector2(55, 52.9996)
+size = Vector2(58, 58)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
 atlas = ExtResource("10_euy5q")
@@ -92,7 +92,7 @@ rotation = 1.5708
 collision_layer = 0
 collision_mask = 3
 slide_on_ceiling = false
-platform_wall_layers = 2
+platform_wall_layers = 3
 script = ExtResource("1_gehna")
 fallSpeed = 50
 PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"), ExtResource("5_taq0t"), ExtResource("4_toq3k"), ExtResource("6_c8h4w")])
@@ -118,7 +118,7 @@ remote_path = NodePath("../../Puyo1Collision2")
 update_rotation = false
 
 [node name="Puyo1Collision" type="CollisionShape2D" parent="."]
-position = Vector2(1.49999, 0.49989)
+position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_cwpa4")
 
 [node name="Puyo1Collision2" type="CollisionShape2D" parent="."]
