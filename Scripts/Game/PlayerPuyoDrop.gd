@@ -122,7 +122,7 @@ func playerControls(controlsToUse):
 		fastDrop = true
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnLeft"):
 		$SoundEffects/PieceRotate.play()
-		if await checkForRoationClipping():
+		if checkForRoationClipping():
 			var tween = get_tree().create_tween()
 			rotate(PI / 2)
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
@@ -130,7 +130,7 @@ func playerControls(controlsToUse):
 			rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
-		if await checkForRoationClipping():
+		if checkForRoationClipping():
 			var tween = get_tree().create_tween()
 			rotate(-PI / 2)
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
@@ -187,12 +187,14 @@ func checkForRoationClipping():
 	return canRotate
 
 func rotate180():
+	var tween = get_tree().create_tween()
+	var tween2 = get_tree().create_tween()
 	var temp = $Puyo1Spawn.position
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
 	temp = $Transforms/RemoteTransformP1.position
-	$Transforms/RemoteTransformP1.position = $Transforms/RemoteTransformP2.position
-	$Transforms/RemoteTransformP2.position = temp
+	tween.tween_property($Transforms/RemoteTransformP1, "position", $Transforms/RemoteTransformP2.position, 0.1)
+	tween2.tween_property($Transforms/RemoteTransformP2, "position", temp, 0.1)
 
 func swapPuyos():
 	currentPuyos.clear()
