@@ -189,7 +189,7 @@ func checkForRoationClipping():
 func rotate180():
 	var tween = get_tree().create_tween()
 	var tween2 = get_tree().create_tween()
-	var temp = $Puyo1Spawn.poszition
+	var temp = $Puyo1Spawn.position
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
 	temp = $Transforms/SpritesTransforms/PuyoSprite1.position
