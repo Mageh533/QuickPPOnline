@@ -205,5 +205,3 @@ replication_config = SubResource("SceneReplicationConfig_egw02")
 [node name="CollisionTransform" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../Transforms")
 update_rotation = false
-
-[node name="Node2D" type="Node2D" parent="."]
