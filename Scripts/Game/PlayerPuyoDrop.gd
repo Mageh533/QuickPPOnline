@@ -83,7 +83,7 @@ func _physics_process(delta):
 
 func _process(delta):
 	if interpolate:
-		$SpritesTransforms.global_position.x = lerp($SpritesTransforms.global_position.x, global_position.x, 25 * delta)
+		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, 4)
 	else:
 		$SpritesTransforms.global_position.x = global_position.x
 		interpolate = true
