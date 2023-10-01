@@ -31,6 +31,7 @@ var leftWallCollide = false
 var rightWallCollide = false
 var active = false
 var playerSet = false
+var interpolate = false
 
 var startingPos
 
@@ -81,8 +82,12 @@ func _physics_process(delta):
 				playerControls(currentPlayer)
 
 func _process(delta):
-	$SpritesTransforms.global_position.x = lerp($SpritesTransforms.global_position.x, global_position.x, 25 * delta)
-	
+	if interpolate:
+		$SpritesTransforms.global_position.x = lerp($SpritesTransforms.global_position.x, global_position.x, 25 * delta)
+	else:
+		$SpritesTransforms.global_position.x = global_position.x
+		interpolate = true
+
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
 		if rayCast.is_colliding():
@@ -228,6 +233,7 @@ func pieceLand():
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo1.basicSetup()
 	puyo2.basicSetup()
+	interpolate = false
 	position = startingPos
 	timeOnGround = 0
 	swapPuyos()
