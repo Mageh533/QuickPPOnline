@@ -413,12 +413,18 @@ libraries = {
 }
 
 [node name="PausedPanel" type="Panel" parent="PermaUI"]
-visible = false
-layout_mode = 0
-offset_left = 470.0
-offset_top = -496.0
-offset_right = 669.0
-offset_bottom = -414.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.5
+offset_top = -325.0
+offset_right = 99.5
+offset_bottom = -243.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tapnf")
 
 [node name="Label" type="Label" parent="PermaUI/PausedPanel"]

@@ -147,7 +147,7 @@ func checkForChain():
 	
 	checkPopTimer = false
 	
-	if checkAllClear():
+	if checkAllClear() and currentChain > 0:
 		await get_tree().create_timer(0.5).timeout
 		$Anims.play("all_clear")
 
