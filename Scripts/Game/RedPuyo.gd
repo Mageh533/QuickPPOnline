@@ -4,6 +4,8 @@ signal puyoConnected
 
 var tile_size = 58
 
+@onready var startingScale = $PuyoSprites.scale.x
+
 var active = false
 var moving = true
 var popped = false
@@ -117,9 +119,9 @@ func playSquashAnim(force):
 	var tween = get_tree().create_tween()
 	if force > 0.85:
 		force = 0.75
-	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, force), 0.05)
+	tween.tween_property($PuyoSprites, "scale", Vector2(startingScale, force), 0.05)
 	tween.tween_property($PuyoSprites, "scale", Vector2(force, 1), 0.05)
-	tween.tween_property($PuyoSprites, "scale", Vector2(0.85, 0.85), 0.05)
+	tween.tween_property($PuyoSprites, "scale", Vector2(startingScale, startingScale), 0.05)
 	if $RayBottom.is_colliding() and $RayBottom.get_collider() is StaticBody2D:
 		var theirType = $RayBottom.get_collider().type
 		if theirType == "RED" or theirType == "GREEN" or theirType == "PURPLE" or theirType == "BLUE" or theirType == "YELLOW":
