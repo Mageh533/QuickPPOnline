@@ -1,7 +1,5 @@
 extends StaticBody2D
 
-signal puyoConnected
-
 var tile_size = 58
 
 @onready var startingScale = $PuyoSprites.scale.x
@@ -59,9 +57,6 @@ func searchOtherPuyos():
 			connected.append($RayRight.get_collider())
 	
 	updateSpriteFrame()
-	
-	if connectedPositions.size() > 0:
-		emit_signal("puyoConnected")
 
 # Update the sprite animation depending on how the its connectedPositions to other puyos
 func updateSpriteFrame():

@@ -482,7 +482,7 @@ label_settings = SubResource("LabelSettings_rx3dw")
 horizontal_alignment = 1
 
 [node name="PoppingTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.7
 one_shot = true
 
 [node name="LoseTimer" type="Timer" parent="."]

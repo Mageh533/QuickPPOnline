@@ -52,6 +52,9 @@ func _process(delta):
 	if chainCooldown > 0 or nuisanceCooldown > 0:
 		$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		if chainCooldown > 0:
+			if !checkPopTimer:
+				checkPopTimer = true
+				$PoppingTimer.start()
 			scoreToAdd = true
 			chainCooldown += -delta
 		if nuisanceCooldown > 0:
@@ -76,6 +79,7 @@ func _process(delta):
 			if movingPuyos:
 				disablePlayer(true)
 			else:
+				checkForChain()
 				disablePlayer(false)
 
 # Connects their signals
@@ -85,7 +89,6 @@ func connectPuyosToGame():
 	for puyo in puyosObjectArray:
 		if !puyo.active and !puyo.type == "Player" and !puyo.type == "Nuisance":
 			puyo.active = true
-			puyo.puyoConnected.connect(_on_puyo_connected)
 	if !defeated:
 		if !puyoDropPlayer[currentPlayer].active:
 			puyoDropPlayer[currentPlayer].currentPlayer = currentPlayer + 1
