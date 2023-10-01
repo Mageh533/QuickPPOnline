@@ -49,6 +49,7 @@ func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += -Vector2.ONE * tile_size/2
 	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
+	$SpritesTransforms.position = global_position
 	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 
@@ -59,6 +60,8 @@ func _physics_process(delta):
 	else:
 		velocity.y = fallSpeed * delta * 50
 		move_and_slide()
+	
+	$SpritesTransforms.global_position.y = global_position.y
 	
 	if (groundCollide or is_on_floor()) and !ceilingCollide:
 		timeOnGround += delta
@@ -77,7 +80,9 @@ func _physics_process(delta):
 			if !GameManager.onlineMatch:
 				playerControls(currentPlayer)
 
-func _process(_delta):
+func _process(delta):
+	$SpritesTransforms.global_position.x = lerp($SpritesTransforms.global_position.x, global_position.x, 25 * delta)
+	
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
 		if rayCast.is_colliding():
@@ -124,16 +129,20 @@ func playerControls(controlsToUse):
 		$SoundEffects/PieceRotate.play()
 		if checkForRoationClipping():
 			var tween = get_tree().create_tween()
+			var tween2 = get_tree().create_tween()
 			rotate(PI / 2)
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
+			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
 			rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if checkForRoationClipping():
 			var tween = get_tree().create_tween()
+			var tween2 = get_tree().create_tween()
 			rotate(-PI / 2)
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
+			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
 			rotate180()
 
@@ -192,9 +201,8 @@ func rotate180():
 	var temp = $Puyo1Spawn.position
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
-	temp = $Transforms/SpritesTransforms/PuyoSprite1.position
-	tween.tween_property($Transforms/SpritesTransforms/PuyoSprite1, "position", $Transforms/SpritesTransforms/PuyoSprite2.position, 0.1)
-	tween2.tween_property($Transforms/SpritesTransforms/PuyoSprite2, "position", temp, 0.1)
+	tween.tween_property($Transforms/SpritesTransforms/PuyoSprite1, "position", $Puyo2Spawn.position, 0.1)
+	tween2.tween_property($Transforms/SpritesTransforms/PuyoSprite2, "position", $Puyo1Spawn.position, 0.1)
 
 func swapPuyos():
 	currentPuyos.clear()
@@ -225,4 +233,5 @@ func pieceLand():
 	swapPuyos()
 	rotation = deg_to_rad(90)
 	$Transforms.rotation = rotation
+	$SpritesTransforms.rotation = rotation
 	emit_signal("pieceLanded")

@@ -98,33 +98,33 @@ fallSpeed = 50
 moveCooldownTime = 0.08
 PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"), ExtResource("5_taq0t"), ExtResource("4_toq3k"), ExtResource("6_c8h4w")])
 
+[node name="SpritesTransforms" type="Node2D" parent="."]
+top_level = true
+rotation = 1.5708
+
+[node name="PuyoSprite1" type="RemoteTransform2D" parent="SpritesTransforms"]
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../Puyo1Sprite")
+update_rotation = false
+
+[node name="PuyoSprite2" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(58, 0)
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../Puyo2Sprite")
+update_rotation = false
+
 [node name="Transforms" type="Node2D" parent="."]
 top_level = true
 rotation = 1.5708
 
-[node name="SpritesTransforms" type="Node2D" parent="Transforms"]
-
-[node name="PuyoSprite1" type="RemoteTransform2D" parent="Transforms/SpritesTransforms"]
-scale = Vector2(0.85, 0.85)
-remote_path = NodePath("../../../Puyo1Sprite")
-update_rotation = false
-
-[node name="PuyoSprite2" type="RemoteTransform2D" parent="Transforms/SpritesTransforms"]
-position = Vector2(58, 0)
-scale = Vector2(0.85, 0.85)
-remote_path = NodePath("../../../Puyo2Sprite")
-update_rotation = false
-
-[node name="CollisionShapesTransforms" type="Node2D" parent="Transforms"]
-
-[node name="RemoteTransformP3" type="RemoteTransform2D" parent="Transforms/CollisionShapesTransforms"]
+[node name="Coll1" type="RemoteTransform2D" parent="Transforms"]
 position = Vector2(58, -0.000209808)
-remote_path = NodePath("../../../Puyo1Collision2")
+remote_path = NodePath("../../Puyo1Collision2")
 update_rotation = false
 update_scale = false
 
-[node name="RemoteTransformP4" type="RemoteTransform2D" parent="Transforms/CollisionShapesTransforms"]
-remote_path = NodePath("../../../Puyo1Collision")
+[node name="Coll2" type="RemoteTransform2D" parent="Transforms"]
+remote_path = NodePath("../../Puyo1Collision")
 update_rotation = false
 update_scale = false
 
@@ -194,7 +194,7 @@ animation = &"BuePuyo"
 
 [node name="Puyo2Sprite" type="AnimatedSprite2D" parent="."]
 top_level = true
-position = Vector2(-0.000209959, 58)
+position = Vector2(-2.53526e-06, 58)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BuePuyo"
@@ -204,4 +204,9 @@ replication_config = SubResource("SceneReplicationConfig_egw02")
 
 [node name="CollisionTransform" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../Transforms")
+update_rotation = false
+
+[node name="SpriteTransforms" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../SpritesTransforms")
+update_position = false
 update_rotation = false
