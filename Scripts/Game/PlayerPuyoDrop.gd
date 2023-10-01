@@ -50,7 +50,8 @@ func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += -Vector2.ONE * tile_size/2
 	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
-	$SpritesTransforms.position = global_position
+	$SpritesTransforms.global_position = global_position
+	interpolate = true
 	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 
@@ -81,12 +82,9 @@ func _physics_process(delta):
 			if !GameManager.onlineMatch:
 				playerControls(currentPlayer)
 
-func _process(delta):
+func _process(_delta):
 	if interpolate:
 		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, 4)
-	else:
-		$SpritesTransforms.global_position.x = global_position.x
-		interpolate = true
 
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
@@ -222,6 +220,12 @@ func swapPuyos():
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 
+func resetPlayer():
+	interpolate = false
+	position = startingPos
+	$SpritesTransforms.global_position = global_position
+	interpolate = true
+
 @rpc("any_peer", "call_local", "reliable")
 func pieceLand():
 	$SoundEffects/PieceLand.play()
@@ -233,7 +237,7 @@ func pieceLand():
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo1.basicSetup()
 	puyo2.basicSetup()
-	position = startingPos
+	resetPlayer()
 	timeOnGround = 0
 	swapPuyos()
 	rotation = deg_to_rad(90)
@@ -241,4 +245,3 @@ func pieceLand():
 	$SpritesTransforms.rotation = rotation
 	emit_signal("pieceLanded")
 	await get_tree().create_timer(0.01).timeout
-	interpolate = false

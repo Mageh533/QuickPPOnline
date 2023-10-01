@@ -57,9 +57,7 @@ func _process(delta):
 		if nuisanceCooldown > 0:
 			nuisanceCooldown += -delta
 		if !defeated:
-			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(false)
-			get_tree().get_nodes_in_group("Player")[currentPlayer].set_physics_process(false)
-			get_tree().get_nodes_in_group("Player")[currentPlayer].visible = false
+			disablePlayer(true)
 	else:
 		if scoreToAdd:
 			scoreToAdd = false
@@ -70,9 +68,15 @@ func _process(delta):
 			nuisanceProcess()
 		currentChain = 0
 		if !defeated:
-			get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(true)
-			get_tree().get_nodes_in_group("Player")[currentPlayer].set_physics_process(true)
-			get_tree().get_nodes_in_group("Player")[currentPlayer].visible = true
+			var movingPuyos = false
+			for puyo in puyosObjectArray:
+				if puyo.type != "Player":
+					if puyo.moving:
+						movingPuyos = true
+			if movingPuyos:
+				disablePlayer(true)
+			else:
+				disablePlayer(false)
 
 # Connects their signals
 func connectPuyosToGame():
@@ -253,12 +257,22 @@ func nuisanceProcess():
 					spawnNuisance(nuisanceQueue)
 					nuisanceQueue = 0
 
+func disablePlayer(disable : bool):
+	if disable:
+		get_tree().get_nodes_in_group("Player")[currentPlayer].resetPlayer()
+		get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(false)
+		get_tree().get_nodes_in_group("Player")[currentPlayer].set_physics_process(false)
+		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = false
+	else:
+		get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(true)
+		get_tree().get_nodes_in_group("Player")[currentPlayer].set_physics_process(true)
+		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = true
+
 func _on_lose_timer_timeout():
 	if loseTile and !defeated:
 		emit_signal("lost")
 		defeated = true
-		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = false
-		get_tree().get_nodes_in_group("Player")[currentPlayer].process_mode = Node.PROCESS_MODE_DISABLED
+		disablePlayer(true)
 		
 	loseTileTimer = false
 
