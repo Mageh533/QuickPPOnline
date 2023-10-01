@@ -233,7 +233,6 @@ func pieceLand():
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo1.basicSetup()
 	puyo2.basicSetup()
-	interpolate = false
 	position = startingPos
 	timeOnGround = 0
 	swapPuyos()
@@ -241,3 +240,5 @@ func pieceLand():
 	$Transforms.rotation = rotation
 	$SpritesTransforms.rotation = rotation
 	emit_signal("pieceLanded")
+	await get_tree().create_timer(0.01).timeout
+	interpolate = false
