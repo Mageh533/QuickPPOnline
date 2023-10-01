@@ -204,8 +204,8 @@ func rotate180():
 	var temp = $Puyo1Spawn.position
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
-	tween.tween_property($Transforms/SpritesTransforms/PuyoSprite1, "position", $Puyo2Spawn.position, 0.1)
-	tween2.tween_property($Transforms/SpritesTransforms/PuyoSprite2, "position", $Puyo1Spawn.position, 0.1)
+	tween.tween_property($SpritesTransforms/PuyoSprite1, "position", $Puyo2Spawn.position, 0.1)
+	tween2.tween_property($SpritesTransforms/PuyoSprite2, "position", $Puyo1Spawn.position, 0.1)
 
 func swapPuyos():
 	currentPuyos.clear()
