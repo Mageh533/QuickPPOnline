@@ -251,8 +251,15 @@ collision_mask = 3
 script = ExtResource("1_2hd31")
 type = "RED"
 
+[node name="Transform" type="Node2D" parent="."]
+top_level = true
+
+[node name="SpriteTransform" type="RemoteTransform2D" parent="Transform"]
+remote_path = NodePath("../../PuyoSprites")
+update_rotation = false
+update_scale = false
+
 [node name="PuyoSprites" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_onuvl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

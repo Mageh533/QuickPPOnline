@@ -8,6 +8,7 @@ var active = false
 var moving = true
 var popped = false
 var squashAnim = false
+var interpolate = false
 @export var type = ""
 var connectedPositions = []
 var connected = []
@@ -15,19 +16,19 @@ var connected = []
 func _ready():
 	basicSetup()
 
-func _process(_delta):
+func _process(delta):
+	if interpolate:
+		$Transform.global_position = lerp($Transform.global_position, global_position, 50 * delta)
+	
 	if !moving and !popped:
 		searchOtherPuyos()
 
 # 'Gravity' for the puyos that works similarly to the actual games, also stays within the tilemap
 func _on_gravity_timer_timeout():
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT)
 	if(!$RayBottom.is_colliding()):
 		position += Vector2.DOWN * tile_size
-		tween.tween_property($PuyoSprites, "global_position", global_position, 0.1).set_trans(Tween.TRANS_SINE)
 		moving = true
 	else:
-		tween.kill()
 		if moving:
 			playSquashAnim(0.5)
 			moving = false
@@ -137,6 +138,8 @@ func pop():
 func basicSetup():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += -Vector2.ONE * tile_size/2
+	$Transform.global_position = global_position
+	interpolate = true
 
 func _on_popped_pre_timer_timeout():
 	if($PuyoSprites.visible):
