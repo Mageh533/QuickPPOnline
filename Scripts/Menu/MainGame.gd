@@ -8,7 +8,7 @@ var matchStarted = false
 func _ready():
 	clearNuisanceQueue("Player1")
 	clearNuisanceQueue("Player2")
-	await get_tree().create_timer(0.01).timeout
+	await get_tree().create_timer(0.05).timeout
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$UIAnims/Anims.play("matchStart")

@@ -6,8 +6,8 @@ var matchStarted = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await get_tree().create_timer(0.05).timeout
 	$PuyoGame.process_mode = Node.PROCESS_MODE_DISABLED
-	await get_tree().create_timer(0.01).timeout
 	$UIAnims/AnimationPlayer.play("Start")
 	await $UIAnims/AnimationPlayer.animation_finished
 	$PuyoGame.process_mode = Node.PROCESS_MODE_INHERIT

@@ -280,7 +280,7 @@ func _on_lose_timer_timeout():
 	loseTileTimer = false
 
 func _on_piece_landed():
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.2).timeout
 	nuisanceProcess()
 
 func _on_lose_tile_area_entered(_area):
