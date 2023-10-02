@@ -302,4 +302,3 @@ shape = SubResource("RectangleShape2D_ql1xf")
 [connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="PoppedPreTimer" to="." method="_on_popped_pre_timer_timeout"]
 [connection signal="timeout" from="PoppedTimer" to="." method="_on_popped_timer_timeout"]
-[connection signal="area_entered" from="AreaCol" to="." method="_on_area_col_area_entered"]

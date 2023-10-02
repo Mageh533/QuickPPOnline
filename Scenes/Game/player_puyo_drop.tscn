@@ -88,7 +88,7 @@ properties/1/sync = true
 properties/1/watch = false
 
 [node name="PlayerPuyoDrop" type="CharacterBody2D" groups=["Player"]]
-rotation = 1.5708
+rotation = -1.5708
 collision_layer = 4
 collision_mask = 3
 slide_on_ceiling = false
@@ -100,7 +100,7 @@ PuyoScenes = Array[PackedScene]([ExtResource("2_x0pfs"), ExtResource("3_m1d6f"),
 
 [node name="SpritesTransforms" type="Node2D" parent="."]
 top_level = true
-rotation = 1.5708
+rotation = -1.5708
 
 [node name="PuyoSprite1" type="RemoteTransform2D" parent="SpritesTransforms"]
 scale = Vector2(0.85, 0.85)
@@ -115,7 +115,7 @@ update_rotation = false
 
 [node name="Transforms" type="Node2D" parent="."]
 top_level = true
-rotation = 1.5708
+rotation = -1.5708
 
 [node name="Coll1" type="RemoteTransform2D" parent="Transforms"]
 position = Vector2(58, -0.000209808)
@@ -194,7 +194,7 @@ animation = &"BuePuyo"
 
 [node name="Puyo2Sprite" type="AnimatedSprite2D" parent="."]
 top_level = true
-position = Vector2(-0.000209959, 58)
+position = Vector2(-2.53526e-06, -58)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BuePuyo"

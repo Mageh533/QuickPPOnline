@@ -34,11 +34,13 @@ var playerSet = false
 var interpolate = false
 
 var startingPos
+var startingRot
 
 # Choses puyos 
 func _ready():
 	rng.seed = GameManager.currentSeed
 	startingPos = position
+	startingRot = rotation
 	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
 	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
 	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
@@ -225,6 +227,7 @@ func swapPuyos():
 func resetPlayer():
 	interpolate = false
 	position = startingPos
+	rotation = startingRot
 	$SpritesTransforms.global_position = global_position
 	interpolate = true
 
@@ -242,7 +245,6 @@ func pieceLand():
 	resetPlayer()
 	timeOnGround = 0
 	swapPuyos()
-	rotation = deg_to_rad(90)
 	$Transforms.rotation = rotation
 	$SpritesTransforms.rotation = rotation
 	emit_signal("pieceLanded")
