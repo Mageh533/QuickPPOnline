@@ -9,6 +9,7 @@ var moving = true
 var popped = false
 var squashAnim = false
 var interpolate = false
+var landed = false
 @export var type = ""
 var connectedPositions = []
 var connected = []
@@ -25,13 +26,24 @@ func _process(delta):
 
 # 'Gravity' for the puyos that works similarly to the actual games, also stays within the tilemap
 func _on_gravity_timer_timeout():
-	if(!$RayBottom.is_colliding()):
-		position += Vector2.DOWN * tile_size
-		moving = true
+	if $ClipDetection.is_colliding() and !landed:
+		if !$RayTop.is_colliding():
+			position += Vector2.UP * tile_size
+		elif !$RayLeft.is_colliding():
+			position += Vector2.LEFT * tile_size
+		elif !$RayRight.is_colliding():
+			position += Vector2.RIGHT * tile_size
+		else:
+			position += Vector2.UP * tile_size
 	else:
-		if moving:
-			playSquashAnim(0.5)
-			moving = false
+		if(!$RayBottom.is_colliding()):
+			position += Vector2.DOWN * tile_size
+			moving = true
+		else:
+			if moving:
+				playSquashAnim(0.5)
+				moving = false
+				landed = true
 
 # Searches for other puyos that are connectedPositions, adds to the array if it finds one to update the spritesheet
 # As well as running a recursive function to find out if the other puyos are connectedPositions to others and keeps count
@@ -158,6 +170,6 @@ func _on_popped_timer_timeout():
 	queue_free()
 
 # Prevent puyos from clipping
-func _on_area_col_area_entered(area):
+func _on_area_col_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
 	if area.name != "LoseTile":
-		area.get_parent().position += Vector2.UP * tile_size
+		position += Vector2.UP * tile_size
