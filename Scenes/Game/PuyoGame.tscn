@@ -164,7 +164,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ttl81"]
 font_size = 24
-font_color = Color(0.868025, 0.766094, 0.0184071, 1)
+font_color = Color(0.882353, 1, 0.054902, 1)
 outline_size = 5
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
@@ -488,32 +488,21 @@ text = "00000000"
 label_settings = SubResource("LabelSettings_rx3dw")
 horizontal_alignment = 1
 
-[node name="ChainPanel" type="Panel" parent="."]
+[node name="ChainLabel" type="Label" parent="."]
 visible = false
-offset_left = 148.0
-offset_top = 293.0
-offset_right = 248.0
-offset_bottom = 347.0
-
-[node name="ChainLabel" type="Label" parent="ChainPanel"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -46.5
-offset_top = -18.5
-offset_right = 46.5
-offset_bottom = 18.5
+offset_left = 324.0
+offset_top = 579.0
+offset_right = 417.0
+offset_bottom = 616.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "0 Chain!"
 label_settings = SubResource("LabelSettings_ttl81")
-
-[node name="PoppingTimer" type="Timer" parent="."]
-wait_time = 0.7
-one_shot = true
 
 [node name="LoseTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -645,5 +634,4 @@ replication_config = SubResource("SceneReplicationConfig_or1r5")
 
 [connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
 [connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
-[connection signal="timeout" from="PoppingTimer" to="." method="_on_popping_timer_timeout"]
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]

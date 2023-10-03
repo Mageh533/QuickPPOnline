@@ -12,7 +12,6 @@ var puyosToPop = []
 var connectedPuyos = []
 var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 
-var checkPopTimer = false
 var scoreToAdd = false
 var loseTile = false
 var loseTileTimer = false
@@ -20,6 +19,7 @@ var defeated = false
 
 var chainCooldown = 0
 var nuisanceCooldown = 0
+var checkChainTime = 0
 var currentChain = 0
 var leftOverNuisance = 0
 @export var nuisanceQueue = 0
@@ -52,15 +52,10 @@ func _process(delta):
 	if chainCooldown > 0 or nuisanceCooldown > 0:
 		$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
 		if chainCooldown > 0:
-			if !checkPopTimer:
-				checkPopTimer = true
-				$PoppingTimer.start()
 			scoreToAdd = true
 			chainCooldown += -delta
 		if nuisanceCooldown > 0:
 			nuisanceCooldown += -delta
-		if !defeated:
-			disablePlayer(true)
 	else:
 		if scoreToAdd:
 			scoreToAdd = false
@@ -69,18 +64,23 @@ func _process(delta):
 			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
 			await get_tree().create_timer(0.5).timeout
 			nuisanceProcess()
-		currentChain = 0
-		if !defeated:
-			var movingPuyos = false
-			for puyo in puyosObjectArray:
-				if puyo.type != "Player":
-					if puyo.moving:
-						movingPuyos = true
-			if movingPuyos:
-				disablePlayer(true)
-			else:
-				checkForChain()
-				disablePlayer(false)
+	
+	if !defeated:
+		var movingPuyos = false
+		for puyo in puyosObjectArray:
+			if puyo.type != "Player":
+				if puyo.moving:
+					movingPuyos = true
+		if movingPuyos or nuisanceCooldown > 0 or chainCooldown > 0 or checkForChain():
+			disablePlayer(true)
+			if checkForChain():
+				checkChainTime += delta
+				if checkChainTime > 0.5:
+					checkChainTime = 0
+					startChain()
+		else:
+			currentChain = 0
+			disablePlayer(false)
 
 # Connects their signals
 func connectPuyosToGame():
@@ -97,12 +97,6 @@ func connectPuyosToGame():
 			puyoDropPlayer[currentPlayer].sendAfterPuyos.connect(_on_after_puyo_sent)
 			puyoDropPlayer[currentPlayer].pieceLanded.connect(_on_piece_landed)
 
-# If any puyo emits the signal they are connected it starts the popping timer
-func _on_puyo_connected():
-	if !checkPopTimer:
-		checkPopTimer = true
-		$PoppingTimer.start()
-
 func _on_next_puyo_sent(puyos):
 	$NextPuyoSprites/Puyo1Set1.play(puyos[0])
 	$NextPuyoSprites/Puyo2Set1.play(puyos[1])
@@ -115,11 +109,8 @@ func _on_after_puyo_sent(puyos):
 	$NextPuyoSprites/Puyo1Set2_2.play(puyos[0])
 	$NextPuyoSprites/Puyo2Set2_2.play(puyos[1])
 
-# Function checks if 4 or more puyos are connected, if so runs their pop function
-func _on_popping_timer_timeout():
-	checkForChain()
-
 func checkForChain():
+	var canChain = false
 	puyosToPop.clear()
 	for puyo in puyosObjectArray:
 		connectedPuyos.clear()
@@ -128,12 +119,17 @@ func checkForChain():
 		
 		if connectedPuyos.size() > 3:
 			puyosToPop.append_array(connectedPuyos)
-			
+			canChain = true
+	return canChain
+
+func startChain():
+	checkForChain()
+	
 	if puyosToPop.size() > 0:
 		chainCooldown = 2
 		currentChain += 1
 		puyosClearedInChain += puyosToPop.size()
-		playChainSoundEffects()
+		playChainEffects(puyosToPop[0].global_position)
 	
 	if puyosToPop.size() > 4 and puyosToPop.size() < 11:
 		groupBonus += 2 + (puyosToPop.size() - 5)
@@ -145,8 +141,6 @@ func checkForChain():
 			colours.erase(puyoToPop.type)
 		puyoToPop.pop()
 	
-	checkPopTimer = false
-	
 	if checkAllClear() and currentChain > 0:
 		await get_tree().create_timer(0.5).timeout
 		$Anims.play("all_clear")
@@ -157,12 +151,20 @@ func findOutAllConnected(puyo):
 		for otherPuyo in puyo.connected:
 			findOutAllConnected(otherPuyo)
 
-func playChainSoundEffects():
+func playChainEffects(chainPos):
 	await get_tree().create_timer(0.3).timeout
 	if currentChain < 7 and currentChain > 0:
 		get_node("ChainSoundEffects/Chain" + str(currentChain)).play()
 	else:
 		$ChainSoundEffects/Chain7.play()
+	
+	$ChainLabel.text = str(currentChain) + " Chain!"
+	$ChainLabel.global_position = chainPos + (Vector2.UP * 200)
+	var tween = get_tree().create_tween()
+	tween.tween_property($ChainLabel, "global_position", chainPos + (Vector2.UP * 100), 0.5)
+	$ChainLabel.show()
+	await get_tree().create_timer(1).timeout
+	$ChainLabel.hide()
 
 # Based on classic tsu rules
 func calculateChainPower():
