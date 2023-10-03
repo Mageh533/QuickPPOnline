@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=50 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -161,6 +161,13 @@ Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
 font_size = 44
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ttl81"]
+font_size = 24
+font_color = Color(0.868025, 0.766094, 0.0184071, 1)
+outline_size = 5
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
 atlas = ExtResource("2_t6ghk")
@@ -480,6 +487,29 @@ offset_bottom = 53.0
 text = "00000000"
 label_settings = SubResource("LabelSettings_rx3dw")
 horizontal_alignment = 1
+
+[node name="ChainPanel" type="Panel" parent="."]
+visible = false
+offset_left = 148.0
+offset_top = 293.0
+offset_right = 248.0
+offset_bottom = 347.0
+
+[node name="ChainLabel" type="Label" parent="ChainPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -18.5
+offset_right = 46.5
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "0 Chain!"
+label_settings = SubResource("LabelSettings_ttl81")
 
 [node name="PoppingTimer" type="Timer" parent="."]
 wait_time = 0.7
