@@ -159,9 +159,9 @@ func playChainEffects(chainPos):
 		$ChainSoundEffects/Chain7.play()
 	
 	$ChainLabel.text = str(currentChain) + " Chain!"
-	$ChainLabel.global_position = chainPos + (Vector2.UP * 200)
+	$ChainLabel.global_position = chainPos
 	var tween = get_tree().create_tween()
-	tween.tween_property($ChainLabel, "global_position", chainPos + (Vector2.UP * 100), 0.5)
+	tween.tween_property($ChainLabel, "global_position", chainPos + (Vector2.UP * 50), 0.5)
 	$ChainLabel.show()
 	await get_tree().create_timer(1).timeout
 	$ChainLabel.hide()
