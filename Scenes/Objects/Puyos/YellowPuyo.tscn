@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dvcfytgr321jq"]
+[gd_scene load_steps=24 format=3 uid="uid://dvcfytgr321jq"]
 
 [ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="1_08lu1"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_0fq04"]
+[ext_resource type="Texture2D" uid="uid://dpd5lsdhx5xmn" path="res://Assets/Sprites/particles/yellow.png" id="3_tj3vo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtghr"]
 atlas = ExtResource("2_0fq04")
@@ -232,5 +233,8 @@ animations = [{
 [node name="YellowPuyo" instance=ExtResource("1_08lu1")]
 type = "YELLOW"
 
-[node name="PuyoSprites" parent="." index="0"]
+[node name="PuyoSprites" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_2b3ey")
+
+[node name="PopParticle" parent="." index="14"]
+texture = ExtResource("3_tj3vo")

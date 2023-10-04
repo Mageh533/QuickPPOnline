@@ -166,6 +166,9 @@ func _on_popped_timer_timeout():
 	$PuyoSprites.play("popped_start")
 	await get_tree().create_timer(0.1).timeout
 	$PuyoSprites.play("popped_end")
+	$PopParticle.color = Color.from_string(type, Color.RED)
+	$PopParticle.emitting = true
+	$PopParticle.reparent(get_parent().get_parent())
 	await $PuyoSprites.animation_finished
 	queue_free()
 
