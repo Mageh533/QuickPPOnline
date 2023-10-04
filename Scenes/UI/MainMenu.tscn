@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://caeh4snxqjfaa" path="res://Scenes/Game/SoloGame.tscn" id="2_c1prm"]
 [ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/MainGame.tscn" id="2_fythm"]
 [ext_resource type="Texture2D" uid="uid://brfhuohmm8tia" path="res://Assets/Sprites/volume-icon.svg" id="4_ueemu"]
+[ext_resource type="Script" path="res://Scripts/Menu/ControlsMenu.gd" id="6_1875d"]
 [ext_resource type="Texture2D" uid="uid://f8u4j5dgknsr" path="res://Assets/Sprites/settings.svg" id="6_yc3yo"]
-[ext_resource type="Script" path="res://Scripts/Menu/SettingsMenu.gd" id="7_wysld"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
@@ -317,6 +317,201 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_q34b0")
 icon = ExtResource("4_ueemu")
 expand_icon = true
 
+[node name="ControlsPopUp" type="PopupPanel" parent="PermaUI"]
+position = Vector2i(288, 80)
+size = Vector2i(586, 421)
+script = ExtResource("6_1875d")
+
+[node name="Controls" type="HBoxContainer" parent="PermaUI/ControlsPopUp"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 584.0
+offset_bottom = 419.0
+theme_override_constants/separation = 85
+alignment = 1
+
+[node name="P1Controls" type="VBoxContainer" parent="PermaUI/ControlsPopUp/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P1Controls"]
+layout_mode = 2
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="p1_up" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P1Controls"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_up"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "     UP/Hard Drop:      "
+
+[node name="p1up" type="Button" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_up"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UP"
+
+[node name="p1_down" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P1Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_down"]
+layout_mode = 2
+text = "     Down/Fast Drop: "
+
+[node name="p1down" type="Button" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_down"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Down"
+
+[node name="p1_left" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P1Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_left"]
+layout_mode = 2
+text = "     Left:                        "
+
+[node name="p1left" type="Button" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_left"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left"
+
+[node name="p1_right" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P1Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_right"]
+layout_mode = 2
+text = "     Right:                     "
+
+[node name="p1right" type="Button" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_right"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right
+"
+
+[node name="p1_turnLeft" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P1Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_turnLeft"]
+layout_mode = 2
+text = "     Turn Left:              "
+
+[node name="p1tleft" type="Button" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_turnLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Z"
+
+[node name="p1_turnRight" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P1Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_turnRight"]
+layout_mode = 2
+text = "     Turn Right:            "
+
+[node name="p1tright" type="Button" parent="PermaUI/ControlsPopUp/Controls/P1Controls/p1_turnRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
+[node name="P2Controls" type="VBoxContainer" parent="PermaUI/ControlsPopUp/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P2Controls"]
+layout_mode = 2
+text = "Player 2
+"
+horizontal_alignment = 1
+
+[node name="p2_up" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P2Controls"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_up"]
+layout_mode = 2
+text = "UP/Hard Drop:      "
+
+[node name="p2up" type="Button" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_up"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UP"
+
+[node name="p2_down" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P2Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_down"]
+layout_mode = 2
+text = "Down/Fast Drop: "
+
+[node name="p2down" type="Button" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_down"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Down"
+
+[node name="p2_left" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P2Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_left"]
+layout_mode = 2
+text = "Left:                        "
+
+[node name="p2left" type="Button" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_left"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left"
+
+[node name="p2_right" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P2Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_right"]
+layout_mode = 2
+text = "Right:                      "
+
+[node name="p2right" type="Button" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_right"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right
+"
+
+[node name="p2_turnLeft" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P2Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_turnLeft"]
+layout_mode = 2
+text = "Turn Left:              "
+
+[node name="p2tleft" type="Button" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_turnLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Z"
+
+[node name="p2_turnRight" type="HBoxContainer" parent="PermaUI/ControlsPopUp/Controls/P2Controls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_turnRight"]
+layout_mode = 2
+text = "Turn Right:            "
+
+[node name="p2tright" type="Button" parent="PermaUI/ControlsPopUp/Controls/P2Controls/p2_turnRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
 [node name="SoundPopUp" type="PopupPanel" parent="PermaUI"]
 transparent_bg = true
 position = Vector2i(15, 347)
@@ -346,10 +541,9 @@ icon = ExtResource("6_yc3yo")
 expand_icon = true
 
 [node name="SettingsPopUp" type="PopupPanel" parent="PermaUI"]
-position = Vector2i(1010, 258)
+position = Vector2i(999, 258)
 size = Vector2i(138, 289)
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2oke")
-script = ExtResource("7_wysld")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PermaUI/SettingsPopUp"]
 offset_left = 2.0
@@ -463,10 +657,23 @@ text = "FPS: "
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
 [connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="PermaUI/SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_up/p1up" to="PermaUI/ControlsPopUp" method="_on_p_1_up_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_down/p1down" to="PermaUI/ControlsPopUp" method="_on_p_1_down_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_left/p1left" to="PermaUI/ControlsPopUp" method="_on_p_1_left_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_right/p1right" to="PermaUI/ControlsPopUp" method="_on_p_1_right_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_turnLeft/p1tleft" to="PermaUI/ControlsPopUp" method="_on_p_1_tleft_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_turnRight/p1tright" to="PermaUI/ControlsPopUp" method="_on_p_1_tright_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P2Controls/p2_up/p2up" to="PermaUI/ControlsPopUp" method="_on_p_2_up_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P2Controls/p2_down/p2down" to="PermaUI/ControlsPopUp" method="_on_p_2_down_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P2Controls/p2_left/p2left" to="PermaUI/ControlsPopUp" method="_on_p_2_left_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P2Controls/p2_right/p2right" to="PermaUI/ControlsPopUp" method="_on_p_2_right_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P2Controls/p2_turnLeft/p2tleft" to="PermaUI/ControlsPopUp" method="_on_p_2_tleft_pressed"]
+[connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P2Controls/p2_turnRight/p2tright" to="PermaUI/ControlsPopUp" method="_on_p_2_tright_pressed"]
 [connection signal="value_changed" from="PermaUI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]
 [connection signal="pressed" from="PermaUI/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="popup_hide" from="PermaUI/SettingsPopUp" to="." method="_on_settings_pop_up_popup_hide"]
-[connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/ReturnToMenu" to="PermaUI/SettingsPopUp" method="_on_return_to_menu_pressed"]
-[connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Exit" to="PermaUI/SettingsPopUp" method="_on_exit_pressed"]
-[connection signal="toggled" from="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter/CheckBox" to="PermaUI/SettingsPopUp" method="_on_check_box_toggled"]
+[connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/ReturnToMenu" to="." method="_on_return_to_menu_pressed"]
+[connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="toggled" from="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="PermaUI/ReturnButton" to="." method="_on_return_button_pressed"]

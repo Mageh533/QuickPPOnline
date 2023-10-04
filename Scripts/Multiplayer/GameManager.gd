@@ -25,7 +25,6 @@ var matchInfo = {
 
 # Global functions
 
-func changeControls(player, control, key):
-	var controlToChange = player + "_" + control
-	InputMap.action_erase_events(controlToChange)
-	InputMap.action_add_event(controlToChange, key)
+func changeControls(control, key):
+	InputMap.action_erase_events(control)
+	InputMap.action_add_event(control, key)
