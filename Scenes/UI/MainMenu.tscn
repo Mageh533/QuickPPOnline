@@ -656,37 +656,42 @@ text = "FPS: "
 [node name="TouchScreenControls" type="Node" parent="PermaUI"]
 
 [node name="Down" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
-position = Vector2(91, 439)
+position = Vector2(157, 545)
 scale = Vector2(3.95833, 3.375)
 texture_normal = ExtResource("8_r0r38")
+passby_press = true
 action = "p1_down"
 visibility_mode = 1
 
-[node name="Left" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
-position = Vector2(3.00001, 441)
-scale = Vector2(3.95833, 3.375)
-texture_normal = ExtResource("9_x51dh")
-action = "p1_left"
-visibility_mode = 1
-
 [node name="Right" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
-position = Vector2(189, 442)
+position = Vector2(272, 437)
 scale = Vector2(3.95833, 3.375)
 texture_normal = ExtResource("10_wrdlg")
+passby_press = true
 action = "p1_right"
 visibility_mode = 1
 
+[node name="Left" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
+position = Vector2(35, 435)
+scale = Vector2(3.95833, 3.375)
+texture_normal = ExtResource("9_x51dh")
+passby_press = true
+action = "p1_left"
+visibility_mode = 1
+
 [node name="TLeft" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
-position = Vector2(919, 429)
+position = Vector2(774, 444)
 scale = Vector2(3.95833, 3.375)
 texture_normal = ExtResource("11_trt2y")
+passby_press = true
 action = "p1_turnLeft"
 visibility_mode = 1
 
 [node name="TRight" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
-position = Vector2(1027, 428)
+position = Vector2(971, 445)
 scale = Vector2(3.95833, 3.375)
 texture_normal = ExtResource("12_arr23")
+passby_press = true
 action = "p1_turnRight"
 visibility_mode = 1
 
