@@ -546,7 +546,7 @@ icon = ExtResource("6_yc3yo")
 expand_icon = true
 
 [node name="SettingsPopUp" type="PopupPanel" parent="PermaUI"]
-position = Vector2i(999, 258)
+position = Vector2i(971, 258)
 size = Vector2i(138, 289)
 theme_override_styles/panel = SubResource("StyleBoxFlat_r2oke")
 
@@ -557,6 +557,14 @@ offset_right = 136.0
 offset_bottom = 287.0
 theme_override_constants/separation = 50
 alignment = 1
+
+[node name="FPSCounter" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter"]
+layout_mode = 2
+text = "FPS Counter"
 
 [node name="Controls" type="Button" parent="PermaUI/SettingsPopUp/VBoxContainer"]
 layout_mode = 2
@@ -570,14 +578,6 @@ text = "Return To Menu
 [node name="Exit" type="Button" parent="PermaUI/SettingsPopUp/VBoxContainer"]
 layout_mode = 2
 text = "Exit Game"
-
-[node name="FPSCounter" type="HBoxContainer" parent="PermaUI/SettingsPopUp/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="CheckBox" type="CheckBox" parent="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter"]
-layout_mode = 2
-text = "FPS Counter"
 
 [node name="ReturnButton" type="Button" parent="PermaUI"]
 visible = false
@@ -654,6 +654,8 @@ offset_bottom = -487.0
 text = "FPS: "
 
 [node name="TouchScreenControls" type="Node2D" parent="PermaUI"]
+visible = false
+position = Vector2(0, -507)
 
 [node name="Down" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
 position = Vector2(157, 545)
@@ -719,8 +721,8 @@ visibility_mode = 1
 [connection signal="value_changed" from="PermaUI/SoundPopUp/VSlider" to="." method="_on_v_slider_value_changed"]
 [connection signal="pressed" from="PermaUI/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="popup_hide" from="PermaUI/SettingsPopUp" to="." method="_on_settings_pop_up_popup_hide"]
+[connection signal="toggled" from="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/ReturnToMenu" to="." method="_on_return_to_menu_pressed"]
 [connection signal="pressed" from="PermaUI/SettingsPopUp/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="toggled" from="PermaUI/SettingsPopUp/VBoxContainer/FPSCounter/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="PermaUI/ReturnButton" to="." method="_on_return_button_pressed"]
