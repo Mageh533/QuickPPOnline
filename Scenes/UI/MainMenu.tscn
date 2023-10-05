@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=31 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://brfhuohmm8tia" path="res://Assets/Sprites/volume-icon.svg" id="4_ueemu"]
 [ext_resource type="Script" path="res://Scripts/Menu/ControlsMenu.gd" id="6_1875d"]
 [ext_resource type="Texture2D" uid="uid://f8u4j5dgknsr" path="res://Assets/Sprites/settings.svg" id="6_yc3yo"]
+[ext_resource type="Texture2D" uid="uid://dmbrugo1fhftd" path="res://Assets/Sprites/mobile/arrow-down.svg" id="8_r0r38"]
+[ext_resource type="Texture2D" uid="uid://dha60g5ynf0oq" path="res://Assets/Sprites/mobile/arrow-left.svg" id="9_x51dh"]
+[ext_resource type="Texture2D" uid="uid://dii00hiko8xsj" path="res://Assets/Sprites/mobile/arrow-right.svg" id="10_wrdlg"]
+[ext_resource type="Texture2D" uid="uid://ddmflrsmm5pbn" path="res://Assets/Sprites/mobile/arrow-back.svg" id="11_trt2y"]
+[ext_resource type="Texture2D" uid="uid://1hkrrdwo15r0" path="res://Assets/Sprites/mobile/arrow-forward.svg" id="12_arr23"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
@@ -647,6 +652,43 @@ offset_top = -510.0
 offset_right = 43.0
 offset_bottom = -487.0
 text = "FPS: "
+
+[node name="TouchScreenControls" type="Node" parent="PermaUI"]
+
+[node name="Down" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
+position = Vector2(91, 439)
+scale = Vector2(3.95833, 3.375)
+texture_normal = ExtResource("8_r0r38")
+action = "p1_down"
+visibility_mode = 1
+
+[node name="Left" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
+position = Vector2(3.00001, 441)
+scale = Vector2(3.95833, 3.375)
+texture_normal = ExtResource("9_x51dh")
+action = "p1_left"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
+position = Vector2(189, 442)
+scale = Vector2(3.95833, 3.375)
+texture_normal = ExtResource("10_wrdlg")
+action = "p1_right"
+visibility_mode = 1
+
+[node name="TLeft" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
+position = Vector2(919, 429)
+scale = Vector2(3.95833, 3.375)
+texture_normal = ExtResource("11_trt2y")
+action = "p1_turnLeft"
+visibility_mode = 1
+
+[node name="TRight" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
+position = Vector2(1027, 428)
+scale = Vector2(3.95833, 3.375)
+texture_normal = ExtResource("12_arr23")
+action = "p1_turnRight"
+visibility_mode = 1
 
 [connection signal="pressed" from="UI/MenuItems/PlaySolo" to="." method="_on_play_solo_pressed"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPLocal" to="." method="_on_play_mp_local_pressed"]
