@@ -2,7 +2,14 @@ extends Control
 
 signal restartGame
 signal gameEnd
+
 var matchStarted = false
+
+var player1ChainDamage = 0
+var player2ChainDamage = 0
+var player1Attacked : bool = false
+var player2Attacked : bool = false
+var chainAttackAnims : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +38,17 @@ func _process(delta):
 		GameManager.matchInfo.matchTime += delta
 		var minutes = int(GameManager.matchInfo.matchTime) / 60
 		$MatchTimer.text = str(minutes).pad_zeros(2) + ":" + str(int(GameManager.matchInfo.matchTime) % 60).pad_zeros(2)
+	
+	if player1Attacked and player2Attacked:
+		chainAttackAnims = true
+	elif !player1Attacked and !player2Attacked:
+		player1ChainDamage = 0
+		player2ChainDamage = 0
+	
+	if chainAttackAnims:
+		playChainAttackEffects()
+	else:
+		get_tree().create_tween().tween_property($UIAnims/ChainAttackPanel, "modulate:a", 0, 1)
 
 func roundEnd(winner):
 	if winner == 1:
@@ -71,11 +89,17 @@ func _on_player_1_send_damage(damage):
 	if damage > 0:
 		$Player2.queueNuisance(damage)
 		playDamageSoundEffects(damage)
+	player1Attacked = false
+	if !player2Attacked:
+		chainAttackAnims = false
 
 func _on_player_2_send_damage(damage):
 	if damage > 0:
 		$Player1.queueNuisance(damage)
 		playDamageSoundEffects(damage)
+	player2Attacked = false
+	if !player1Attacked:
+		chainAttackAnims = false
 
 func clearNuisanceQueue(player):
 	for sprite in get_node(player + "/NuisanceQueue").get_children():
@@ -133,3 +157,21 @@ func playDamageSoundEffects(damage):
 	else:
 		$SoundEffects/Attack4.play()
 		
+
+func playChainAttackEffects():
+	if $UIAnims/ChainAttackPanel.modulate.a == 0:
+		get_tree().create_tween().tween_property($UIAnims/ChainAttackPanel, "modulate:a", 0.6, 1)
+	var p1DamageToShow = (player1ChainDamage / 2) + 1
+	var p2DamageToShow = player2ChainDamage + 1
+	$UIAnims/ChainAttackPanel/P1Damage.text = str(player1ChainDamage)
+	$UIAnims/ChainAttackPanel/P2Damage.text = str(player2ChainDamage)
+	get_tree().create_tween().tween_property($UIAnims/ChainAttackPanel/ChainAttackBar, "max_value", p2DamageToShow, 0.2)
+	get_tree().create_tween().tween_property($UIAnims/ChainAttackPanel/ChainAttackBar, "value", p1DamageToShow, 0.2)
+
+func _on_player_1_attacking_damage(attack):
+	player1Attacked = true
+	player1ChainDamage = attack
+
+func _on_player_2_attacking_damage(attack):
+	player2Attacked = true
+	player2ChainDamage = attack

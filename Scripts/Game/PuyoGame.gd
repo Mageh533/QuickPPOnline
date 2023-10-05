@@ -1,6 +1,7 @@
 extends Node2D
 
 signal sendDamage(damage)
+signal attackingDamage(attack)
 signal lost
 
 @export var currentPlayer : int
@@ -53,6 +54,8 @@ func _process(delta):
 	$ScorePanel/ScoreLabel.text = str(score).pad_zeros(8)
 	if chainCooldown > 0 or nuisanceCooldown > 0:
 		$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
+		var chainScore = (10 * puyosClearedInChain) * (calculateChainPower() + calculateColourBonus() + groupBonus)
+		emit_signal("attackingDamage", chainScore)
 		if chainCooldown > 0:
 			scoreToAdd = true
 			chainCooldown += -delta

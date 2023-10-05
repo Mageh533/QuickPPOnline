@@ -241,11 +241,16 @@ animations = [{
 [sub_resource type="LabelSettings" id="LabelSettings_s51mq"]
 font_color = Color(0.184314, 0.184314, 0.184314, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnh6q"]
-bg_color = Color(0.0980392, 0.72549, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_f6vhb"]
+font_size = 72
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h8gm"]
-bg_color = Color(0.419608, 0.576471, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wa87a"]
+bg_color = Color(0, 0.713726, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nul1h"]
+bg_color = Color(0, 0, 0.596078, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_owgav"]
 font_size = 35
@@ -399,11 +404,6 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_yhe0d"]
 font_size = 32
 outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_f6vhb"]
-font_size = 72
-outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g7mdf"]
@@ -584,6 +584,15 @@ position = Vector2(50, 13)
 scale = Vector2(0.445, 0.445)
 sprite_frames = SubResource("SpriteFrames_lcqxn")
 
+[node name="MatchTimer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 10.0
+offset_right = 665.0
+offset_bottom = 112.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_f6vhb")
+
 [node name="UIAnims" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 13
@@ -597,14 +606,11 @@ grow_vertical = 2
 
 [node name="ChainAttackPanel" type="Panel" parent="UIAnims"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -117.0
-offset_bottom = -45.0
+offset_top = 200.0
+offset_bottom = 261.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ChainAttackBar" type="ProgressBar" parent="UIAnims/ChainAttackPanel"]
 layout_mode = 1
@@ -617,9 +623,67 @@ offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_pnh6q")
-theme_override_styles/fill = SubResource("StyleBoxFlat_1h8gm")
+theme_override_styles/background = SubResource("StyleBoxFlat_wa87a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nul1h")
 value = 50.0
+rounded = true
+show_percentage = false
+
+[node name="P1Rect" type="ColorRect" parent="UIAnims/ChainAttackPanel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 71.0
+offset_bottom = -1.0
+grow_vertical = 2
+color = Color(0, 0, 0.596078, 1)
+
+[node name="P2Rect" type="ColorRect" parent="UIAnims/ChainAttackPanel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0.713726, 0, 1)
+
+[node name="P1Damage" type="Label" parent="UIAnims/ChainAttackPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 23.0
+offset_top = -33.5
+offset_right = 181.0
+offset_bottom = 33.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0"
+vertical_alignment = 1
+
+[node name="P2Damage" type="Label" parent="UIAnims/ChainAttackPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -181.0
+offset_top = -33.5
+offset_right = -23.0
+offset_bottom = 33.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Ready" type="Label" parent="UIAnims"]
 visible = false
@@ -738,19 +802,12 @@ grow_vertical = 0
 text = "First to:"
 scroll_active = false
 
-[node name="MatchTimer" type="Label" parent="."]
-layout_mode = 0
-offset_left = 481.0
-offset_top = 10.0
-offset_right = 665.0
-offset_bottom = 112.0
-text = "00:00"
-label_settings = SubResource("LabelSettings_f6vhb")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_g7mdf")
 
+[connection signal="attackingDamage" from="Player1" to="." method="_on_player_1_attacking_damage"]
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]
+[connection signal="attackingDamage" from="Player2" to="." method="_on_player_2_attacking_damage"]
 [connection signal="lost" from="Player2" to="." method="_on_player_2_lost"]
 [connection signal="sendDamage" from="Player2" to="." method="_on_player_2_send_damage"]
