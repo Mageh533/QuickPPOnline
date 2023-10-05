@@ -653,7 +653,7 @@ offset_right = 43.0
 offset_bottom = -487.0
 text = "FPS: "
 
-[node name="TouchScreenControls" type="Node" parent="PermaUI"]
+[node name="TouchScreenControls" type="Node2D" parent="PermaUI"]
 
 [node name="Down" type="TouchScreenButton" parent="PermaUI/TouchScreenControls"]
 position = Vector2(157, 545)

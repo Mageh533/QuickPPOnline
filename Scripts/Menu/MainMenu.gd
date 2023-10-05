@@ -10,6 +10,7 @@ const PORT = 4433
 
 func _ready():
 	$PermaUI/PausedPanel.hide()
+	$PermaUI/TouchScreenControls.hide()
 	if OS.get_name() == "Web":
 		$UI/MenuItems/PlayMPOnline.disabled = true
 		$PermaUI/SettingsPopUp/VBoxContainer/Exit.queue_free()
@@ -57,6 +58,7 @@ func _on_play_solo_pressed():
 	$GameContainer.add_child(currentGame)
 	await playFadeAnims("fadeOut")
 	get_tree().paused = false
+	$PermaUI/TouchScreenControls.show()
 
 
 func on_restart_pressed():
@@ -133,6 +135,7 @@ func start_game():
 	await playFadeAnims("fadeOut")
 	get_tree().paused = false
 	print("Second player is: " + str(GameManager.secondPlayerId))
+	$PermaUI/TouchScreenControls.show()
 
 @rpc("any_peer", "call_local")
 func restartGame():
