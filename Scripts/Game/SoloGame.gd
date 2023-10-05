@@ -12,6 +12,7 @@ func _ready():
 	await $UIAnims/AnimationPlayer.animation_finished
 	$PuyoGame.process_mode = Node.PROCESS_MODE_INHERIT
 	matchStarted = true
+	GameManager.soloInfo.active = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

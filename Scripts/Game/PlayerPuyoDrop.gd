@@ -87,7 +87,10 @@ func _physics_process(delta):
 func _process(_delta):
 	if interpolate:
 		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, 4)
-
+	
+	if GameManager.soloInfo.active:
+		fallSpeed = GameManager.soloMatchSettings.speed * 10
+	
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
 		if rayCast.is_colliding():

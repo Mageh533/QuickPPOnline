@@ -12,7 +12,8 @@ var soloInfo = {
 	"Mode" : "Endless",
 	"matchTime" : 0,
 	"maxChain" : 0,
-	"speed" : 0
+	"speed" : 0,
+	"active" : false
 }
 var matchInfo = {
 	"matchTime" : 0,
@@ -23,7 +24,8 @@ var matchSettings = {
 	"roundsToWin" : 2
 }
 var soloMatchSettings = {
-	"speed" : 5
+	"speed" : 5,
+	"fixedSpeed" : true
 }
 
 # Global functions

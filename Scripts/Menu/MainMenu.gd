@@ -215,3 +215,6 @@ func _on_check_box_toggled(button_pressed):
 
 func _on_rounds_value_changed(value):
 	GameManager.matchSettings.roundsToWin = value
+
+func _on_speed_value_changed(value):
+	GameManager.soloMatchSettings.speed = value

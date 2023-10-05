@@ -370,6 +370,7 @@ text = "Speed"
 [node name="Speed" type="SpinBox" parent="UI/SoloMatchSettings/Items/SpeedSetting"]
 layout_mode = 2
 min_value = 1.0
+max_value = 20.0
 value = 1.0
 rounded = true
 
@@ -790,6 +791,8 @@ visibility_mode = 1
 [connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
 [connection signal="value_changed" from="UI/LocalMatchSettings/Items/RoundsToWin/Rounds" to="." method="_on_rounds_value_changed"]
 [connection signal="pressed" from="UI/LocalMatchSettings/Items/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="changed" from="UI/SoloMatchSettings/Items/SpeedSetting/Speed" to="." method="_on_speed_changed"]
+[connection signal="value_changed" from="UI/SoloMatchSettings/Items/SpeedSetting/Speed" to="." method="_on_speed_value_changed"]
 [connection signal="pressed" from="UI/SoloMatchSettings/Items/SoloStartButton" to="." method="_on_solo_start_button_pressed"]
 [connection signal="pressed" from="PermaUI/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_up/p1up" to="PermaUI/ControlsPopUp" method="_on_p_1_up_pressed"]
