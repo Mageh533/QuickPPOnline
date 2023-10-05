@@ -234,7 +234,7 @@ func spawnNuisance(nuisanceNum):
 		else:
 			stack += 1
 			freeSpawnPoints = [0, 1, 2, 3, 4, 5]
-	if nuisanceNum < 12:
+	if nuisanceNum < 6:
 		$MultiplayerSoundEffects/Damage1.play()
 	else:
 		$MultiplayerSoundEffects/Damage2.play()
