@@ -9,14 +9,16 @@ var masterVolumeIndex = AudioServer.get_bus_index("Master")
 const PORT = 4433
 
 func _ready():
+	$UI/SoloMatchSettings/Items/SpeedSetting/Speed.value = GameManager.soloMatchSettings.speed
+	$UI/LocalMatchSettings/Items/RoundsToWin/Rounds.value = GameManager.matchSettings.roundsToWin
 	$PermaUI/PausedPanel.hide()
 	$PermaUI/TouchScreenControls.hide()
 	if OS.get_name() == "Web":
 		$UI/MenuItems/PlayMPOnline.disabled = true
 		$PermaUI/SettingsPopUp/VBoxContainer/Exit.queue_free()
 	$PermaUI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
-	$UI/MenuItems/OnlinePopUp.hide()
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
+	$UI/OnlinePopUp.hide()
+	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
 	
@@ -46,11 +48,13 @@ func _on_settings_pop_up_popup_hide():
 	get_tree().paused = false
 
 func _on_play_mp_local_pressed():
-	setUpLocalGame()
-	await playFadeAnims("fadeIn")
-	start_game()
+	$UI/LocalMatchSettings.show()
 
 func _on_play_solo_pressed():
+	$UI/SoloMatchSettings.show()
+
+func _on_solo_start_button_pressed():
+	$UI/SoloMatchSettings.hide()
 	setUpLocalGame()
 	await playFadeAnims("fadeIn")
 	currentGame = SoloGame.instantiate()
@@ -60,6 +64,11 @@ func _on_play_solo_pressed():
 	get_tree().paused = false
 	$PermaUI/TouchScreenControls.show()
 
+func _on_start_button_pressed():
+	$UI/LocalMatchSettings.hide()
+	setUpLocalGame()
+	await playFadeAnims("fadeIn")
+	start_game()
 
 func on_restart_pressed():
 	await playFadeAnims("fadeIn")
@@ -122,7 +131,7 @@ func _on_start_pressed():
 	start_game.rpc()
 
 func _on_play_mp_online_pressed():
-	$UI/MenuItems/OnlinePopUp.visible = true
+	$UI/OnlinePopUp.visible = true
 
 @rpc("any_peer", "call_local")
 func start_game():
@@ -150,14 +159,14 @@ func _on_host_pressed():
 		OS.alert("Failed to start multiplayer server.")
 		return
 	else:
-		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
-		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
-		$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
+		$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
+		$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
+		$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 	multiplayer.multiplayer_peer = peer
 
 func _on_connect_pressed():
 	# Start as client.
-	var txt : String = $UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Remote.text
+	var txt : String = $UI/OnlinePopUp/VOnlineContainer/DirectNet/Options/Remote.text
 	if txt == "":
 		OS.alert("Need a remote to connect to.")
 		return
@@ -179,13 +188,13 @@ func setSecondPlayerId(id):
 		setSecondPlayerId.rpc_id(id, id)
 
 func peer_connected(_id):
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = false
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
+	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.visible = true
+	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = false
+	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "2 / 2 Players connected"
 
 func peer_disconnected(_id):
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
-	$UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
+	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start.disabled = true
+	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Label.text = "1 / 2 Players connected"
 
 func connection_failed():
 	pass
@@ -203,3 +212,6 @@ func _on_exit_pressed():
 
 func _on_check_box_toggled(button_pressed):
 	GameManager.fpsCounter = button_pressed
+
+func _on_rounds_value_changed(value):
+	GameManager.matchSettings.roundsToWin = value

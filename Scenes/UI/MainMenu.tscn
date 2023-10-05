@@ -69,6 +69,11 @@ MarginContainer/constants/margin_top = 0
 Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
 PopupPanel/styles/panel = SubResource("StyleBoxFlat_baad8")
 
+[sub_resource type="LabelSettings" id="LabelSettings_w71jw"]
+font_color = Color(0.901961, 0.901961, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwkxl"]
 bg_color = Color(0, 0.713726, 0.996078, 1)
 border_width_left = 1
@@ -87,11 +92,6 @@ MarginContainer/constants/margin_left = 0
 MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 0
 Panel/styles/panel = SubResource("StyleBoxFlat_rwkxl")
-
-[sub_resource type="LabelSettings" id="LabelSettings_w71jw"]
-font_color = Color(0.901961, 0.901961, 0, 1)
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q34b0"]
 bg_color = Color(1, 1, 1, 0.443137)
@@ -230,59 +230,6 @@ text = "Play Local Multiplayer"
 layout_mode = 2
 text = "Play Online"
 
-[node name="OnlinePopUp" type="PopupPanel" parent="UI/MenuItems"]
-mode = 1
-position = Vector2i(455, 212)
-size = Vector2i(245, 217)
-max_size = Vector2i(31248, 32768)
-
-[node name="VOnlineContainer" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp"]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 243.0
-offset_bottom = 215.0
-theme_override_constants/separation = 17
-
-[node name="DirectNet" type="VBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer"]
-layout_mode = 2
-theme = SubResource("Theme_mb2x8")
-theme_override_constants/separation = 24
-
-[node name="Direct" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
-layout_mode = 2
-text = "Online"
-horizontal_alignment = 1
-
-[node name="Host" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
-layout_mode = 2
-text = "Host"
-
-[node name="Options" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
-layout_mode = 2
-alignment = 1
-
-[node name="Remote" type="LineEdit" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options"]
-layout_mode = 2
-text = "127.0.0.1"
-max_length = 15
-expand_to_text_length = true
-
-[node name="Connect" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options"]
-layout_mode = 2
-text = "Connect"
-
-[node name="PlayerInfo" type="HBoxContainer" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo"]
-layout_mode = 2
-text = "0 / 0 Players connected"
-
-[node name="Start" type="Button" parent="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo"]
-layout_mode = 2
-text = "Start"
-
 [node name="OnlineWarning" type="Label" parent="UI"]
 visible = false
 layout_mode = 0
@@ -294,6 +241,141 @@ text = "Online multiplayer currently does not work on html5.
 Support coming soon!"
 label_settings = SubResource("LabelSettings_w71jw")
 horizontal_alignment = 1
+
+[node name="OnlinePopUp" type="PopupPanel" parent="UI"]
+mode = 1
+position = Vector2i(450, 212)
+size = Vector2i(259, 259)
+max_size = Vector2i(31248, 32768)
+
+[node name="VOnlineContainer" type="VBoxContainer" parent="UI/OnlinePopUp"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 257.0
+offset_bottom = 257.0
+theme_override_constants/separation = 17
+
+[node name="DirectNet" type="VBoxContainer" parent="UI/OnlinePopUp/VOnlineContainer"]
+layout_mode = 2
+theme = SubResource("Theme_mb2x8")
+theme_override_constants/separation = 24
+
+[node name="Direct" type="Label" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet"]
+layout_mode = 2
+text = "Online"
+horizontal_alignment = 1
+
+[node name="Host" type="Button" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet"]
+layout_mode = 2
+text = "Host"
+
+[node name="Options" type="HBoxContainer" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet"]
+layout_mode = 2
+alignment = 1
+
+[node name="Remote" type="LineEdit" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet/Options"]
+layout_mode = 2
+text = "127.0.0.1"
+max_length = 15
+expand_to_text_length = true
+
+[node name="Connect" type="Button" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet/Options"]
+layout_mode = 2
+text = "Connect"
+
+[node name="RoundsToWin" type="HBoxContainer" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet/RoundsToWin"]
+layout_mode = 2
+text = "Rounds To Win"
+
+[node name="Rounds" type="SpinBox" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet/RoundsToWin"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+rounded = true
+
+[node name="PlayerInfo" type="HBoxContainer" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo"]
+layout_mode = 2
+text = "0 / 0 Players connected"
+
+[node name="Start" type="Button" parent="UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo"]
+layout_mode = 2
+text = "Start"
+
+[node name="LocalMatchSettings" type="PopupPanel" parent="UI"]
+position = Vector2i(470, 145)
+size = Vector2i(212, 152)
+
+[node name="Items" type="VBoxContainer" parent="UI/LocalMatchSettings"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 210.0
+offset_bottom = 150.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/LocalMatchSettings/Items"]
+layout_mode = 2
+text = "Match Settings"
+horizontal_alignment = 1
+
+[node name="RoundsToWin" type="HBoxContainer" parent="UI/LocalMatchSettings/Items"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/LocalMatchSettings/Items/RoundsToWin"]
+layout_mode = 2
+text = "Rounds To Win"
+
+[node name="Rounds" type="SpinBox" parent="UI/LocalMatchSettings/Items/RoundsToWin"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+rounded = true
+
+[node name="StartButton" type="Button" parent="UI/LocalMatchSettings/Items"]
+layout_mode = 2
+text = "Start Match"
+
+[node name="SoloMatchSettings" type="PopupPanel" parent="UI"]
+position = Vector2i(465, 90)
+size = Vector2i(217, 167)
+
+[node name="Items" type="VBoxContainer" parent="UI/SoloMatchSettings"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 215.0
+offset_bottom = 165.0
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/SoloMatchSettings/Items"]
+layout_mode = 2
+text = "Solo Match Settings"
+horizontal_alignment = 1
+
+[node name="SpeedSetting" type="HBoxContainer" parent="UI/SoloMatchSettings/Items"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/SoloMatchSettings/Items/SpeedSetting"]
+layout_mode = 2
+text = "Speed"
+
+[node name="Speed" type="SpinBox" parent="UI/SoloMatchSettings/Items/SpeedSetting"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+rounded = true
+
+[node name="SoloStartButton" type="Button" parent="UI/SoloMatchSettings/Items"]
+layout_mode = 2
+text = "Start Match"
 
 [node name="GameContainer" type="Node" parent="."]
 process_mode = 1
@@ -702,9 +784,13 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_mouse_exited"]
 [connection signal="pressed" from="UI/MenuItems/PlayMPOnline" to="." method="_on_play_mp_online_pressed"]
-[connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
-[connection signal="pressed" from="UI/MenuItems/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/Options/Connect" to="." method="_on_connect_pressed"]
+[connection signal="value_changed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/RoundsToWin/Rounds" to="." method="_on_rounds_value_changed"]
+[connection signal="pressed" from="UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo/Start" to="." method="_on_start_pressed"]
+[connection signal="value_changed" from="UI/LocalMatchSettings/Items/RoundsToWin/Rounds" to="." method="_on_rounds_value_changed"]
+[connection signal="pressed" from="UI/LocalMatchSettings/Items/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/SoloMatchSettings/Items/SoloStartButton" to="." method="_on_solo_start_button_pressed"]
 [connection signal="pressed" from="PermaUI/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_up/p1up" to="PermaUI/ControlsPopUp" method="_on_p_1_up_pressed"]
 [connection signal="pressed" from="PermaUI/ControlsPopUp/Controls/P1Controls/p1_down/p1down" to="PermaUI/ControlsPopUp" method="_on_p_1_down_pressed"]
