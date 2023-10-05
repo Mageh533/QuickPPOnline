@@ -2,6 +2,7 @@ extends Node2D
 
 signal sendDamage(damage)
 signal attackingDamage(attack)
+signal attacking(attacking)
 signal lost
 
 @export var currentPlayer : int
@@ -53,10 +54,12 @@ func _process(delta):
 	connectPuyosToGame()
 	$ScorePanel/ScoreLabel.text = str(score).pad_zeros(8)
 	if chainCooldown > 0 or nuisanceCooldown > 0:
-		$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
-		var chainScore = (10 * puyosClearedInChain) * (calculateChainPower() + calculateColourBonus() + groupBonus)
-		emit_signal("attackingDamage", chainScore)
 		if chainCooldown > 0:
+			if currentChain > 2:
+				emit_signal("attacking", true)
+			$ScorePanel/ScoreLabel.text = str(10 * puyosClearedInChain) + " x " + str(calculateChainPower() + calculateColourBonus() + groupBonus)
+			var chainScore = (10 * puyosClearedInChain) * (calculateChainPower() + calculateColourBonus() + groupBonus)
+			emit_signal("attackingDamage", chainScore)
 			scoreToAdd = true
 			chainCooldown += -delta
 		if nuisanceCooldown > 0:
@@ -84,6 +87,7 @@ func _process(delta):
 					startChain()
 		else:
 			currentChain = 0
+			emit_signal("attacking", false)
 			disablePlayer(false)
 
 # Connects their signals

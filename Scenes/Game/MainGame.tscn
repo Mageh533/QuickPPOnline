@@ -780,9 +780,11 @@ scroll_active = false
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_g7mdf")
 
+[connection signal="attacking" from="Player1" to="." method="_on_player_1_attacking"]
 [connection signal="attackingDamage" from="Player1" to="." method="_on_player_1_attacking_damage"]
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]
+[connection signal="attacking" from="Player2" to="." method="_on_player_2_attacking"]
 [connection signal="attackingDamage" from="Player2" to="." method="_on_player_2_attacking_damage"]
 [connection signal="lost" from="Player2" to="." method="_on_player_2_lost"]
 [connection signal="sendDamage" from="Player2" to="." method="_on_player_2_send_damage"]
