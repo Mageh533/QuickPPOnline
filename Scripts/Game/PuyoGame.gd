@@ -6,6 +6,7 @@ signal lost
 @export var currentPlayer : int
 @export var nuisanceTarget: float
 @export var nuisanceScene : PackedScene
+@export var playerColor : Color
 
 var puyosObjectArray = []
 var puyosToPop = []
@@ -32,6 +33,7 @@ var coloursCleared = 0
 var groupBonus = 0
 
 func _ready():
+	setPlayerColor()
 	if currentPlayer == 0:
 		$PuyoDropBG2.visible = false
 		$NextPuyoSprites/Puyo1Set1_2.visible = false
@@ -271,6 +273,12 @@ func disablePlayer(disable : bool):
 		get_tree().get_nodes_in_group("Player")[currentPlayer].set_process(true)
 		get_tree().get_nodes_in_group("Player")[currentPlayer].set_physics_process(true)
 		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = true
+
+func setPlayerColor():
+	$TileMap.set_layer_modulate(0, playerColor)
+	$ScorePanel.self_modulate = playerColor
+	$PuyoDropBG1.color = playerColor
+	$PuyoDropBG2.color = playerColor
 
 func _on_lose_timer_timeout():
 	if loseTile and !defeated:

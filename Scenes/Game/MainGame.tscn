@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=49 format=3 uid="uid://5rjlbqosjvt2"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
@@ -241,6 +241,12 @@ animations = [{
 [sub_resource type="LabelSettings" id="LabelSettings_s51mq"]
 font_color = Color(0.184314, 0.184314, 0.184314, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pnh6q"]
+bg_color = Color(0.0980392, 0.72549, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h8gm"]
+bg_color = Color(0.419608, 0.576471, 1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_owgav"]
 font_size = 35
 font_color = Color(1, 0.219608, 0.231373, 1)
@@ -478,6 +484,7 @@ animation = &"small"
 [node name="Player2" parent="." instance=ExtResource("3_qhxpw")]
 position = Vector2(733, 2)
 currentPlayer = 1
+playerColor = Color(0.0980392, 0.72549, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
 libraries = {
@@ -588,6 +595,32 @@ offset_right = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ChainAttackPanel" type="Panel" parent="UIAnims"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -117.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChainAttackBar" type="ProgressBar" parent="UIAnims/ChainAttackPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_pnh6q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1h8gm")
+value = 50.0
+
 [node name="Ready" type="Label" parent="UIAnims"]
 visible = false
 layout_mode = 0
@@ -697,7 +730,7 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -34.0
+offset_left = -45.0
 offset_top = -23.0
 offset_right = 47.0
 grow_horizontal = 2
