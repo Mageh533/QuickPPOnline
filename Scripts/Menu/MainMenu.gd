@@ -6,19 +6,26 @@ extends Node
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
 
+enum MenuSets {
+	MAIN_MENU,
+	SOLO_MENU,
+	MULTIPLAYER_MENU,
+	SETTINGS_MENU,
+	MULTIPLAYER_LOCAL_MENU,
+	MULTIPLAYER_ONLINE_MENU
+}
+
+var currentMenu = MenuSets.MAIN_MENU
+
 const PORT = 4433
 
 func _ready():
-	$UI/SoloMatchSettings/Items/SpeedSetting/Speed.value = GameManager.soloMatchSettings.speed
-	$UI/LocalMatchSettings/Items/RoundsToWin/Rounds.value = GameManager.matchSettings.roundsToWin
+	$PermaUI/PauseButton.hide()
+	get_tree().paused = false
+	menuStartAnims()
 	$PermaUI/PausedPanel.hide()
 	$PermaUI/TouchScreenControls.hide()
-	if OS.get_name() == "Web":
-		$UI/MenuItems/PlayMPOnline.disabled = true
-		$PermaUI/SettingsPopUp/VBoxContainer/Exit.queue_free()
 	$PermaUI/SoundPopUp/VSlider.value = db_to_linear(AudioServer.get_bus_volume_db(masterVolumeIndex))
-	$UI/OnlinePopUp.hide()
-	$UI/OnlinePopUp/VOnlineContainer/DirectNet/PlayerInfo.hide()
 	# You can save bandwidth by disabling server relay and peer notifications.
 	multiplayer.server_relay = false
 	
@@ -26,8 +33,6 @@ func _ready():
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
-	
-	playFadeAnims("fadeOut")
 
 func _process(_delta):
 	if GameManager.fpsCounter == true:
@@ -43,18 +48,15 @@ func _process(_delta):
 		$PermaUI/PausedPanel.show()
 	else:
 		$PermaUI/PausedPanel.hide()
+	
+	if currentMenu == MenuSets.MAIN_MENU:
+		if $UI/BackButton.modulate.a == 1:
+			get_tree().create_tween().tween_property($UI/BackButton, "modulate:a", 0, 0.2)
+	else:
+		if $UI/BackButton.modulate.a == 0:
+			get_tree().create_tween().tween_property($UI/BackButton, "modulate:a", 1, 0.2)
 
-func _on_settings_pop_up_popup_hide():
-	get_tree().paused = false
-
-func _on_play_mp_local_pressed():
-	$UI/LocalMatchSettings.show()
-
-func _on_play_solo_pressed():
-	$UI/SoloMatchSettings.show()
-
-func _on_solo_start_button_pressed():
-	$UI/SoloMatchSettings.hide()
+func startEndlessGame():
 	setUpLocalGame()
 	await playFadeAnims("fadeIn")
 	currentGame = SoloGame.instantiate()
@@ -63,9 +65,9 @@ func _on_solo_start_button_pressed():
 	await playFadeAnims("fadeOut")
 	get_tree().paused = false
 	$PermaUI/TouchScreenControls.show()
+	$PermaUI/PauseButton.show()
 
-func _on_start_button_pressed():
-	$UI/LocalMatchSettings.hide()
+func startLocalMpGame():
 	setUpLocalGame()
 	await playFadeAnims("fadeIn")
 	start_game()
@@ -82,7 +84,7 @@ func on_game_end():
 func _on_sound_button_pressed():
 	$PermaUI/SoundPopUp.show()
 
-func _on_settings_button_pressed():
+func _on_pause_button_pressed():
 	$PermaUI/SettingsPopUp.show()
 
 func _on_v_slider_value_changed(value):
@@ -101,7 +103,6 @@ func playFadeAnims(anim):
 func setUpLocalGame():
 	randomize()
 	GameManager.currentSeed = randi()
-	$PermaUI/SettingsPopUp/VBoxContainer/Controls.disabled = true
 
 # ======================== Online related ========================
 
@@ -118,20 +119,9 @@ func setUpSeed(seedShare):
 	if multiplayer.is_server():
 		setUpSeed.rpc_id(GameManager.secondPlayerId, seedShare)
 
-func _on_play_mp_online_mouse_entered():
-	if OS.get_name() == "Web":
-		$UI/OnlineWarning.show()
-
-func _on_play_mp_online_mouse_exited():
-	if OS.get_name() == "Web":
-		$UI/OnlineWarning.hide()
-
 func _on_start_pressed():
 	GameManager.onlineMatch = true
 	start_game.rpc()
-
-func _on_play_mp_online_pressed():
-	$UI/OnlinePopUp.visible = true
 
 @rpc("any_peer", "call_local")
 func start_game():
@@ -179,6 +169,7 @@ func _on_connect_pressed():
 
 
 # Since this is only a 1v1 where one player is the server, we only need to know the id of player 2
+# But this essentially sucks and needs to be rewritten to work with more than 2 players
 @rpc("any_peer", "call_local")
 func setSecondPlayerId(id):
 	if GameManager.secondPlayerId == 0:
@@ -200,21 +191,223 @@ func connection_failed():
 	pass
 
 # ======== Settings stuff ========
-
-func _on_controls_pressed():
-	$PermaUI/ControlsPopUp.show()
-
 func _on_return_to_menu_pressed():
 	get_tree().reload_current_scene()
-
-func _on_exit_pressed():
-	get_tree().quit()
 
 func _on_check_box_toggled(button_pressed):
 	GameManager.fpsCounter = button_pressed
 
-func _on_rounds_value_changed(value):
-	GameManager.matchSettings.roundsToWin = value
+# Pause game when settings menu is open
+func _on_settings_pop_up_popup_hide():
+	get_tree().paused = false
 
-func _on_speed_value_changed(value):
-	GameManager.soloMatchSettings.speed = value
+# ======== UI Menus animations ========
+func menuStartAnims():
+	$UI/Background.modulate.a = 0
+	await get_tree().create_timer(0.01).timeout
+	$UI/MenuItems/PlaySolo.position.x = 1200
+	$UI/MenuItems/PlayMP.position.x = -1200
+	$UI/MenuItems/MenuSettings.position.x = 1200
+	await get_tree().create_timer(1).timeout
+	var tween = get_tree().create_tween()
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property($UI/Background, "modulate:a", 1, 2)
+	tween2.tween_property($UI/EAWarning, "modulate:a", 1, 1)
+	tween.tween_property($UI/MenuItems/PlaySolo, "position:x", 400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($UI/MenuItems/PlayMP, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($UI/MenuItems/MenuSettings, "position:x", 400, 0.3).set_trans(Tween.TRANS_CUBIC)
+
+func mainMenuHide():
+	var tween = get_tree().create_tween()
+	get_tree().create_tween().tween_property($UI/MenuItems/PlaySolo, "position:x", 1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MenuItems/PlayMP, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($UI/MenuItems/MenuSettings, "position:x", 1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	$UI/MenuItems.hide()
+
+func mainMenuShow():
+	$UI/MenuItems.modulate.a = 0
+	$UI/MenuItems/PlaySolo.position.x = 1200
+	$UI/MenuItems/PlayMP.position.x = -1200
+	$UI/MenuItems/MenuSettings.position.x = 1200
+	await get_tree().create_timer(0.2).timeout
+	$UI/MenuItems.show()
+	get_tree().create_tween().tween_property($UI/MenuItems, "modulate:a", 1, 0.3) # Weird workaround to stop flickering when switching menus
+	get_tree().create_tween().tween_property($UI/MenuItems/PlaySolo, "position:x", 400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MenuItems/PlayMP, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MenuItems/MenuSettings, "position:x", 400, 0.3).set_trans(Tween.TRANS_CUBIC)
+
+func soloMenuShow():
+	$UI/SoloMenu.modulate.a = 0
+	$UI/SoloMenu/Endless.position.x = 1200
+	$UI/SoloMenu/TinyPuyo.position.x = 1200
+	$UI/SoloMenu/Fever.position.x = 1200
+	await get_tree().create_timer(0.2).timeout
+	$UI/SoloMenu.show()
+	get_tree().create_tween().tween_property($UI/SoloMenu, "modulate:a", 1, 0.3)
+	get_tree().create_tween().tween_property($UI/SoloMenu/Endless, "position:x", 400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/SoloMenu/TinyPuyo, "position:x", 400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/SoloMenu/Fever, "position:x", 400, 0.3).set_trans(Tween.TRANS_CUBIC)
+
+func soloMenuHide():
+	var tween = get_tree().create_tween()
+	get_tree().create_tween().tween_property($UI/SoloMenu/Endless, "position:x", 1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/SoloMenu/TinyPuyo, "position:x", 1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($UI/SoloMenu/Fever, "position:x", 1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	$UI/SoloMenu.hide()
+
+func mPMenuShow():
+	$UI/MultiplayerMenu.modulate.a = 0
+	$UI/MultiplayerMenu/LocalMP.position.x = -1200
+	$UI/MultiplayerMenu/OnlineMP.position.x = -1200
+	await get_tree().create_timer(0.2).timeout
+	$UI/MultiplayerMenu.show()
+	get_tree().create_tween().tween_property($UI/MultiplayerMenu, "modulate:a", 1, 0.3)
+	get_tree().create_tween().tween_property($UI/MultiplayerMenu/LocalMP, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerMenu/OnlineMP, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+
+func mPMenuHide():
+	var tween = get_tree().create_tween()
+	get_tree().create_tween().tween_property($UI/MultiplayerMenu/LocalMP, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($UI/MultiplayerMenu/OnlineMP, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	$UI/MultiplayerMenu.hide()
+
+func localMpMenuShow():
+	$UI/MultiplayerLocalMenu.modulate.a = 0
+	$UI/MultiplayerLocalMenu/CreateGame.position.x = -1200
+	$UI/MultiplayerLocalMenu.show()
+	await get_tree().create_timer(0.2).timeout
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu, "modulate:a", 1, 0.3)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+
+func localMpMenuHide():
+	var tween = get_tree().create_tween()
+	tween.tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	$UI/MultiplayerLocalMenu.hide()
+
+func settingsMenuShow():
+	$UI/SettingsPanel.position.x = 1200
+	$UI/SettingsPanel.show()
+	get_tree().create_tween().tween_property($UI/SettingsPanel, "position:x", 250, 0.3)
+
+func settingsMenuHide():
+	var tween = get_tree().create_tween()
+	tween.tween_property($UI/SettingsPanel, "position:x", 1200, 0.3)
+	await tween.finished
+	$UI/SettingsPanel.hide()
+
+# ======== UI Buttons animations ========
+# ======== Main Menu Buttons ========
+func _on_play_solo_mouse_entered():
+	if currentMenu == MenuSets.MAIN_MENU:
+		get_tree().create_tween().tween_property($UI/MenuItems/PlaySolo, "position:x", 350, 0.1)
+
+func _on_play_solo_mouse_exited():
+	if currentMenu == MenuSets.MAIN_MENU:
+		get_tree().create_tween().tween_property($UI/MenuItems/PlaySolo, "position:x", 400, 0.1)
+
+func _on_play_mp_local_mouse_entered():
+	if currentMenu == MenuSets.MAIN_MENU:
+		get_tree().create_tween().tween_property($UI/MenuItems/PlayMP, "position:x", -350, 0.1)
+
+func _on_play_mp_local_mouse_exited():
+	if currentMenu == MenuSets.MAIN_MENU:
+		get_tree().create_tween().tween_property($UI/MenuItems/PlayMP, "position:x", -400, 0.1)
+
+func _on_menu_settings_mouse_entered():
+	if currentMenu == MenuSets.MAIN_MENU:
+		get_tree().create_tween().tween_property($UI/MenuItems/MenuSettings, "position:x", 350, 0.1)
+
+func _on_menu_settings_mouse_exited():
+	if currentMenu == MenuSets.MAIN_MENU:
+		get_tree().create_tween().tween_property($UI/MenuItems/MenuSettings, "position:x", 400, 0.1)
+
+func _on_menu_settings_pressed():
+	currentMenu = MenuSets.SETTINGS_MENU
+	await mainMenuHide()
+	await settingsMenuShow()
+
+func _on_play_solo_pressed():
+	currentMenu = MenuSets.SOLO_MENU
+	await mainMenuHide()
+	await soloMenuShow()
+
+func _on_play_mp_pressed():
+	currentMenu = MenuSets.MULTIPLAYER_MENU
+	await mainMenuHide()
+	await mPMenuShow()
+
+# ======== Solo Menu Buttons ========
+func _on_classic_mouse_entered():
+	if currentMenu == MenuSets.SOLO_MENU:
+		get_tree().create_tween().tween_property($UI/SoloMenu/Endless, "position:x", 350, 0.1)
+
+func _on_classic_mouse_exited():
+	if currentMenu == MenuSets.SOLO_MENU:
+		get_tree().create_tween().tween_property($UI/SoloMenu/Endless, "position:x", 400, 0.1)
+
+func _on_endless_pressed():
+	startEndlessGame()
+
+# ======== Multiplayer Menu Buttons ========
+func _on_local_mp_mouse_entered():
+	if currentMenu == MenuSets.MULTIPLAYER_MENU:
+		get_tree().create_tween().tween_property($UI/MultiplayerMenu/LocalMP, "position:x", -350, 0.1)
+
+func _on_local_mp_mouse_exited():
+	if currentMenu == MenuSets.MULTIPLAYER_MENU:
+		get_tree().create_tween().tween_property($UI/MultiplayerMenu/LocalMP, "position:x", -400, 0.1)
+
+func _on_local_mp_pressed():
+	currentMenu = MenuSets.MULTIPLAYER_LOCAL_MENU
+	await mPMenuHide()
+	await localMpMenuShow()
+
+# ======== Multiplayer Local Menu Buttons ========
+
+func _on_create_game_mouse_entered():
+	pass # Replace with function body.
+
+func _on_create_game_mouse_exited():
+	pass # Replace with function body.
+
+func _on_create_game_pressed():
+	startLocalMpGame()
+
+# ======== Other Menu Buttons ========
+
+func _on_back_button_pressed():
+	if currentMenu == MenuSets.SOLO_MENU:
+		await soloMenuHide()
+		await mainMenuShow()
+		currentMenu = MenuSets.MAIN_MENU
+	elif currentMenu == MenuSets.MULTIPLAYER_MENU:
+		await mPMenuHide()
+		await mainMenuShow()
+		currentMenu = MenuSets.MAIN_MENU
+	elif currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
+		await localMpMenuHide()
+		await mPMenuShow()
+		currentMenu = MenuSets.MULTIPLAYER_MENU
+	elif currentMenu == MenuSets.SETTINGS_MENU:
+		await settingsMenuHide()
+		await mainMenuShow()
+		currentMenu = MenuSets.MAIN_MENU
+
+
+func _on_back_button_mouse_entered():
+	get_tree().create_tween().tween_property($UI/BackButton, "position:x", 0, 0.2)
+
+func _on_back_button_mouse_exited():
+	get_tree().create_tween().tween_property($UI/BackButton, "position:x", -5, 0.2)
+
+func _on_settings_tab_tab_changed(tab):
+	if tab == 0:
+		$UI/SettingsPanel/ControlsPanel.show()
+		$UI/SettingsPanel/GameSettingsPanel.hide()
+	if tab == 1:
+		$UI/SettingsPanel/ControlsPanel.hide()
+		$UI/SettingsPanel/GameSettingsPanel.show()

@@ -1,4 +1,4 @@
-extends PopupPanel
+extends Panel
 
 @onready var p1Controls = $Controls/P1Controls
 @onready var p2Controls = $Controls/P2Controls

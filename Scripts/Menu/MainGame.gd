@@ -35,6 +35,7 @@ func _process(delta):
 	$UIAnims/WinsPanel/WinsInfo.text = "First to: " + str(GameManager.matchSettings.roundsToWin)
 	if matchStarted:
 		GameManager.matchInfo.matchTime += delta
+		@warning_ignore("integer_division")
 		var minutes = int(GameManager.matchInfo.matchTime) / 60
 		$MatchTimer.text = str(minutes).pad_zeros(2) + ":" + str(int(GameManager.matchInfo.matchTime) % 60).pad_zeros(2)
 	
@@ -150,6 +151,7 @@ func playDamageSoundEffects(damage):
 func playChainAttackEffects():
 	if $UIAnims/ChainAttackPanel.modulate.a == 0:
 		get_tree().create_tween().tween_property($UIAnims/ChainAttackPanel, "modulate:a", 0.6, 1)
+	@warning_ignore("integer_division")
 	var p1DamageToShow = (player1ChainDamage / 2) + 1
 	var p2DamageToShow = player2ChainDamage + 1
 	$UIAnims/ChainAttackPanel/P1Damage.text = str(player1ChainDamage)

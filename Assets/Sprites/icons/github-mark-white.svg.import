@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brfhuohmm8tia"
-path="res://.godot/imported/volume-icon.svg-db03f0a217397194459461d5dac631db.ctex"
+uid="uid://bnh6g8rof482p"
+path="res://.godot/imported/github-mark-white.svg-d462011263a65cce79c2f392008ec53e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/volume-icon.svg"
-dest_files=["res://.godot/imported/volume-icon.svg-db03f0a217397194459461d5dac631db.ctex"]
+source_file="res://Assets/Sprites/icons/github-mark-white.svg"
+dest_files=["res://.godot/imported/github-mark-white.svg-d462011263a65cce79c2f392008ec53e.ctex"]
 
 [params]
 
