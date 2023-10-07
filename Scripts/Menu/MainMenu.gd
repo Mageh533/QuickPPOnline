@@ -65,7 +65,6 @@ func startEndlessGame():
 	await playFadeAnims("fadeOut")
 	get_tree().paused = false
 	$PermaUI/TouchScreenControls.show()
-	$PermaUI/PauseButton.show()
 
 func startLocalMpGame():
 	setUpLocalGame()
@@ -101,6 +100,7 @@ func playFadeAnims(anim):
 	$PermaUI/FadeRect.hide()
 
 func setUpLocalGame():
+	$PermaUI/PauseButton.show()
 	randomize()
 	GameManager.currentSeed = randi()
 
