@@ -385,17 +385,6 @@ text = "Max chain:"
 [node name="MaxChain" type="Label" parent="InfoPanel/VBox/Chain"]
 layout_mode = 2
 
-[node name="Time" type="HBoxContainer" parent="InfoPanel/VBox"]
-layout_mode = 2
-theme_override_constants/separation = 180
-
-[node name="TimeLabel" type="Label" parent="InfoPanel/VBox/Time"]
-layout_mode = 2
-text = "Time:"
-
-[node name="Time" type="Label" parent="InfoPanel/VBox/Time"]
-layout_mode = 2
-
 [node name="Speed" type="HBoxContainer" parent="InfoPanel/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 170
@@ -405,6 +394,17 @@ layout_mode = 2
 text = "Speed:"
 
 [node name="Speed" type="Label" parent="InfoPanel/VBox/Speed"]
+layout_mode = 2
+
+[node name="Time" type="HBoxContainer" parent="InfoPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 180
+
+[node name="TimeLabel" type="Label" parent="InfoPanel/VBox/Time"]
+layout_mode = 2
+text = "Time:"
+
+[node name="Time" type="Label" parent="InfoPanel/VBox/Time"]
 layout_mode = 2
 
 [node name="GarbageSentPanel" type="Panel" parent="."]
