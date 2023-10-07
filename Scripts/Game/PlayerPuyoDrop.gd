@@ -56,6 +56,7 @@ func _ready():
 	interpolate = true
 	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
+	fallSpeed = GameManager.generalSettings.speed * 10
 
 func _physics_process(delta):
 	if fastDrop:
@@ -87,9 +88,6 @@ func _physics_process(delta):
 func _process(_delta):
 	if interpolate:
 		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, 5)
-	
-	if GameManager.soloInfo.active:
-		fallSpeed = GameManager.soloMatchSettings.speed * 10
 	
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
