@@ -86,7 +86,7 @@ func _physics_process(delta):
 
 func _process(_delta):
 	if interpolate:
-		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, 4)
+		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, 5)
 	
 	if GameManager.soloInfo.active:
 		fallSpeed = GameManager.soloMatchSettings.speed * 10
