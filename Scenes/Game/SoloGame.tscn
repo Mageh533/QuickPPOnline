@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://caeh4snxqjfaa"]
+[gd_scene load_steps=33 format=3 uid="uid://caeh4snxqjfaa"]
 
 [ext_resource type="Script" path="res://Scripts/Game/SoloGame.gd" id="1_3dbq3"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="1_pr7mx"]
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_flro5"]
+[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="4_jua4e"]
 [ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/Sounds/lose.wav" id="4_qs63m"]
 [ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/Sounds/prepare.wav" id="5_ahetw"]
 [ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/Sounds/matchStart.wav" id="6_6xc70"]
@@ -56,10 +57,14 @@ border_color = Color(0.145098, 0.145098, 0.145098, 0.827451)
 shadow_size = 7
 
 [sub_resource type="Theme" id="Theme_jqlrh"]
+default_font_size = 24
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_scksh")
 Button/styles/normal = SubResource("StyleBoxFlat_katm3")
 Button/styles/pressed = SubResource("StyleBoxFlat_wcmnw")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 4
 MarginContainer/constants/margin_bottom = 0
 MarginContainer/constants/margin_left = 0
 MarginContainer/constants/margin_right = 0
@@ -98,6 +103,93 @@ tracks/1/keys = {
 _data = {
 "lose": SubResource("Animation_cv65l")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75rf2"]
+atlas = ExtResource("4_jua4e")
+region = Rect2(855, 512, 119, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2muoe"]
+atlas = ExtResource("4_jua4e")
+region = Rect2(720, 792, 65, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qftdl"]
+atlas = ExtResource("4_jua4e")
+region = Rect2(1008, 787, 67, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdvsh"]
+atlas = ExtResource("4_jua4e")
+region = Rect2(792, 788, 66, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh4ww"]
+atlas = ExtResource("4_jua4e")
+region = Rect2(936, 787, 66, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mouuq"]
+atlas = ExtResource("4_jua4e")
+region = Rect2(1080, 798, 67, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_856k7"]
+atlas = ExtResource("4_jua4e")
+region = Rect2(864, 788, 66, 71)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_unfs1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75rf2")
+}],
+"loop": true,
+"name": &"comet",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2muoe")
+}],
+"loop": true,
+"name": &"crown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qftdl")
+}],
+"loop": true,
+"name": &"large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdvsh")
+}],
+"loop": true,
+"name": &"moon",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh4ww")
+}],
+"loop": true,
+"name": &"rock",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mouuq")
+}],
+"loop": true,
+"name": &"small",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_856k7")
+}],
+"loop": true,
+"name": &"star",
+"speed": 5.0
+}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y5fwk"]
 font_size = 32
@@ -242,7 +334,7 @@ libraries = {
 
 [node name="GameModePanel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 668.0
+offset_left = 600.0
 offset_top = 74.0
 offset_right = 1018.0
 offset_bottom = 120.0
@@ -253,7 +345,7 @@ offset_left = 36.0
 offset_top = 1.0
 offset_right = 184.0
 offset_bottom = 41.0
-theme_override_constants/separation = 40
+theme_override_constants/separation = 185
 
 [node name="ModeLabel" type="Label" parent="GameModePanel/ModeContainer"]
 layout_mode = 2
@@ -265,37 +357,26 @@ text = "Endless"
 
 [node name="InfoPanel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 667.0
+offset_left = 599.0
 offset_top = 147.0
-offset_right = 1017.0
-offset_bottom = 361.0
-
-[node name="CurrentGameInfo" type="Label" parent="InfoPanel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -72.5
-offset_right = 72.5
-offset_bottom = 26.0
-grow_horizontal = 2
-text = "Current Game Info"
+offset_right = 1020.0
+offset_bottom = 387.0
 
 [node name="VBox" type="VBoxContainer" parent="InfoPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 41.0
-offset_top = -59.0
-offset_right = 150.0
-offset_bottom = 104.0
+offset_left = 39.0
+offset_top = -85.5
+offset_right = 205.0
+offset_bottom = 85.5
 grow_vertical = 2
 theme_override_constants/separation = 30
 
 [node name="Chain" type="HBoxContainer" parent="InfoPanel/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 120
 
 [node name="MaxChainLabel" type="Label" parent="InfoPanel/VBox/Chain"]
 layout_mode = 2
@@ -306,7 +387,7 @@ layout_mode = 2
 
 [node name="Time" type="HBoxContainer" parent="InfoPanel/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 180
 
 [node name="TimeLabel" type="Label" parent="InfoPanel/VBox/Time"]
 layout_mode = 2
@@ -317,7 +398,7 @@ layout_mode = 2
 
 [node name="Speed" type="HBoxContainer" parent="InfoPanel/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 170
 
 [node name="SpeedLabel" type="Label" parent="InfoPanel/VBox/Speed"]
 layout_mode = 2
@@ -328,10 +409,10 @@ layout_mode = 2
 
 [node name="GarbageSentPanel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 665.0
-offset_top = 411.0
-offset_right = 1015.0
-offset_bottom = 470.0
+offset_left = 512.0
+offset_top = 561.0
+offset_right = 1025.0
+offset_bottom = 620.0
 
 [node name="Label" type="Label" parent="GarbageSentPanel"]
 layout_mode = 1
@@ -344,6 +425,45 @@ offset_right = 143.0
 offset_bottom = 13.0
 grow_vertical = 2
 text = "Nuisance Sent:"
+
+[node name="NuisanceQueue" type="Node2D" parent="GarbageSentPanel"]
+position = Vector2(243, 29)
+
+[node name="1" type="AnimatedSprite2D" parent="GarbageSentPanel/NuisanceQueue"]
+position = Vector2(3, 0)
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_unfs1")
+animation = &"small"
+
+[node name="2" type="AnimatedSprite2D" parent="GarbageSentPanel/NuisanceQueue"]
+position = Vector2(47, 0)
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_unfs1")
+animation = &"small"
+
+[node name="3" type="AnimatedSprite2D" parent="GarbageSentPanel/NuisanceQueue"]
+position = Vector2(96, 0)
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_unfs1")
+animation = &"small"
+
+[node name="4" type="AnimatedSprite2D" parent="GarbageSentPanel/NuisanceQueue"]
+position = Vector2(141, 0)
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_unfs1")
+animation = &"small"
+
+[node name="5" type="AnimatedSprite2D" parent="GarbageSentPanel/NuisanceQueue"]
+position = Vector2(186, 0)
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_unfs1")
+animation = &"small"
+
+[node name="6" type="AnimatedSprite2D" parent="GarbageSentPanel/NuisanceQueue"]
+position = Vector2(231, 0)
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_unfs1")
+animation = &"small"
 
 [node name="UIAnims" type="Control" parent="."]
 layout_mode = 1
@@ -413,3 +533,4 @@ stream = ExtResource("10_jcqiu")
 stream = ExtResource("11_ha2ch")
 
 [connection signal="lost" from="PuyoGame" to="." method="_on_puyo_game_lost"]
+[connection signal="sendDamage" from="PuyoGame" to="." method="_on_puyo_game_send_damage"]
