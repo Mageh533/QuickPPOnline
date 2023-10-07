@@ -277,8 +277,8 @@ func mPMenuHide():
 func localMpMenuShow():
 	$UI/MultiplayerLocalMenu.modulate.a = 0
 	$UI/MultiplayerLocalMenu/CreateGame.position.x = -1200
-	$UI/MultiplayerLocalMenu.show()
 	await get_tree().create_timer(0.2).timeout
+	$UI/MultiplayerLocalMenu.show()
 	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu, "modulate:a", 1, 0.3)
 	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
 

@@ -412,6 +412,7 @@ grow_vertical = 2
 script = ExtResource("6_1875d")
 
 [node name="Controls" type="HBoxContainer" parent="UI/SettingsPanel/ControlsPanel"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 584.0
@@ -612,6 +613,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="FPSCounterCheckBox" type="CheckBox" parent="UI/SettingsPanel/GameSettingsPanel"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 28.0
 offset_right = 124.0
