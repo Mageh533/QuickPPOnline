@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b526hnm8iba4l"]
+[gd_scene load_steps=30 format=3 uid="uid://b526hnm8iba4l"]
 
 [ext_resource type="Script" path="res://Scripts/Game/RedPuyo.gd" id="1_2hd31"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_ymwr0"]
@@ -256,9 +256,6 @@ properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ql1xf"]
-size = Vector2(58, 58)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3f1jn"]
 size = Vector2(54, 54)
 
@@ -283,7 +280,6 @@ update_scale = false
 [node name="PuyoSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_onuvl")
-animation = &"hard_drop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7kfrt")
@@ -300,10 +296,6 @@ target_position = Vector2(50, 0)
 [node name="RayLeft" type="RayCast2D" parent="."]
 target_position = Vector2(-50, 0)
 
-[node name="GravityTimer" type="Timer" parent="."]
-wait_time = 0.05
-autostart = true
-
 [node name="PoppedPreTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -314,16 +306,6 @@ one_shot = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_y8bqo")
-
-[node name="AreaCol" type="Area2D" parent="."]
-top_level = true
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaCol"]
-shape = SubResource("RectangleShape2D_ql1xf")
-
-[node name="AreaTransform" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../AreaCol")
 
 [node name="ClipDetection" type="ShapeCast2D" parent="."]
 shape = SubResource("RectangleShape2D_3f1jn")
@@ -344,7 +326,5 @@ scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_64avu")
 script = ExtResource("3_snage")
 
-[connection signal="timeout" from="GravityTimer" to="." method="_on_gravity_timer_timeout"]
 [connection signal="timeout" from="PoppedPreTimer" to="." method="_on_popped_pre_timer_timeout"]
 [connection signal="timeout" from="PoppedTimer" to="." method="_on_popped_timer_timeout"]
-[connection signal="area_shape_entered" from="AreaCol" to="." method="_on_area_col_area_shape_entered"]

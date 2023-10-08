@@ -97,7 +97,7 @@ func _physics_process(delta):
 		else:
 			loseTileTime = 0
 		
-		if loseTileTime > 1:
+		if loseTileTime > 0.5:
 			defeated = true
 			emit_signal("lost")
 			disablePlayer(true)

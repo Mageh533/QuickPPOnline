@@ -1,6 +1,8 @@
 extends StaticBody2D
 
 var tile_size = 58
+var gravityTime = 0.03
+var gravityCooldown = 0
 
 @onready var startingScale = $PuyoSprites.scale.x
 
@@ -10,6 +12,7 @@ var popped = false
 var squashAnim = false
 var interpolate = false
 var landed = false
+var hardDrop = false
 @export var type = ""
 var connectedPositions = []
 var connected = []
@@ -24,8 +27,22 @@ func _process(delta):
 	if !moving and !popped:
 		searchOtherPuyos()
 
+func _physics_process(delta):
+	if hardDrop:
+		$PuyoSprites.play("hard_drop")
+		if !$RayBottom.is_colliding():
+			position += Vector2.DOWN * tile_size
+		else:
+			hardDrop = false
+	else:
+		if gravityCooldown > 0:
+			gravityCooldown -= delta
+		else:
+			gravityCooldown = gravityTime
+			fallDown()
+
 # 'Gravity' for the puyos that works similarly to the actual games, also stays within the tilemap
-func _on_gravity_timer_timeout():
+func fallDown():
 	if $ClipDetection.is_colliding() and !landed:
 		if !$RayTop.is_colliding():
 			position += Vector2.UP * tile_size
@@ -170,8 +187,3 @@ func _on_popped_timer_timeout():
 	$PopParticle.reparent(get_parent().get_parent())
 	await $PuyoSprites.animation_finished
 	queue_free()
-
-# Prevent puyos from clipping
-func _on_area_col_area_shape_entered(_area_rid, area, _area_shape_index, _local_shape_index):
-	if area.name != "LoseTile":
-		position += Vector2.UP * tile_size

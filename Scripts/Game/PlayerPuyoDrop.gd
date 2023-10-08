@@ -151,6 +151,9 @@ func playerControls(controlsToUse):
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
 			rotate180()
+	if Input.is_action_just_pressed("p" + str(controlsToUse) + "_up"):
+		if GameManager.generalSettings.hardDrop:
+			pieceLand(true)
 
 # Function to find out where raycasts are after rotating
 func setRayCastsPositions():
@@ -233,7 +236,7 @@ func resetPlayer():
 	interpolate = true
 
 @rpc("any_peer", "call_local", "reliable")
-func pieceLand():
+func pieceLand(hardDrop : bool = false):
 	$SoundEffects/PieceLand.play()
 	var puyo1 = currentPuyos[0].instantiate()
 	var puyo2 = currentPuyos[1].instantiate()
@@ -241,6 +244,9 @@ func pieceLand():
 	get_parent().add_child(puyo2)
 	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	if hardDrop:
+		puyo1.hardDrop = hardDrop
+		puyo2.hardDrop = hardDrop
 	puyo1.basicSetup()
 	puyo2.basicSetup()
 	resetPlayer()
