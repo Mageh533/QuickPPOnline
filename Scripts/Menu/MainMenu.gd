@@ -310,6 +310,17 @@ func soloOptionsHide():
 	await tween.finished
 	$UI/SoloOptionsPanel.hide()
 
+func mpOptionsShow():
+	$UI/MultiplayerOptionsPanel.modulate.a = 0
+	$UI/MultiplayerOptionsPanel.show()
+	get_tree().create_tween().tween_property($UI/MultiplayerOptionsPanel, "modulate:a", 1, 0.3)
+
+func mpOptionsHide():
+	var tween = get_tree().create_tween()
+	tween.tween_property($UI/MultiplayerOptionsPanel, "modulate:a", 0, 0.3)
+	await tween.finished
+	$UI/MultiplayerOptionsPanel.hide()
+
 # ======== UI Buttons animations ========
 # ======== Main Menu Buttons ========
 func _on_play_solo_mouse_entered():
@@ -380,6 +391,9 @@ func _on_local_mp_pressed():
 	await mPMenuHide()
 	await localMpMenuShow()
 
+func _on_mp_options_pressed():
+	mpOptionsShow()
+
 # ======== Multiplayer Local Menu Buttons ========
 
 func _on_create_game_mouse_entered():
@@ -404,6 +418,7 @@ func _on_back_button_pressed():
 		await mainMenuShow()
 		currentMenu = MenuSets.MAIN_MENU
 	elif currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
+		mpOptionsHide()
 		await localMpMenuHide()
 		await mPMenuShow()
 		currentMenu = MenuSets.MULTIPLAYER_MENU
@@ -411,7 +426,6 @@ func _on_back_button_pressed():
 		await settingsMenuHide()
 		await mainMenuShow()
 		currentMenu = MenuSets.MAIN_MENU
-
 
 func _on_back_button_mouse_entered():
 	get_tree().create_tween().tween_property($UI/BackButton, "position:x", 0, 0.2)
@@ -427,7 +441,7 @@ func _on_settings_tab_tab_changed(tab):
 		$UI/SettingsPanel/ControlsPanel.hide()
 		$UI/SettingsPanel/GameSettingsPanel.show()
 
-# Solo options
+# Game options menu
 func _on_speed_input_value_changed(value):
 	GameManager.generalSettings.speed = value
 
@@ -442,3 +456,9 @@ func _on_nuisance_input_toggled(button_pressed):
 
 func _on_time_input_value_changed(value):
 	GameManager.soloMatchSettings.timeLimit = value
+
+func _on_rounds_input_value_changed(value):
+	GameManager.matchSettings.roundsToWin = value
+
+func _on_fever_mode_input_toggled(button_pressed):
+	GameManager.matchSettings.feverMode = button_pressed

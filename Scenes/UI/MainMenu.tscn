@@ -396,6 +396,16 @@ icon = ExtResource("5_iygt7")
 alignment = 2
 icon_alignment = 2
 
+[node name="Options" type="Button" parent="UI/MultiplayerLocalMenu/CreateGame"]
+layout_mode = 0
+offset_left = 703.0
+offset_top = 47.0
+offset_right = 784.0
+offset_bottom = 124.0
+icon = ExtResource("10_m5b1v")
+icon_alignment = 1
+expand_icon = true
+
 [node name="SettingsPanel" type="Panel" parent="UI"]
 visible = false
 layout_mode = 0
@@ -700,6 +710,67 @@ layout_mode = 2
 text = "Send Nuisance To Self"
 alignment = 1
 
+[node name="MultiplayerOptionsPanel" type="Panel" parent="UI"]
+layout_mode = 0
+offset_left = 858.0
+offset_top = 161.0
+offset_right = 1142.0
+offset_bottom = 369.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/MultiplayerOptionsPanel"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_right = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/MultiplayerOptionsPanel/VBox"]
+layout_mode = 2
+text = "Game Options"
+label_settings = SubResource("LabelSettings_7q2y5")
+horizontal_alignment = 1
+
+[node name="RoundsContainer" type="HBoxContainer" parent="UI/MultiplayerOptionsPanel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/MultiplayerOptionsPanel/VBox/RoundsContainer"]
+layout_mode = 2
+text = "Rounds To Win:"
+
+[node name="RoundsInput" type="SpinBox" parent="UI/MultiplayerOptionsPanel/VBox/RoundsContainer"]
+layout_mode = 2
+value = 2.0
+
+[node name="SpeedContainer" type="HBoxContainer" parent="UI/MultiplayerOptionsPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 71
+alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="UI/MultiplayerOptionsPanel/VBox/SpeedContainer"]
+layout_mode = 2
+text = "Speed:"
+
+[node name="SpeedInput" type="SpinBox" parent="UI/MultiplayerOptionsPanel/VBox/SpeedContainer"]
+layout_mode = 2
+max_value = 20.0
+value = 5.0
+rounded = true
+
+[node name="FeverModeInput" type="CheckButton" parent="UI/MultiplayerOptionsPanel/VBox"]
+layout_mode = 2
+text = "Allow Fever Mode"
+alignment = 1
+
+[node name="HDropInput" type="CheckButton" parent="UI/MultiplayerOptionsPanel/VBox"]
+layout_mode = 2
+text = "Hard Drop"
+alignment = 1
+
 [node name="BackButton" type="Button" parent="UI"]
 layout_mode = 0
 offset_left = -5.0
@@ -946,6 +1017,7 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_pressed"]
+[connection signal="pressed" from="UI/MultiplayerLocalMenu/CreateGame/Options" to="." method="_on_mp_options_pressed"]
 [connection signal="tab_changed" from="UI/SettingsPanel/SettingsTab" to="." method="_on_settings_tab_tab_changed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P1Controls/p1_up/p1up" to="UI/SettingsPanel/ControlsPanel" method="_on_p_1_up_pressed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P1Controls/p1_down/p1down" to="UI/SettingsPanel/ControlsPanel" method="_on_p_1_down_pressed"]
@@ -965,6 +1037,10 @@ visibility_mode = 1
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/FixedSpeedInput" to="." method="_on_fixed_speed_input_toggled"]
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/HDropInput" to="." method="_on_h_drop_input_toggled"]
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/NuisanceInput" to="." method="_on_nuisance_input_toggled"]
+[connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/RoundsContainer/RoundsInput" to="." method="_on_rounds_input_value_changed"]
+[connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/SpeedContainer/SpeedInput" to="." method="_on_speed_input_value_changed"]
+[connection signal="toggled" from="UI/MultiplayerOptionsPanel/VBox/FeverModeInput" to="." method="_on_fever_mode_input_toggled"]
+[connection signal="toggled" from="UI/MultiplayerOptionsPanel/VBox/HDropInput" to="." method="_on_h_drop_input_toggled"]
 [connection signal="mouse_entered" from="UI/BackButton" to="." method="_on_back_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/BackButton" to="." method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="UI/BackButton" to="." method="_on_back_button_pressed"]
