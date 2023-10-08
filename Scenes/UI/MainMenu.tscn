@@ -711,6 +711,7 @@ text = "Send Nuisance To Self"
 alignment = 1
 
 [node name="MultiplayerOptionsPanel" type="Panel" parent="UI"]
+visible = false
 layout_mode = 0
 offset_left = 858.0
 offset_top = 161.0
@@ -1017,6 +1018,8 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_pressed"]
+[connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/CreateGame/Options" to="." method="_on_options_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/CreateGame/Options" to="." method="_on_options_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerLocalMenu/CreateGame/Options" to="." method="_on_mp_options_pressed"]
 [connection signal="tab_changed" from="UI/SettingsPanel/SettingsTab" to="." method="_on_settings_tab_tab_changed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P1Controls/p1_up/p1up" to="UI/SettingsPanel/ControlsPanel" method="_on_p_1_up_pressed"]

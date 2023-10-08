@@ -300,9 +300,10 @@ func settingsMenuHide():
 	$UI/SettingsPanel.hide()
 
 func soloOptionsShow():
-	$UI/SoloOptionsPanel.modulate.a = 0
-	$UI/SoloOptionsPanel.show()
-	get_tree().create_tween().tween_property($UI/SoloOptionsPanel, "modulate:a", 1, 0.3)
+	if !$UI/SoloOptionsPanel.visible:
+		$UI/SoloOptionsPanel.modulate.a = 0
+		$UI/SoloOptionsPanel.show()
+		get_tree().create_tween().tween_property($UI/SoloOptionsPanel, "modulate:a", 1, 0.3)
 
 func soloOptionsHide():
 	var tween = get_tree().create_tween()
@@ -311,9 +312,10 @@ func soloOptionsHide():
 	$UI/SoloOptionsPanel.hide()
 
 func mpOptionsShow():
-	$UI/MultiplayerOptionsPanel.modulate.a = 0
-	$UI/MultiplayerOptionsPanel.show()
-	get_tree().create_tween().tween_property($UI/MultiplayerOptionsPanel, "modulate:a", 1, 0.3)
+	if !$UI/MultiplayerOptionsPanel.visible:
+		$UI/MultiplayerOptionsPanel.modulate.a = 0
+		$UI/MultiplayerOptionsPanel.show()
+		get_tree().create_tween().tween_property($UI/MultiplayerOptionsPanel, "modulate:a", 1, 0.3)
 
 func mpOptionsHide():
 	var tween = get_tree().create_tween()
@@ -397,10 +399,20 @@ func _on_mp_options_pressed():
 # ======== Multiplayer Local Menu Buttons ========
 
 func _on_create_game_mouse_entered():
-	pass # Replace with function body.
+	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -350, 0.1)
 
 func _on_create_game_mouse_exited():
-	pass # Replace with function body.
+	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -400, 0.1)
+
+func _on_options_mouse_entered():
+	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -350, 0.1)
+
+func _on_options_mouse_exited():
+	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -400, 0.1)
 
 func _on_create_game_pressed():
 	startLocalMpGame()
