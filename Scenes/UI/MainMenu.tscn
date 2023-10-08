@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=38 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
@@ -45,6 +45,7 @@ border_width_bottom = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
 bg_color = Color(0, 0.713726, 0.996078, 1)
 border_width_left = 1
+border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
@@ -84,6 +85,9 @@ PopupPanel/styles/panel = SubResource("StyleBoxFlat_baad8")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ce72"]
 bg_color = Color(0.192157, 0.192157, 0.192157, 0.533333)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7q2y5"]
+font_size = 24
 
 [sub_resource type="Animation" id="Animation_f8h8j"]
 resource_name = "Start_Up"
@@ -308,6 +312,15 @@ theme_override_font_sizes/font_size = 32
 text = "Endless"
 icon = ExtResource("5_iygt7")
 alignment = 0
+
+[node name="Options" type="Button" parent="UI/SoloMenu/Endless"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 28.0
+offset_right = 220.0
+offset_bottom = 68.0
+icon = ExtResource("10_m5b1v")
+expand_icon = true
 
 [node name="TinyPuyo" type="Button" parent="UI/SoloMenu"]
 layout_mode = 2
@@ -620,6 +633,73 @@ offset_right = 124.0
 offset_bottom = 53.0
 text = "FPS Counter"
 
+[node name="SoloOptionsPanel" type="Panel" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 161.0
+offset_right = 307.0
+offset_bottom = 369.0
+
+[node name="VBox" type="VBoxContainer" parent="UI/SoloOptionsPanel"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_right = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/SoloOptionsPanel/VBox"]
+layout_mode = 2
+text = "Game Options"
+label_settings = SubResource("LabelSettings_7q2y5")
+horizontal_alignment = 1
+
+[node name="TimeContainer" type="HBoxContainer" parent="UI/SoloOptionsPanel/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/SoloOptionsPanel/VBox/TimeContainer"]
+layout_mode = 2
+text = "Time Limit:"
+
+[node name="TimeInput" type="SpinBox" parent="UI/SoloOptionsPanel/VBox/TimeContainer"]
+layout_mode = 2
+max_value = 300.0
+
+[node name="SpeedContainer" type="HBoxContainer" parent="UI/SoloOptionsPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="UI/SoloOptionsPanel/VBox/SpeedContainer"]
+layout_mode = 2
+text = "Speed:"
+
+[node name="SpeedInput" type="SpinBox" parent="UI/SoloOptionsPanel/VBox/SpeedContainer"]
+layout_mode = 2
+max_value = 20.0
+value = 5.0
+rounded = true
+
+[node name="FixedSpeedInput" type="CheckButton" parent="UI/SoloOptionsPanel/VBox"]
+layout_mode = 2
+text = "Fixed Speed"
+alignment = 1
+
+[node name="HDropInput" type="CheckButton" parent="UI/SoloOptionsPanel/VBox"]
+layout_mode = 2
+text = "Hard Drop"
+alignment = 1
+
+[node name="NuisanceInput" type="CheckButton" parent="UI/SoloOptionsPanel/VBox"]
+layout_mode = 2
+text = "Send Nuisance To Self"
+alignment = 1
+
 [node name="BackButton" type="Button" parent="UI"]
 layout_mode = 0
 offset_left = -5.0
@@ -857,6 +937,9 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/SoloMenu/Endless" to="." method="_on_classic_mouse_entered"]
 [connection signal="mouse_exited" from="UI/SoloMenu/Endless" to="." method="_on_classic_mouse_exited"]
 [connection signal="pressed" from="UI/SoloMenu/Endless" to="." method="_on_endless_pressed"]
+[connection signal="mouse_entered" from="UI/SoloMenu/Endless/Options" to="." method="_on_classic_mouse_entered"]
+[connection signal="mouse_exited" from="UI/SoloMenu/Endless/Options" to="." method="_on_classic_mouse_exited"]
+[connection signal="pressed" from="UI/SoloMenu/Endless/Options" to="." method="_on_solo_options_pressed"]
 [connection signal="mouse_entered" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_pressed"]
@@ -877,6 +960,11 @@ visibility_mode = 1
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P2Controls/p2_turnLeft/p2tleft" to="UI/SettingsPanel/ControlsPanel" method="_on_p_2_tleft_pressed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P2Controls/p2_turnRight/p2tright" to="UI/SettingsPanel/ControlsPanel" method="_on_p_2_tright_pressed"]
 [connection signal="toggled" from="UI/SettingsPanel/GameSettingsPanel/FPSCounterCheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="value_changed" from="UI/SoloOptionsPanel/VBox/TimeContainer/TimeInput" to="." method="_on_time_input_value_changed"]
+[connection signal="value_changed" from="UI/SoloOptionsPanel/VBox/SpeedContainer/SpeedInput" to="." method="_on_speed_input_value_changed"]
+[connection signal="toggled" from="UI/SoloOptionsPanel/VBox/FixedSpeedInput" to="." method="_on_fixed_speed_input_toggled"]
+[connection signal="toggled" from="UI/SoloOptionsPanel/VBox/HDropInput" to="." method="_on_h_drop_input_toggled"]
+[connection signal="toggled" from="UI/SoloOptionsPanel/VBox/NuisanceInput" to="." method="_on_nuisance_input_toggled"]
 [connection signal="mouse_entered" from="UI/BackButton" to="." method="_on_back_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/BackButton" to="." method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="UI/BackButton" to="." method="_on_back_button_pressed"]

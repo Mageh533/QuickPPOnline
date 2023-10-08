@@ -35,7 +35,7 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 
 func _process(_delta):
-	if GameManager.fpsCounter == true:
+	if GameManager.clientSettings.fpsCounter == true:
 		$PermaUI/FPSCounter.show()
 		$PermaUI/FPSCounter.text = "FPS: " + str(Engine.get_frames_per_second())
 	else:
@@ -195,7 +195,7 @@ func _on_return_to_menu_pressed():
 	get_tree().reload_current_scene()
 
 func _on_check_box_toggled(button_pressed):
-	GameManager.fpsCounter = button_pressed
+	GameManager.generalSettings.fpsCounter = button_pressed
 
 # Pause game when settings menu is open
 func _on_settings_pop_up_popup_hide():
@@ -299,6 +299,17 @@ func settingsMenuHide():
 	await tween.finished
 	$UI/SettingsPanel.hide()
 
+func soloOptionsShow():
+	$UI/SoloOptionsPanel.modulate.a = 0
+	$UI/SoloOptionsPanel.show()
+	get_tree().create_tween().tween_property($UI/SoloOptionsPanel, "modulate:a", 1, 0.3)
+
+func soloOptionsHide():
+	var tween = get_tree().create_tween()
+	tween.tween_property($UI/SoloOptionsPanel, "modulate:a", 0, 0.3)
+	await tween.finished
+	$UI/SoloOptionsPanel.hide()
+
 # ======== UI Buttons animations ========
 # ======== Main Menu Buttons ========
 func _on_play_solo_mouse_entered():
@@ -352,6 +363,9 @@ func _on_classic_mouse_exited():
 func _on_endless_pressed():
 	startEndlessGame()
 
+func _on_solo_options_pressed():
+	soloOptionsShow()
+
 # ======== Multiplayer Menu Buttons ========
 func _on_local_mp_mouse_entered():
 	if currentMenu == MenuSets.MULTIPLAYER_MENU:
@@ -381,6 +395,7 @@ func _on_create_game_pressed():
 
 func _on_back_button_pressed():
 	if currentMenu == MenuSets.SOLO_MENU:
+		soloOptionsHide()
 		await soloMenuHide()
 		await mainMenuShow()
 		currentMenu = MenuSets.MAIN_MENU
@@ -411,3 +426,19 @@ func _on_settings_tab_tab_changed(tab):
 	if tab == 1:
 		$UI/SettingsPanel/ControlsPanel.hide()
 		$UI/SettingsPanel/GameSettingsPanel.show()
+
+# Solo options
+func _on_speed_input_value_changed(value):
+	GameManager.generalSettings.speed = value
+
+func _on_fixed_speed_input_toggled(button_pressed):
+	GameManager.soloMatchSettings.fixedSpeed = button_pressed
+
+func _on_h_drop_input_toggled(button_pressed):
+	GameManager.generalSettings.hardDrop = button_pressed
+
+func _on_nuisance_input_toggled(button_pressed):
+	GameManager.soloMatchSettings.sendNuisanceToSelf = button_pressed
+
+func _on_time_input_value_changed(value):
+	GameManager.soloMatchSettings.timeLimit = value

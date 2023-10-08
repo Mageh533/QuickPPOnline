@@ -3,11 +3,29 @@ extends Node
 # Global variables
 
 var onlineMatch = false
-var fpsCounter = false
-
 var secondPlayerId = 0
 var currentSeed = 0
 
+# Settings dictionaries
+var clientSettings = {
+	"moveSpeed" : 0.3,
+	"fpsCounter" : false,
+}
+var generalSettings = {
+	"hardDrop" : false,
+	"speed" : 5
+}
+var matchSettings = {
+	"roundsToWin" : 2,
+	"feverMode" : false,
+}
+var soloMatchSettings = {
+	"fixedSpeed" : true,
+	"timeLimit" : 0,
+	"sendNuisanceToSelf" : false
+}
+
+# In game info dictionaries
 var soloInfo = {
 	"Mode" : "Endless",
 	"matchTime" : 0,
@@ -19,13 +37,6 @@ var matchInfo = {
 	"matchTime" : 0,
 	"p1Wins" : 0,
 	"p2Wins" : 0
-}
-var matchSettings = {
-	"roundsToWin" : 2
-}
-var soloMatchSettings = {
-	"speed" : 5,
-	"fixedSpeed" : true
 }
 
 # Global functions
