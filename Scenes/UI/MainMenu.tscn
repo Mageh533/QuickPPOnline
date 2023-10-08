@@ -764,6 +764,7 @@ rounded = true
 
 [node name="FeverModeInput" type="CheckButton" parent="UI/MultiplayerOptionsPanel/VBox"]
 layout_mode = 2
+disabled = true
 text = "Allow Fever Mode"
 alignment = 1
 
