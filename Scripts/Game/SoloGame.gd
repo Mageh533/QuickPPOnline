@@ -3,6 +3,7 @@ extends Control
 signal gameEnd
 
 var matchStarted = false
+var timeOutEffectCooldown = false
 
 @onready var nuisanceQueueSprites = $GarbageSentPanel/NuisanceQueue.get_children()
 
@@ -16,6 +17,7 @@ func _ready():
 	$PuyoGame.process_mode = Node.PROCESS_MODE_INHERIT
 	matchStarted = true
 	GameManager.soloInfo.active = true
+	GameManager.soloInfo.matchTime = GameManager.soloMatchSettings.timeLimit
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,17 +29,37 @@ func _process(delta):
 	GameManager.soloInfo.speed = player.fallSpeed / 10
 	$InfoPanel/VBox/Speed/Speed.text = str(GameManager.soloInfo.speed)
 	if matchStarted:
-		GameManager.soloInfo.matchTime += delta
+		if GameManager.soloMatchSettings.timeLimit > 0:
+			GameManager.soloInfo.matchTime -= delta
+			if GameManager.soloInfo.matchTime < 10 and GameManager.soloInfo.matchTime > 0:
+				$InfoPanel/VBox/Time/Time.modulate = Color.YELLOW
+				if !timeOutEffectCooldown:
+					timeOutEffectCooldown = true
+					$TimeOutFX.start()
+					$SoundEffects/Timeout.play()
+			elif GameManager.soloInfo.matchTime <= 0:
+				gameOver()
+		else:
+			GameManager.soloInfo.matchTime += delta
 		var seconds = fmod(GameManager.soloInfo.matchTime, 60)
 		var minutes = floor(GameManager.soloInfo.matchTime / 60)
 		$InfoPanel/VBox/Time/Time.text = str(minutes) + ":" + str(seconds).pad_zeros(2).pad_decimals(2)
 
-
-func _on_puyo_game_lost():
+func gameOver():
+	matchStarted = false
+	if GameManager.soloMatchSettings.timeLimit > 0:
+		$SoundEffects/TimeoutEnd.play()
+		GameManager.soloInfo.matchTime = 0
+		$PuyoGame.process_mode = Node.PROCESS_MODE_DISABLED
+		await get_tree().create_timer(1).timeout
+		$PuyoGame.process_mode = Node.PROCESS_MODE_INHERIT
 	$PuyoGame/GameAnims.play("lose")
 	$UIAnims/AnimationPlayer.play("End")
 	await $UIAnims/AnimationPlayer.animation_finished
 	emit_signal("gameEnd")
+
+func _on_puyo_game_lost():
+	gameOver()
 
 func clearNuisanceQueue():
 	for sprite in nuisanceQueueSprites:
@@ -49,3 +71,6 @@ func _on_puyo_game_send_damage(damage):
 	GameManager.nuisanceDisplayHelper(nuisanceQueueSprites, nuisanceToShow, 6)
 	if GameManager.soloMatchSettings.sendNuisanceToSelf:
 		$PuyoGame.queueNuisance(damage)
+
+func _on_time_out_fx_timeout():
+	timeOutEffectCooldown = false
