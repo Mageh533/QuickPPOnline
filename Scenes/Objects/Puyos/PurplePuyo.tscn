@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bn4xxyrsqwh2g"]
+[gd_scene load_steps=25 format=3 uid="uid://bn4xxyrsqwh2g"]
 
 [ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="1_qsyjt"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_bhwv6"]
@@ -7,6 +7,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_iqvlf"]
 atlas = ExtResource("2_bhwv6")
 region = Rect2(0, 283, 66, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlpfk"]
+atlas = ExtResource("2_bhwv6")
+region = Rect2(1878, 78, 56, 118)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hko2j"]
 atlas = ExtResource("2_bhwv6")
@@ -88,6 +92,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlpfk")
+}],
+"loop": true,
+"name": &"hard_drop",
 "speed": 5.0
 }, {
 "frames": [{

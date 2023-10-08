@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b526hnm8iba4l"]
+[gd_scene load_steps=31 format=3 uid="uid://b526hnm8iba4l"]
 
 [ext_resource type="Script" path="res://Scripts/Game/RedPuyo.gd" id="1_2hd31"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_ymwr0"]
@@ -8,6 +8,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_qkbay"]
 atlas = ExtResource("1_ymwr0")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82s03"]
+atlas = ExtResource("1_ymwr0")
+region = Rect2(1584, 79, 66, 118)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3pkad"]
 atlas = ExtResource("1_ymwr0")
@@ -89,6 +93,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82s03")
+}],
+"loop": true,
+"name": &"hard_drop",
 "speed": 5.0
 }, {
 "frames": [{
@@ -271,6 +283,7 @@ update_scale = false
 [node name="PuyoSprites" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_onuvl")
+animation = &"hard_drop"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7kfrt")
