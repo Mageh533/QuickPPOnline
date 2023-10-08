@@ -58,6 +58,7 @@ func gameOver():
 	$PuyoGame/GameAnims.play("lose")
 	$UIAnims/AnimationPlayer.play("End")
 	await $UIAnims/AnimationPlayer.animation_finished
+	$PuyoGame.process_mode = Node.PROCESS_MODE_DISABLED
 	emit_signal("gameEnd")
 
 func _on_puyo_game_lost():
