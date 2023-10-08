@@ -1,6 +1,7 @@
 extends Node2D
 
 signal sendDamage(damage)
+signal sendPoppedPuyos(puyos)
 signal attackingDamage(attack)
 signal attacking(attacking)
 signal lost
@@ -160,6 +161,8 @@ func startChain():
 		if puyoToPop.type in colours:
 			colours.erase(puyoToPop.type)
 		puyoToPop.pop()
+	
+	emit_signal("sendPoppedPuyos", puyosToPop.size())
 	
 	if checkAllClear() and currentChain > 0:
 		await get_tree().create_timer(0.5).timeout

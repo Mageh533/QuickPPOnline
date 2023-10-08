@@ -5,6 +5,8 @@ signal gameEnd
 var matchStarted = false
 var timeOutEffectCooldown = false
 
+var poppedPuyos = 0
+
 @onready var nuisanceQueueSprites = $GarbageSentPanel/NuisanceQueue.get_children()
 
 # Called when the node enters the scene tree for the first time.
@@ -74,3 +76,11 @@ func _on_puyo_game_send_damage(damage):
 
 func _on_time_out_fx_timeout():
 	timeOutEffectCooldown = false
+
+func _on_puyo_game_send_popped_puyos(puyos):
+	poppedPuyos += puyos
+	if !GameManager.soloMatchSettings.fixedSpeed:
+		if poppedPuyos > 30:
+			poppedPuyos = 0
+			get_tree().get_nodes_in_group("Player")[0].fallSpeed += 10
+			$SoundEffects/ChallengeUp.play()

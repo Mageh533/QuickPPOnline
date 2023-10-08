@@ -20,7 +20,7 @@ var matchSettings = {
 	"feverMode" : false,
 }
 var soloMatchSettings = {
-	"fixedSpeed" : true,
+	"fixedSpeed" : false,
 	"timeLimit" : 0,
 	"sendNuisanceToSelf" : false
 }

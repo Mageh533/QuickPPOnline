@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://caeh4snxqjfaa"]
+[gd_scene load_steps=36 format=3 uid="uid://caeh4snxqjfaa"]
 
 [ext_resource type="Script" path="res://Scripts/Game/SoloGame.gd" id="1_3dbq3"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="1_pr7mx"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/Sounds/win.wav" id="11_ha2ch"]
 [ext_resource type="AudioStream" uid="uid://dyw5miinuqndn" path="res://Assets/Sounds/tiemout.wav" id="13_s4rwc"]
 [ext_resource type="AudioStream" uid="uid://m4rxk1ciya11" path="res://Assets/Sounds/timeoutEnd.wav" id="14_b5ttc"]
+[ext_resource type="AudioStream" uid="uid://thlqjncdoh55" path="res://Assets/Sounds/challenge.wav" id="15_f435a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scksh"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
@@ -540,9 +541,13 @@ stream = ExtResource("13_s4rwc")
 [node name="TimeoutEnd" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource("14_b5ttc")
 
+[node name="ChallengeUp" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource("15_f435a")
+
 [node name="TimeOutFX" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="lost" from="PuyoGame" to="." method="_on_puyo_game_lost"]
 [connection signal="sendDamage" from="PuyoGame" to="." method="_on_puyo_game_send_damage"]
+[connection signal="sendPoppedPuyos" from="PuyoGame" to="." method="_on_puyo_game_send_popped_puyos"]
 [connection signal="timeout" from="TimeOutFX" to="." method="_on_time_out_fx_timeout"]
