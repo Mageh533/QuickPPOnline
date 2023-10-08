@@ -59,6 +59,7 @@ func _process(_delta):
 func startEndlessGame():
 	setUpLocalGame()
 	await playFadeAnims("fadeIn")
+	$UI.hide()
 	currentGame = SoloGame.instantiate()
 	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)
