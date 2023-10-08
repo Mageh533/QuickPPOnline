@@ -16,10 +16,9 @@ var connectedPuyos = []
 var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 
 var scoreToAdd = false
-var loseTile = false
-var loseTileTimer = false
 var defeated = false
 
+var loseTileTime = 0
 var chainCooldown = 0
 var nuisanceCooldown = 0
 var checkChainTime = 0
@@ -89,6 +88,19 @@ func _process(delta):
 			currentChain = 0
 			emit_signal("attacking", false)
 			disablePlayer(false)
+
+# Check if a puyo is on the losetile, then emit a lost signal if true
+func _physics_process(delta):
+	if !defeated:
+		if $LoseTileSprite/LoseCollision.is_colliding():
+			loseTileTime += delta
+		else:
+			loseTileTime = 0
+		
+		if loseTileTime > 1:
+			defeated = true
+			emit_signal("lost")
+			disablePlayer(true)
 
 # Connects their signals
 func connectPuyosToGame():
@@ -287,24 +299,6 @@ func setPlayerColor():
 	$PuyoDropBG1.color = playerColor
 	$PuyoDropBG2.color = playerColor
 
-func _on_lose_timer_timeout():
-	if loseTile and !defeated:
-		emit_signal("lost")
-		defeated = true
-		disablePlayer(true)
-		
-	loseTileTimer = false
-
 func _on_piece_landed():
 	await get_tree().create_timer(0.2).timeout
 	nuisanceProcess()
-
-func _on_lose_tile_area_entered(_area):
-	loseTile = true
-	if !loseTileTimer:
-		loseTileTimer = true
-		$LoseTimer.start()
-
-
-func _on_lose_tile_area_exited(_area):
-	loseTile = false

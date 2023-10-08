@@ -66,8 +66,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1iod"]
-size = Vector2(25, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84oas"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3prtr"]
 texture = ExtResource("1_3by7s")
@@ -432,17 +431,15 @@ offset_right = 312.0
 offset_bottom = 574.0
 color = Color(0.164706, 0.164706, 0.164706, 0.745098)
 
-[node name="LoseTile" type="Area2D" parent="."]
+[node name="LoseTileSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(152, 65)
-collision_layer = 0
-
-[node name="LoseTileSprite" type="AnimatedSprite2D" parent="LoseTile"]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_wxp1r")
+frame_progress = 0.255278
 
-[node name="LoseCollision" type="CollisionShape2D" parent="LoseTile"]
-position = Vector2(0.5, 1)
-shape = SubResource("RectangleShape2D_y1iod")
+[node name="LoseCollision" type="ShapeCast2D" parent="LoseTileSprite"]
+shape = SubResource("RectangleShape2D_84oas")
+target_position = Vector2(0, 0)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(44, 44)
@@ -504,10 +501,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0 Chain!"
 label_settings = SubResource("LabelSettings_ttl81")
-
-[node name="LoseTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
 
 [node name="ChainSoundEffects" type="Node" parent="."]
 
@@ -631,7 +624,3 @@ libraries = {
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_or1r5")
-
-[connection signal="area_entered" from="LoseTile" to="." method="_on_lose_tile_area_entered"]
-[connection signal="area_exited" from="LoseTile" to="." method="_on_lose_tile_area_exited"]
-[connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
