@@ -47,3 +47,5 @@ func _on_puyo_game_send_damage(damage):
 	var nuisanceToShow = damage
 	clearNuisanceQueue()
 	GameManager.nuisanceDisplayHelper(nuisanceQueueSprites, nuisanceToShow, 6)
+	if GameManager.soloMatchSettings.sendNuisanceToSelf:
+		$PuyoGame.queueNuisance(damage)
