@@ -407,29 +407,13 @@ func _on_local_mp_pressed():
 	await mPMenuHide()
 	await localMpMenuShow()
 
-func _on_mp_options_pressed():
-	mpOptionsShow()
-
 # ======== Multiplayer Local Menu Buttons ========
 
-func _on_create_game_mouse_entered():
-	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame, "position:x", -50, 0.1)
-
-func _on_create_game_mouse_exited():
-	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame, "position:x", 0, 0.1)
-
-func _on_options_mouse_entered():
-	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame, "position:x", -50, 0.1)
-
-func _on_options_mouse_exited():
-	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame, "position:x", 0, 0.1)
-
-func _on_create_game_pressed():
+func _on_tsu_game_pressed():
 	startLocalMpGame()
+
+func _on_mp_options_pressed():
+	mpOptionsShow()
 
 # ======== Other Menu Buttons ========
 
@@ -485,6 +469,3 @@ func _on_time_input_value_changed(value):
 
 func _on_rounds_input_value_changed(value):
 	GameManager.matchSettings.roundsToWin = value
-
-func _on_fever_mode_input_toggled(button_pressed):
-	GameManager.matchSettings.feverMode = button_pressed
