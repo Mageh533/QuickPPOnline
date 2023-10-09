@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://4t300lgrkwhu" path="res://Scenes/Objects/Puyos/GreenPuyo.tscn" id="4_0opt5"]
 [ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/Puyos/YellowPuyo.tscn" id="5_b2mlv"]
 [ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/Sounds/chain1.wav" id="5_hwduy"]
+[ext_resource type="PackedScene" uid="uid://rq2bwcbvu8p4" path="res://Scenes/Game/Player/player_puyo_drop.tscn" id="5_txj1e"]
 [ext_resource type="AudioStream" uid="uid://mwxcrh8yylc6" path="res://Assets/Sounds/chain2.wav" id="6_5l2rs"]
 [ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="6_rg22k"]
 [ext_resource type="AudioStream" uid="uid://tvki8clelukf" path="res://Assets/Sounds/chain3.wav" id="7_x8yts"]
 [ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/Puyos/PurplePuyo.tscn" id="7_xer8m"]
 [ext_resource type="AudioStream" uid="uid://gmnfjf5to2nx" path="res://Assets/Sounds/chain4.wav" id="8_5sh6p"]
 [ext_resource type="AudioStream" uid="uid://i48fl00ahthh" path="res://Assets/Sounds/chain5.wav" id="9_6u5m2"]
-[ext_resource type="PackedScene" uid="uid://rq2bwcbvu8p4" path="res://Scenes/Game/player_puyo_drop.tscn" id="9_l6p23"]
 [ext_resource type="PackedScene" uid="uid://dhcsxdylpaexb" path="res://Scenes/Objects/Puyos/NuisancePuyo.tscn" id="10_7qs3i"]
 [ext_resource type="AudioStream" uid="uid://27mspu334ol5" path="res://Assets/Sounds/chain6.wav" id="10_8pul3"]
 [ext_resource type="Script" path="res://Scripts/Game/DrawBorderOnQueue.gd" id="10_vtmlc"]
@@ -123,7 +123,7 @@ texture_region_size = Vector2i(58, 59)
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ip3n8"]
-scenes/1/scene = ExtResource("9_l6p23")
+scenes/1/scene = ExtResource("5_txj1e")
 scenes/2/scene = ExtResource("3_syxk4")
 scenes/3/scene = ExtResource("4_0opt5")
 scenes/4/scene = ExtResource("5_b2mlv")
@@ -431,13 +431,15 @@ offset_right = 312.0
 offset_bottom = 574.0
 color = Color(0.164706, 0.164706, 0.164706, 0.745098)
 
-[node name="LoseTileSprite" type="AnimatedSprite2D" parent="."]
+[node name="LoseTiles" type="Node2D" parent="."]
+
+[node name="LoseTileSprite" type="AnimatedSprite2D" parent="LoseTiles"]
 position = Vector2(152, 65)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_wxp1r")
 frame_progress = 0.255278
 
-[node name="LoseCollision" type="ShapeCast2D" parent="LoseTileSprite"]
+[node name="LoseCollision" type="ShapeCast2D" parent="LoseTiles/LoseTileSprite"]
 shape = SubResource("RectangleShape2D_84oas")
 target_position = Vector2(0, 0)
 
