@@ -277,15 +277,24 @@ func mPMenuHide():
 
 func localMpMenuShow():
 	$UI/MultiplayerLocalMenu.modulate.a = 0
-	$UI/MultiplayerLocalMenu/CreateGame.position.x = -1200
+	$UI/MultiplayerLocalMenu/ClassicGame.position.x = -1200
+	$UI/MultiplayerLocalMenu/FeverGame.position.x = -1200
+	$UI/MultiplayerLocalMenu/SunGame.position.x = -1200
+	$UI/MultiplayerLocalMenu/OriginalGame.position.x = -1200
 	await get_tree().create_timer(0.2).timeout
 	$UI/MultiplayerLocalMenu.show()
 	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu, "modulate:a", 1, 0.3)
-	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/ClassicGame, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/FeverGame, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/SunGame, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/OriginalGame, "position:x", -400, 0.3).set_trans(Tween.TRANS_CUBIC)
 
 func localMpMenuHide():
 	var tween = get_tree().create_tween()
-	tween.tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($UI/MultiplayerLocalMenu/ClassicGame, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/FeverGame, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/SunGame, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
+	get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/OriginalGame, "position:x", -1200, 0.3).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 	$UI/MultiplayerLocalMenu.hide()
 
@@ -401,19 +410,19 @@ func _on_mp_options_pressed():
 
 func _on_create_game_mouse_entered():
 	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -350, 0.1)
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/ClassicGame, "position:x", -350, 0.1)
 
 func _on_create_game_mouse_exited():
 	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -400, 0.1)
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/ClassicGame, "position:x", -400, 0.1)
 
 func _on_options_mouse_entered():
 	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -350, 0.1)
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/ClassicGame, "position:x", -350, 0.1)
 
 func _on_options_mouse_exited():
 	if currentMenu == MenuSets.MULTIPLAYER_LOCAL_MENU:
-		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/CreateGame, "position:x", -400, 0.1)
+		get_tree().create_tween().tween_property($UI/MultiplayerLocalMenu/ClassicGame, "position:x", -400, 0.1)
 
 func _on_create_game_pressed():
 	startLocalMpGame()

@@ -16,10 +16,11 @@ var generalSettings = {
 	"speed" : 5
 }
 var matchSettings = {
+	"gamemode" : "TSU",
 	"roundsToWin" : 2,
-	"feverMode" : false,
 }
 var soloMatchSettings = {
+	"gamemode" : "Endless",
 	"fixedSpeed" : false,
 	"timeLimit" : 0,
 	"sendNuisanceToSelf" : false

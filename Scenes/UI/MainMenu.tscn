@@ -327,7 +327,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 disabled = true
-text = "Tiny Puyo"
+text = "Endless Tiny Puyo"
 icon = ExtResource("6_5k27g")
 alignment = 0
 
@@ -336,7 +336,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 disabled = true
-text = "Fever"
+text = "Endless Fever"
 icon = ExtResource("7_h4jqb")
 alignment = 0
 
@@ -382,29 +382,59 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_top = -224.0
 offset_right = 1.0
-offset_bottom = -59.0
+offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 37
 
-[node name="CreateGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+[node name="ClassicGame" type="Button" parent="UI/MultiplayerLocalMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
-text = "Create Local Match"
+text = "Puyo Puyo 2/TSU"
+icon = ExtResource("6_5k27g")
+alignment = 2
+icon_alignment = 2
+
+[node name="Options" type="Button" parent="UI/MultiplayerLocalMenu/ClassicGame"]
+layout_mode = 0
+offset_left = 787.0
+offset_top = 13.0
+offset_right = 830.0
+offset_bottom = 50.0
+icon = ExtResource("10_m5b1v")
+icon_alignment = 1
+expand_icon = true
+
+[node name="FeverGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Fever"
 icon = ExtResource("5_iygt7")
 alignment = 2
 icon_alignment = 2
 
-[node name="Options" type="Button" parent="UI/MultiplayerLocalMenu/CreateGame"]
-layout_mode = 0
-offset_left = 703.0
-offset_top = 47.0
-offset_right = 784.0
-offset_bottom = 124.0
-icon = ExtResource("10_m5b1v")
-icon_alignment = 1
-expand_icon = true
+[node name="SunGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Sun"
+icon = ExtResource("5_iygt7")
+alignment = 2
+icon_alignment = 2
+
+[node name="OriginalGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Puyo Puyo (Original)"
+icon = ExtResource("5_iygt7")
+alignment = 2
+icon_alignment = 2
 
 [node name="SettingsPanel" type="Panel" parent="UI"]
 visible = false
@@ -762,12 +792,6 @@ max_value = 20.0
 value = 5.0
 rounded = true
 
-[node name="FeverModeInput" type="CheckButton" parent="UI/MultiplayerOptionsPanel/VBox"]
-layout_mode = 2
-disabled = true
-text = "Allow Fever Mode"
-alignment = 1
-
 [node name="HDropInput" type="CheckButton" parent="UI/MultiplayerOptionsPanel/VBox"]
 layout_mode = 2
 text = "Hard Drop"
@@ -1016,12 +1040,12 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_pressed"]
-[connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_mouse_entered"]
-[connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_mouse_exited"]
-[connection signal="pressed" from="UI/MultiplayerLocalMenu/CreateGame" to="." method="_on_create_game_pressed"]
-[connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/CreateGame/Options" to="." method="_on_options_mouse_entered"]
-[connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/CreateGame/Options" to="." method="_on_options_mouse_exited"]
-[connection signal="pressed" from="UI/MultiplayerLocalMenu/CreateGame/Options" to="." method="_on_mp_options_pressed"]
+[connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_mouse_exited"]
+[connection signal="pressed" from="UI/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_pressed"]
+[connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_options_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_options_mouse_exited"]
+[connection signal="pressed" from="UI/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_mp_options_pressed"]
 [connection signal="tab_changed" from="UI/SettingsPanel/SettingsTab" to="." method="_on_settings_tab_tab_changed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P1Controls/p1_up/p1up" to="UI/SettingsPanel/ControlsPanel" method="_on_p_1_up_pressed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P1Controls/p1_down/p1down" to="UI/SettingsPanel/ControlsPanel" method="_on_p_1_down_pressed"]
@@ -1043,7 +1067,6 @@ visibility_mode = 1
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/NuisanceInput" to="." method="_on_nuisance_input_toggled"]
 [connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/RoundsContainer/RoundsInput" to="." method="_on_rounds_input_value_changed"]
 [connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/SpeedContainer/SpeedInput" to="." method="_on_speed_input_value_changed"]
-[connection signal="toggled" from="UI/MultiplayerOptionsPanel/VBox/FeverModeInput" to="." method="_on_fever_mode_input_toggled"]
 [connection signal="toggled" from="UI/MultiplayerOptionsPanel/VBox/HDropInput" to="." method="_on_h_drop_input_toggled"]
 [connection signal="mouse_entered" from="UI/BackButton" to="." method="_on_back_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/BackButton" to="." method="_on_back_button_mouse_exited"]
