@@ -289,7 +289,6 @@ scale = Vector2(0.408163, 0.416667)
 texture = ExtResource("5_l3gvt")
 
 [node name="MenuItems" type="VBoxContainer" parent="UI"]
-visible = false
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -418,12 +417,13 @@ alignment = 2
 icon_alignment = 2
 
 [node name="LocalMPScroll" type="ScrollContainer" parent="UI"]
+visible = false
 layout_direction = 3
 layout_mode = 0
 offset_left = 327.0
 offset_top = 102.0
 offset_right = 1152.0
-offset_bottom = 440.0
+offset_bottom = 461.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hvmcn")
 horizontal_scroll_mode = 0
 
