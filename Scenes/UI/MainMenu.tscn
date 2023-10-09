@@ -258,7 +258,7 @@ offset_top = -12.0
 offset_right = 168.0
 offset_bottom = 14.0
 grow_vertical = 2
-text = "Alpha 0.0.8"
+text = "Alpha 0.1.1"
 
 [node name="GithubProjectLink" type="LinkButton" parent="UI/Background/Header"]
 layout_mode = 1
