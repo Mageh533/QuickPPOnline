@@ -117,7 +117,7 @@ func playerControls(controlsToUse):
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !rightWallCollide and !ceilingCollide:
 				$SoundEffects/PieceMove.play()
-				move_and_collide(Vector2.RIGHT * (tile_size * 0.75))
+				move_and_collide(Vector2.RIGHT * (tile_size * get_parent().scale.x))
 			moveCooldown = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_left"):
 		if !moveCooldown:
@@ -125,7 +125,7 @@ func playerControls(controlsToUse):
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !leftWallCollide and !ceilingCollide:
 				$SoundEffects/PieceMove.play()
-				move_and_collide(Vector2.LEFT * (tile_size * 0.75))
+				move_and_collide(Vector2.LEFT * (tile_size * get_parent().scale.x))
 			moveCooldown = false
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false
