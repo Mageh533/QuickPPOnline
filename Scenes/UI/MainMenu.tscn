@@ -373,68 +373,220 @@ icon = ExtResource("6_5k27g")
 alignment = 2
 icon_alignment = 2
 
-[node name="MultiplayerLocalMenu" type="VBoxContainer" parent="UI"]
+[node name="LocalMPScroll" type="ScrollContainer" parent="UI"]
 visible = false
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -224.0
-offset_right = 1.0
-offset_bottom = 126.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_direction = 3
+layout_mode = 0
+offset_left = 327.0
+offset_top = 102.0
+offset_right = 1152.0
+offset_bottom = 440.0
+horizontal_scroll_mode = 0
+
+[node name="MultiplayerLocalMenu" type="VBoxContainer" parent="UI/LocalMPScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 37
 
-[node name="ClassicGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+[node name="ClassicGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 text = "Puyo Puyo 2/TSU"
 icon = ExtResource("6_5k27g")
-alignment = 2
-icon_alignment = 2
+alignment = 0
 
-[node name="Options" type="Button" parent="UI/MultiplayerLocalMenu/ClassicGame"]
-layout_mode = 0
-offset_left = 787.0
-offset_top = 13.0
-offset_right = 830.0
-offset_bottom = 50.0
+[node name="Options" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -498.0
+offset_top = -20.0
+offset_right = -456.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
 icon = ExtResource("10_m5b1v")
 icon_alignment = 1
 expand_icon = true
 
-[node name="FeverGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+[node name="FeverGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 disabled = true
 text = "Fever"
 icon = ExtResource("5_iygt7")
-alignment = 2
-icon_alignment = 2
+alignment = 0
 
-[node name="SunGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+[node name="SunGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 disabled = true
 text = "Sun"
 icon = ExtResource("5_iygt7")
-alignment = 2
-icon_alignment = 2
+alignment = 0
 
-[node name="OriginalGame" type="Button" parent="UI/MultiplayerLocalMenu"]
+[node name="OriginalGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
 disabled = true
 text = "Puyo Puyo (Original)"
 icon = ExtResource("5_iygt7")
-alignment = 2
-icon_alignment = 2
+alignment = 0
+
+[node name="TinyGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Tiny Puyo
+"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="MegaGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Mega Puyo
+"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="BomberGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Bomber
+"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="UnderwaterGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Underwater
+"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="GustGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Gust"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="QuartetGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Quarter"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="ExcavationGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Excavation"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="TinyExcavationGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Tiny Excavation"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="SpinnerGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Spinner"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="FourGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Foursight"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="TrapGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Trap"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="TransformationGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Transformation"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="SlotGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Slots"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="BlocksGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Blocks"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="IceBlocksGame" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Ice Blocks"
+icon = ExtResource("5_iygt7")
+alignment = 0
+
+[node name="SearchLight" type="Button" parent="UI/LocalMPScroll/MultiplayerLocalMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+disabled = true
+text = "Searchlight"
+icon = ExtResource("5_iygt7")
+alignment = 0
 
 [node name="SettingsPanel" type="Panel" parent="UI"]
 visible = false
@@ -827,7 +979,7 @@ offset_right = 368.0
 offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "The game is currently a work in progress. Everything you see is subject to change!"
+text = "The game is currently a work in progress. Everything you see is subject to change! "
 label_settings = SubResource("LabelSettings_h34xs")
 horizontal_alignment = 1
 
@@ -1040,12 +1192,12 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_pressed"]
-[connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_mouse_entered"]
-[connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_mouse_exited"]
-[connection signal="pressed" from="UI/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_pressed"]
-[connection signal="mouse_entered" from="UI/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_options_mouse_entered"]
-[connection signal="mouse_exited" from="UI/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_options_mouse_exited"]
-[connection signal="pressed" from="UI/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_mp_options_pressed"]
+[connection signal="mouse_entered" from="UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_mouse_entered"]
+[connection signal="mouse_exited" from="UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_mouse_exited"]
+[connection signal="pressed" from="UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame" to="." method="_on_create_game_pressed"]
+[connection signal="mouse_entered" from="UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_options_mouse_entered"]
+[connection signal="mouse_exited" from="UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_options_mouse_exited"]
+[connection signal="pressed" from="UI/LocalMPScroll/MultiplayerLocalMenu/ClassicGame/Options" to="." method="_on_mp_options_pressed"]
 [connection signal="tab_changed" from="UI/SettingsPanel/SettingsTab" to="." method="_on_settings_tab_tab_changed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P1Controls/p1_up/p1up" to="UI/SettingsPanel/ControlsPanel" method="_on_p_1_up_pressed"]
 [connection signal="pressed" from="UI/SettingsPanel/ControlsPanel/Controls/P1Controls/p1_down/p1down" to="UI/SettingsPanel/ControlsPanel" method="_on_p_1_down_pressed"]
