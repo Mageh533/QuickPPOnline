@@ -358,6 +358,14 @@ text = "Endless Tiny Puyo"
 icon = ExtResource("6_5k27g")
 alignment = 0
 
+[node name="Options" type="Button" parent="UI/SoloMenu/TinyPuyo"]
+offset_left = 334.0
+offset_top = 28.0
+offset_right = 374.0
+offset_bottom = 68.0
+icon = ExtResource("10_m5b1v")
+expand_icon = true
+
 [node name="Fever" type="Button" parent="UI/SoloMenu"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -1219,6 +1227,9 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/SoloMenu/TinyPuyo" to="." method="_on_tiny_puyo_mouse_entered"]
 [connection signal="mouse_exited" from="UI/SoloMenu/TinyPuyo" to="." method="_on_tiny_puyo_mouse_exited"]
 [connection signal="pressed" from="UI/SoloMenu/TinyPuyo" to="." method="_on_tiny_puyo_pressed"]
+[connection signal="mouse_entered" from="UI/SoloMenu/TinyPuyo/Options" to="." method="_on_tiny_puyo_mouse_entered"]
+[connection signal="mouse_exited" from="UI/SoloMenu/TinyPuyo/Options" to="." method="_on_tiny_puyo_mouse_exited"]
+[connection signal="pressed" from="UI/SoloMenu/TinyPuyo/Options" to="." method="_on_solo_options_pressed"]
 [connection signal="mouse_entered" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_pressed"]
