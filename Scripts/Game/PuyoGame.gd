@@ -93,9 +93,13 @@ func _process(delta):
 # Check if a puyo is on the losetile, then emit a lost signal if true
 func _physics_process(delta):
 	if !defeated:
-		if $LoseTileSprite/LoseCollision.is_colliding():
-			loseTileTime += delta
-		else:
+		var loseTileTouch = false
+		for losetileSprite in $LoseTiles.get_children():
+			if losetileSprite.get_child(0).is_colliding():
+				loseTileTime += delta
+				loseTileTouch = true
+		
+		if !loseTileTouch:
 			loseTileTime = 0
 		
 		if loseTileTime > 0.5:
@@ -240,12 +244,19 @@ func calculateNuisance(chainScore, targetPoints):
 func queueNuisance(nuisanceNum):
 	nuisanceQueue += nuisanceNum
 
+# Function to get all spawn points in the case grid is bigger or smaller e.g, tiny puyo and mega puyo gamemodes
+func getNuisanceSpawnPoints():
+	var freeSpawnPoints = []
+	for nuisanceSpawn in $NuisanceSpawns.get_children():
+		freeSpawnPoints.append(nuisanceSpawn.name.to_int())
+	return freeSpawnPoints
+
 # Nuisance spawns in rows and stack up
 func spawnNuisance(nuisanceNum):
 	var nuisanceSpawnPoints = $NuisanceSpawns.get_children()
 	var tile_size = 58
 	var stack = 0
-	var freeSpawnPoints = [0, 1, 2, 3, 4, 5]
+	var freeSpawnPoints = getNuisanceSpawnPoints()
 	var nuisanceToSpawn = nuisanceNum
 	while nuisanceToSpawn > 0:
 		if freeSpawnPoints.size() > 0:
@@ -257,7 +268,7 @@ func spawnNuisance(nuisanceNum):
 			nuisanceToSpawn += -1
 		else:
 			stack += 1
-			freeSpawnPoints = [0, 1, 2, 3, 4, 5]
+			freeSpawnPoints = getNuisanceSpawnPoints()
 	if nuisanceNum < 6:
 		$MultiplayerSoundEffects/Damage1.play()
 	else:
