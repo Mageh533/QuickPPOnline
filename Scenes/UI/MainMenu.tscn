@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=41 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
 [ext_resource type="PackedScene" uid="uid://caeh4snxqjfaa" path="res://Scenes/Game/Solo/SoloGame.tscn" id="2_nehnh"]
 [ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/Multiplayer/MainGame.tscn" id="3_1w8i2"]
+[ext_resource type="PackedScene" uid="uid://bgpmhkt3uc611" path="res://Scenes/Game/Solo/TinySoloGame.tscn" id="3_nia5t"]
 [ext_resource type="Texture2D" uid="uid://c18tyq86m5k1o" path="res://Assets/Sprites/particles/red.png" id="5_iygt7"]
 [ext_resource type="Texture2D" uid="uid://bnh6g8rof482p" path="res://Assets/Sprites/icons/github-mark-white.svg" id="5_l3gvt"]
 [ext_resource type="Texture2D" uid="uid://b1blsckwuoghl" path="res://Assets/Sprites/particles/green.png" id="6_5k27g"]
@@ -216,7 +217,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_bnywg")
-SoloGame = ExtResource("2_nehnh")
+SoloGames = Array[PackedScene]([ExtResource("2_nehnh"), ExtResource("3_nia5t")])
 MainGame = ExtResource("3_1w8i2")
 
 [node name="UI" type="Control" parent="."]
@@ -353,7 +354,6 @@ expand_icon = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
-disabled = true
 text = "Endless Tiny Puyo"
 icon = ExtResource("6_5k27g")
 alignment = 0
@@ -1216,6 +1216,9 @@ visibility_mode = 1
 [connection signal="mouse_entered" from="UI/SoloMenu/Endless/Options" to="." method="_on_classic_mouse_entered"]
 [connection signal="mouse_exited" from="UI/SoloMenu/Endless/Options" to="." method="_on_classic_mouse_exited"]
 [connection signal="pressed" from="UI/SoloMenu/Endless/Options" to="." method="_on_solo_options_pressed"]
+[connection signal="mouse_entered" from="UI/SoloMenu/TinyPuyo" to="." method="_on_tiny_puyo_mouse_entered"]
+[connection signal="mouse_exited" from="UI/SoloMenu/TinyPuyo" to="." method="_on_tiny_puyo_mouse_exited"]
+[connection signal="pressed" from="UI/SoloMenu/TinyPuyo" to="." method="_on_tiny_puyo_pressed"]
 [connection signal="mouse_entered" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_mouse_exited"]
 [connection signal="pressed" from="UI/MultiplayerMenu/LocalMP" to="." method="_on_local_mp_pressed"]

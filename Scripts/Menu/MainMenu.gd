@@ -1,6 +1,6 @@
 extends Node
 
-@export var SoloGame : PackedScene
+@export var SoloGames : Array[PackedScene]
 @export var MainGame : PackedScene
 
 var currentGame
@@ -56,11 +56,11 @@ func _process(_delta):
 		if $UI/BackButton.modulate.a == 0:
 			get_tree().create_tween().tween_property($UI/BackButton, "modulate:a", 1, 0.2)
 
-func startEndlessGame():
+func startSoloGame(Game : int):
 	setUpLocalGame()
 	await playFadeAnims("fadeIn")
 	$UI.hide()
-	currentGame = SoloGame.instantiate()
+	currentGame = SoloGames[Game].instantiate()
 	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)
 	await playFadeAnims("fadeOut")
@@ -374,8 +374,21 @@ func _on_classic_mouse_exited():
 	if currentMenu == MenuSets.SOLO_MENU:
 		get_tree().create_tween().tween_property($UI/SoloMenu/Endless, "position:x", 400, 0.1)
 
+func _on_tiny_puyo_mouse_entered():
+	if currentMenu == MenuSets.SOLO_MENU:
+		get_tree().create_tween().tween_property($UI/SoloMenu/TinyPuyo, "position:x", 350, 0.1)
+
+func _on_tiny_puyo_mouse_exited():
+	if currentMenu == MenuSets.SOLO_MENU:
+		get_tree().create_tween().tween_property($UI/SoloMenu/TinyPuyo, "position:x", 400, 0.1)
+
+func _on_tiny_puyo_pressed():
+	GameManager.soloInfo.gamemode = "Endless Tiny Puyo"
+	startSoloGame(1)
+
 func _on_endless_pressed():
-	startEndlessGame()
+	GameManager.soloInfo.gamemode = "Endless"
+	startSoloGame(0)
 
 func _on_solo_options_pressed():
 	soloOptionsShow()
