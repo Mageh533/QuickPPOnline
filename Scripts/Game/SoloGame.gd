@@ -11,6 +11,7 @@ var poppedPuyos = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$GameModePanel/ModeContainer/Mode.text = GameManager.soloInfo.gamemode
 	clearNuisanceQueue()
 	await get_tree().create_timer(0.05).timeout
 	$PuyoGame.process_mode = Node.PROCESS_MODE_DISABLED
@@ -23,7 +24,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$GameModePanel/ModeContainer/Mode.text = GameManager.soloInfo.Mode
 	if $PuyoGame.currentChain > GameManager.soloInfo.maxChain:
 		GameManager.soloInfo.maxChain = $PuyoGame.currentChain
 	$InfoPanel/VBox/Chain/MaxChain.text = str(GameManager.soloInfo.maxChain)
