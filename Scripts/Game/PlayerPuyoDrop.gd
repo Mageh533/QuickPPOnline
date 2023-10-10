@@ -125,10 +125,8 @@ func setUpPuyoGroup():
 	sendPuyoSignal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 1, 0, currentDropSet.size()))
 	sendPuyoSignal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 2, 0, currentDropSet.size()))
 	fallSpeed = GameManager.generalSettings.speed * 10
-	if GameManager.matchSettings.gamemode == "Fever":
+	if GameManager.matchSettings.gamemode == "Fever" or GameManager.soloMatchSettings.gamemode == "Endless Tiny Puyo":
 		currentDropSet = GameManager.setDropset(get_parent().get_parent().character)
-	elif GameManager.soloMatchSettings.gamemode == "Endless Tiny Puyo":
-		currentDropSet = GameManager.setDropset("Solo")
 
 func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
