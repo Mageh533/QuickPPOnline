@@ -22,6 +22,7 @@ var currentDropSet = []
 
 var timeOnGround = 0
 var currentPlayer = 0
+var dropsetNum = 0
 
 var fastDrop = false
 var ceilingCollide = false
@@ -87,8 +88,10 @@ func _process(_delta):
 		if rayCast.is_colliding():
 			ceilingCollide = true
 	
-	if currentDropSet.is_empty():
+	if currentDropSet.is_empty() or currentDropSet[dropsetNum] == GameManager.dropSetVar.I:
 		disableAdditionalPieces(true)
+	else:
+		disableAdditionalPieces(false)
 	
 	if active and !playerSet:
 		playerSet = true
@@ -185,6 +188,12 @@ func setRayCastsPositions():
 		leftRaycasts.append($RayCasts/RayBRight)
 		rightRaycasts.append($RayCasts/RayTLeft)
 		rightRaycasts.append($RayCasts/RayTRight)
+		topRaycasts.append($RayCasts2/RayLeft)
+		bottomRaycasts.append($RayCasts2/RayRight)
+		leftRaycasts.append($RayCasts2/RayBLeft)
+		leftRaycasts.append($RayCasts2/RayBRight)
+		rightRaycasts.append($RayCasts2/RayTLeft)
+		rightRaycasts.append($RayCasts2/RayTRight)
 	if currentAngle == 0:
 		topRaycasts.append($RayCasts/RayTLeft)
 		topRaycasts.append($RayCasts/RayTRight)
@@ -192,6 +201,12 @@ func setRayCastsPositions():
 		bottomRaycasts.append($RayCasts/RayBRight)
 		leftRaycasts.append($RayCasts/RayLeft)
 		rightRaycasts.append($RayCasts/RayRight)
+		topRaycasts.append($RayCasts2/RayTLeft)
+		topRaycasts.append($RayCasts2/RayTRight)
+		bottomRaycasts.append($RayCasts2/RayBLeft)
+		bottomRaycasts.append($RayCasts2/RayBRight)
+		leftRaycasts.append($RayCasts2/RayLeft)
+		rightRaycasts.append($RayCasts2/RayRight)
 	if currentAngle == -2:
 		bottomRaycasts.append($RayCasts/RayRight)
 		bottomRaycasts.append($RayCasts/RayLeft)
@@ -199,6 +214,12 @@ func setRayCastsPositions():
 		rightRaycasts.append($RayCasts/RayBRight)
 		leftRaycasts.append($RayCasts/RayTLeft)
 		leftRaycasts.append($RayCasts/RayTRight)
+		bottomRaycasts.append($RayCasts2/RayRight)
+		bottomRaycasts.append($RayCasts2/RayLeft)
+		rightRaycasts.append($RayCasts2/RayBLeft)
+		rightRaycasts.append($RayCasts2/RayBRight)
+		leftRaycasts.append($RayCasts2/RayTLeft)
+		leftRaycasts.append($RayCasts2/RayTRight)
 	if currentAngle == -3 or currentAngle == 3:
 		topRaycasts.append($RayCasts/RayBLeft)
 		topRaycasts.append($RayCasts/RayBRight)
@@ -206,6 +227,12 @@ func setRayCastsPositions():
 		bottomRaycasts.append($RayCasts/RayTRight)
 		rightRaycasts.append($RayCasts/RayLeft)
 		leftRaycasts.append($RayCasts/RayRight)
+		topRaycasts.append($RayCasts2/RayBLeft)
+		topRaycasts.append($RayCasts2/RayBRight)
+		bottomRaycasts.append($RayCasts2/RayTLeft)
+		bottomRaycasts.append($RayCasts2/RayTRight)
+		rightRaycasts.append($RayCasts2/RayLeft)
+		leftRaycasts.append($RayCasts2/RayRight)
 
 # Prevents clipping 
 func checkForRoationClipping():
@@ -271,6 +298,10 @@ func pieceLand(hardDrop : bool = false):
 	puyo2.basicSetup()
 	resetPlayer()
 	timeOnGround = 0
+	if !currentDropSet.is_empty():
+		dropsetNum += 1
+		if dropsetNum >= currentDropSet.size():
+			dropsetNum = 0
 	swapPuyos()
 	$Transforms.rotation = rotation
 	$SpritesTransforms.rotation = rotation

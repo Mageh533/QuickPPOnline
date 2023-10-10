@@ -172,6 +172,12 @@ shape = SubResource("RectangleShape2D_cwpa4")
 [node name="Puyo2Spawn" type="Marker2D" parent="."]
 position = Vector2(58, 0)
 
+[node name="Puyo3Spawn" type="Marker2D" parent="."]
+position = Vector2(58, 58)
+
+[node name="Puyo4Spawn" type="Marker2D" parent="."]
+position = Vector2(0, 58)
+
 [node name="SoundEffects" type="Node" parent="."]
 
 [node name="PieceLand" type="AudioStreamPlayer" parent="SoundEffects"]
