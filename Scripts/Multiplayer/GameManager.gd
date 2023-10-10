@@ -25,7 +25,7 @@ var matchSettings = {
 var soloMatchSettings = {
 	"gamemode" : "Endless",
 	"fixedSpeed" : false,
-	"timeLimit" : 0,
+	"timeLimit" : 120,
 	"sendNuisanceToSelf" : false,
 	"character" : ""
 }

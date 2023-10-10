@@ -305,7 +305,7 @@ offset_top = -12.0
 offset_right = 168.0
 offset_bottom = 14.0
 grow_vertical = 2
-text = "Alpha 0.2.1"
+text = "Alpha 0.2.3"
 
 [node name="GithubProjectLink" type="LinkButton" parent="UI/Background/Header"]
 layout_mode = 1
@@ -918,6 +918,7 @@ text = "Time Limit:"
 [node name="TimeInput" type="SpinBox" parent="UI/SoloOptionsPanel/VBox/TimeContainer"]
 layout_mode = 2
 max_value = 300.0
+value = 120.0
 
 [node name="SpeedContainer" type="HBoxContainer" parent="UI/SoloOptionsPanel/VBox"]
 layout_mode = 2
@@ -1248,7 +1249,7 @@ offset_left = -177.0
 offset_right = -64.0
 offset_bottom = 37.0
 grow_horizontal = 0
-text = "Player2"
+text = "Player 2"
 label_settings = SubResource("LabelSettings_yit6r")
 
 [node name="BackButton" type="Button" parent="UI"]
