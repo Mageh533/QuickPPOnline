@@ -99,3 +99,4 @@ func setDropset(characterSet):
 	var dropSet = []
 	if characterSet == "Solo":
 		dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.MONO_L, dropSetVar.DICH_O]
+	return dropSet
