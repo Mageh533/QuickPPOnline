@@ -48,7 +48,7 @@ func _process(delta):
 		player2ChainDamage = 0
 		get_tree().create_tween().tween_property($UIAnims/ChainAttackPanel, "modulate:a", 0, 1)
 
-func roundEnd(winner):
+func roundEnd():
 	$UIAnims/Anims.play("roundEnd")
 	await $UIAnims/Anims.animation_finished
 	await get_tree().create_timer(1).timeout
@@ -66,7 +66,7 @@ func _on_player_1_lost():
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	GameManager.matchInfo.p2Wins += 1
-	roundEnd(2)
+	roundEnd()
 
 func _on_player_2_lost():
 	matchStarted = false
@@ -77,7 +77,7 @@ func _on_player_2_lost():
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	GameManager.matchInfo.p1Wins += 1
-	roundEnd(1)
+	roundEnd()
 
 func _on_player_1_send_damage(damage):
 	if damage > 0:
