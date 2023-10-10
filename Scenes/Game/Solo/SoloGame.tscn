@@ -4,17 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="1_pr7mx"]
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="2_flro5"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="4_jua4e"]
-[ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/Sounds/lose.wav" id="4_qs63m"]
-[ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/Sounds/prepare.wav" id="5_ahetw"]
-[ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/Sounds/matchStart.wav" id="6_6xc70"]
-[ext_resource type="AudioStream" uid="uid://ccfbkpfv8psaa" path="res://Assets/Sounds/attack1.wav" id="7_1somt"]
-[ext_resource type="AudioStream" uid="uid://2ap3imurmp4a" path="res://Assets/Sounds/attack2.wav" id="8_tjqh4"]
-[ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/Sounds/attack3.wav" id="9_ljw7g"]
-[ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/Sounds/attack4.wav" id="10_jcqiu"]
-[ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/Sounds/win.wav" id="11_ha2ch"]
-[ext_resource type="AudioStream" uid="uid://dyw5miinuqndn" path="res://Assets/Sounds/tiemout.wav" id="13_s4rwc"]
-[ext_resource type="AudioStream" uid="uid://m4rxk1ciya11" path="res://Assets/Sounds/timeoutEnd.wav" id="14_b5ttc"]
-[ext_resource type="AudioStream" uid="uid://thlqjncdoh55" path="res://Assets/Sounds/challenge.wav" id="15_f435a"]
+[ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/SFX/lose.wav" id="5_q80hu"]
+[ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/SFX/prepare.wav" id="6_eroxf"]
+[ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/SFX/matchStart.wav" id="7_kgu8k"]
+[ext_resource type="AudioStream" uid="uid://ccfbkpfv8psaa" path="res://Assets/SFX/attack1.wav" id="8_wel4x"]
+[ext_resource type="AudioStream" uid="uid://2ap3imurmp4a" path="res://Assets/SFX/attack2.wav" id="9_dew7g"]
+[ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/SFX/attack3.wav" id="10_yvy1q"]
+[ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/SFX/attack4.wav" id="11_01drs"]
+[ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/SFX/win.wav" id="12_gfmgy"]
+[ext_resource type="AudioStream" uid="uid://dyw5miinuqndn" path="res://Assets/SFX/tiemout.wav" id="13_h7tv1"]
+[ext_resource type="AudioStream" uid="uid://m4rxk1ciya11" path="res://Assets/SFX/timeoutEnd.wav" id="14_waokm"]
+[ext_resource type="AudioStream" uid="uid://thlqjncdoh55" path="res://Assets/SFX/challenge.wav" id="15_0fu68"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scksh"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
@@ -224,7 +224,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("4_qs63m")
+"stream": ExtResource("5_q80hu")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -255,11 +255,11 @@ tracks/0/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("5_ahetw")
+"stream": ExtResource("6_eroxf")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_6xc70")
+"stream": ExtResource("7_kgu8k")
 }],
 "times": PackedFloat32Array(0.5, 2)
 }
@@ -517,31 +517,31 @@ libraries = {
 [node name="Prepare" type="AudioStreamPlayer2D" parent="SoundEffects"]
 
 [node name="Start" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("6_6xc70")
+stream = ExtResource("7_kgu8k")
 
 [node name="Attack1" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("7_1somt")
+stream = ExtResource("8_wel4x")
 
 [node name="Attack2" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("8_tjqh4")
+stream = ExtResource("9_dew7g")
 
 [node name="Attack3" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("9_ljw7g")
+stream = ExtResource("10_yvy1q")
 
 [node name="Attack4" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("10_jcqiu")
+stream = ExtResource("11_01drs")
 
 [node name="Win" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("11_ha2ch")
+stream = ExtResource("12_gfmgy")
 
 [node name="Timeout" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("13_s4rwc")
+stream = ExtResource("13_h7tv1")
 
 [node name="TimeoutEnd" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("14_b5ttc")
+stream = ExtResource("14_waokm")
 
 [node name="ChallengeUp" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("15_f435a")
+stream = ExtResource("15_0fu68")
 
 [node name="TimeOutFX" type="Timer" parent="."]
 one_shot = true

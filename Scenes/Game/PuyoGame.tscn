@@ -1,27 +1,28 @@
-[gd_scene load_steps=50 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=51 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_t6ghk"]
+[ext_resource type="Texture2D" uid="uid://he26l3hfdd7e" path="res://Assets/Sprites/matrix/ffield.png" id="3_82u8y"]
 [ext_resource type="PackedScene" uid="uid://4b8n5t827yci" path="res://Scenes/Objects/Puyos/BluePuyo.tscn" id="3_syxk4"]
 [ext_resource type="PackedScene" uid="uid://4t300lgrkwhu" path="res://Scenes/Objects/Puyos/GreenPuyo.tscn" id="4_0opt5"]
 [ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/Puyos/YellowPuyo.tscn" id="5_b2mlv"]
-[ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/Sounds/chain1.wav" id="5_hwduy"]
 [ext_resource type="PackedScene" uid="uid://rq2bwcbvu8p4" path="res://Scenes/Game/Player/player_puyo_drop.tscn" id="5_txj1e"]
-[ext_resource type="AudioStream" uid="uid://mwxcrh8yylc6" path="res://Assets/Sounds/chain2.wav" id="6_5l2rs"]
 [ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="6_rg22k"]
-[ext_resource type="AudioStream" uid="uid://tvki8clelukf" path="res://Assets/Sounds/chain3.wav" id="7_x8yts"]
 [ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/Puyos/PurplePuyo.tscn" id="7_xer8m"]
-[ext_resource type="AudioStream" uid="uid://gmnfjf5to2nx" path="res://Assets/Sounds/chain4.wav" id="8_5sh6p"]
-[ext_resource type="AudioStream" uid="uid://i48fl00ahthh" path="res://Assets/Sounds/chain5.wav" id="9_6u5m2"]
 [ext_resource type="PackedScene" uid="uid://dhcsxdylpaexb" path="res://Scenes/Objects/Puyos/NuisancePuyo.tscn" id="10_7qs3i"]
-[ext_resource type="AudioStream" uid="uid://27mspu334ol5" path="res://Assets/Sounds/chain6.wav" id="10_8pul3"]
 [ext_resource type="Script" path="res://Scripts/Game/DrawBorderOnQueue.gd" id="10_vtmlc"]
-[ext_resource type="AudioStream" uid="uid://cg4mht1v1w3dy" path="res://Assets/Sounds/chain7plus.wav" id="11_4vtwm"]
-[ext_resource type="AudioStream" uid="uid://bxjndxr7gtii7" path="res://Assets/Sounds/damage1.wav" id="17_43n50"]
-[ext_resource type="AudioStream" uid="uid://boqfbxkyhsey1" path="res://Assets/Sounds/damage2.wav" id="18_ubat8"]
-[ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/Sounds/damage3.wav" id="19_04va0"]
-[ext_resource type="AudioStream" uid="uid://ccqnv7lvh8drs" path="res://Assets/Sounds/allClear.wav" id="19_qxvst"]
+[ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/SFX/chain1.wav" id="12_w1lio"]
+[ext_resource type="AudioStream" uid="uid://mwxcrh8yylc6" path="res://Assets/SFX/chain2.wav" id="13_ojiuo"]
+[ext_resource type="AudioStream" uid="uid://tvki8clelukf" path="res://Assets/SFX/chain3.wav" id="14_whvvs"]
+[ext_resource type="AudioStream" uid="uid://gmnfjf5to2nx" path="res://Assets/SFX/chain4.wav" id="15_8ggkx"]
+[ext_resource type="AudioStream" uid="uid://i48fl00ahthh" path="res://Assets/SFX/chain5.wav" id="16_c6ppr"]
+[ext_resource type="AudioStream" uid="uid://27mspu334ol5" path="res://Assets/SFX/chain6.wav" id="17_ajaq3"]
+[ext_resource type="AudioStream" uid="uid://cg4mht1v1w3dy" path="res://Assets/SFX/chain7plus.wav" id="18_hto76"]
+[ext_resource type="AudioStream" uid="uid://bxjndxr7gtii7" path="res://Assets/SFX/damage1.wav" id="19_s8nsm"]
+[ext_resource type="AudioStream" uid="uid://boqfbxkyhsey1" path="res://Assets/SFX/damage2.wav" id="20_gkmbh"]
+[ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/SFX/damage3.wav" id="21_4thcd"]
+[ext_resource type="AudioStream" uid="uid://ccqnv7lvh8drs" path="res://Assets/SFX/allClear.wav" id="22_5khce"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
 atlas = ExtResource("2_t6ghk")
@@ -376,7 +377,7 @@ tracks/0/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("19_qxvst")
+"stream": ExtResource("22_5khce")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -437,6 +438,13 @@ offset_left = 36.0
 offset_top = 36.0
 offset_right = 312.0
 offset_bottom = 574.0
+
+[node name="FeverBackground" type="TextureRect" parent="."]
+offset_left = 43.0
+offset_top = 44.0
+offset_right = 312.0
+offset_bottom = 572.0
+texture = ExtResource("3_82u8y")
 
 [node name="LoseTiles" type="Node2D" parent="."]
 
@@ -514,38 +522,38 @@ label_settings = SubResource("LabelSettings_ttl81")
 [node name="ChainSoundEffects" type="Node" parent="."]
 
 [node name="Chain1" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("5_hwduy")
+stream = ExtResource("12_w1lio")
 
 [node name="Chain2" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("6_5l2rs")
+stream = ExtResource("13_ojiuo")
 
 [node name="Chain3" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("7_x8yts")
+stream = ExtResource("14_whvvs")
 
 [node name="Chain4" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("8_5sh6p")
+stream = ExtResource("15_8ggkx")
 
 [node name="Chain5" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("9_6u5m2")
+stream = ExtResource("16_c6ppr")
 
 [node name="Chain6" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("10_8pul3")
+stream = ExtResource("17_ajaq3")
 
 [node name="Chain7" type="AudioStreamPlayer" parent="ChainSoundEffects"]
-stream = ExtResource("11_4vtwm")
+stream = ExtResource("18_hto76")
 
 [node name="AllClear" type="AudioStreamPlayer" parent="ChainSoundEffects"]
 
 [node name="MultiplayerSoundEffects" type="Node" parent="."]
 
 [node name="Damage1" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
-stream = ExtResource("17_43n50")
+stream = ExtResource("19_s8nsm")
 
 [node name="Damage2" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
-stream = ExtResource("18_ubat8")
+stream = ExtResource("20_gkmbh")
 
 [node name="Damage3" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
-stream = ExtResource("19_04va0")
+stream = ExtResource("21_4thcd")
 
 [node name="NextPuyoSprites" type="Node2D" parent="."]
 

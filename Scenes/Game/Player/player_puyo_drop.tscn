@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://4b8n5t827yci" path="res://Scenes/Objects/Puyos/BluePuyo.tscn" id="4_e10fr"]
 [ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/Puyos/YellowPuyo.tscn" id="5_k4ubi"]
 [ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/Puyos/PurplePuyo.tscn" id="6_wshy5"]
-[ext_resource type="AudioStream" uid="uid://dvqogtw6c6as" path="res://Assets/Sounds/pieceland.wav" id="7_anfj1"]
-[ext_resource type="AudioStream" uid="uid://dafv8dap2l47s" path="res://Assets/Sounds/piecechange.wav" id="8_fm6xa"]
-[ext_resource type="AudioStream" uid="uid://ddqpkof6ib82m" path="res://Assets/Sounds/piecemove.wav" id="9_5vwjr"]
+[ext_resource type="AudioStream" uid="uid://dvqogtw6c6as" path="res://Assets/SFX/pieceland.wav" id="7_r2h4u"]
+[ext_resource type="AudioStream" uid="uid://dafv8dap2l47s" path="res://Assets/SFX/piecechange.wav" id="8_3sdjf"]
+[ext_resource type="AudioStream" uid="uid://ddqpkof6ib82m" path="res://Assets/SFX/piecemove.wav" id="9_xkkvh"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="10_5naes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwpa4"]
@@ -143,13 +143,13 @@ position = Vector2(58, 0)
 [node name="SoundEffects" type="Node" parent="."]
 
 [node name="PieceLand" type="AudioStreamPlayer" parent="SoundEffects"]
-stream = ExtResource("7_anfj1")
+stream = ExtResource("7_r2h4u")
 
 [node name="PieceRotate" type="AudioStreamPlayer" parent="SoundEffects"]
-stream = ExtResource("8_fm6xa")
+stream = ExtResource("8_3sdjf")
 
 [node name="PieceMove" type="AudioStreamPlayer" parent="SoundEffects"]
-stream = ExtResource("9_5vwjr")
+stream = ExtResource("9_xkkvh")
 
 [node name="RayCasts" type="Node2D" parent="."]
 
