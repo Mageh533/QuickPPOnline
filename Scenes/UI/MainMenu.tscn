@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=68 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
@@ -67,6 +67,13 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stvvn"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
 bg_color = Color(0, 0.713726, 0.996078, 1)
 border_width_left = 1
@@ -123,6 +130,7 @@ Button/styles/focus = null
 Button/styles/hover = SubResource("StyleBoxFlat_qebv7")
 Button/styles/normal = SubResource("StyleBoxFlat_0b83h")
 Button/styles/pressed = SubResource("StyleBoxFlat_d4hmw")
+ItemList/styles/panel = SubResource("StyleBoxFlat_stvvn")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 3
@@ -1026,20 +1034,45 @@ text = "Start"
 
 [node name="MultiplayerOptionsPanel" type="Panel" parent="UI"]
 visible = false
-layout_mode = 0
-offset_left = 410.0
-offset_top = 161.0
-offset_right = 694.0
-offset_bottom = 369.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -266.5
+offset_top = -214.0
+offset_right = 266.5
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MPStartBTN" type="Button" parent="UI/MultiplayerOptionsPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 49.5
+offset_top = -134.0
+offset_right = 193.5
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start"
 
 [node name="VBox" type="VBoxContainer" parent="UI/MultiplayerOptionsPanel"]
 layout_mode = 1
-anchors_preset = 13
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -104.0
-offset_right = 104.0
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = 18.0
+offset_right = -22.5
+offset_bottom = 172.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -1082,12 +1115,141 @@ layout_mode = 2
 text = "Hard Drop"
 alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="UI/MultiplayerOptionsPanel/VBox"]
-layout_mode = 2
+[node name="MPCharList" type="ItemList" parent="UI/MultiplayerOptionsPanel"]
+layout_mode = 1
+offset_left = 26.0
+offset_top = 38.0
+offset_right = 247.0
+offset_bottom = 227.0
+item_count = 24
+item_0/text = "Amitie"
+item_0/icon = ExtResource("11_okpsl")
+item_1/text = "Arle"
+item_1/icon = ExtResource("12_phbek")
+item_2/text = "Carbuncle"
+item_2/icon = ExtResource("13_bdv25")
+item_3/text = "Dongurigaeru"
+item_3/icon = ExtResource("14_x8x7w")
+item_4/text = "Draco Centauros"
+item_4/icon = ExtResource("15_l2lka")
+item_5/text = "Ecolo"
+item_5/icon = ExtResource("16_1cpqs")
+item_6/text = "Feli"
+item_6/icon = ExtResource("17_kd5q1")
+item_7/text = "Klug"
+item_7/icon = ExtResource("18_x18xe")
+item_8/text = "Lemres"
+item_8/icon = ExtResource("19_idpkg")
+item_9/text = "Maguro"
+item_9/icon = ExtResource("20_rtmfy")
+item_10/text = "Ms. Accord"
+item_10/icon = ExtResource("21_h2801")
+item_11/text = "Ocean Prince"
+item_11/icon = ExtResource("22_b6aep")
+item_12/text = "Onion Pixy"
+item_12/icon = ExtResource("23_ruin3")
+item_13/text = "Raffine"
+item_13/icon = ExtResource("24_sumgc")
+item_14/text = "Rider"
+item_14/icon = ExtResource("25_l37hy")
+item_15/text = "Ringo"
+item_15/icon = ExtResource("26_lcnnb")
+item_16/text = "Risukuma"
+item_16/icon = ExtResource("27_0lf33")
+item_17/text = "Rulue"
+item_17/icon = ExtResource("28_w305g")
+item_18/text = "Satan"
+item_18/icon = ExtResource("29_llbn7")
+item_19/text = "Schezo"
+item_19/icon = ExtResource("30_vc51y")
+item_20/text = "Sig"
+item_20/icon = ExtResource("31_utr8k")
+item_21/text = "Suketoudara"
+item_21/icon = ExtResource("32_myn60")
+item_22/text = "Witch"
+item_22/icon = ExtResource("33_wgmeq")
+item_23/text = "Yu & Rei"
+item_23/icon = ExtResource("34_2n5tr")
 
-[node name="MPStartBTN" type="Button" parent="UI/MultiplayerOptionsPanel/VBox"]
-layout_mode = 2
-text = "Start"
+[node name="MPCharList2" type="ItemList" parent="UI/MultiplayerOptionsPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 38.0
+offset_right = -29.0
+offset_bottom = 227.0
+grow_horizontal = 0
+item_count = 24
+item_0/text = "Amitie"
+item_0/icon = ExtResource("11_okpsl")
+item_1/text = "Arle"
+item_1/icon = ExtResource("12_phbek")
+item_2/text = "Carbuncle"
+item_2/icon = ExtResource("13_bdv25")
+item_3/text = "Dongurigaeru"
+item_3/icon = ExtResource("14_x8x7w")
+item_4/text = "Draco Centauros"
+item_4/icon = ExtResource("15_l2lka")
+item_5/text = "Ecolo"
+item_5/icon = ExtResource("16_1cpqs")
+item_6/text = "Feli"
+item_6/icon = ExtResource("17_kd5q1")
+item_7/text = "Klug"
+item_7/icon = ExtResource("18_x18xe")
+item_8/text = "Lemres"
+item_8/icon = ExtResource("19_idpkg")
+item_9/text = "Maguro"
+item_9/icon = ExtResource("20_rtmfy")
+item_10/text = "Ms. Accord"
+item_10/icon = ExtResource("21_h2801")
+item_11/text = "Ocean Prince"
+item_11/icon = ExtResource("22_b6aep")
+item_12/text = "Onion Pixy"
+item_12/icon = ExtResource("23_ruin3")
+item_13/text = "Raffine"
+item_13/icon = ExtResource("24_sumgc")
+item_14/text = "Rider"
+item_14/icon = ExtResource("25_l37hy")
+item_15/text = "Ringo"
+item_15/icon = ExtResource("26_lcnnb")
+item_16/text = "Risukuma"
+item_16/icon = ExtResource("27_0lf33")
+item_17/text = "Rulue"
+item_17/icon = ExtResource("28_w305g")
+item_18/text = "Satan"
+item_18/icon = ExtResource("29_llbn7")
+item_19/text = "Schezo"
+item_19/icon = ExtResource("30_vc51y")
+item_20/text = "Sig"
+item_20/icon = ExtResource("31_utr8k")
+item_21/text = "Suketoudara"
+item_21/icon = ExtResource("32_myn60")
+item_22/text = "Witch"
+item_22/icon = ExtResource("33_wgmeq")
+item_23/text = "Yu & Rei"
+item_23/icon = ExtResource("34_2n5tr")
+
+[node name="P1CharacterLabel" type="Label" parent="UI/MultiplayerOptionsPanel"]
+layout_mode = 1
+offset_left = 85.0
+offset_right = 198.0
+offset_bottom = 37.0
+text = "Player 1"
+label_settings = SubResource("LabelSettings_yit6r")
+
+[node name="P2CharacterLabel" type="Label" parent="UI/MultiplayerOptionsPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -177.0
+offset_right = -64.0
+offset_bottom = 37.0
+grow_horizontal = 0
+text = "Player2"
+label_settings = SubResource("LabelSettings_yit6r")
 
 [node name="BackButton" type="Button" parent="UI"]
 layout_mode = 0
@@ -1354,10 +1516,12 @@ visibility_mode = 1
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/NuisanceInput" to="." method="_on_nuisance_input_toggled"]
 [connection signal="item_selected" from="UI/SoloOptionsPanel/CharList" to="." method="_on_char_list_item_selected"]
 [connection signal="pressed" from="UI/SoloOptionsPanel/SoloStartBTN" to="." method="_on_solo_start_btn_pressed"]
+[connection signal="pressed" from="UI/MultiplayerOptionsPanel/MPStartBTN" to="." method="_on_mp_start_btn_pressed"]
 [connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/RoundsContainer/RoundsInput" to="." method="_on_rounds_input_value_changed"]
 [connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/SpeedContainer/SpeedInput" to="." method="_on_speed_input_value_changed"]
 [connection signal="toggled" from="UI/MultiplayerOptionsPanel/VBox/HDropInput" to="." method="_on_h_drop_input_toggled"]
-[connection signal="pressed" from="UI/MultiplayerOptionsPanel/VBox/MPStartBTN" to="." method="_on_mp_start_btn_pressed"]
+[connection signal="item_selected" from="UI/MultiplayerOptionsPanel/MPCharList" to="." method="_on_mp_char_list_item_selected"]
+[connection signal="item_selected" from="UI/MultiplayerOptionsPanel/MPCharList2" to="." method="_on_mp_char_list_2_item_selected"]
 [connection signal="mouse_entered" from="UI/BackButton" to="." method="_on_back_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/BackButton" to="." method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="UI/BackButton" to="." method="_on_back_button_pressed"]

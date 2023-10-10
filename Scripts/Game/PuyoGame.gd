@@ -49,6 +49,7 @@ func _ready():
 		$NextPuyoSprites/Puyo2Set1.visible = false
 		$NextPuyoSprites/Puyo1Set2.visible = false
 		$NextPuyoSprites/Puyo2Set2.visible = false
+		$CharacterBackground.flip_h = true
 	$AllClear.visible = false
 
 func _process(delta):

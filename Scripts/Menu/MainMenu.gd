@@ -493,3 +493,9 @@ func _on_mp_start_btn_pressed():
 
 func _on_char_list_item_selected(index):
 	GameManager.soloMatchSettings.character = $UI/SoloOptionsPanel/CharList.get_item_text(index)
+
+func _on_mp_char_list_item_selected(index):
+	GameManager.matchSettings.p1Char = $UI/MultiplayerOptionsPanel/MPCharList.get_item_text(index)
+
+func _on_mp_char_list_2_item_selected(index):
+	GameManager.matchSettings.p2Char = $UI/MultiplayerOptionsPanel/MPCharList2.get_item_text(index)

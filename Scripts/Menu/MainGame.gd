@@ -14,6 +14,8 @@ var player2Attacked : bool = false
 func _ready():
 	clearNuisanceQueue("Player1")
 	clearNuisanceQueue("Player2")
+	$Player1.setPlayerCharacter(GameManager.matchSettings.p1Char)
+	$Player2.setPlayerCharacter(GameManager.matchSettings.p2Char)
 	await get_tree().create_timer(0.05).timeout
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED

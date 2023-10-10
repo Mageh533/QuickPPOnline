@@ -18,6 +18,8 @@ var generalSettings = {
 }
 var matchSettings = {
 	"gamemode" : "TSU",
+	"p1Char" : "",
+	"p2Char" : "",
 	"roundsToWin" : 2,
 }
 var soloMatchSettings = {
