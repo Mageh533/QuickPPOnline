@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dvqogtw6c6as"
-path="res://.godot/imported/pieceland.wav-e3419381fb65c7b4bb21eb007a16df0a.sample"
+uid="uid://cclu6vyyjc7tc"
+path="res://.godot/imported/star.wav-a43bdbddbe31f4f4d4ba357e32abc26b.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/pieceland.wav"
-dest_files=["res://.godot/imported/pieceland.wav-e3419381fb65c7b4bb21eb007a16df0a.sample"]
+source_file="res://Assets/SFX/star.wav"
+dest_files=["res://.godot/imported/star.wav-a43bdbddbe31f4f4d4ba357e32abc26b.sample"]
 
 [params]
 

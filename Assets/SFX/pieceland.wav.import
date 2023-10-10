@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://2ap3imurmp4a"
-path="res://.godot/imported/attack2.wav-2b10079ad765df9192bf4e2d60852561.sample"
+uid="uid://dvqogtw6c6as"
+path="res://.godot/imported/pieceland.wav-6bf0a74db4db7e714044d01827333a47.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/attack2.wav"
-dest_files=["res://.godot/imported/attack2.wav-2b10079ad765df9192bf4e2d60852561.sample"]
+source_file="res://Assets/SFX/pieceland.wav"
+dest_files=["res://.godot/imported/pieceland.wav-6bf0a74db4db7e714044d01827333a47.sample"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://m4rxk1ciya11"
-path="res://.godot/imported/timeoutEnd.wav-a7d1a7b8ea12afc207cd1b70b5ab3b8a.sample"
+uid="uid://dyw5miinuqndn"
+path="res://.godot/imported/tiemout.wav-55612db47c674d417338d134b36d567a.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/timeoutEnd.wav"
-dest_files=["res://.godot/imported/timeoutEnd.wav-a7d1a7b8ea12afc207cd1b70b5ab3b8a.sample"]
+source_file="res://Assets/SFX/tiemout.wav"
+dest_files=["res://.godot/imported/tiemout.wav-55612db47c674d417338d134b36d567a.sample"]
 
 [params]
 

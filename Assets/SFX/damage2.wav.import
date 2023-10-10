@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cg4mht1v1w3dy"
-path="res://.godot/imported/chain7plus.wav-bf13ce44e74fd362deaf7a9cd3f8e331.sample"
+uid="uid://boqfbxkyhsey1"
+path="res://.godot/imported/damage2.wav-16ee455755aa9d302a6dc769939cc016.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/chain7plus.wav"
-dest_files=["res://.godot/imported/chain7plus.wav-bf13ce44e74fd362deaf7a9cd3f8e331.sample"]
+source_file="res://Assets/SFX/damage2.wav"
+dest_files=["res://.godot/imported/damage2.wav-16ee455755aa9d302a6dc769939cc016.sample"]
 
 [params]
 

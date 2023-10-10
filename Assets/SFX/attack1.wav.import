@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dyw5miinuqndn"
-path="res://.godot/imported/tiemout.wav-943d488702b8b37c92df2ea99b2554d7.sample"
+uid="uid://ccfbkpfv8psaa"
+path="res://.godot/imported/attack1.wav-61b9ef45883f5ec9279a60916214227e.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/tiemout.wav"
-dest_files=["res://.godot/imported/tiemout.wav-943d488702b8b37c92df2ea99b2554d7.sample"]
+source_file="res://Assets/SFX/attack1.wav"
+dest_files=["res://.godot/imported/attack1.wav-61b9ef45883f5ec9279a60916214227e.sample"]
 
 [params]
 

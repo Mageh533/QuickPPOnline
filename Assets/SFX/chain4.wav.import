@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://thlqjncdoh55"
-path="res://.godot/imported/challenge.wav-765a5a0542c3ffdb2cfb75eca97f88e4.sample"
+uid="uid://gmnfjf5to2nx"
+path="res://.godot/imported/chain4.wav-5c7b8839d86cead107a853270a31bdab.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/challenge.wav"
-dest_files=["res://.godot/imported/challenge.wav-765a5a0542c3ffdb2cfb75eca97f88e4.sample"]
+source_file="res://Assets/SFX/chain4.wav"
+dest_files=["res://.godot/imported/chain4.wav-5c7b8839d86cead107a853270a31bdab.sample"]
 
 [params]
 

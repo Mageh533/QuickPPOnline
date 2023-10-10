@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dafv8dap2l47s"
-path="res://.godot/imported/piecechange.wav-55fbd284dfffa95e5200de01a3740f63.sample"
+path="res://.godot/imported/piecechange.wav-dbdbbc9c925e8393a3b1b732a4927486.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/piecechange.wav"
-dest_files=["res://.godot/imported/piecechange.wav-55fbd284dfffa95e5200de01a3740f63.sample"]
+source_file="res://Assets/SFX/piecechange.wav"
+dest_files=["res://.godot/imported/piecechange.wav-dbdbbc9c925e8393a3b1b732a4927486.sample"]
 
 [params]
 
