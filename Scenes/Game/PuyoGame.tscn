@@ -441,10 +441,11 @@ offset_left = 36.0
 offset_top = 36.0
 offset_right = 312.0
 offset_bottom = 574.0
-color = Color(0.164706, 0.164706, 0.164706, 0.745098)
+color = Color(0.164706, 0.164706, 0.164706, 1)
 
 [node name="CharacterBackground" type="TextureRect" parent="."]
 visible = false
+modulate = Color(1, 1, 1, 0.501961)
 offset_left = 36.0
 offset_top = 36.0
 offset_right = 312.0
