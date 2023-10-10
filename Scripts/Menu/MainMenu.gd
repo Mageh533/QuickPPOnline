@@ -22,7 +22,6 @@ var currentMenu = MenuSets.MAIN_MENU
 const PORT = 4433
 
 func _ready():
-	$UI/LocalMPScroll.get_v_scroll_bar().scale.x = -2
 	$PermaUI/PauseButton.hide()
 	get_tree().paused = false
 	menuStartAnims()
