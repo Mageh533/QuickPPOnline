@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dysk61aadfrjd"
+path="res://.godot/imported/counterspell.wav-557f0c971b03428ea70bc7065bce5aac.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/Yu & Rei/Voice/counterspell.wav"
+dest_files=["res://.godot/imported/counterspell.wav-557f0c971b03428ea70bc7065bce5aac.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

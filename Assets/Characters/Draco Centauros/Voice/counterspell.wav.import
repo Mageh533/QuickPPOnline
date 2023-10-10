@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dar56hsh63smy"
+path="res://.godot/imported/counterspell.wav-080810f44a35318721bd86a5569b9f53.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/Draco Centauros/Voice/counterspell.wav"
+dest_files=["res://.godot/imported/counterspell.wav-080810f44a35318721bd86a5569b9f53.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

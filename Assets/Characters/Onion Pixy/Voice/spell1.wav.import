@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbg2fyye0qnfd"
+path="res://.godot/imported/spell1.wav-0cef0f329fa8c05e0347f998d3b69545.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/Onion Pixy/Voice/spell1.wav"
+dest_files=["res://.godot/imported/spell1.wav-0cef0f329fa8c05e0347f998d3b69545.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

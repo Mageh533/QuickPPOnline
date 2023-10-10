@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://blr4a8agt0rtv"
+path="res://.godot/imported/choose.wav-93b75925721a9f2971e8f8d76abfeaaa.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/Yu & Rei/Voice/choose.wav"
+dest_files=["res://.godot/imported/choose.wav-93b75925721a9f2971e8f8d76abfeaaa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

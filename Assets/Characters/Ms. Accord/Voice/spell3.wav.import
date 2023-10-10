@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bo7q6lc8tt8qg"
+path="res://.godot/imported/spell3.wav-33a1affc3009eddb13cf5115045a111d.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/Ms. Accord/Voice/spell3.wav"
+dest_files=["res://.godot/imported/spell3.wav-33a1affc3009eddb13cf5115045a111d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
