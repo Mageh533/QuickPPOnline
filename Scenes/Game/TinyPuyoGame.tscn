@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dn4gmuydyqp6y"]
+[gd_scene load_steps=11 format=3 uid="uid://dn4gmuydyqp6y"]
 
 [ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="1_86dyu"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_fkmlm"]
@@ -48,15 +48,36 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84oas"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_swbwa"]
+font_size = 70
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
 [node name="PuyoGame" instance=ExtResource("1_86dyu")]
+position = Vector2(0, -25)
+
+[node name="Background" parent="." index="0"]
+offset_top = -220.0
+offset_right = 479.0
+
+[node name="CharacterBackground" parent="." index="1"]
+offset_top = -214.0
+offset_right = 477.0
+
+[node name="FeverBackground" parent="." index="2"]
+offset_left = 39.0
+offset_top = -208.0
+offset_right = 475.0
+
+[node name="LoseTiles" parent="." index="3"]
+position = Vector2(69, -256)
 
 [node name="LoseTileSprite" parent="LoseTiles" index="0"]
-position = Vector2(160, 59)
-scale = Vector2(0.467, 0.505)
+position = Vector2(165, 64)
 
 [node name="LoseTileSprite2" type="AnimatedSprite2D" parent="LoseTiles" index="1"]
-position = Vector2(188, 59)
-scale = Vector2(0.467, 0.505)
+position = Vector2(209, 64)
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_wxp1r")
 frame_progress = 0.255278
 
@@ -65,8 +86,65 @@ shape = SubResource("RectangleShape2D_84oas")
 target_position = Vector2(0, 0)
 
 [node name="TileMap" parent="." index="4"]
-position = Vector2(39, 44)
-scale = Vector2(0.467, 0.505)
+position = Vector2(39, -213)
 cell_quadrant_size = 18
 layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, -65535, 65536, 0, -65531, 65536, 0, -1, 65536, 1, 917503, 131072, 0, 917502, 0, 1, 851966, 0, 1, 786430, 0, 1, 720894, 0, 1, 655358, 0, 1, 589822, 0, 1, 524286, 0, 1, 458750, 0, 1, 393214, 0, 1, 327678, 0, 1, 262142, 0, 1, 196606, 0, 1, 131070, 0, 1, 65534, 0, 1, -2, 0, 1, -65530, 65536, 0, -65528, 65536, 0, -65527, 65536, 0, 10, 262144, 0, 65546, 262144, 0, 131082, 262144, 0, 196618, 262144, 0, 262154, 262144, 0, 327690, 262144, 0, 393226, 262144, 0, 458762, 262144, 0, 524298, 262144, 0, 589834, 262144, 0, 655370, 262144, 0, 720906, 262144, 0, 786442, 262144, 0, 851978, 262144, 0, 917514, 262144, 0, 983050, 262144, 0, 1048586, 262144, 0, 1114122, 262144, 0, 851967, 131072, 0, 983039, 131072, 0, 1048575, 131072, 0, 1114111, 131072, 0, 1179647, 131072, 0, -65526, 131072, 1, 1179648, 196608, 0, 1179649, 196608, 0, 1179650, 196608, 0, 1179651, 196608, 0, 1179652, 196608, 0, 1179653, 196608, 0, 1179654, 196608, 0, 1179655, 196608, 0, 1179656, 196608, 0, 1179657, 196608, 0, 1245183, 196608, 1, 1179658, 262144, 1, -65529, 65536, 0, 1179646, 0, 1, 1114110, 0, 1, 1048574, 0, 1, 983038, 0, 1, 11, 0, 1, 65547, 0, 1, 131083, 0, 1, 196619, 0, 1, 262155, 0, 1, 327691, 0, 1, 393227, 0, 1, 458763, 0, 1, 524299, 0, 1, 589835, 0, 1, 655371, 0, 1, 720907, 0, 1, 786443, 0, 1, 851979, 0, 1, 917515, 0, 1, 983051, 0, 1, 1048587, 0, 1, 1114123, 0, 1, 1179659, 0, 1, 1245182, 0, 1, -65525, 0, 1, -65533, 65536, 0, -65532, 65536, 0, -65534, 65536, 0)
 layer_1/tile_data = PackedInt32Array(-65532, 1, 65536)
+
+[node name="PuyoDropBG1" parent="." index="5"]
+offset_left = 500.0
+offset_top = -210.0
+offset_right = 565.0
+offset_bottom = -86.0
+scale = Vector2(1.8, 1.8)
+expand_mode = 1
+
+[node name="PuyoDropBG2" parent="." index="6"]
+offset_left = -105.0
+offset_top = -213.0
+offset_right = -40.0
+offset_bottom = -89.0
+scale = Vector2(1.8, 1.8)
+expand_mode = 1
+
+[node name="ScorePanel" parent="." index="7"]
+offset_left = 26.0
+offset_right = 487.0
+offset_bottom = 662.0
+
+[node name="ScoreLabel" parent="ScorePanel" index="0"]
+offset_left = -2.0
+offset_top = -10.0
+offset_right = 454.0
+offset_bottom = 89.0
+label_settings = SubResource("LabelSettings_swbwa")
+
+[node name="NextPuyoSprites" parent="." index="11"]
+scale = Vector2(1.5, 1.5)
+
+[node name="Puyo1Set1" parent="NextPuyoSprites" index="0"]
+position = Vector2(363.867, -110.567)
+
+[node name="Puyo2Set1" parent="NextPuyoSprites" index="1"]
+position = Vector2(364.867, -72.5667)
+
+[node name="Puyo1Set2" parent="NextPuyoSprites" index="2"]
+position = Vector2(391.067, -40.5917)
+
+[node name="Puyo2Set2" parent="NextPuyoSprites" index="3"]
+position = Vector2(391.267, -10.0167)
+
+[node name="Puyo1Set1_2" parent="NextPuyoSprites" index="4"]
+position = Vector2(-19.0667, -114.567)
+
+[node name="Puyo2Set1_2" parent="NextPuyoSprites" index="5"]
+position = Vector2(-18.0667, -76.5667)
+
+[node name="Puyo1Set2_2" parent="NextPuyoSprites" index="6"]
+position = Vector2(-48.2667, -43.5917)
+
+[node name="Puyo2Set2_2" parent="NextPuyoSprites" index="7"]
+position = Vector2(-48.0667, -14.3417)
+
+[node name="NuisanceSpawns" parent="." index="12"]
+position = Vector2(-3, -268)
