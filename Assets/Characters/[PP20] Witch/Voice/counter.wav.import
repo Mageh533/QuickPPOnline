@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bs8kc3v5fl4bq"
+path="res://.godot/imported/counter.wav-eb98a499f2da6d9d71ce72719f1f5d36.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Witch/Voice/counter.wav"
+dest_files=["res://.godot/imported/counter.wav-eb98a499f2da6d9d71ce72719f1f5d36.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

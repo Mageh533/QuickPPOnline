@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8fwqt0i1khy4"
+path="res://.godot/imported/counter.wav-c527c1d5915497f59f78e9ba4d46cb2f.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Feli/Voice/counter.wav"
+dest_files=["res://.godot/imported/counter.wav-c527c1d5915497f59f78e9ba4d46cb2f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://kj8m6bgl1tbf"
+path="res://.godot/imported/counterspell.wav-d8d829adea0e0a76457a601e4410ccee.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Ringo/Voice/counterspell.wav"
+dest_files=["res://.godot/imported/counterspell.wav-d8d829adea0e0a76457a601e4410ccee.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

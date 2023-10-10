@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dh13swyowm55n"
+path="res://.godot/imported/spell2.wav-a5b235299c00a99519221c138c1b7384.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Arle/Voice/spell2.wav"
+dest_files=["res://.godot/imported/spell2.wav-a5b235299c00a99519221c138c1b7384.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

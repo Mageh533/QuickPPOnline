@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://mre7l78y1f2j"
+path="res://.godot/imported/counterspell.wav-8a5f7ade977a3ac439b96e795b532e61.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Lemres/Voice/counterspell.wav"
+dest_files=["res://.godot/imported/counterspell.wav-8a5f7ade977a3ac439b96e795b532e61.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

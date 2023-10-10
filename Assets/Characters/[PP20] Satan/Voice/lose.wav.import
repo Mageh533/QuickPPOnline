@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://2m64er3mectq"
+path="res://.godot/imported/lose.wav-8b09b78af864d3b01ad4992937ed8ba7.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Satan/Voice/lose.wav"
+dest_files=["res://.godot/imported/lose.wav-8b09b78af864d3b01ad4992937ed8ba7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

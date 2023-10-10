@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cniou677n5u61"
+path="res://.godot/imported/damage2.wav-ee70de923a5dfa36f351462a698de181.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Sig/Voice/damage2.wav"
+dest_files=["res://.godot/imported/damage2.wav-ee70de923a5dfa36f351462a698de181.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

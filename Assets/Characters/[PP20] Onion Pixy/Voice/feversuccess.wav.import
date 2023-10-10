@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c5xfycnp4sfa2"
+path="res://.godot/imported/feversuccess.wav-a3fb01995192729a0261ab1f387decae.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Onion Pixy/Voice/feversuccess.wav"
+dest_files=["res://.godot/imported/feversuccess.wav-a3fb01995192729a0261ab1f387decae.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

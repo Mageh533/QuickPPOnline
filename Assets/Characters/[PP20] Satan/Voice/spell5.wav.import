@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dkf3ky4dyerau"
+path="res://.godot/imported/spell5.wav-59e312879d272ca1c5c65b2ee2b09afe.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Satan/Voice/spell5.wav"
+dest_files=["res://.godot/imported/spell5.wav-59e312879d272ca1c5c65b2ee2b09afe.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

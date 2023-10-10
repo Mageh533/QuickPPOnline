@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://sahqtx3yv4ol"
+path="res://.godot/imported/spell5.wav-4887aae057c6ad5b6fa43f2334347de7.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Ringo/Voice/spell5.wav"
+dest_files=["res://.godot/imported/spell5.wav-4887aae057c6ad5b6fa43f2334347de7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://w8b5g3pwnili"
+path="res://.godot/imported/feverfail.wav-9afb34a8fc9bcf2c1fe73eb297f063dc.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Ms. Accord/Voice/feverfail.wav"
+dest_files=["res://.godot/imported/feverfail.wav-9afb34a8fc9bcf2c1fe73eb297f063dc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

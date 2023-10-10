@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbmvj0p4h75yo"
+path="res://.godot/imported/choose.wav-c91694d13d25da093cff9c16547b4a31.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Suketoudara/Voice/choose.wav"
+dest_files=["res://.godot/imported/choose.wav-c91694d13d25da093cff9c16547b4a31.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

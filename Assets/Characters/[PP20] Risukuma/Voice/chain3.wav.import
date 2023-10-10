@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgrb2k6cof386"
+path="res://.godot/imported/chain3.wav-5286dd48da2dc5cdcda467b42f32642b.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Risukuma/Voice/chain3.wav"
+dest_files=["res://.godot/imported/chain3.wav-5286dd48da2dc5cdcda467b42f32642b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

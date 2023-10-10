@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b25nnluvxhvmu"
+path="res://.godot/imported/spell2.wav-006e16d8feb4e406d6a8011fc19ee73e.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Amitie/Voice/spell2.wav"
+dest_files=["res://.godot/imported/spell2.wav-006e16d8feb4e406d6a8011fc19ee73e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

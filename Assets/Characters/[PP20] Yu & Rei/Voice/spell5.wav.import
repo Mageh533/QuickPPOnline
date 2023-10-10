@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btgp1rep4nam6"
+path="res://.godot/imported/spell5.wav-a9936c6bc62d1525ae02aede3308b31b.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Yu & Rei/Voice/spell5.wav"
+dest_files=["res://.godot/imported/spell5.wav-a9936c6bc62d1525ae02aede3308b31b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

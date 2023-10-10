@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dodci60x0m227"
+path="res://.godot/imported/feversuccess.wav-2b5e55c9cdb19942840dcf73076edaee.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Dongurigaeru/Voice/feversuccess.wav"
+dest_files=["res://.godot/imported/feversuccess.wav-2b5e55c9cdb19942840dcf73076edaee.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

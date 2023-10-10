@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://crmo835pd8t80"
+path="res://.godot/imported/chain1.wav-d9710b0898123b7823ae79c6dcdaaf0d.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Ocean Prince/Voice/chain1.wav"
+dest_files=["res://.godot/imported/chain1.wav-d9710b0898123b7823ae79c6dcdaaf0d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

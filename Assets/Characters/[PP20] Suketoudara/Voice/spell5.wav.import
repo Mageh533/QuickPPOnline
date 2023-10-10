@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvutop0oxgqcl"
+path="res://.godot/imported/spell5.wav-81565473c91be7fbe65f75df365d9088.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Suketoudara/Voice/spell5.wav"
+dest_files=["res://.godot/imported/spell5.wav-81565473c91be7fbe65f75df365d9088.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

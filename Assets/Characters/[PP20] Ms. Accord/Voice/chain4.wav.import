@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://x28xtc3454oy"
+path="res://.godot/imported/chain4.wav-4b8cf616a493f6bb4e35aae0d8cc02eb.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Ms. Accord/Voice/chain4.wav"
+dest_files=["res://.godot/imported/chain4.wav-4b8cf616a493f6bb4e35aae0d8cc02eb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

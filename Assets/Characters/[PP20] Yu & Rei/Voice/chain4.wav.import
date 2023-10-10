@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://co2nke7xtjw2u"
+path="res://.godot/imported/chain4.wav-ee1142e604115dbc7d5f8fa18650a5e1.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Yu & Rei/Voice/chain4.wav"
+dest_files=["res://.godot/imported/chain4.wav-ee1142e604115dbc7d5f8fa18650a5e1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

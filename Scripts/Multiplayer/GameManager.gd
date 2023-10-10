@@ -8,8 +8,9 @@ var currentSeed = 0
 
 # Settings dictionaries
 var clientSettings = {
-	"moveSpeed" : 0.3,
+	"moveSpeed" : 0.08,
 	"fpsCounter" : false,
+	"enableVoices" : false
 }
 var generalSettings = {
 	"hardDrop" : false,

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bhkq57m3eu5ya"
+path="res://.godot/imported/damage1.wav-56e4e6905aa642b67ef1fe5387ec17de.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Arle/Voice/damage1.wav"
+dest_files=["res://.godot/imported/damage1.wav-56e4e6905aa642b67ef1fe5387ec17de.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

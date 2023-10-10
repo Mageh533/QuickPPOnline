@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwrvp7cjup1lu"
+path="res://.godot/imported/chain1.wav-15c63f33554f28ec6bdd786637509311.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Satan/Voice/chain1.wav"
+dest_files=["res://.godot/imported/chain1.wav-15c63f33554f28ec6bdd786637509311.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

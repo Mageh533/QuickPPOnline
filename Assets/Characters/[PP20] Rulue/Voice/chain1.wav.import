@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://be5blysqid4xd"
+path="res://.godot/imported/chain1.wav-efb9bb87381cc7ac1e35319323a84e7d.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Rulue/Voice/chain1.wav"
+dest_files=["res://.godot/imported/chain1.wav-efb9bb87381cc7ac1e35319323a84e7d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

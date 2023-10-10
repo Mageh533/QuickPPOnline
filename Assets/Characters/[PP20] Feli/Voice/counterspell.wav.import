@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dkx68lcwyir73"
+path="res://.godot/imported/counterspell.wav-513c3303339d12dee27a055b6c55ff57.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Feli/Voice/counterspell.wav"
+dest_files=["res://.godot/imported/counterspell.wav-513c3303339d12dee27a055b6c55ff57.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

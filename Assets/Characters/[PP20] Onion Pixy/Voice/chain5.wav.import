@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dwd7ixkqm3kxm"
+path="res://.godot/imported/chain5.wav-2ba81317588c9dcf76f4bf25cc4d5e72.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Onion Pixy/Voice/chain5.wav"
+dest_files=["res://.godot/imported/chain5.wav-2ba81317588c9dcf76f4bf25cc4d5e72.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2cm4oas7lo5x"
+path="res://.godot/imported/lose.wav-994a70c4ad4e019d8ebf3143ab062987.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Rulue/Voice/lose.wav"
+dest_files=["res://.godot/imported/lose.wav-994a70c4ad4e019d8ebf3143ab062987.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

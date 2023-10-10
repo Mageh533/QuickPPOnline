@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://duud0yppwmmpf"
+path="res://.godot/imported/chain5.wav-5277d80bb14411d888fda7a81847897f.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Suketoudara/Voice/chain5.wav"
+dest_files=["res://.godot/imported/chain5.wav-5277d80bb14411d888fda7a81847897f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d4nf6s64xd34a"
+path="res://.godot/imported/win.wav-d3f97b288733bead379ca282bdf14b84.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Draco Centauros/Voice/win.wav"
+dest_files=["res://.godot/imported/win.wav-d3f97b288733bead379ca282bdf14b84.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

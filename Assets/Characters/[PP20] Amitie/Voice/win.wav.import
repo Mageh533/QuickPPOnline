@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ljeix2u2uc5v"
+path="res://.godot/imported/win.wav-e42823cb668c40c51f8a47a26e3ee479.sample"
+
+[deps]
+
+source_file="res://Assets/Characters/[PP20] Amitie/Voice/win.wav"
+dest_files=["res://.godot/imported/win.wav-e42823cb668c40c51f8a47a26e3ee479.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
