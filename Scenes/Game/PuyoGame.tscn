@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=50 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -149,6 +149,10 @@ region = Rect2(0, 141, 64, 67)
 atlas = ExtResource("2_t6ghk")
 region = Rect2(0, 68, 66, 68)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5cw3"]
+atlas = ExtResource("2_t6ghk")
+region = Rect2(1536, 512, 512, 256)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_iqvlf"]
 atlas = ExtResource("2_t6ghk")
 region = Rect2(0, 283, 66, 67)
@@ -181,131 +185,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iqvlf")
+"texture": SubResource("AtlasTexture_s5cw3")
 }],
 "loop": true,
-"name": &"PurplePuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkbay")
-}],
-"loop": false,
-"name": &"RedPuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wtghr")
-}],
-"loop": true,
-"name": &"YellowPuyo",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_85m4y"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bs3e0")
-}],
-"loop": true,
-"name": &"BuePuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnhu7")
-}],
-"loop": true,
-"name": &"GreenPuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iqvlf")
-}],
-"loop": true,
-"name": &"PurplePuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkbay")
-}],
-"loop": false,
-"name": &"RedPuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wtghr")
-}],
-"loop": true,
-"name": &"YellowPuyo",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jpwnm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bs3e0")
-}],
-"loop": true,
-"name": &"BuePuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnhu7")
-}],
-"loop": true,
-"name": &"GreenPuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iqvlf")
-}],
-"loop": true,
-"name": &"PurplePuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkbay")
-}],
-"loop": false,
-"name": &"RedPuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wtghr")
-}],
-"loop": true,
-"name": &"YellowPuyo",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_pmwj7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bs3e0")
-}],
-"loop": true,
-"name": &"BuePuyo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnhu7")
-}],
-"loop": true,
-"name": &"GreenPuyo",
+"name": &"Nothing",
 "speed": 5.0
 }, {
 "frames": [{
@@ -490,67 +373,115 @@ layer_1/tile_data = PackedInt32Array(-65534, 1, 65536)
 clip_children = 2
 offset_left = 327.0
 offset_top = 45.0
-offset_right = 327.0
-offset_bottom = 45.0
+offset_right = 401.0
+offset_bottom = 170.0
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("12_70b0l")
 
 [node name="Puyo1Set1" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(24.16, 26.48)
+position = Vector2(26.08, 27.84)
 scale = Vector2(0.48, 0.48)
 sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
 
 [node name="Puyo2Set1" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(24.96, 56.88)
+position = Vector2(26.8801, 58.24)
 scale = Vector2(0.48, 0.48)
-sprite_frames = SubResource("SpriteFrames_85m4y")
+sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
 
+[node name="Puyo3Set1" type="AnimatedSprite2D" parent="PuyoDropBG1"]
+position = Vector2(56.48, 28.64)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
+
+[node name="Puyo4Set1" type="AnimatedSprite2D" parent="PuyoDropBG1"]
+position = Vector2(57.2801, 59.04)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
+
 [node name="Puyo1Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(45.92, 82.46)
+position = Vector2(52.32, 84.24)
 scale = Vector2(0.36, 0.36)
-sprite_frames = SubResource("SpriteFrames_jpwnm")
+sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
 
 [node name="Puyo2Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(46.0799, 106.92)
+position = Vector2(52.4799, 108.7)
 scale = Vector2(0.36, 0.36)
-sprite_frames = SubResource("SpriteFrames_pmwj7")
+sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
+
+[node name="Puyo3Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
+position = Vector2(76.3199, 84.24)
+scale = Vector2(0.36, 0.36)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
+
+[node name="Puyo4Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
+position = Vector2(76.4799, 108.7)
+scale = Vector2(0.36, 0.36)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
 
 [node name="PuyoDropBG2" type="TextureRect" parent="."]
 clip_children = 2
-offset_left = -58.0
+offset_left = -70.0
 offset_top = 45.0
-offset_right = 6.99999
+offset_right = 5.0
 offset_bottom = 169.0
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("14_dakh1")
 
 [node name="Puyo1Set1" type="AnimatedSprite2D" parent="PuyoDropBG2"]
-position = Vector2(40.96, 25.68)
+position = Vector2(45.76, 25.68)
 scale = Vector2(0.48, 0.48)
 sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
 
 [node name="Puyo2Set1" type="AnimatedSprite2D" parent="PuyoDropBG2"]
-position = Vector2(41.76, 56.08)
+position = Vector2(46.56, 56.08)
 scale = Vector2(0.48, 0.48)
-sprite_frames = SubResource("SpriteFrames_85m4y")
+sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
 
 [node name="Puyo1Set2" type="AnimatedSprite2D" parent="PuyoDropBG2"]
-position = Vector2(17.6, 82.46)
+position = Vector2(22.4, 82.46)
 scale = Vector2(0.36, 0.36)
-sprite_frames = SubResource("SpriteFrames_jpwnm")
+sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
 
 [node name="Puyo2Set2" type="AnimatedSprite2D" parent="PuyoDropBG2"]
-position = Vector2(17.76, 105.86)
+position = Vector2(22.56, 105.86)
 scale = Vector2(0.36, 0.36)
-sprite_frames = SubResource("SpriteFrames_pmwj7")
+sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BuePuyo"
+
+[node name="Puyo3Set1" type="AnimatedSprite2D" parent="PuyoDropBG2"]
+position = Vector2(16.16, 25.68)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
+
+[node name="Puyo4Set1" type="AnimatedSprite2D" parent="PuyoDropBG2"]
+position = Vector2(16.9601, 56.08)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
+
+[node name="Puyo3Set2" type="AnimatedSprite2D" parent="PuyoDropBG2"]
+position = Vector2(0.32, 82.46)
+scale = Vector2(0.36, 0.36)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
+
+[node name="Puyo4Set2" type="AnimatedSprite2D" parent="PuyoDropBG2"]
+position = Vector2(0.479935, 106.92)
+scale = Vector2(0.36, 0.36)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"Nothing"
 
 [node name="ScorePanel" type="Panel" parent="."]
 offset_left = 31.0

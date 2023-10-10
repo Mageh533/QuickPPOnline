@@ -120,14 +120,22 @@ func connectPuyosToGame():
 func _on_next_puyo_sent(puyos):
 	$PuyoDropBG1/Puyo1Set1.play(puyos[0])
 	$PuyoDropBG1/Puyo2Set1.play(puyos[1])
+	$PuyoDropBG1/Puyo3Set1.play(puyos[2])
+	$PuyoDropBG1/Puyo4Set1.play(puyos[3])
 	$PuyoDropBG2/Puyo1Set1.play(puyos[0])
 	$PuyoDropBG2/Puyo2Set1.play(puyos[1])
+	$PuyoDropBG2/Puyo3Set1.play(puyos[2])
+	$PuyoDropBG2/Puyo4Set1.play(puyos[3])
 
 func _on_after_puyo_sent(puyos):
 	$PuyoDropBG1/Puyo1Set2.play(puyos[0])
 	$PuyoDropBG1/Puyo2Set2.play(puyos[1])
+	$PuyoDropBG1/Puyo3Set2.play(puyos[2])
+	$PuyoDropBG1/Puyo4Set2.play(puyos[3])
 	$PuyoDropBG2/Puyo1Set2.play(puyos[0])
 	$PuyoDropBG2/Puyo2Set2.play(puyos[1])
+	$PuyoDropBG2/Puyo3Set2.play(puyos[2])
+	$PuyoDropBG2/Puyo4Set2.play(puyos[3])
 
 func checkForChain():
 	var canChain = false
