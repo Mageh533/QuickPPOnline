@@ -40,16 +40,8 @@ func _ready():
 	setPlayerCharacter()
 	if currentPlayer == 0:
 		$PuyoDropBG2.visible = false
-		$NextPuyoSprites/Puyo1Set1_2.visible = false
-		$NextPuyoSprites/Puyo2Set1_2.visible = false
-		$NextPuyoSprites/Puyo1Set2_2.visible = false
-		$NextPuyoSprites/Puyo2Set2_2.visible = false
 	else:
 		$PuyoDropBG1.visible = false
-		$NextPuyoSprites/Puyo1Set1.visible = false
-		$NextPuyoSprites/Puyo2Set1.visible = false
-		$NextPuyoSprites/Puyo1Set2.visible = false
-		$NextPuyoSprites/Puyo2Set2.visible = false
 		$CharacterBackground.flip_h = true
 	$AllClear.visible = false
 
@@ -126,16 +118,16 @@ func connectPuyosToGame():
 			puyoDropPlayer[currentPlayer].pieceLanded.connect(_on_piece_landed)
 
 func _on_next_puyo_sent(puyos):
-	$NextPuyoSprites/Puyo1Set1.play(puyos[0])
-	$NextPuyoSprites/Puyo2Set1.play(puyos[1])
-	$NextPuyoSprites/Puyo1Set1_2.play(puyos[0])
-	$NextPuyoSprites/Puyo2Set1_2.play(puyos[1])
+	$PuyoDropBG1/Puyo1Set1.play(puyos[0])
+	$PuyoDropBG1/Puyo2Set1.play(puyos[1])
+	$PuyoDropBG2/Puyo1Set1.play(puyos[0])
+	$PuyoDropBG2/Puyo2Set1.play(puyos[1])
 
 func _on_after_puyo_sent(puyos):
-	$NextPuyoSprites/Puyo1Set2.play(puyos[0])
-	$NextPuyoSprites/Puyo2Set2.play(puyos[1])
-	$NextPuyoSprites/Puyo1Set2_2.play(puyos[0])
-	$NextPuyoSprites/Puyo2Set2_2.play(puyos[1])
+	$PuyoDropBG1/Puyo1Set2.play(puyos[0])
+	$PuyoDropBG1/Puyo2Set2.play(puyos[1])
+	$PuyoDropBG2/Puyo1Set2.play(puyos[0])
+	$PuyoDropBG2/Puyo2Set2.play(puyos[1])
 
 func checkForChain():
 	var canChain = false
@@ -313,8 +305,8 @@ func disablePlayer(disable : bool):
 func setPlayerColor():
 	$TileMap.set_layer_modulate(0, playerColor)
 	$ScorePanel.self_modulate = playerColor
-	$PuyoDropBG1.modulate = playerColor
-	$PuyoDropBG2.modulate = playerColor
+	$PuyoDropBG1.self_modulate = playerColor
+	$PuyoDropBG2.self_modulate = playerColor
 
 func setPlayerCharacter(iCharacter : String = ""):
 	if !iCharacter.is_empty():
