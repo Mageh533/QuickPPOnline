@@ -37,6 +37,7 @@ var groupBonus = 0
 
 func _ready():
 	setPlayerColor()
+	setPlayerCharacter()
 	if currentPlayer == 0:
 		$PuyoDropBG2.visible = false
 		$NextPuyoSprites/Puyo1Set1_2.visible = false
@@ -315,10 +316,15 @@ func setPlayerColor():
 	$PuyoDropBG1.modulate = playerColor
 	$PuyoDropBG2.modulate = playerColor
 
-func setPlayerCharacter(character : String):
-	if !character.is_empty():
+func setPlayerCharacter(iCharacter : String = ""):
+	if !iCharacter.is_empty():
+		character = iCharacter
 		$CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
 		$CharacterBackground.show()
+	else:
+		if !character.is_empty():
+			$CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
+			$CharacterBackground.show()
 
 func _on_piece_landed():
 	await get_tree().create_timer(0.2).timeout
