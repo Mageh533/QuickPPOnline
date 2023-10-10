@@ -447,7 +447,7 @@ func _on_back_button_pressed():
 	elif currentMenu == MenuSets.MULTIPLAYER_LOCAL_PREGAME:
 		await mpOptionsHide()
 		await localMpMenuShow()
-		currentMenu = MenuSets.SOLO_MENU
+		currentMenu = MenuSets.MULTIPLAYER_LOCAL_MENU
 
 func _on_back_button_mouse_entered():
 	get_tree().create_tween().tween_property($UI/BackButton, "position:x", 0, 0.2)
