@@ -102,6 +102,7 @@ func _process(_delta):
 		else:
 			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
 
+# Massive set up, too much going on here
 func setUpPuyoGroup():
 	rng.seed = GameManager.currentSeed
 	startingPos = position
@@ -111,11 +112,11 @@ func setUpPuyoGroup():
 		nextPuyos = getNewPuyos()
 		afterPuyos = getNewPuyos()
 	else:
+		# get new puyos but check if the dropset that is to come in the list is dichromatic, wraps around the list as well
 		currentPuyos = getNewPuyos(checkForDichromatic(currentDropSet[dropsetNum]))
 		nextPuyos = getNewPuyos(checkForDichromatic(currentDropSet[wrapi(dropsetNum + 1, 0, currentDropSet.size())]))
 		afterPuyos = getNewPuyos(checkForDichromatic(currentDropSet[wrapi(dropsetNum + 2, 0, currentDropSet.size())]))
-	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+	displayGroupSprites()
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += -Vector2.ONE * tile_size/2
 	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
@@ -258,6 +259,7 @@ func rotate180():
 	tween.tween_property($SpritesTransforms/PuyoSprite1, "position", p2, 0.1)
 	tween2.tween_property($SpritesTransforms/PuyoSprite2, "position", p1, 0.1)
 
+# Function to get new puyo colours for next drop, if dichromatic is set then it makes sure to get seperate colours
 func getNewPuyos(dichromatic : bool = false):
 	var puyos = []
 	if dichromatic:
@@ -285,8 +287,7 @@ func swapPuyos():
 	else:
 		afterPuyos = getNewPuyos(checkForDichromatic(currentDropSet[wrapi(dropsetNum + 2, 0, currentDropSet.size())]))
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
-	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+	displayGroupSprites()
 
 func resetPlayer():
 	interpolate = false
@@ -300,8 +301,8 @@ func disableAdditionalPieces(disabled : bool, fourPieceDis : bool = true):
 		raycast.enabled = !disabled
 	$Puyo1Collision3.disabled = disabled
 	$Puyo1Collision4.disabled = fourPieceDis
-	$Puyo3Sprite.visible = !disabled
-	$Puyo4Sprite.visible = !fourPieceDis
+	$Puyo3Sprite.visible = !fourPieceDis
+	$Puyo4Sprite.visible = !disabled
 
 func setUpMonoLPiece(hardDrop : bool = false):
 	var puyo1
@@ -390,7 +391,7 @@ func setUpVertLPiece(hardDrop : bool = false):
 	get_parent().add_child(puyo3)
 	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo3.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
@@ -411,7 +412,7 @@ func setUpHorLPiece(hardDrop : bool = false):
 	get_parent().add_child(puyo3)
 	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
 	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo3.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
@@ -435,11 +436,34 @@ func setUpIPiece(hardDrop : bool = false):
 	puyo1.basicSetup()
 	puyo2.basicSetup()
 
+# Check if the next dropset is a dichromatic one e.g., needs 2 seperate colors
 func checkForDichromatic(dropSetGroup):
 	var dich = false
 	if dropSetGroup == GameManager.dropSetVar.DICH_O or dropSetGroup == GameManager.dropSetVar.VERTICAL_L or dropSetGroup == GameManager.dropSetVar.HORIZONTAL_L:
 		dich = true
 	return dich
+
+func displayGroupSprites():
+	if checkForDichromatic(currentDropSet[dropsetNum]):
+		if currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
+			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+			$Puyo3Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+			$Puyo4Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+		else:
+			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			$Puyo2Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			$Puyo3Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+			$Puyo4Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+	else:
+		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L or currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			$Puyo2Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			$Puyo3Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			$Puyo4Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+		else:
+			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 
 @rpc("any_peer", "call_local", "reliable")
 func pieceLand(hardDrop : bool = false):
