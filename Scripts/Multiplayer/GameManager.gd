@@ -29,7 +29,6 @@ var soloMatchSettings = {
 
 # In game info dictionaries
 var soloInfo = {
-	"Mode" : "Endless",
 	"matchTime" : 0,
 	"maxChain" : 0,
 	"speed" : 0,

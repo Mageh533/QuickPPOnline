@@ -743,13 +743,14 @@ vertical_alignment = 1
 [node name="Ready" type="Sprite2D" parent="UIAnims"]
 visible = false
 modulate = Color(1, 1, 1, 0)
-position = Vector2(176, 215)
+position = Vector2(176, 128)
 texture = ExtResource("12_3kp25")
 
 [node name="Start" type="Sprite2D" parent="UIAnims"]
 visible = false
 modulate = Color(1, 1, 1, 0)
 position = Vector2(181, 245)
+scale = Vector2(0.415, 0.415)
 texture = ExtResource("13_7mrld")
 
 [node name="Anims" type="AnimationPlayer" parent="UIAnims"]

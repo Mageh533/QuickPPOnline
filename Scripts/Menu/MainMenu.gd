@@ -9,9 +9,11 @@ var masterVolumeIndex = AudioServer.get_bus_index("Master")
 enum MenuSets {
 	MAIN_MENU,
 	SOLO_MENU,
+	SOLO_PREGAME,
 	MULTIPLAYER_MENU,
 	SETTINGS_MENU,
 	MULTIPLAYER_LOCAL_MENU,
+	MULTIPLAYER_LOCAL_PREGAME,
 	MULTIPLAYER_ONLINE_MENU
 }
 
@@ -384,15 +386,16 @@ func _on_tiny_puyo_mouse_exited():
 		get_tree().create_tween().tween_property($UI/SoloMenu/TinyPuyo, "position:x", 400, 0.1)
 
 func _on_tiny_puyo_pressed():
-	GameManager.soloInfo.gamemode = "Endless Tiny Puyo"
-	startSoloGame(1)
+	GameManager.soloMatchSettings.gamemode = "Endless Tiny Puyo"
+	currentMenu = MenuSets.SOLO_PREGAME
+	await soloMenuHide()
+	await soloOptionsShow()
 
 func _on_endless_pressed():
-	GameManager.soloInfo.gamemode = "Endless"
-	startSoloGame(0)
-
-func _on_solo_options_pressed():
-	soloOptionsShow()
+	GameManager.soloMatchSettings.gamemode = "Endless"
+	currentMenu = MenuSets.SOLO_PREGAME
+	await soloMenuHide()
+	await soloOptionsShow()
 
 # ======== Multiplayer Menu Buttons ========
 func _on_local_mp_mouse_entered():
@@ -411,10 +414,10 @@ func _on_local_mp_pressed():
 # ======== Multiplayer Local Menu Buttons ========
 
 func _on_tsu_game_pressed():
-	startLocalMpGame()
-
-func _on_mp_options_pressed():
-	mpOptionsShow()
+	GameManager.matchInfo.gamemode = "TSU"
+	currentMenu = MenuSets.MULTIPLAYER_LOCAL_PREGAME
+	await localMpMenuHide()
+	await mpOptionsShow()
 
 # ======== Other Menu Buttons ========
 
@@ -437,6 +440,14 @@ func _on_back_button_pressed():
 		await settingsMenuHide()
 		await mainMenuShow()
 		currentMenu = MenuSets.MAIN_MENU
+	elif currentMenu == MenuSets.SOLO_PREGAME:
+		await soloOptionsHide()
+		await soloMenuShow()
+		currentMenu = MenuSets.SOLO_MENU
+	elif currentMenu == MenuSets.MULTIPLAYER_LOCAL_PREGAME:
+		await mpOptionsHide()
+		await localMpMenuShow()
+		currentMenu = MenuSets.SOLO_MENU
 
 func _on_back_button_mouse_entered():
 	get_tree().create_tween().tween_property($UI/BackButton, "position:x", 0, 0.2)
@@ -470,3 +481,12 @@ func _on_time_input_value_changed(value):
 
 func _on_rounds_input_value_changed(value):
 	GameManager.matchSettings.roundsToWin = value
+
+func _on_solo_start_btn_pressed():
+	if GameManager.soloMatchSettings.gamemode == "Endless":
+		startSoloGame(0)
+	elif GameManager.soloMatchSettings.gamemode == "Endless Tiny Puyo":
+		startSoloGame(1)
+
+func _on_mp_start_btn_pressed():
+	startLocalMpGame()
