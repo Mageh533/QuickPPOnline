@@ -34,12 +34,11 @@ var rightWallCollide = false
 var active = false
 var playerSet = false
 var interpolate = false
-var largePiece = false
 
 var startingPos
 var startingRot
 
-# Choses puyos 
+# Set up the puyo group with bunch of stuff 
 func _ready():
 	setUpPuyoGroup()
 
@@ -91,7 +90,10 @@ func _process(_delta):
 	if currentDropSet.is_empty() or currentDropSet[dropsetNum] == GameManager.dropSetVar.I:
 		disableAdditionalPieces(true)
 	else:
-		disableAdditionalPieces(false)
+		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L or currentDropSet[dropsetNum] == GameManager.dropSetVar.VERTICAL_L or currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
+			disableAdditionalPieces(false)
+		else:
+			disableAdditionalPieces(false, false)
 	
 	if active and !playerSet:
 		playerSet = true
@@ -104,12 +106,14 @@ func setUpPuyoGroup():
 	rng.seed = GameManager.currentSeed
 	startingPos = position
 	startingRot = rotation
-	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	if currentDropSet.is_empty():
+		currentPuyos = getNewPuyos()
+		nextPuyos = getNewPuyos()
+		afterPuyos = getNewPuyos()
+	else:
+		currentPuyos = getNewPuyos(checkForDichromatic(currentDropSet[dropsetNum]))
+		nextPuyos = getNewPuyos(checkForDichromatic(currentDropSet[wrapi(dropsetNum + 1, 0, currentDropSet.size())]))
+		afterPuyos = getNewPuyos(checkForDichromatic(currentDropSet[wrapi(dropsetNum + 2, 0, currentDropSet.size())]))
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	position = position.snapped(Vector2.ONE * tile_size)
@@ -254,6 +258,21 @@ func rotate180():
 	tween.tween_property($SpritesTransforms/PuyoSprite1, "position", p2, 0.1)
 	tween2.tween_property($SpritesTransforms/PuyoSprite2, "position", p1, 0.1)
 
+func getNewPuyos(dichromatic : bool = false):
+	var puyos = []
+	if dichromatic:
+		puyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+		var seperatePuyo = false
+		while !seperatePuyo:
+			var puyo = PuyoScenes[rng.randi() % PuyoScenes.size()]
+			if puyo != puyos[0]:
+				seperatePuyo = true
+				puyos.append(puyo)
+	else:
+		puyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+		puyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	return puyos
+
 func swapPuyos():
 	currentPuyos.clear()
 	currentPuyos.append_array(nextPuyos)
@@ -261,8 +280,10 @@ func swapPuyos():
 	nextPuyos.append_array(afterPuyos)
 	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
 	afterPuyos.clear()
-	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	if currentDropSet.is_empty():
+		afterPuyos = getNewPuyos()
+	else:
+		afterPuyos = getNewPuyos(checkForDichromatic(currentDropSet[wrapi(dropsetNum + 2, 0, currentDropSet.size())]))
 	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
 	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
@@ -274,19 +295,136 @@ func resetPlayer():
 	$SpritesTransforms.global_position = global_position
 	interpolate = true
 
-func disableAdditionalPieces(disabled : bool):
+func disableAdditionalPieces(disabled : bool, fourPieceDis : bool = true):
 	for raycast in $RayCasts2.get_children():
 		raycast.enabled = !disabled
 	$Puyo1Collision3.disabled = disabled
-	$Puyo1Collision4.disabled = disabled
+	$Puyo1Collision4.disabled = fourPieceDis
 	$Puyo3Sprite.visible = !disabled
-	$Puyo4Sprite.visible = !disabled
+	$Puyo4Sprite.visible = !fourPieceDis
 
-@rpc("any_peer", "call_local", "reliable")
-func pieceLand(hardDrop : bool = false):
-	$SoundEffects/PieceLand.play()
-	var puyo1 = currentPuyos[0].instantiate()
-	var puyo2 = currentPuyos[1].instantiate()
+func setUpMonoLPiece(hardDrop : bool = false):
+	var puyo1
+	var puyo2
+	var puyo3
+	puyo1 = currentPuyos[0].instantiate()
+	puyo2 = currentPuyos[0].instantiate()
+	puyo3 = currentPuyos[0].instantiate()
+	get_parent().add_child(puyo1)
+	get_parent().add_child(puyo2)
+	get_parent().add_child(puyo3)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	if hardDrop:
+		puyo1.hardDrop = hardDrop
+		puyo2.hardDrop = hardDrop
+		puyo3.hardDrop = hardDrop
+	puyo1.basicSetup()
+	puyo2.basicSetup()
+	puyo3.basicSetup()
+
+func setUpMonoOPiece(hardDrop : bool = false):
+	var puyo1
+	var puyo2
+	var puyo3
+	var puyo4
+	puyo1 = currentPuyos[0].instantiate()
+	puyo2 = currentPuyos[0].instantiate()
+	puyo3 = currentPuyos[0].instantiate()
+	puyo4 = currentPuyos[0].instantiate()
+	get_parent().add_child(puyo1)
+	get_parent().add_child(puyo2)
+	get_parent().add_child(puyo3)
+	get_parent().add_child(puyo4)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo4.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
+	if hardDrop:
+		puyo1.hardDrop = hardDrop
+		puyo2.hardDrop = hardDrop
+		puyo3.hardDrop = hardDrop
+		puyo4.hardDrop = hardDrop
+	puyo1.basicSetup()
+	puyo2.basicSetup()
+	puyo3.basicSetup()
+	puyo4.basicSetup()
+
+func setUpDichOPiece(hardDrop : bool = false):
+	var puyo1
+	var puyo2
+	var puyo3
+	var puyo4
+	puyo1 = currentPuyos[0].instantiate()
+	puyo2 = currentPuyos[0].instantiate()
+	puyo3 = currentPuyos[1].instantiate()
+	puyo4 = currentPuyos[1].instantiate()
+	get_parent().add_child(puyo1)
+	get_parent().add_child(puyo2)
+	get_parent().add_child(puyo3)
+	get_parent().add_child(puyo4)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo4.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
+	if hardDrop:
+		puyo1.hardDrop = hardDrop
+		puyo2.hardDrop = hardDrop
+		puyo3.hardDrop = hardDrop
+		puyo4.hardDrop = hardDrop
+	puyo1.basicSetup()
+	puyo2.basicSetup()
+	puyo3.basicSetup()
+	puyo4.basicSetup()
+
+func setUpVertLPiece(hardDrop : bool = false):
+	var puyo1
+	var puyo2
+	var puyo3
+	puyo1 = currentPuyos[0].instantiate()
+	puyo2 = currentPuyos[0].instantiate()
+	puyo3 = currentPuyos[1].instantiate()
+	get_parent().add_child(puyo1)
+	get_parent().add_child(puyo2)
+	get_parent().add_child(puyo3)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	if hardDrop:
+		puyo1.hardDrop = hardDrop
+		puyo2.hardDrop = hardDrop
+		puyo3.hardDrop = hardDrop
+	puyo1.basicSetup()
+	puyo2.basicSetup()
+	puyo3.basicSetup()
+
+func setUpHorLPiece(hardDrop : bool = false):
+	var puyo1
+	var puyo2
+	var puyo3
+	puyo1 = currentPuyos[0].instantiate()
+	puyo2 = currentPuyos[1].instantiate()
+	puyo3 = currentPuyos[0].instantiate()
+	get_parent().add_child(puyo1)
+	get_parent().add_child(puyo2)
+	get_parent().add_child(puyo3)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	if hardDrop:
+		puyo1.hardDrop = hardDrop
+		puyo2.hardDrop = hardDrop
+		puyo3.hardDrop = hardDrop
+	puyo1.basicSetup()
+	puyo2.basicSetup()
+	puyo3.basicSetup()
+
+func setUpIPiece(hardDrop : bool = false):
+	var puyo1
+	var puyo2
+	puyo1 = currentPuyos[0].instantiate()
+	puyo2 = currentPuyos[1].instantiate()
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
 	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
@@ -296,6 +434,31 @@ func pieceLand(hardDrop : bool = false):
 		puyo2.hardDrop = hardDrop
 	puyo1.basicSetup()
 	puyo2.basicSetup()
+
+func checkForDichromatic(dropSetGroup):
+	var dich = false
+	if dropSetGroup == GameManager.dropSetVar.DICH_O or dropSetGroup == GameManager.dropSetVar.VERTICAL_L or dropSetGroup == GameManager.dropSetVar.HORIZONTAL_L:
+		dich = true
+	return dich
+
+@rpc("any_peer", "call_local", "reliable")
+func pieceLand(hardDrop : bool = false):
+	$SoundEffects/PieceLand.play()
+	if !currentDropSet.is_empty():
+		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
+			setUpMonoLPiece(hardDrop)
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+			setUpMonoOPiece(hardDrop)
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
+			setUpDichOPiece(hardDrop)
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.VERTICAL_L:
+			setUpVertLPiece(hardDrop)
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
+			setUpHorLPiece(hardDrop)
+		else:
+			setUpIPiece()
+	else:
+		setUpIPiece()
 	resetPlayer()
 	timeOnGround = 0
 	if !currentDropSet.is_empty():
