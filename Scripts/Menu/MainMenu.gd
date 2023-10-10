@@ -490,3 +490,6 @@ func _on_solo_start_btn_pressed():
 
 func _on_mp_start_btn_pressed():
 	startLocalMpGame()
+
+func _on_char_list_item_selected(index):
+	GameManager.soloMatchSettings.character = $UI/SoloOptionsPanel/CharList.get_item_text(index)

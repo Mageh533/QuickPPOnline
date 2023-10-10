@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=67 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
@@ -15,8 +15,32 @@
 [ext_resource type="Texture2D" uid="uid://dha60g5ynf0oq" path="res://Assets/Sprites/mobile/arrow-left.svg" id="9_x51dh"]
 [ext_resource type="Texture2D" uid="uid://f8u4j5dgknsr" path="res://Assets/Sprites/icons/settings.svg" id="10_m5b1v"]
 [ext_resource type="Texture2D" uid="uid://dii00hiko8xsj" path="res://Assets/Sprites/mobile/arrow-right.svg" id="10_wrdlg"]
+[ext_resource type="Texture2D" uid="uid://cdr2l5l5qgbjs" path="res://Assets/Characters/Amitie/icon.png" id="11_okpsl"]
 [ext_resource type="Texture2D" uid="uid://ddmflrsmm5pbn" path="res://Assets/Sprites/mobile/arrow-back.svg" id="11_trt2y"]
 [ext_resource type="Texture2D" uid="uid://1hkrrdwo15r0" path="res://Assets/Sprites/mobile/arrow-forward.svg" id="12_arr23"]
+[ext_resource type="Texture2D" uid="uid://bx4nhr1611p1b" path="res://Assets/Characters/Arle/icon.png" id="12_phbek"]
+[ext_resource type="Texture2D" uid="uid://j54owwdpsr3a" path="res://Assets/Characters/Carbuncle/icon.png" id="13_bdv25"]
+[ext_resource type="Texture2D" uid="uid://c50ppwfnamqdu" path="res://Assets/Characters/Dongurigaeru/icon.png" id="14_x8x7w"]
+[ext_resource type="Texture2D" uid="uid://bgvk36gfepdv3" path="res://Assets/Characters/Draco Centauros/icon.png" id="15_l2lka"]
+[ext_resource type="Texture2D" uid="uid://dfwf6f2v62ud" path="res://Assets/Characters/Ecolo/icon.png" id="16_1cpqs"]
+[ext_resource type="Texture2D" uid="uid://myn362x6s1yg" path="res://Assets/Characters/Feli/icon.png" id="17_kd5q1"]
+[ext_resource type="Texture2D" uid="uid://tvia3gdy5mmm" path="res://Assets/Characters/Klug/icon.png" id="18_x18xe"]
+[ext_resource type="Texture2D" uid="uid://7530u0kullth" path="res://Assets/Characters/Lemres/icon.png" id="19_idpkg"]
+[ext_resource type="Texture2D" uid="uid://bngu0yg7csiy5" path="res://Assets/Characters/Maguro/icon.png" id="20_rtmfy"]
+[ext_resource type="Texture2D" uid="uid://dom1eld68lc8m" path="res://Assets/Characters/Ms. Accord/icon.png" id="21_h2801"]
+[ext_resource type="Texture2D" uid="uid://vedsn2r6gpju" path="res://Assets/Characters/Ocean Prince/icon.png" id="22_b6aep"]
+[ext_resource type="Texture2D" uid="uid://dcnuw2svfpuh7" path="res://Assets/Characters/Onion Pixy/icon.png" id="23_ruin3"]
+[ext_resource type="Texture2D" uid="uid://i04vjt6i27nh" path="res://Assets/Characters/Raffine/icon.png" id="24_sumgc"]
+[ext_resource type="Texture2D" uid="uid://mpdm4e6awir7" path="res://Assets/Characters/Rider/icon.png" id="25_l37hy"]
+[ext_resource type="Texture2D" uid="uid://bp2pplal1mp6a" path="res://Assets/Characters/Ringo/icon.png" id="26_lcnnb"]
+[ext_resource type="Texture2D" uid="uid://da4b2lyd7ph62" path="res://Assets/Characters/Risukuma/icon.png" id="27_0lf33"]
+[ext_resource type="Texture2D" uid="uid://bo8ijnntivman" path="res://Assets/Characters/Rulue/icon.png" id="28_w305g"]
+[ext_resource type="Texture2D" uid="uid://b4ohap24xmvb4" path="res://Assets/Characters/Satan/icon.png" id="29_llbn7"]
+[ext_resource type="Texture2D" uid="uid://hjbs0lgf5bpd" path="res://Assets/Characters/Schezo/icon.png" id="30_vc51y"]
+[ext_resource type="Texture2D" uid="uid://bjv3lpgm2nexk" path="res://Assets/Characters/Sig/icon.png" id="31_utr8k"]
+[ext_resource type="Texture2D" uid="uid://bf8g7kt86mab0" path="res://Assets/Characters/Suketoudara/icon.png" id="32_myn60"]
+[ext_resource type="Texture2D" uid="uid://d26581uwo20un" path="res://Assets/Characters/Witch/icon.png" id="33_wgmeq"]
+[ext_resource type="Texture2D" uid="uid://ctb5ta8jke20y" path="res://Assets/Characters/Yu & Rei/icon.png" id="34_2n5tr"]
 
 [sub_resource type="SystemFont" id="SystemFont_ha0fw"]
 subpixel_positioning = 0
@@ -124,6 +148,13 @@ border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7q2y5"]
 font_size = 24
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yit6r"]
+font_size = 24
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_f8h8j"]
 resource_name = "Start_Up"
@@ -837,11 +868,18 @@ text = "FPS Counter"
 
 [node name="SoloOptionsPanel" type="Panel" parent="UI"]
 visible = false
-layout_mode = 0
-offset_left = 445.0
-offset_top = 138.0
-offset_right = 729.0
-offset_bottom = 421.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -142.0
+offset_right = 244.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="UI/SoloOptionsPanel"]
 layout_mode = 1
@@ -849,8 +887,8 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -104.0
-offset_right = 104.0
+offset_left = -212.0
+offset_right = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -906,8 +944,84 @@ alignment = 1
 [node name="VSeparator" type="VSeparator" parent="UI/SoloOptionsPanel/VBox"]
 layout_mode = 2
 
-[node name="SoloStartBTN" type="Button" parent="UI/SoloOptionsPanel/VBox"]
-layout_mode = 2
+[node name="CharacterLabel" type="Label" parent="UI/SoloOptionsPanel"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 2.0
+offset_right = 425.0
+offset_bottom = 39.0
+text = "Character"
+label_settings = SubResource("LabelSettings_yit6r")
+
+[node name="CharList" type="ItemList" parent="UI/SoloOptionsPanel"]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 43.0
+offset_right = 482.0
+offset_bottom = 232.0
+item_count = 24
+item_0/text = "Amitie"
+item_0/icon = ExtResource("11_okpsl")
+item_1/text = "Arle"
+item_1/icon = ExtResource("12_phbek")
+item_2/text = "Carbuncle"
+item_2/icon = ExtResource("13_bdv25")
+item_3/text = "Dongurigaeru"
+item_3/icon = ExtResource("14_x8x7w")
+item_4/text = "Draco Centauros"
+item_4/icon = ExtResource("15_l2lka")
+item_5/text = "Ecolo"
+item_5/icon = ExtResource("16_1cpqs")
+item_6/text = "Feli"
+item_6/icon = ExtResource("17_kd5q1")
+item_7/text = "Klug"
+item_7/icon = ExtResource("18_x18xe")
+item_8/text = "Lemres"
+item_8/icon = ExtResource("19_idpkg")
+item_9/text = "Maguro"
+item_9/icon = ExtResource("20_rtmfy")
+item_10/text = "Ms. Accord"
+item_10/icon = ExtResource("21_h2801")
+item_11/text = "Ocean Prince"
+item_11/icon = ExtResource("22_b6aep")
+item_12/text = "Onion Pixy"
+item_12/icon = ExtResource("23_ruin3")
+item_13/text = "Raffine"
+item_13/icon = ExtResource("24_sumgc")
+item_14/text = "Rider"
+item_14/icon = ExtResource("25_l37hy")
+item_15/text = "Ringo"
+item_15/icon = ExtResource("26_lcnnb")
+item_16/text = "Risukuma"
+item_16/icon = ExtResource("27_0lf33")
+item_17/text = "Rulue"
+item_17/icon = ExtResource("28_w305g")
+item_18/text = "Satan"
+item_18/icon = ExtResource("29_llbn7")
+item_19/text = "Schezo"
+item_19/icon = ExtResource("30_vc51y")
+item_20/text = "Sig"
+item_20/icon = ExtResource("31_utr8k")
+item_21/text = "Suketoudara"
+item_21/icon = ExtResource("32_myn60")
+item_22/text = "Witch"
+item_22/icon = ExtResource("33_wgmeq")
+item_23/text = "Yu & Rei"
+item_23/icon = ExtResource("34_2n5tr")
+
+[node name="SoloStartBTN" type="Button" parent="UI/SoloOptionsPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -35.0
+offset_right = 104.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Start"
 
 [node name="MultiplayerOptionsPanel" type="Panel" parent="UI"]
@@ -1238,7 +1352,8 @@ visibility_mode = 1
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/FixedSpeedInput" to="." method="_on_fixed_speed_input_toggled"]
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/HDropInput" to="." method="_on_h_drop_input_toggled"]
 [connection signal="toggled" from="UI/SoloOptionsPanel/VBox/NuisanceInput" to="." method="_on_nuisance_input_toggled"]
-[connection signal="pressed" from="UI/SoloOptionsPanel/VBox/SoloStartBTN" to="." method="_on_solo_start_btn_pressed"]
+[connection signal="item_selected" from="UI/SoloOptionsPanel/CharList" to="." method="_on_char_list_item_selected"]
+[connection signal="pressed" from="UI/SoloOptionsPanel/SoloStartBTN" to="." method="_on_solo_start_btn_pressed"]
 [connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/RoundsContainer/RoundsInput" to="." method="_on_rounds_input_value_changed"]
 [connection signal="value_changed" from="UI/MultiplayerOptionsPanel/VBox/SpeedContainer/SpeedInput" to="." method="_on_speed_input_value_changed"]
 [connection signal="toggled" from="UI/MultiplayerOptionsPanel/VBox/HDropInput" to="." method="_on_h_drop_input_toggled"]

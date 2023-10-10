@@ -11,6 +11,7 @@ var poppedPuyos = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$PuyoGame.setPlayerCharacter(GameManager.soloMatchSettings.character)
 	$GameModePanel/ModeContainer/Mode.text = GameManager.soloMatchSettings.gamemode
 	clearNuisanceQueue()
 	await get_tree().create_timer(0.05).timeout

@@ -24,7 +24,8 @@ var soloMatchSettings = {
 	"gamemode" : "Endless",
 	"fixedSpeed" : false,
 	"timeLimit" : 0,
-	"sendNuisanceToSelf" : false
+	"sendNuisanceToSelf" : false,
+	"character" : ""
 }
 
 # In game info dictionaries

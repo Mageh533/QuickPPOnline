@@ -37,7 +37,6 @@ var groupBonus = 0
 
 func _ready():
 	setPlayerColor()
-	setPlayerCharacter()
 	if currentPlayer == 0:
 		$PuyoDropBG2.visible = false
 		$NextPuyoSprites/Puyo1Set1_2.visible = false
@@ -315,7 +314,7 @@ func setPlayerColor():
 	$PuyoDropBG1.modulate = playerColor
 	$PuyoDropBG2.modulate = playerColor
 
-func setPlayerCharacter():
+func setPlayerCharacter(character : String):
 	if !character.is_empty():
 		$CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
 		$CharacterBackground.show()
