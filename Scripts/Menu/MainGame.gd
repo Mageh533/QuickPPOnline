@@ -47,12 +47,6 @@ func _process(delta):
 		get_tree().create_tween().tween_property($UIAnims/ChainAttackPanel, "modulate:a", 0, 1)
 
 func roundEnd(winner):
-	if winner == 1:
-		$UIAnims/Player1EndText.text = "You Win!"
-		$UIAnims/Player2EndText.text = "You Lose..."
-	else:
-		$UIAnims/Player1EndText.text = "You Lose..."
-		$UIAnims/Player2EndText.text = "You Win!"
 	$UIAnims/Anims.play("roundEnd")
 	await $UIAnims/Anims.animation_finished
 	await get_tree().create_timer(1).timeout
@@ -65,6 +59,7 @@ func _on_player_1_lost():
 	matchStarted = false
 	$SoundEffects/Lose.play()
 	$Player1/AnimationPlayer.play("lose")
+	$UIAnims/Player1EndText.play("Lose")
 	await $Player1/AnimationPlayer.animation_finished
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
@@ -75,6 +70,7 @@ func _on_player_2_lost():
 	matchStarted = false
 	$SoundEffects/Lose.play()
 	$Player2/AnimationPlayer.play("lose")
+	$UIAnims/Player2EndText.play("Lose")
 	await $Player2/AnimationPlayer.animation_finished
 	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
 	$Player1.process_mode = Node.PROCESS_MODE_DISABLED

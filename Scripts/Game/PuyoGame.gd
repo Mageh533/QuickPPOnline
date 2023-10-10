@@ -312,8 +312,8 @@ func disablePlayer(disable : bool):
 func setPlayerColor():
 	$TileMap.set_layer_modulate(0, playerColor)
 	$ScorePanel.self_modulate = playerColor
-	$PuyoDropBG1.color = playerColor
-	$PuyoDropBG2.color = playerColor
+	$PuyoDropBG1.modulate = playerColor
+	$PuyoDropBG2.modulate = playerColor
 
 func setPlayerCharacter():
 	if !character.is_empty():
