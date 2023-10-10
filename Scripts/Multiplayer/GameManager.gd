@@ -1,6 +1,14 @@
 extends Node
 
 # Global variables
+enum dropSetVar {
+	I,
+	VERTICAL_L,
+	HORIZONTAL_L,
+	MONO_L,
+	DICH_O,
+	MONO_O
+}
 
 var onlineMatch = false
 var secondPlayerId = 0
@@ -86,3 +94,8 @@ func nuisanceDisplayHelper(nuisanceQueueSprites, nuisanceToShow, spritesToUse):
 func changeControls(control, key):
 	InputMap.action_erase_events(control)
 	InputMap.action_add_event(control, key)
+
+func setDropset(characterSet):
+	var dropSet = []
+	if characterSet == "Solo":
+		dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.MONO_L, dropSetVar.DICH_O]

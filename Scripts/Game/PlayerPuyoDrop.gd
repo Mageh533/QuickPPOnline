@@ -18,6 +18,7 @@ var rightRaycasts = []
 var currentPuyos = []
 var nextPuyos = []
 var afterPuyos = []
+var currentDropSet = []
 
 var timeOnGround = 0
 var currentPlayer = 0
@@ -38,25 +39,7 @@ var startingRot
 
 # Choses puyos 
 func _ready():
-	rng.seed = GameManager.currentSeed
-	startingPos = position
-	startingRot = rotation
-	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
-	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
-	position = position.snapped(Vector2.ONE * tile_size)
-	position += -Vector2.ONE * tile_size/2
-	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
-	$SpritesTransforms.global_position = global_position
-	interpolate = true
-	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
-	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
-	fallSpeed = GameManager.generalSettings.speed * 10
+	setUpPuyoGroup()
 
 func _physics_process(delta):
 	if fastDrop:
@@ -109,6 +92,31 @@ func _process(_delta):
 			$MultiplayerSynchronizer.set_multiplayer_authority(1)
 		else:
 			$MultiplayerSynchronizer.set_multiplayer_authority(GameManager.secondPlayerId)
+
+func setUpPuyoGroup():
+	rng.seed = GameManager.currentSeed
+	startingPos = position
+	startingRot = rotation
+	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	currentPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	nextPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	afterPuyos.append(PuyoScenes[rng.randi() % PuyoScenes.size()])
+	$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+	$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+	position = position.snapped(Vector2.ONE * tile_size)
+	position += -Vector2.ONE * tile_size/2
+	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
+	$SpritesTransforms.global_position = global_position
+	interpolate = true
+	emit_signal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]])
+	emit_signal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]])
+	fallSpeed = GameManager.generalSettings.speed * 10
+	if GameManager.matchSettings.gamemode == "Fever":
+		currentDropSet = GameManager.setDropset(get_parent().get_parent().character)
+	elif GameManager.soloMatchSettings.gamemode == "Endless Tiny Puyo":
+		currentDropSet = GameManager.setDropset("Solo")
 
 func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):
