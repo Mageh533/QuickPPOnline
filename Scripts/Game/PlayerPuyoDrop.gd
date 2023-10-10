@@ -60,10 +60,10 @@ func _ready():
 
 func _physics_process(delta):
 	if fastDrop:
-		velocity.y = (fallSpeed + 800) * delta * 50
+		velocity.y = (fallSpeed + 800) * delta * (get_parent().global_scale.y * 50)
 		move_and_slide()
 	else:
-		velocity.y = fallSpeed * delta * 50
+		velocity.y = fallSpeed * delta * (get_parent().global_scale.y * 50)
 		move_and_slide()
 	
 	$SpritesTransforms.global_position.y = global_position.y
@@ -117,7 +117,7 @@ func playerControls(controlsToUse):
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !rightWallCollide and !ceilingCollide:
 				$SoundEffects/PieceMove.play()
-				move_and_collide(Vector2.RIGHT * (tile_size * get_parent().scale.x))
+				move_and_collide(Vector2.RIGHT * (tile_size * get_parent().global_scale.x))
 			moveCooldown = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_left"):
 		if !moveCooldown:
@@ -125,7 +125,7 @@ func playerControls(controlsToUse):
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !leftWallCollide and !ceilingCollide:
 				$SoundEffects/PieceMove.play()
-				move_and_collide(Vector2.LEFT * (tile_size * get_parent().scale.x))
+				move_and_collide(Vector2.LEFT * (tile_size * get_parent().global_scale.x))
 			moveCooldown = false
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false

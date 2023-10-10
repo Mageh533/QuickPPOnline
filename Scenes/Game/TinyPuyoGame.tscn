@@ -64,7 +64,7 @@ frame_progress = 0.255278
 shape = SubResource("RectangleShape2D_84oas")
 target_position = Vector2(0, 0)
 
-[node name="TileMap" parent="." index="3"]
+[node name="TileMap" parent="." index="4"]
 position = Vector2(39, 44)
 scale = Vector2(0.467, 0.505)
 cell_quadrant_size = 18
