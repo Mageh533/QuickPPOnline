@@ -444,26 +444,30 @@ func checkForDichromatic(dropSetGroup):
 	return dich
 
 func displayGroupSprites():
-	if checkForDichromatic(currentDropSet[dropsetNum]):
-		if currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
+	if currentDropSet.is_empty():
 			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
 			$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
-			$Puyo3Sprite.play(currentPuyos[1]._bundled.get("names")[0])
-			$Puyo4Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-		else:
-			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-			$Puyo2Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-			$Puyo3Sprite.play(currentPuyos[1]._bundled.get("names")[0])
-			$Puyo4Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 	else:
-		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L or currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
-			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-			$Puyo2Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-			$Puyo3Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-			$Puyo4Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+		if checkForDichromatic(currentDropSet[dropsetNum]):
+			if currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
+				$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+				$Puyo3Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+				$Puyo4Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			else:
+				$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$Puyo2Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$Puyo3Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+				$Puyo4Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 		else:
-			$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
-			$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
+			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L or currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+				$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$Puyo2Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$Puyo3Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$Puyo4Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+			else:
+				$Puyo1Sprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$Puyo2Sprite.play(currentPuyos[1]._bundled.get("names")[0])
 
 @rpc("any_peer", "call_local", "reliable")
 func pieceLand(hardDrop : bool = false):
