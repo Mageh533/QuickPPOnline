@@ -10,6 +10,7 @@ signal lost
 @export var nuisanceTarget: float
 @export var nuisanceScene : PackedScene
 @export var playerColor : Color
+@export var character : String
 
 var puyosObjectArray = []
 var puyosToPop = []
@@ -36,6 +37,7 @@ var groupBonus = 0
 
 func _ready():
 	setPlayerColor()
+	setPlayerCharacter()
 	if currentPlayer == 0:
 		$PuyoDropBG2.visible = false
 		$NextPuyoSprites/Puyo1Set1_2.visible = false
@@ -312,6 +314,11 @@ func setPlayerColor():
 	$ScorePanel.self_modulate = playerColor
 	$PuyoDropBG1.color = playerColor
 	$PuyoDropBG2.color = playerColor
+
+func setPlayerCharacter():
+	if !character.is_empty():
+		$CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
+		$CharacterBackground.show()
 
 func _on_piece_landed():
 	await get_tree().create_timer(0.2).timeout
