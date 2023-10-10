@@ -367,6 +367,7 @@ icon = ExtResource("6_5k27g")
 alignment = 0
 
 [node name="Options" type="Button" parent="UI/SoloMenu/TinyPuyo"]
+layout_mode = 0
 offset_left = 334.0
 offset_top = 28.0
 offset_right = 374.0
@@ -418,11 +419,11 @@ icon_alignment = 2
 
 [node name="LocalMPScroll" type="ScrollContainer" parent="UI"]
 visible = false
-layout_direction = 3
+layout_direction = 2
 layout_mode = 0
-offset_left = 327.0
+offset_left = -2.0
 offset_top = 102.0
-offset_right = 1152.0
+offset_right = 823.0
 offset_bottom = 461.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hvmcn")
 horizontal_scroll_mode = 0
