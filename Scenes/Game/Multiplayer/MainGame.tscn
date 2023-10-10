@@ -11,7 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/SFX/attack3.wav" id="9_1pcht"]
 [ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/SFX/attack4.wav" id="10_clq5v"]
 [ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/SFX/win.wav" id="11_vybnl"]
+[ext_resource type="Texture2D" uid="uid://c50bisg8juta5" path="res://Assets/Sprites/matrix/ready.png" id="12_3kp25"]
 [ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/SFX/prepare.wav" id="12_7n662"]
+[ext_resource type="Texture2D" uid="uid://bka4v05qcc3ja" path="res://Assets/Sprites/matrix/go.png" id="13_7mrld"]
 [ext_resource type="Texture2D" uid="uid://c6t18jm83jdcc" path="res://Assets/Sprites/matrix/lose.png" id="13_y8uym"]
 [ext_resource type="Texture2D" uid="uid://cq3cmuy5pjw2s" path="res://Assets/Sprites/matrix/win.png" id="14_rogje"]
 
@@ -254,32 +256,20 @@ bg_color = Color(0, 0.713726, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nul1h"]
 bg_color = Color(0, 0, 0.596078, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_owgav"]
-font_size = 35
-font_color = Color(1, 0.219608, 0.231373, 1)
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ftehg"]
-font_size = 35
-font_color = Color(0.878431, 0.352941, 0.0627451, 1)
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_qa1vl"]
 resource_name = "matchStart"
-length = 2.5
+length = 3.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Ready:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(117, 128), Vector2(117, 215)]
+"values": [Vector2(176, 128), Vector2(176, 215)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -300,7 +290,7 @@ tracks/2/path = NodePath("Start:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2, 2.5),
+"times": PackedFloat32Array(0, 2, 3.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -324,6 +314,42 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0.5, 2)
 }
 tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Start:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.1, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.415, 0.415), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Start:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2, 2.4, 3, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Ready:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5, 0.8, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_kae8g"]
 resource_name = "roundEnd"
@@ -332,7 +358,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Player1EndText:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
@@ -356,7 +382,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("Player2EndText:position")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
@@ -375,6 +401,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Player1EndText:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Player2EndText:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3wce1"]
@@ -690,29 +740,17 @@ text = "0"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="UIAnims"]
+[node name="Ready" type="Sprite2D" parent="UIAnims"]
 visible = false
-layout_mode = 0
-offset_left = 117.0
-offset_top = 128.0
-offset_right = 250.0
-offset_bottom = 195.001
-text = "Ready?"
-label_settings = SubResource("LabelSettings_owgav")
-horizontal_alignment = 1
-vertical_alignment = 1
+modulate = Color(1, 1, 1, 0)
+position = Vector2(176, 215)
+texture = ExtResource("12_3kp25")
 
-[node name="Start" type="Label" parent="UIAnims"]
+[node name="Start" type="Sprite2D" parent="UIAnims"]
 visible = false
-layout_mode = 0
-offset_left = 117.0
-offset_top = 214.0
-offset_right = 250.0
-offset_bottom = 281.0
-text = "Start!"
-label_settings = SubResource("LabelSettings_ftehg")
-horizontal_alignment = 1
-vertical_alignment = 1
+modulate = Color(1, 1, 1, 0)
+position = Vector2(181, 245)
+texture = ExtResource("13_7mrld")
 
 [node name="Anims" type="AnimationPlayer" parent="UIAnims"]
 libraries = {
@@ -720,14 +758,14 @@ libraries = {
 }
 
 [node name="Player1EndText" type="AnimatedSprite2D" parent="UIAnims"]
-visible = false
-position = Vector2(-153, 277)
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-153, 196)
 sprite_frames = SubResource("SpriteFrames_rcckt")
 animation = &"Win"
 
 [node name="Player2EndText" type="AnimatedSprite2D" parent="UIAnims"]
-visible = false
-position = Vector2(517, 277)
+modulate = Color(1, 1, 1, 0)
+position = Vector2(517, 196)
 sprite_frames = SubResource("SpriteFrames_ftl5f")
 animation = &"Win"
 
