@@ -113,6 +113,18 @@ scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../../Puyo2Sprite")
 update_rotation = false
 
+[node name="PuyoSprite3" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(58, 58)
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../Puyo3Sprite")
+update_rotation = false
+
+[node name="PuyoSprite4" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(0, 58)
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../Puyo4Sprite")
+update_rotation = false
+
 [node name="Transforms" type="Node2D" parent="."]
 top_level = true
 rotation = -1.5708
@@ -128,11 +140,31 @@ remote_path = NodePath("../../Puyo1Collision")
 update_rotation = false
 update_scale = false
 
+[node name="Coll3" type="RemoteTransform2D" parent="Transforms"]
+position = Vector2(58, 58)
+remote_path = NodePath("../../Puyo1Collision3")
+update_rotation = false
+update_scale = false
+
+[node name="Coll4" type="RemoteTransform2D" parent="Transforms"]
+position = Vector2(0, 58)
+remote_path = NodePath("../../Puyo1Collision4")
+update_rotation = false
+update_scale = false
+
 [node name="Puyo1Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cwpa4")
 
 [node name="Puyo1Collision2" type="CollisionShape2D" parent="."]
 position = Vector2(58, -0.000209808)
+shape = SubResource("RectangleShape2D_cwpa4")
+
+[node name="Puyo1Collision3" type="CollisionShape2D" parent="."]
+position = Vector2(58, 58)
+shape = SubResource("RectangleShape2D_cwpa4")
+
+[node name="Puyo1Collision4" type="CollisionShape2D" parent="."]
+position = Vector2(0, 58)
 shape = SubResource("RectangleShape2D_cwpa4")
 
 [node name="Puyo1Spawn" type="Marker2D" parent="."]
@@ -186,6 +218,42 @@ target_position = Vector2(0, -40)
 collision_mask = 3
 collide_with_areas = true
 
+[node name="RayCasts2" type="Node2D" parent="."]
+position = Vector2(-0.000209959, 58)
+
+[node name="RayBLeft" type="RayCast2D" parent="RayCasts2"]
+target_position = Vector2(0, 40)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="RayBRight" type="RayCast2D" parent="RayCasts2"]
+position = Vector2(58, 0)
+target_position = Vector2(0, 40)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="RayLeft" type="RayCast2D" parent="RayCasts2"]
+target_position = Vector2(-40, 0)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="RayRight" type="RayCast2D" parent="RayCasts2"]
+position = Vector2(58, 0)
+target_position = Vector2(40, 0)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="RayTRight" type="RayCast2D" parent="RayCasts2"]
+position = Vector2(58, 0)
+target_position = Vector2(0, -40)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="RayTLeft" type="RayCast2D" parent="RayCasts2"]
+target_position = Vector2(0, -40)
+collision_mask = 3
+collide_with_areas = true
+
 [node name="Puyo1Sprite" type="AnimatedSprite2D" parent="."]
 top_level = true
 scale = Vector2(0.85, 0.85)
@@ -195,6 +263,20 @@ animation = &"BuePuyo"
 [node name="Puyo2Sprite" type="AnimatedSprite2D" parent="."]
 top_level = true
 position = Vector2(-0.000209959, -58)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_vineh")
+animation = &"BuePuyo"
+
+[node name="Puyo3Sprite" type="AnimatedSprite2D" parent="."]
+top_level = true
+position = Vector2(57.9998, -58.0002)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_vineh")
+animation = &"BuePuyo"
+
+[node name="Puyo4Sprite" type="AnimatedSprite2D" parent="."]
+top_level = true
+position = Vector2(58, -0.000209959)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BuePuyo"

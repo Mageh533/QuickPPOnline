@@ -33,6 +33,7 @@ var rightWallCollide = false
 var active = false
 var playerSet = false
 var interpolate = false
+var largePiece = false
 
 var startingPos
 var startingRot
@@ -85,6 +86,9 @@ func _process(_delta):
 	for rayCast in topRaycasts:
 		if rayCast.is_colliding():
 			ceilingCollide = true
+	
+	if currentDropSet.is_empty():
+		disableAdditionalPieces(true)
 	
 	if active and !playerSet:
 		playerSet = true
@@ -242,6 +246,14 @@ func resetPlayer():
 	rotation = startingRot
 	$SpritesTransforms.global_position = global_position
 	interpolate = true
+
+func disableAdditionalPieces(disabled : bool):
+	for raycast in $RayCasts2.get_children():
+		raycast.enabled = !disabled
+	$Puyo1Collision3.disabled = disabled
+	$Puyo1Collision4.disabled = disabled
+	$Puyo3Sprite.visible = !disabled
+	$Puyo4Sprite.visible = !disabled
 
 @rpc("any_peer", "call_local", "reliable")
 func pieceLand(hardDrop : bool = false):
