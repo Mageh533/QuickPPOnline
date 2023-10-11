@@ -100,10 +100,10 @@ func setDropset(characterSet):
 	match characterSet:
 		"Amitie":
 			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
-		"Carbuncle":
-			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.DICH_O]
 		"Arle":
 			dropSet = [dropSetVar.I]
+		"Carbuncle":
+			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.DICH_O]
 		_:
 			dropSet = [dropSetVar.I]
 	return dropSet
