@@ -248,5 +248,5 @@ type = "GREEN"
 [node name="PuyoSprites" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_n1i0k")
 
-[node name="PopParticle" parent="." index="14"]
+[node name="PopParticle" parent="." index="11"]
 texture = ExtResource("3_lgo0c")

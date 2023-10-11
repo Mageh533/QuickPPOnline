@@ -242,11 +242,11 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="BuePuyo" instance=ExtResource("1_mp0ix")]
+[node name="BluePuyo" instance=ExtResource("1_mp0ix")]
 type = "BLUE"
 
 [node name="PuyoSprites" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_7t4mi")
 
-[node name="PopParticle" parent="." index="14"]
+[node name="PopParticle" parent="." index="11"]
 texture = ExtResource("3_mkkdx")
