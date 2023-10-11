@@ -44,10 +44,10 @@ func _ready():
 
 func _physics_process(delta):
 	if fastDrop:
-		velocity.y = (fallSpeed + 800) * delta * (get_parent().global_scale.y * 50)
+		velocity.y = (fallSpeed + 500) * delta * (get_parent().global_scale.y * 75) * 2
 		move_and_slide()
 	else:
-		velocity.y = fallSpeed * delta * (get_parent().global_scale.y * 50)
+		velocity.y = fallSpeed * delta * (get_parent().global_scale.y * 75) * 2
 		move_and_slide()
 	
 	$SpritesTransforms.global_position.y = global_position.y
