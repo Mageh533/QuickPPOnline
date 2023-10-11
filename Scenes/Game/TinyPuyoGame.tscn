@@ -119,32 +119,5 @@ offset_right = 454.0
 offset_bottom = 89.0
 label_settings = SubResource("LabelSettings_swbwa")
 
-[node name="NextPuyoSprites" parent="." index="11"]
-scale = Vector2(1.5, 1.5)
-
-[node name="Puyo1Set1" parent="NextPuyoSprites" index="0"]
-position = Vector2(363.867, -110.567)
-
-[node name="Puyo2Set1" parent="NextPuyoSprites" index="1"]
-position = Vector2(364.867, -72.5667)
-
-[node name="Puyo1Set2" parent="NextPuyoSprites" index="2"]
-position = Vector2(391.067, -40.5917)
-
-[node name="Puyo2Set2" parent="NextPuyoSprites" index="3"]
-position = Vector2(391.267, -10.0167)
-
-[node name="Puyo1Set1_2" parent="NextPuyoSprites" index="4"]
-position = Vector2(-19.0667, -114.567)
-
-[node name="Puyo2Set1_2" parent="NextPuyoSprites" index="5"]
-position = Vector2(-18.0667, -76.5667)
-
-[node name="Puyo1Set2_2" parent="NextPuyoSprites" index="6"]
-position = Vector2(-48.2667, -43.5917)
-
-[node name="Puyo2Set2_2" parent="NextPuyoSprites" index="7"]
-position = Vector2(-48.0667, -14.3417)
-
-[node name="NuisanceSpawns" parent="." index="12"]
+[node name="NuisanceSpawns" parent="." index="11"]
 position = Vector2(-3, -268)

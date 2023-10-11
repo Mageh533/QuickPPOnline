@@ -1,11 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://bgpmhkt3uc611"]
+[gd_scene load_steps=38 format=3 uid="uid://bgpmhkt3uc611"]
 
 [ext_resource type="Script" path="res://Scripts/Game/SoloGame.gd" id="1_p6vcs"]
 [ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_ujttg"]
 [ext_resource type="PackedScene" uid="uid://dn4gmuydyqp6y" path="res://Scenes/Game/TinyPuyoGame.tscn" id="3_prqse"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="4_eiurf"]
 [ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/SFX/lose.wav" id="5_cxfvr"]
+[ext_resource type="Texture2D" uid="uid://c50bisg8juta5" path="res://Assets/Sprites/matrix/ready.png" id="5_kwwgk"]
+[ext_resource type="Texture2D" uid="uid://bka4v05qcc3ja" path="res://Assets/Sprites/matrix/go.png" id="6_6nbi3"]
 [ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/SFX/prepare.wav" id="6_mucq3"]
+[ext_resource type="Texture2D" uid="uid://c6t18jm83jdcc" path="res://Assets/Sprites/matrix/lose.png" id="7_cevgh"]
 [ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/SFX/matchStart.wav" id="7_dw8eu"]
 [ext_resource type="AudioStream" uid="uid://ccfbkpfv8psaa" path="res://Assets/SFX/attack1.wav" id="8_h58ro"]
 [ext_resource type="AudioStream" uid="uid://2ap3imurmp4a" path="res://Assets/SFX/attack2.wav" id="9_gnk1l"]
@@ -74,6 +77,38 @@ MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 0
 Panel/styles/panel = SubResource("StyleBoxFlat_bplcu")
 PopupPanel/styles/panel = SubResource("StyleBoxFlat_37yav")
+
+[sub_resource type="Animation" id="Animation_cv65l"]
+resource_name = "lose"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(179, 180), Vector2(179, 150), Vector2(179, 130), Vector2(179, 1200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.341069, 0.693421]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mqbs"]
+_data = {
+"lose": SubResource("Animation_cv65l")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75rf2"]
 atlas = ExtResource("4_eiurf")
@@ -162,11 +197,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_y5fwk"]
-font_size = 32
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_t57r5"]
 resource_name = "End"
 length = 4.0
@@ -201,18 +231,18 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("GameOver:position")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(1, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(261, 196), Vector2(261, 250)]
+"values": [Vector2(354, 196), Vector2(354, 250)]
 }
 
 [sub_resource type="Animation" id="Animation_dfkki"]
 resource_name = "Start"
-length = 2.5
+length = 3.0
 tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -229,7 +259,7 @@ tracks/0/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("7_dw8eu")
 }],
-"times": PackedFloat32Array(0.5, 2)
+"times": PackedFloat32Array(0.4, 2)
 }
 tracks/0/use_blend = true
 tracks/1/type = "value"
@@ -239,7 +269,7 @@ tracks/1/path = NodePath("Ready:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.4),
+"times": PackedFloat32Array(0, 0.5, 1.7),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -251,7 +281,7 @@ tracks/2/path = NodePath("Go:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2, 2.5),
+"times": PackedFloat32Array(0, 2, 3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -260,13 +290,49 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("Ready:position")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(300, 177), Vector2(300, 250)]
+"values": [Vector2(351, 177), Vector2(351, 250)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Go:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.73, 0.73), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Go:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2, 2.5, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Ready:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5, 1, 1.5, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ntpme"]
@@ -296,8 +362,13 @@ texture = ExtResource("2_ujttg")
 expand_mode = 2
 
 [node name="PuyoGame" parent="." instance=ExtResource("3_prqse")]
-position = Vector2(177, 179)
+position = Vector2(179, 180)
 scale = Vector2(0.665, 0.665)
+
+[node name="GameAnims" type="AnimationPlayer" parent="PuyoGame"]
+libraries = {
+"": SubResource("AnimationLibrary_2mqbs")
+}
 
 [node name="GameModePanel" type="Panel" parent="."]
 layout_mode = 0
@@ -440,35 +511,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Ready" type="Label" parent="UIAnims"]
+[node name="Ready" type="Sprite2D" parent="UIAnims"]
 visible = false
-layout_mode = 0
-offset_left = 300.0
-offset_top = 250.0
-offset_right = 409.0
-offset_bottom = 298.0
-text = "Ready?"
-label_settings = SubResource("LabelSettings_y5fwk")
+modulate = Color(1, 1, 1, 0)
+position = Vector2(351, 250)
+texture = ExtResource("5_kwwgk")
 
-[node name="Go" type="Label" parent="UIAnims"]
+[node name="Go" type="Sprite2D" parent="UIAnims"]
 visible = false
-layout_mode = 0
-offset_left = 300.0
-offset_top = 250.0
-offset_right = 386.0
-offset_bottom = 298.0
-text = "Start!"
-label_settings = SubResource("LabelSettings_y5fwk")
+modulate = Color(1, 1, 1, 0)
+position = Vector2(350, 283)
+texture = ExtResource("6_6nbi3")
 
-[node name="GameOver" type="Label" parent="UIAnims"]
+[node name="GameOver" type="Sprite2D" parent="UIAnims"]
 visible = false
-layout_mode = 0
-offset_left = 261.0
-offset_top = 250.0
-offset_right = 443.0
-offset_bottom = 298.001
-text = "Game Over!"
-label_settings = SubResource("LabelSettings_y5fwk")
+position = Vector2(354, 196)
+texture = ExtResource("7_cevgh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UIAnims"]
 libraries = {
