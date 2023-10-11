@@ -524,9 +524,9 @@ func pieceLand(hardDrop : bool = false):
 		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
 			setUpHorLPiece(hardDrop)
 		else:
-			setUpIPiece()
+			setUpIPiece(hardDrop)
 	else:
-		setUpIPiece()
+		setUpIPiece(hardDrop)
 	resetPlayer()
 	timeOnGround = 0
 	if !currentDropSet.is_empty():
