@@ -104,6 +104,48 @@ func setDropset(characterSet):
 			dropSet = [dropSetVar.I]
 		"Carbuncle":
 			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.DICH_O]
+		"Dongurigaeru":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
+		"Draco Centauros":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.HORIZONTAL_L, dropSetVar.MONO_O, dropSetVar.HORIZONTAL_L, dropSetVar.VERTICAL_L, dropSetVar.DICH_O]
+		"Ecolo":
+			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.HORIZONTAL_L, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.HORIZONTAL_L, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I]
+		"Feli":
+			dropSet = [dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I]
+		"Klug":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
+		"Lemres":
+			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.HORIZONTAL_L]
+		"Maguro":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
+		"Ms. Accord":
+			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.DICH_O]
+		"Ocean Prince":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.DICH_O]
+		"Onion Pixy":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
+		"Raffine":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
+		"Rider":
+			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.DICH_O]
+		"Ringo":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.MONO_O, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.VERTICAL_L]
+		"Risukuma":
+			dropSet = [dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I]
+		"Rulue":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O]
+		"Satan":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O]
+		"Schezo":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I]
+		"Sig":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
+		"Suketoudara":
+			dropSet = [dropSetVar.I, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O]
+		"Witch":
+			dropSet = [dropSetVar.HORIZONTAL_L, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.I, dropSetVar.I]
+		"Yu & Rei":
+			dropSet = [dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.HORIZONTAL_L, dropSetVar.I, dropSetVar.MONO_O, dropSetVar.I, dropSetVar.VERTICAL_L, dropSetVar.I, dropSetVar.DICH_O, dropSetVar.I, dropSetVar.I, dropSetVar.I, dropSetVar.DICH_O]
 		_:
 			dropSet = [dropSetVar.I]
 	return dropSet
