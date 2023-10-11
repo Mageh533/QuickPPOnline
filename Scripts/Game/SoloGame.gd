@@ -51,7 +51,8 @@ func _process(delta):
 func gameOver():
 	matchStarted = false
 	if GameManager.soloMatchSettings.timeLimit > 0:
-		$SoundEffects/TimeoutEnd.play()
+		if GameManager.soloInfo.matchTime <= 0:
+			$SoundEffects/TimeoutEnd.play()
 		GameManager.soloInfo.matchTime = 0
 		$PuyoGame.process_mode = Node.PROCESS_MODE_DISABLED
 		await get_tree().create_timer(1).timeout
