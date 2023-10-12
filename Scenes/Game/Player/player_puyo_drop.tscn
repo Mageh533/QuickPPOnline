@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://rq2bwcbvu8p4"]
+[gd_scene load_steps=50 format=3 uid="uid://rq2bwcbvu8p4"]
 
 [ext_resource type="Script" path="res://Scripts/Game/PlayerPuyoDrop.gd" id="1_ckb26"]
 [ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="2_axvif"]
@@ -292,41 +292,147 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6wec6")
 }],
-"loop": true,
+"loop": false,
 "name": &"BluePuyo",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_myw6o")
 }],
-"loop": true,
+"loop": false,
 "name": &"GreenPuyo",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vaq7q")
 }],
-"loop": true,
+"loop": false,
 "name": &"PurplePuyo",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8gcvl")
 }],
-"loop": true,
+"loop": false,
 "name": &"RedPuyo",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uke6m")
 }],
-"loop": true,
+"loop": false,
 "name": &"YellowPuyo",
-"speed": 5.0
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8egq"]
+atlas = ExtResource("10_5naes")
+region = Rect2(721, 852, 80, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1axpm"]
+atlas = ExtResource("10_5naes")
+region = Rect2(577, 852, 82, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iwl7"]
+atlas = ExtResource("10_5naes")
+region = Rect2(1010, 852, 77, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et7si"]
+atlas = ExtResource("10_5naes")
+region = Rect2(430, 852, 86, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45uxf"]
+atlas = ExtResource("10_5naes")
+region = Rect2(866, 852, 78, 142)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6x2tb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8egq")
+}],
+"loop": false,
+"name": &"BluePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1axpm")
+}],
+"loop": false,
+"name": &"GreenPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iwl7")
+}],
+"loop": false,
+"name": &"PurplePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et7si")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45uxf")
+}],
+"loop": false,
+"name": &"YellowPuyo",
+"speed": 0.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bvb63"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8egq")
+}],
+"loop": false,
+"name": &"BluePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1axpm")
+}],
+"loop": true,
+"name": &"GreenPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iwl7")
+}],
+"loop": false,
+"name": &"PurplePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et7si")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45uxf")
+}],
+"loop": false,
+"name": &"YellowPuyo",
+"speed": 0.0
 }]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_egw02"]
@@ -397,17 +503,30 @@ scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../../PuyoVerticalSprite/Eyes")
 update_rotation = false
 
-[node name="PuyoVerticalSprite2" type="RemoteTransform2D" parent="SpritesTransforms"]
-position = Vector2(30.9998, 57.0001)
+[node name="PuyoDichOSprite1" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(33, 0.000118256)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
-remote_path = NodePath("../../PuyoVerticalSprite2")
+remote_path = NodePath("../../PuyoDichO1")
 
-[node name="PuyoVerticalSprite2Eyes" type="RemoteTransform2D" parent="SpritesTransforms"]
-position = Vector2(57.9998, 58.0002)
+[node name="PuyoDichOSprite2Eyes2" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(58, 0.000213623)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
-remote_path = NodePath("../../PuyoVerticalSprite2/Eyes")
+remote_path = NodePath("../../PuyoDichO1/Eyes")
+update_rotation = false
+
+[node name="PuyoDichOSprite2" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(30.9999, 37.0001)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../PuyoDichO2")
+
+[node name="PuyoDichOSprite2Eyes" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(-4.00013, 32)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../PuyoDichO2/Eyes")
 update_rotation = false
 
 [node name="PuyoHorizontalSprite" type="RemoteTransform2D" parent="SpritesTransforms"]
@@ -612,7 +731,7 @@ position = Vector2(33, 0.000118256)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_0efjg")
-animation = &"BluePuyo"
+animation = &"YellowPuyo"
 
 [node name="Eyes" type="AnimatedSprite2D" parent="PuyoVerticalSprite"]
 top_level = true
@@ -621,17 +740,34 @@ scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
 
-[node name="PuyoVerticalSprite2" type="AnimatedSprite2D" parent="."]
+[node name="PuyoDichO1" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(30.9998, 57.0001)
+position = Vector2(33, 0.000118256)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
-sprite_frames = SubResource("SpriteFrames_0efjg")
+sprite_frames = SubResource("SpriteFrames_6x2tb")
+animation = &"YellowPuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDichO1"]
+top_level = true
+position = Vector2(3.66365e-06, -58)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
 
-[node name="Eyes" type="AnimatedSprite2D" parent="PuyoVerticalSprite2"]
+[node name="PuyoDichO2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(30.9999, 37.0001)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_bvb63")
+animation = &"GreenPuyo"
+flip_h = true
+flip_v = true
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDichO2"]
 top_level = true
-position = Vector2(58, -58)
+position = Vector2(32, 4.00001)
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
