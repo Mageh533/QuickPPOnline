@@ -123,7 +123,7 @@ func displayPuyoQueue(bg : String, pSet : String, puyos):
 	for i in range(puyosI.size()):
 		if puyosI[i] == "Nothing":
 			puyosI[i] = str(randi())
-	if puyosI[0] == puyosI[1] and puyosI[2] != puyosI[3] and !puyosI[2].is_valid_int(): #Vertical L
+	if puyosI[0] == puyosI[1] and puyosI[3] != puyosI[2] and !puyosI[3].is_valid_int(): #Vertical L
 		# Hide and show sprites
 		get_node("PuyoDrop" + bg + "/PuyoVertical" + pSet).show()
 		get_node("PuyoDrop" + bg + "/PuyoDich1" + pSet).hide()
