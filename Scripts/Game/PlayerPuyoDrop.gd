@@ -18,7 +18,7 @@ var rightRaycasts = []
 var currentPuyos = []
 var nextPuyos = []
 var afterPuyos = []
-var currentDropSet = [GameManager.dropSetVar.DICH_O, GameManager.dropSetVar.MONO_O, GameManager.dropSetVar.MONO_L, GameManager.dropSetVar.VERTICAL_L, GameManager.dropSetVar.HORIZONTAL_L]
+var currentDropSet = []
 
 var timeOnGround = 0
 var currentPlayer = 0
