@@ -117,25 +117,103 @@ func connectPuyosToGame():
 			puyoDropPlayer[currentPlayer].sendAfterPuyos.connect(_on_after_puyo_sent)
 			puyoDropPlayer[currentPlayer].pieceLanded.connect(_on_piece_landed)
 
+func displayPuyoQueue(bg : String, set : String, puyos):
+	# randomize nothing to a random int so they wont match up as actual puyos
+	var puyosI = puyos
+	for i in range(puyosI.size()):
+		if puyosI[i] == "Nothing":
+			puyosI[i] = str(randi())
+	if puyosI[0] == puyosI[1] and puyosI[2] != puyosI[3] and !puyosI[2].is_valid_int(): #Vertical L
+		# Hide and show sprites
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set).show()
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo2" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo4" + set).show()
+		# Play anims
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set).play(puyosI[0])
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set + "/Eyes").play(puyosI[0])
+		get_node("PuyoDrop" + bg + "/Puyo4" + set).play(puyosI[3])
+	elif puyosI[1] == puyosI[3] and puyosI[0] != puyosI[2] and puyosI[0] != puyosI[1] and !puyosI[0].is_valid_int(): # Horizontal L
+		# Hide and show sprites
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set).show()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).show()
+		get_node("PuyoDrop" + bg + "/Puyo2" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo4" + set).hide()
+		# Play anims
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).play(puyosI[3])
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set).play(puyosI[0])
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set + "/Eyes").play(puyosI[0])
+	elif puyosI[0] == puyosI[1] and puyosI[0] == puyosI[2] and puyosI[0] == puyosI[3]: # Mono O
+		# Hide and show sprites
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).show()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set + "/Eyes").hide()
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo2" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo4" + set).hide()
+		# Play anims
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).play(puyosI[0])
+	elif puyosI[0] == puyosI[1] and puyosI[0] == puyosI[3] and puyosI[0] != puyosI[2]: # Mono L
+		# Hide and show sprites
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).show()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set + "/Eyes").show()
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo2" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo4" + set).hide()
+		# Play anims
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).play(puyosI[0] + "L")
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set + "/Eyes").play(puyosI[0])
+	elif puyosI[0] == puyosI[1] and puyosI[2] == puyosI[3]: # Dichromatic O
+		# Hide and show sprites
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set).show()
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set).show()
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo2" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo4" + set).hide()
+		# Play anims
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set).play(puyosI[0])
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set + "/Eyes").play(puyosI[0])
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set).play(puyosI[2])
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set + "/Eyes").play(puyosI[2])
+	else:
+		# Hide and show sprites
+		get_node("PuyoDrop" + bg + "/PuyoVertical" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich1" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoDich2" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoHorizontal" + set).hide()
+		get_node("PuyoDrop" + bg + "/PuyoMono" + set).hide()
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).show()
+		get_node("PuyoDrop" + bg + "/Puyo2" + set).show()
+		get_node("PuyoDrop" + bg + "/Puyo4" + set).hide()
+		# Play anims
+		get_node("PuyoDrop" + bg + "/Puyo1" + set).play(puyosI[0])
+		get_node("PuyoDrop" + bg + "/Puyo2" + set).play(puyosI[1])
+
 func _on_next_puyo_sent(puyos):
-	$PuyoDropBG1/Puyo1Set1.play(puyos[0])
-	$PuyoDropBG1/Puyo2Set1.play(puyos[1])
-	$PuyoDropBG1/Puyo3Set1.play(puyos[2])
-	$PuyoDropBG1/Puyo4Set1.play(puyos[3])
-	$PuyoDropBG2/Puyo1Set1.play(puyos[0])
-	$PuyoDropBG2/Puyo2Set1.play(puyos[1])
-	$PuyoDropBG2/Puyo3Set1.play(puyos[2])
-	$PuyoDropBG2/Puyo4Set1.play(puyos[3])
+	displayPuyoQueue("BG1", "Set1", puyos)
+	displayPuyoQueue("BG2", "Set1", puyos)
 
 func _on_after_puyo_sent(puyos):
-	$PuyoDropBG1/Puyo1Set2.play(puyos[0])
-	$PuyoDropBG1/Puyo2Set2.play(puyos[1])
-	$PuyoDropBG1/Puyo3Set2.play(puyos[2])
-	$PuyoDropBG1/Puyo4Set2.play(puyos[3])
-	$PuyoDropBG2/Puyo1Set2.play(puyos[0])
-	$PuyoDropBG2/Puyo2Set2.play(puyos[1])
-	$PuyoDropBG2/Puyo3Set2.play(puyos[2])
-	$PuyoDropBG2/Puyo4Set2.play(puyos[3])
+	displayPuyoQueue("BG1", "Set2", puyos)
+	displayPuyoQueue("BG2", "Set2", puyos)
 
 func checkForChain():
 	var canChain = false

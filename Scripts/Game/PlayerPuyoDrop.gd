@@ -18,7 +18,7 @@ var rightRaycasts = []
 var currentPuyos = []
 var nextPuyos = []
 var afterPuyos = []
-var currentDropSet = [GameManager.dropSetVar.DICH_O, GameManager.dropSetVar.I]
+var currentDropSet = []
 
 var puyoSpawnsInitPos = []
 

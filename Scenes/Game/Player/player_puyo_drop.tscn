@@ -685,14 +685,12 @@ collision_mask = 3
 collide_with_areas = true
 
 [node name="Puyo1Sprite" type="AnimatedSprite2D" parent="."]
-visible = false
 top_level = true
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BluePuyo"
 
 [node name="Puyo2Sprite" type="AnimatedSprite2D" parent="."]
-visible = false
 top_level = true
 position = Vector2(-0.000209959, -58)
 scale = Vector2(0.85, 0.85)
@@ -746,6 +744,7 @@ sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
 
 [node name="PuyoDichO1" type="AnimatedSprite2D" parent="."]
+visible = false
 top_level = true
 position = Vector2(8, -29)
 scale = Vector2(0.85, 0.85)
@@ -760,6 +759,7 @@ sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
 
 [node name="PuyoDichO2" type="AnimatedSprite2D" parent="."]
+visible = false
 top_level = true
 position = Vector2(44, -26)
 scale = Vector2(0.85, 0.85)
