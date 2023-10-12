@@ -99,6 +99,30 @@ offset_bottom = -86.0
 scale = Vector2(1.8, 1.8)
 expand_mode = 1
 
+[node name="PuyoVerticalSet2" parent="PuyoDropBG1" index="8"]
+position = Vector2(45.3554, 95.1444)
+
+[node name="PuyoDich1Set2" parent="PuyoDropBG1" index="9"]
+position = Vector2(37.9354, 95.9444)
+
+[node name="PuyoDich2Set2" parent="PuyoDropBG1" index="10"]
+position = Vector2(52.5556, 97.5444)
+
+[node name="PuyoHorizontalSet2" parent="PuyoDropBG1" index="11"]
+position = Vector2(56.5555, 109.445)
+
+[node name="PuyoMonoSet2" parent="PuyoDropBG1" index="12"]
+position = Vector2(45.9356, 91.9445)
+
+[node name="Puyo1Set2" parent="PuyoDropBG1" index="13"]
+position = Vector2(46.4755, 84.8844)
+
+[node name="Puyo2Set2" parent="PuyoDropBG1" index="14"]
+position = Vector2(46.6354, 109.344)
+
+[node name="Puyo4Set2" parent="PuyoDropBG1" index="15"]
+position = Vector2(70.6354, 109.344)
+
 [node name="PuyoDropBG2" parent="." index="6"]
 offset_left = -105.0
 offset_top = -213.0
@@ -106,6 +130,30 @@ offset_right = -40.0
 offset_bottom = -89.0
 scale = Vector2(1.8, 1.8)
 expand_mode = 1
+
+[node name="PuyoVerticalSet2" parent="PuyoDropBG2" index="8"]
+position = Vector2(17.5778, 90.1445)
+
+[node name="PuyoDich1Set2" parent="PuyoDropBG2" index="9"]
+position = Vector2(10.1578, 90.9445)
+
+[node name="PuyoDich2Set2" parent="PuyoDropBG2" index="10"]
+position = Vector2(24.7778, 92.5445)
+
+[node name="PuyoHorizontalSet2" parent="PuyoDropBG2" index="11"]
+position = Vector2(30.3778, 104.444)
+
+[node name="PuyoMonoSet2" parent="PuyoDropBG2" index="12"]
+position = Vector2(18.1578, 86.9444)
+
+[node name="Puyo1Set2" parent="PuyoDropBG2" index="13"]
+position = Vector2(18.6978, 79.8844)
+
+[node name="Puyo2Set2" parent="PuyoDropBG2" index="14"]
+position = Vector2(18.8577, 104.344)
+
+[node name="Puyo4Set2" parent="PuyoDropBG2" index="15"]
+position = Vector2(42.8577, 104.344)
 
 [node name="ScorePanel" parent="." index="7"]
 offset_left = 26.0

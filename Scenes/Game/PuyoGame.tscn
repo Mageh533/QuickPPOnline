@@ -821,7 +821,7 @@ sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BluePuyo"
 
 [node name="PuyoVerticalSet2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(51.2, 94.5)
+position = Vector2(48.8, 96.1)
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_6d1wm")
 animation = &"BluePuyo"
@@ -833,7 +833,7 @@ sprite_frames = SubResource("SpriteFrames_ece8a")
 animation = &"BluePuyo"
 
 [node name="PuyoDich1Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(43.78, 95.3)
+position = Vector2(41.38, 96.9)
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_223gc")
 animation = &"BluePuyo"
@@ -845,7 +845,7 @@ sprite_frames = SubResource("SpriteFrames_ece8a")
 animation = &"BluePuyo"
 
 [node name="PuyoDich2Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(58.4, 96.9)
+position = Vector2(56, 98.5)
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_223gc")
 animation = &"BluePuyo"
@@ -859,7 +859,7 @@ sprite_frames = SubResource("SpriteFrames_ece8a")
 animation = &"BluePuyo"
 
 [node name="PuyoHorizontalSet2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(62.4, 108.8)
+position = Vector2(60, 110.4)
 rotation = -1.5708
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_0n2nq")
@@ -873,7 +873,7 @@ sprite_frames = SubResource("SpriteFrames_ece8a")
 animation = &"BluePuyo"
 
 [node name="PuyoMonoSet2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(51.78, 91.3)
+position = Vector2(49.38, 92.9)
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_gymys")
 animation = &"BluePuyo"
@@ -886,19 +886,19 @@ sprite_frames = SubResource("SpriteFrames_ece8a")
 animation = &"BluePuyo"
 
 [node name="Puyo1Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(52.32, 84.24)
+position = Vector2(49.92, 85.84)
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BluePuyo"
 
 [node name="Puyo2Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(52.4799, 108.7)
+position = Vector2(50.0799, 110.3)
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BluePuyo"
 
 [node name="Puyo4Set2" type="AnimatedSprite2D" parent="PuyoDropBG1"]
-position = Vector2(76.4799, 108.7)
+position = Vector2(74.0799, 110.3)
 scale = Vector2(0.36, 0.36)
 sprite_frames = SubResource("SpriteFrames_oqu15")
 animation = &"BluePuyo"
