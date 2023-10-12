@@ -20,6 +20,8 @@ var nextPuyos = []
 var afterPuyos = []
 var currentDropSet = []
 
+var puyoSpawnsInitPos = []
+
 var timeOnGround = 0
 var currentPlayer = 0
 var dropsetNum = 0
@@ -91,6 +93,7 @@ func _process(_delta):
 	
 	if active and !playerSet:
 		playerSet = true
+		puyoSpawnsInitPos = [$Puyo1Spawn.position, $Puyo2Spawn.position, $Puyo3Spawn.position, $Puyo4Spawn.position, ]
 		if currentPlayer == 1:
 			$MultiplayerSynchronizer.set_multiplayer_authority(1)
 		else:
@@ -152,8 +155,10 @@ func playerControls(controlsToUse):
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
-			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+			if !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours(0)
+			elif !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
+				rotateOPiece(0)
 			else:
 				rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
@@ -165,8 +170,10 @@ func playerControls(controlsToUse):
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
-			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+			if !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours(1)
+			elif !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
+				rotateOPiece(1)
 			else:
 				rotate180()
 	if Input.is_action_just_pressed("p" + str(controlsToUse) + "_up"):
@@ -268,9 +275,10 @@ func checkForRoationClipping():
 	if rightWallCollide and leftWallCollide:
 		var currentAngle = round(transform.get_rotation())
 		if currentAngle == -2 or currentAngle == 2:
-			canRotate = false
+			if currentDropSet.is_empty() or currentDropSet[dropsetNum] == GameManager.dropSetVar.I:
+				canRotate = false
 	if !currentDropSet.is_empty():
-		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O or currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
 			canRotate = false
 	return canRotate
 
@@ -284,6 +292,23 @@ func rotate180():
 	var p2 = $SpritesTransforms/PuyoSprite2.position
 	tween.tween_property($SpritesTransforms/PuyoSprite1, "position", p2, 0.1)
 	tween2.tween_property($SpritesTransforms/PuyoSprite2, "position", p1, 0.1)
+
+func rotateOPiece(dir):
+	var tween = get_tree().create_tween()
+	var temp1 = $Puyo1Spawn.position
+	var temp2 = $Puyo3Spawn.position
+	if dir == 0:
+		$Puyo1Spawn.position = $Puyo2Spawn.position
+		$Puyo2Spawn.position = temp2
+		$Puyo3Spawn.position = $Puyo4Spawn.position
+		$Puyo4Spawn.position = temp1
+		tween.tween_property($SpritesTransforms/DichOTransforms, "rotation", lerp_angle($SpritesTransforms/DichOTransforms.rotation, ($SpritesTransforms/DichOTransforms.rotation + PI / 2), 1), 0.1)
+	else:
+		$Puyo1Spawn.position = $Puyo4Spawn.position
+		$Puyo3Spawn.position = $Puyo2Spawn.position
+		$Puyo2Spawn.position = temp1
+		$Puyo4Spawn.position = temp2
+		tween.tween_property($SpritesTransforms/DichOTransforms, "rotation", lerp_angle($SpritesTransforms/DichOTransforms.rotation, ($SpritesTransforms/DichOTransforms.rotation + -PI / 2), 1), 0.1)
 
 # Function to get new puyo colours for next drop, if dichromatic is set then it makes sure to get seperate colours
 func getNewPuyos(dichromatic : bool = false):
@@ -316,6 +341,9 @@ func swapPuyos():
 	displayGroupSprites()
 
 func resetPlayer():
+	# Reset spawns in case a 180 degree rotation or an o rotation was made
+	for i in range(puyoSpawnsInitPos.size()):
+		get_node("Puyo" + str(i + 1) +"Spawn").position = puyoSpawnsInitPos[i]
 	interpolate = false
 	position = startingPos
 	rotation = startingRot
