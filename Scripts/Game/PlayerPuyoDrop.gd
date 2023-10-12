@@ -18,7 +18,7 @@ var rightRaycasts = []
 var currentPuyos = []
 var nextPuyos = []
 var afterPuyos = []
-var currentDropSet = []
+var currentDropSet = [GameManager.dropSetVar.DICH_O, GameManager.dropSetVar.I]
 
 var puyoSpawnsInitPos = []
 
@@ -348,6 +348,7 @@ func resetPlayer():
 	position = startingPos
 	rotation = startingRot
 	$SpritesTransforms.global_position = global_position
+	$SpritesTransforms/DichOTransforms.rotation = 0
 	interpolate = true
 
 func enableAdditionalPieces(enabled : bool = false, thirdPieceEn : bool = false):
