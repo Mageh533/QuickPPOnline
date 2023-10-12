@@ -377,11 +377,25 @@ rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../../PuyoMonoLSprite")
 
+[node name="PuyoMonoLSpriteEyes" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(47, 7.00017)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../PuyoMonoLSprite/Eyes")
+update_rotation = false
+
 [node name="PuyoVerticalSprite" type="RemoteTransform2D" parent="SpritesTransforms"]
 position = Vector2(33, 0.000118256)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../../PuyoVerticalSprite")
+
+[node name="PuyoVerticalSpriteEyes" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(58, 0.000213623)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../PuyoVerticalSprite/Eyes")
+update_rotation = false
 
 [node name="PuyoVerticalSprite2" type="RemoteTransform2D" parent="SpritesTransforms"]
 position = Vector2(30.9998, 57.0001)
@@ -389,10 +403,23 @@ rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../../PuyoVerticalSprite2")
 
+[node name="PuyoVerticalSprite2Eyes" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(57.9998, 58.0002)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../PuyoVerticalSprite2/Eyes")
+update_rotation = false
+
 [node name="PuyoHorizontalSprite" type="RemoteTransform2D" parent="SpritesTransforms"]
 position = Vector2(-1.00013, 34)
 scale = Vector2(0.85, 0.85)
 remote_path = NodePath("../../PuyoHorizontalSprite")
+
+[node name="PuyoHorizontalSpriteEyes" type="RemoteTransform2D" parent="SpritesTransforms"]
+position = Vector2(-6.00003, 6.99997)
+scale = Vector2(0.85, 0.85)
+remote_path = NodePath("../../PuyoHorizontalSprite/Eyes")
+update_rotation = false
 
 [node name="PuyoMonoOSprite" type="RemoteTransform2D" parent="SpritesTransforms"]
 position = Vector2(30.9999, 29.0001)
@@ -573,10 +600,11 @@ sprite_frames = SubResource("SpriteFrames_p0ytx")
 animation = &"YellowPuyo"
 
 [node name="Eyes" type="AnimatedSprite2D" parent="PuyoMonoLSprite"]
-position = Vector2(-29.4118, -27.0588)
-scale = Vector2(0.75, 0.75)
+top_level = true
+position = Vector2(7, -47)
+scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_hienc")
-animation = &"BluePuyo"
+animation = &"YellowPuyo"
 
 [node name="PuyoVerticalSprite" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -587,8 +615,9 @@ sprite_frames = SubResource("SpriteFrames_0efjg")
 animation = &"BluePuyo"
 
 [node name="Eyes" type="AnimatedSprite2D" parent="PuyoVerticalSprite"]
-position = Vector2(-1.17646, -30.5882)
-scale = Vector2(0.75, 0.75)
+top_level = true
+position = Vector2(3.66365e-06, -58)
+scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
 
@@ -601,8 +630,9 @@ sprite_frames = SubResource("SpriteFrames_0efjg")
 animation = &"BluePuyo"
 
 [node name="Eyes" type="AnimatedSprite2D" parent="PuyoVerticalSprite2"]
-position = Vector2(-1.17646, -30.5882)
-scale = Vector2(0.75, 0.75)
+top_level = true
+position = Vector2(58, -58)
+scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
 
@@ -616,9 +646,9 @@ sprite_frames = SubResource("SpriteFrames_0efjg")
 animation = &"BluePuyo"
 
 [node name="Eyes" type="AnimatedSprite2D" parent="PuyoHorizontalSprite"]
-position = Vector2(-1.17646, -30.5882)
-rotation = 1.5708
-scale = Vector2(0.75, 0.75)
+top_level = true
+position = Vector2(6.99999, 6)
+scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_hienc")
 animation = &"BluePuyo"
 
