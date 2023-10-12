@@ -154,7 +154,8 @@ func playerControls(controlsToUse):
 		else:
 			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours()
-			rotate180()
+			else:
+				rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if checkForRoationClipping():
@@ -166,7 +167,8 @@ func playerControls(controlsToUse):
 		else:
 			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours()
-			rotate180()
+			else:
+				rotate180()
 	if Input.is_action_just_pressed("p" + str(controlsToUse) + "_up"):
 		if GameManager.generalSettings.hardDrop:
 			pieceLand(true)
@@ -319,21 +321,26 @@ func disableAdditionalPieces():
 		$Puyo1Sprite.hide()
 		$Puyo2Sprite.hide()
 		$Puyo4Sprite.hide()
-		$PuyoMonoSprite.hide()
+		$PuyoMonoOSprite.hide()
+		$PuyoMonoLSprite.hide()
 		$PuyoHorizontalSprite.hide()
 		$PuyoVerticalSprite.show()
 		$PuyoVerticalSprite2.show()
-	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O or currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
-		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
-			enableAdditionalPieces(true, false)
-			$PuyoMonoSprite/Eyes.show()
-		else:
-			enableAdditionalPieces(true, true)
-			$PuyoMonoSprite/Eyes.hide()
+	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 		$Puyo1Sprite.hide()
 		$Puyo2Sprite.hide()
 		$Puyo4Sprite.hide()
-		$PuyoMonoSprite.show()
+		$PuyoMonoOSprite.show()
+		$PuyoMonoLSprite.hide()
+		$PuyoHorizontalSprite.hide()
+		$PuyoVerticalSprite.hide()
+		$PuyoVerticalSprite2.hide()
+	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
+		$Puyo1Sprite.hide()
+		$Puyo2Sprite.hide()
+		$Puyo4Sprite.hide()
+		$PuyoMonoOSprite.hide()
+		$PuyoMonoLSprite.show()
 		$PuyoHorizontalSprite.hide()
 		$PuyoVerticalSprite.hide()
 		$PuyoVerticalSprite2.hide()
@@ -342,7 +349,8 @@ func disableAdditionalPieces():
 		$Puyo1Sprite.hide()
 		$Puyo2Sprite.hide()
 		$Puyo4Sprite.show()
-		$PuyoMonoSprite.hide()
+		$PuyoMonoOSprite.hide()
+		$PuyoMonoLSprite.hide()
 		$PuyoHorizontalSprite.hide()
 		$PuyoVerticalSprite.show()
 		$PuyoVerticalSprite2.hide()
@@ -351,7 +359,8 @@ func disableAdditionalPieces():
 		$Puyo1Sprite.hide()
 		$Puyo2Sprite.show()
 		$Puyo4Sprite.hide()
-		$PuyoMonoSprite.hide()
+		$PuyoMonoOSprite.hide()
+		$PuyoMonoLSprite.hide()
 		$PuyoHorizontalSprite.show()
 		$PuyoVerticalSprite.hide()
 		$PuyoVerticalSprite2.hide()
@@ -360,7 +369,8 @@ func disableAdditionalPieces():
 		$Puyo1Sprite.show()
 		$Puyo2Sprite.show()
 		$Puyo4Sprite.hide()
-		$PuyoMonoSprite.hide()
+		$PuyoMonoOSprite.hide()
+		$PuyoMonoLSprite.hide()
 		$PuyoHorizontalSprite.hide()
 		$PuyoVerticalSprite.hide()
 		$PuyoVerticalSprite2.hide()
@@ -525,12 +535,10 @@ func displayGroupSprites():
 				$PuyoVerticalSprite2/Eyes.play(currentPuyos[0]._bundled.get("names")[0])
 		else:
 			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
-				$PuyoMonoSprite.frame = 1
-				$PuyoMonoSprite.play(currentPuyos[0]._bundled.get("names")[0])
-				$PuyoMonoSprite/Eyes.play(currentPuyos[0]._bundled.get("names")[0])
+				$PuyoMonoLSprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$PuyoMonoLSprite/Eyes.play(currentPuyos[0]._bundled.get("names")[0])
 			elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
-				$PuyoMonoSprite.frame = 0
-				$PuyoMonoSprite.play(currentPuyos[0]._bundled.get("names")[0])
+				$PuyoMonoOSprite.play(currentPuyos[0]._bundled.get("names")[0])
 
 func sendPuyoSignal(signalName : String, puyoColours, currentDropSetNum : int):
 	var puyos = []

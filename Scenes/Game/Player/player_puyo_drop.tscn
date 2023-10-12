@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://rq2bwcbvu8p4"]
+[gd_scene load_steps=43 format=3 uid="uid://rq2bwcbvu8p4"]
 
 [ext_resource type="Script" path="res://Scripts/Game/PlayerPuyoDrop.gd" id="1_ckb26"]
 [ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="2_axvif"]
@@ -81,48 +81,88 @@ animations = [{
 atlas = ExtResource("10_5naes")
 region = Rect2(428, 500, 141, 125)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w42xa"]
-atlas = ExtResource("10_5naes")
-region = Rect2(649, 360, 129, 120)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_llnth"]
 atlas = ExtResource("10_5naes")
 region = Rect2(283, 500, 139, 125)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tac32"]
-atlas = ExtResource("10_5naes")
-region = Rect2(504, 360, 125, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a1kl7"]
 atlas = ExtResource("10_5naes")
 region = Rect2(715, 500, 142, 125)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rr0dq"]
-atlas = ExtResource("10_5naes")
-region = Rect2(935, 360, 133, 120)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ti2ta"]
 atlas = ExtResource("10_5naes")
 region = Rect2(141, 500, 136, 125)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_paro2"]
-atlas = ExtResource("10_5naes")
-region = Rect2(364, 360, 120, 120)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_j20kr"]
 atlas = ExtResource("10_5naes")
 region = Rect2(569, 500, 141, 125)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jsyc4"]
-atlas = ExtResource("10_5naes")
-region = Rect2(790, 360, 131, 120)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oovkf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gfpk1")
+}],
+"loop": false,
+"name": &"BluePuyo",
+"speed": 0.0
 }, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llnth")
+}],
+"loop": false,
+"name": &"GreenPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1kl7")
+}],
+"loop": false,
+"name": &"PurplePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti2ta")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j20kr")
+}],
+"loop": false,
+"name": &"YellowPuyo",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w42xa"]
+atlas = ExtResource("10_5naes")
+region = Rect2(649, 360, 129, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tac32"]
+atlas = ExtResource("10_5naes")
+region = Rect2(504, 360, 125, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr0dq"]
+atlas = ExtResource("10_5naes")
+region = Rect2(935, 360, 133, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paro2"]
+atlas = ExtResource("10_5naes")
+region = Rect2(364, 360, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsyc4"]
+atlas = ExtResource("10_5naes")
+region = Rect2(790, 360, 131, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p0ytx"]
+animations = [{
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w42xa")
 }],
@@ -132,9 +172,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_llnth")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_tac32")
 }],
 "loop": false,
@@ -142,9 +179,6 @@ animations = [{
 "speed": 0.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a1kl7")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rr0dq")
 }],
@@ -154,9 +188,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ti2ta")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_paro2")
 }],
 "loop": false,
@@ -164,9 +195,6 @@ animations = [{
 "speed": 0.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j20kr")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jsyc4")
 }],
@@ -503,16 +531,23 @@ scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_vineh")
 animation = &"BluePuyo"
 
-[node name="PuyoMonoSprite" type="AnimatedSprite2D" parent="."]
+[node name="PuyoMonoOSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(29.9999, 32.0001)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 sprite_frames = SubResource("SpriteFrames_oovkf")
-animation = &"BluePuyo"
+animation = &"YellowPuyo"
 
-[node name="Eyes" type="AnimatedSprite2D" parent="PuyoMonoSprite"]
+[node name="PuyoMonoLSprite" type="AnimatedSprite2D" parent="."]
 visible = false
+position = Vector2(29.9999, 32.0001)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_p0ytx")
+animation = &"YellowPuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoMonoLSprite"]
 position = Vector2(-29.4118, -27.0588)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_hienc")
