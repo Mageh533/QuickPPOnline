@@ -153,7 +153,7 @@ func playerControls(controlsToUse):
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
 			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
-				cycleColours()
+				cycleColours(0)
 			else:
 				rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
@@ -166,24 +166,36 @@ func playerControls(controlsToUse):
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
 			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
-				cycleColours()
+				cycleColours(1)
 			else:
 				rotate180()
 	if Input.is_action_just_pressed("p" + str(controlsToUse) + "_up"):
 		if GameManager.generalSettings.hardDrop:
 			pieceLand(true)
 
-func cycleColours():
-	if currentPuyos[0] == PuyoScenes[0]:
-		currentPuyos[0] = PuyoScenes[1]
-	elif currentPuyos[0] == PuyoScenes[1]:
-		currentPuyos[0] = PuyoScenes[2]
-	elif currentPuyos[0] == PuyoScenes[2]:
-		currentPuyos[0] = PuyoScenes[3]
-	elif currentPuyos[0] == PuyoScenes[3]:
-		currentPuyos[0] = PuyoScenes[4]
+func cycleColours(dir : int):
+	if dir == 0:
+		if currentPuyos[0] == PuyoScenes[0]:
+			currentPuyos[0] = PuyoScenes[1]
+		elif currentPuyos[0] == PuyoScenes[1]:
+			currentPuyos[0] = PuyoScenes[2]
+		elif currentPuyos[0] == PuyoScenes[2]:
+			currentPuyos[0] = PuyoScenes[3]
+		elif currentPuyos[0] == PuyoScenes[3]:
+			currentPuyos[0] = PuyoScenes[4]
+		else:
+			currentPuyos[0] = PuyoScenes[0]
 	else:
-		currentPuyos[0] = PuyoScenes[0]
+		if currentPuyos[0] == PuyoScenes[0]:
+			currentPuyos[0] = PuyoScenes[4]
+		elif currentPuyos[0] == PuyoScenes[1]:
+			currentPuyos[0] = PuyoScenes[0]
+		elif currentPuyos[0] == PuyoScenes[2]:
+			currentPuyos[0] = PuyoScenes[1]
+		elif currentPuyos[0] == PuyoScenes[3]:
+			currentPuyos[0] = PuyoScenes[2]
+		else:
+			currentPuyos[0] = PuyoScenes[3]
 	displayGroupSprites()
 
 # Function to find out where raycasts are after rotating
