@@ -323,7 +323,7 @@ func resetPlayer():
 
 func enableAdditionalPieces(enabled : bool = false, thirdPieceEn : bool = false):
 	for raycast in $RayCasts2.get_children():
-		raycast.enabled = !enabled
+		raycast.enabled = enabled
 	$Puyo1Collision3.disabled = !thirdPieceEn
 	$Puyo1Collision4.disabled = !enabled
 
@@ -339,6 +339,7 @@ func disableAdditionalPieces():
 		$PuyoVerticalSprite.show()
 		$PuyoVerticalSprite2.show()
 	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+		enableAdditionalPieces(true, true)
 		$Puyo1Sprite.hide()
 		$Puyo2Sprite.hide()
 		$Puyo4Sprite.hide()
@@ -348,6 +349,7 @@ func disableAdditionalPieces():
 		$PuyoVerticalSprite.hide()
 		$PuyoVerticalSprite2.hide()
 	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
+		enableAdditionalPieces(true, false)
 		$Puyo1Sprite.hide()
 		$Puyo2Sprite.hide()
 		$Puyo4Sprite.hide()
