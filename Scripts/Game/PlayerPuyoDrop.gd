@@ -18,7 +18,7 @@ var rightRaycasts = []
 var currentPuyos = []
 var nextPuyos = []
 var afterPuyos = []
-var currentDropSet = [GameManager.dropSetVar.I, GameManager.dropSetVar.MONO_O, GameManager.dropSetVar.MONO_L, GameManager.dropSetVar.VERTICAL_L, GameManager.dropSetVar.HORIZONTAL_L]
+var currentDropSet = [GameManager.dropSetVar.DICH_O, GameManager.dropSetVar.MONO_O, GameManager.dropSetVar.MONO_L, GameManager.dropSetVar.VERTICAL_L, GameManager.dropSetVar.HORIZONTAL_L]
 
 var timeOnGround = 0
 var currentPlayer = 0
@@ -545,8 +545,8 @@ func displayGroupSprites():
 			else:
 				$PuyoVerticalSprite.play(currentPuyos[0]._bundled.get("names")[0])
 				$PuyoVerticalSprite/Eyes.play(currentPuyos[0]._bundled.get("names")[0])
-				$PuyoVerticalSprite2.play(currentPuyos[0]._bundled.get("names")[0])
-				$PuyoVerticalSprite2/Eyes.play(currentPuyos[0]._bundled.get("names")[0])
+				$PuyoVerticalSprite2.play(currentPuyos[1]._bundled.get("names")[0])
+				$PuyoVerticalSprite2/Eyes.play(currentPuyos[1]._bundled.get("names")[0])
 		else:
 			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
 				$PuyoMonoLSprite.play(currentPuyos[0]._bundled.get("names")[0])
