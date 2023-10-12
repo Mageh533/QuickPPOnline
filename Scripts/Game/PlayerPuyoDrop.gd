@@ -269,8 +269,9 @@ func checkForRoationClipping():
 		var currentAngle = round(transform.get_rotation())
 		if currentAngle == -2 or currentAngle == 2:
 			canRotate = false
-	if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
-		canRotate = false
+	if !currentDropSet.is_empty():
+		if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+			canRotate = false
 	return canRotate
 
 func rotate180():
@@ -328,56 +329,67 @@ func enableAdditionalPieces(enabled : bool = false, thirdPieceEn : bool = false)
 	$Puyo1Collision4.disabled = !enabled
 
 func disableAdditionalPieces():
-	if currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
-		enableAdditionalPieces(true, true)
-		$Puyo1Sprite.hide()
-		$Puyo2Sprite.hide()
-		$Puyo4Sprite.hide()
-		$PuyoMonoOSprite.hide()
-		$PuyoMonoLSprite.hide()
-		$PuyoHorizontalSprite.hide()
-		$PuyoVerticalSprite.show()
-		$PuyoVerticalSprite2.show()
-	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
-		enableAdditionalPieces(true, true)
-		$Puyo1Sprite.hide()
-		$Puyo2Sprite.hide()
-		$Puyo4Sprite.hide()
-		$PuyoMonoOSprite.show()
-		$PuyoMonoLSprite.hide()
-		$PuyoHorizontalSprite.hide()
-		$PuyoVerticalSprite.hide()
-		$PuyoVerticalSprite2.hide()
-	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
-		enableAdditionalPieces(true, false)
-		$Puyo1Sprite.hide()
-		$Puyo2Sprite.hide()
-		$Puyo4Sprite.hide()
-		$PuyoMonoOSprite.hide()
-		$PuyoMonoLSprite.show()
-		$PuyoHorizontalSprite.hide()
-		$PuyoVerticalSprite.hide()
-		$PuyoVerticalSprite2.hide()
-	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.VERTICAL_L:
-		enableAdditionalPieces(true, false)
-		$Puyo1Sprite.hide()
-		$Puyo2Sprite.hide()
-		$Puyo4Sprite.show()
-		$PuyoMonoOSprite.hide()
-		$PuyoMonoLSprite.hide()
-		$PuyoHorizontalSprite.hide()
-		$PuyoVerticalSprite.show()
-		$PuyoVerticalSprite2.hide()
-	elif currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
-		enableAdditionalPieces(true, false)
-		$Puyo1Sprite.hide()
-		$Puyo2Sprite.show()
-		$Puyo4Sprite.hide()
-		$PuyoMonoOSprite.hide()
-		$PuyoMonoLSprite.hide()
-		$PuyoHorizontalSprite.show()
-		$PuyoVerticalSprite.hide()
-		$PuyoVerticalSprite2.hide()
+	if !currentDropSet.is_empty():
+		if currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
+			enableAdditionalPieces(true, true)
+			$Puyo1Sprite.hide()
+			$Puyo2Sprite.hide()
+			$Puyo4Sprite.hide()
+			$PuyoMonoOSprite.hide()
+			$PuyoMonoLSprite.hide()
+			$PuyoHorizontalSprite.hide()
+			$PuyoVerticalSprite.show()
+			$PuyoVerticalSprite2.show()
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+			enableAdditionalPieces(true, true)
+			$Puyo1Sprite.hide()
+			$Puyo2Sprite.hide()
+			$Puyo4Sprite.hide()
+			$PuyoMonoOSprite.show()
+			$PuyoMonoLSprite.hide()
+			$PuyoHorizontalSprite.hide()
+			$PuyoVerticalSprite.hide()
+			$PuyoVerticalSprite2.hide()
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_L:
+			enableAdditionalPieces(true, false)
+			$Puyo1Sprite.hide()
+			$Puyo2Sprite.hide()
+			$Puyo4Sprite.hide()
+			$PuyoMonoOSprite.hide()
+			$PuyoMonoLSprite.show()
+			$PuyoHorizontalSprite.hide()
+			$PuyoVerticalSprite.hide()
+			$PuyoVerticalSprite2.hide()
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.VERTICAL_L:
+			enableAdditionalPieces(true, false)
+			$Puyo1Sprite.hide()
+			$Puyo2Sprite.hide()
+			$Puyo4Sprite.show()
+			$PuyoMonoOSprite.hide()
+			$PuyoMonoLSprite.hide()
+			$PuyoHorizontalSprite.hide()
+			$PuyoVerticalSprite.show()
+			$PuyoVerticalSprite2.hide()
+		elif currentDropSet[dropsetNum] == GameManager.dropSetVar.HORIZONTAL_L:
+			enableAdditionalPieces(true, false)
+			$Puyo1Sprite.hide()
+			$Puyo2Sprite.show()
+			$Puyo4Sprite.hide()
+			$PuyoMonoOSprite.hide()
+			$PuyoMonoLSprite.hide()
+			$PuyoHorizontalSprite.show()
+			$PuyoVerticalSprite.hide()
+			$PuyoVerticalSprite2.hide()
+		else:
+			enableAdditionalPieces(false, false)
+			$Puyo1Sprite.show()
+			$Puyo2Sprite.show()
+			$Puyo4Sprite.hide()
+			$PuyoMonoOSprite.hide()
+			$PuyoMonoLSprite.hide()
+			$PuyoHorizontalSprite.hide()
+			$PuyoVerticalSprite.hide()
+			$PuyoVerticalSprite2.hide()
 	else:
 		enableAdditionalPieces(false, false)
 		$Puyo1Sprite.show()
