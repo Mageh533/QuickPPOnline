@@ -152,6 +152,8 @@ func playerControls(controlsToUse):
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
+			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+				cycleColours()
 			rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
@@ -162,10 +164,25 @@ func playerControls(controlsToUse):
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
 		else:
+			if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+				cycleColours()
 			rotate180()
 	if Input.is_action_just_pressed("p" + str(controlsToUse) + "_up"):
 		if GameManager.generalSettings.hardDrop:
 			pieceLand(true)
+
+func cycleColours():
+	if currentPuyos[0] == PuyoScenes[0]:
+		currentPuyos[0] = PuyoScenes[1]
+	elif currentPuyos[0] == PuyoScenes[1]:
+		currentPuyos[0] = PuyoScenes[2]
+	elif currentPuyos[0] == PuyoScenes[2]:
+		currentPuyos[0] = PuyoScenes[3]
+	elif currentPuyos[0] == PuyoScenes[3]:
+		currentPuyos[0] = PuyoScenes[4]
+	else:
+		currentPuyos[0] = PuyoScenes[0]
+	displayGroupSprites()
 
 # Function to find out where raycasts are after rotating
 func setRayCastsPositions():
@@ -238,6 +255,8 @@ func checkForRoationClipping():
 		var currentAngle = round(transform.get_rotation())
 		if currentAngle == -2 or currentAngle == 2:
 			canRotate = false
+	if currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
+		canRotate = false
 	return canRotate
 
 func rotate180():
