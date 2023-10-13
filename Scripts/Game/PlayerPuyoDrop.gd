@@ -94,6 +94,8 @@ func _process(_delta):
 	if active and !playerSet:
 		playerSet = true
 		puyoSpawnsInitPos = [$Puyo1Spawn.position, $Puyo2Spawn.position, $Puyo3Spawn.position, $Puyo4Spawn.position, ]
+		sendPuyoSignal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 1, 0, currentDropSet.size()))
+		sendPuyoSignal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 2, 0, currentDropSet.size()))
 		if currentPlayer == 1:
 			$MultiplayerSynchronizer.set_multiplayer_authority(1)
 		else:
