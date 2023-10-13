@@ -71,9 +71,9 @@ func _physics_process(delta):
 			if !GameManager.onlineMatch:
 				playerControls(currentPlayer)
 
-func _process(_delta):
+func _process(delta):
 	if interpolate:
-		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, 5)
+		$SpritesTransforms.global_position.x = move_toward($SpritesTransforms.global_position.x, global_position.x, delta * 550)
 	
 	setRayCastsPositions()
 	for rayCast in leftRaycasts:
