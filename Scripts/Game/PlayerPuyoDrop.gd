@@ -148,7 +148,7 @@ func playerControls(controlsToUse):
 		fastDrop = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_down"):
 		fastDrop = true
-	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnLeft"):
+	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
 		$SoundEffects/PieceRotate.play()
 		if checkForRoationClipping():
 			var tween = get_tree().create_tween()
@@ -163,7 +163,7 @@ func playerControls(controlsToUse):
 				rotateOPiece(0)
 			else:
 				rotate180()
-	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnRight"):
+	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnLeft"):
 		$SoundEffects/PieceRotate.play()
 		if checkForRoationClipping():
 			var tween = get_tree().create_tween()
