@@ -35,7 +35,6 @@ func _on_gravity_timer_timeout():
 		tween.kill()
 		if moving:
 			moving = false
-			playSquashAnim(0.5)
 
 func _on_pre_popped_timer_timeout():
 	if($PuyoSprite.visible):
@@ -45,15 +44,6 @@ func _on_pre_popped_timer_timeout():
 		
 	if $PoppedPreTimer.wait_time > 0.01:
 		$PoppedPreTimer.wait_time = $PoppedPreTimer.wait_time - 0.02
-
-# Blop!
-func playSquashAnim(force):
-	var tween = get_tree().create_tween()
-	if force > 0.85:
-		force = 0.75
-	tween.tween_property($PuyoSprite, "scale", Vector2(0.85, force), 0.05)
-	tween.tween_property($PuyoSprite, "scale", Vector2(force, 1), 0.05)
-	tween.tween_property($PuyoSprite, "scale", Vector2(0.85, 0.85), 0.05)
 
 func _on_popped_timer_timeout():
 	queue_free()

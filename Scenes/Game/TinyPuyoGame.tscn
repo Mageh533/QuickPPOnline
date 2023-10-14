@@ -97,7 +97,6 @@ offset_top = -139.0
 offset_right = 647.0
 
 [node name="FeverTime" parent="FeverGauge/FeverBG2" index="7"]
-layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 40.0
