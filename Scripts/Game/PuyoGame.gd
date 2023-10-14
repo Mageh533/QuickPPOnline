@@ -313,7 +313,7 @@ func calculateNuisance(chainScore, targetPoints):
 	var nuisanceToSend = floor(nuisancePoints)
 	leftOverNuisance = nuisancePoints - nuisanceToSend
 	if checkAllClear():
-		nuisanceToSend += 30
+		leftOverNuisance += 30
 	if nuisanceQueue > 0:
 		var temp = nuisanceQueue
 		nuisanceQueue -= nuisanceToSend
