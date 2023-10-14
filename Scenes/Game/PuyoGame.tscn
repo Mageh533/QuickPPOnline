@@ -1,9 +1,10 @@
-[gd_scene load_steps=81 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=94 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_t6ghk"]
 [ext_resource type="Texture2D" uid="uid://he26l3hfdd7e" path="res://Assets/Sprites/matrix/ffield.png" id="3_82u8y"]
+[ext_resource type="Shader" uid="uid://dqf8hq3ryophn" path="res://Shaders/PuyoBoard/PuyoGame.tres" id="3_pqyss"]
 [ext_resource type="PackedScene" uid="uid://4b8n5t827yci" path="res://Scenes/Objects/Puyos/BluePuyo.tscn" id="3_syxk4"]
 [ext_resource type="PackedScene" uid="uid://4t300lgrkwhu" path="res://Scenes/Objects/Puyos/GreenPuyo.tscn" id="4_0opt5"]
 [ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/Puyos/YellowPuyo.tscn" id="5_b2mlv"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dhcsxdylpaexb" path="res://Scenes/Objects/Puyos/NuisancePuyo.tscn" id="10_7qs3i"]
 [ext_resource type="Texture2D" uid="uid://ytu3q106ve2l" path="res://Assets/Sprites/matrix/nextR.png" id="12_70b0l"]
 [ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/SFX/chain1.wav" id="12_w1lio"]
+[ext_resource type="Texture2D" uid="uid://dfq7f3msqjhcp" path="res://Assets/Sprites/matrix/fgauge.png" id="13_5h8ft"]
 [ext_resource type="AudioStream" uid="uid://mwxcrh8yylc6" path="res://Assets/SFX/chain2.wav" id="13_ojiuo"]
 [ext_resource type="Texture2D" uid="uid://pvmeh0cvtjed" path="res://Assets/Sprites/matrix/nextL.png" id="14_dakh1"]
 [ext_resource type="AudioStream" uid="uid://tvki8clelukf" path="res://Assets/SFX/chain3.wav" id="14_whvvs"]
@@ -25,6 +27,9 @@
 [ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/SFX/damage3.wav" id="21_4thcd"]
 [ext_resource type="AudioStream" uid="uid://ccqnv7lvh8drs" path="res://Assets/SFX/allClear.wav" id="22_5khce"]
 [ext_resource type="Texture2D" uid="uid://r64olssw0i2l" path="res://Assets/Sprites/matrix/allclear.png" id="23_0my3u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pr1yx"]
+shader = ExtResource("3_pqyss")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
 atlas = ExtResource("2_t6ghk")
@@ -140,6 +145,119 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_3prtr")
 sources/1 = SubResource("TileSetScenesCollectionSource_ip3n8")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_no4om"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdvyi"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7kr7"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et2rh"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ect0d"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skl1a"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(40, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgx7c"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(80, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uajy8"]
+atlas = ExtResource("13_5h8ft")
+region = Rect2(120, 40, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jav3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_no4om")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdvyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7kr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et2rh")
+}],
+"loop": true,
+"name": &"BGLarge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdvyi")
+}],
+"loop": true,
+"name": &"BGMedium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et2rh")
+}],
+"loop": true,
+"name": &"BGSmall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7kr7")
+}],
+"loop": true,
+"name": &"BGSmol",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ect0d")
+}],
+"loop": true,
+"name": &"FeverLarge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skl1a")
+}],
+"loop": true,
+"name": &"FeverMedium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgx7c")
+}],
+"loop": true,
+"name": &"FeverSmall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uajy8")
+}],
+"loop": true,
+"name": &"FeverSmol",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qlnw2"]
+font_size = 32
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wec6"]
 atlas = ExtResource("2_t6ghk")
@@ -695,6 +813,7 @@ offset_bottom = 574.0
 
 [node name="FeverBackground" type="TextureRect" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_pr1yx")
 offset_left = 43.0
 offset_top = 44.0
 offset_right = 312.0
@@ -727,6 +846,255 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(-65534, 1, 65536)
+
+[node name="FeverGauge" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -107.0
+offset_top = 39.0
+offset_right = 445.0
+offset_bottom = 577.0
+
+[node name="FeverBG1" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = 161.0
+offset_right = 4.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGLarge"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="FeverTime" type="Label" parent="FeverGauge/FeverBG1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 107.0
+offset_right = 42.0
+offset_bottom = 155.0
+text = "15"
+label_settings = SubResource("LabelSettings_qlnw2")
+
+[node name="FeverOverlay1" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = 161.0
+offset_right = 4.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverLarge"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
+
+[node name="FeverBG2" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -423.0
+offset_top = 161.0
+offset_right = -303.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(-1, 1)
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGLarge"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="FeverTime" type="Label" parent="FeverGauge/FeverBG2"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 107.0
+offset_right = 84.0
+offset_bottom = 155.0
+scale = Vector2(-1, 1)
+text = "15"
+label_settings = SubResource("LabelSettings_qlnw2")
+
+[node name="FeverOverlay2" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -423.0
+offset_top = 161.0
+offset_right = -303.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(-1, 1)
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverLarge"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
 
 [node name="PuyoDropBG1" type="TextureRect" parent="."]
 clip_children = 2
@@ -921,9 +1289,9 @@ animation = &"BluePuyo"
 
 [node name="PuyoDropBG2" type="TextureRect" parent="."]
 clip_children = 2
-offset_left = -82.0
+offset_left = -69.0
 offset_top = 45.0
-offset_right = -7.99997
+offset_right = 5.00002
 offset_bottom = 170.0
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("14_dakh1")
