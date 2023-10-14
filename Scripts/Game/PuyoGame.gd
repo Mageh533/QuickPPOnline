@@ -11,6 +11,7 @@ signal lost
 @export var nuisanceScene : PackedScene
 @export var playerColor : Color
 @export var character : String
+@export var feverMode : bool
 
 var puyosObjectArray = []
 var puyosToPop = []
@@ -34,15 +35,27 @@ var chainPower = 0
 var colourBonus = 0
 var coloursCleared = 0
 var groupBonus = 0
+var feverGauge = 0
 
 func _ready():
 	setPlayerColor()
 	setPlayerCharacter()
-	if currentPlayer == 0:
-		$PuyoDropBG2.visible = false
+	
+	if feverMode:
+		$FeverGauge.show()
 	else:
-		$PuyoDropBG1.visible = false
+		$FeverGauge.hide()
+	
+	if currentPlayer == 0:
+		$PuyoDropBG2.hide()
+		$FeverGauge/FeverBG2.hide()
+		$FeverGauge/FeverOverlay2.hide()
+	else:
+		$PuyoDropBG1.hide()
+		$FeverGauge/FeverBG1.hide()
+		$FeverGauge/FeverOverlay1.hide()
 		$CharacterBackground.flip_h = true
+	
 	$AllClear.visible = false
 
 func _process(delta):
@@ -316,11 +329,19 @@ func calculateNuisance(chainScore, targetPoints):
 		leftOverNuisance += 30
 	if nuisanceQueue > 0:
 		var temp = nuisanceQueue
+		if feverMode:
+			increaseFeverGauge()
 		nuisanceQueue -= nuisanceToSend
 		nuisanceToSend -= temp
 		if nuisanceQueue < 0:
 			nuisanceQueue = 0
 	return nuisanceToSend
+
+func increaseFeverGauge():
+	feverGauge += 1
+	for i in range(feverGauge):
+		get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = playerColor
+		get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = playerColor
 
 func queueNuisance(nuisanceNum):
 	nuisanceQueue += nuisanceNum

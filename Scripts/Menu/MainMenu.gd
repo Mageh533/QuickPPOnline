@@ -1,7 +1,7 @@
 extends Node
 
 @export var SoloGames : Array[PackedScene]
-@export var MainGame : PackedScene
+@export var MainGame : Array[PackedScene]
 
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
@@ -69,16 +69,16 @@ func startSoloGame(Game : int):
 	get_tree().paused = false
 	$PermaUI/TouchScreenControls.show()
 
-func startLocalMpGame():
+func startLocalMpGame(Game : int):
 	setUpLocalGame()
 	await playFadeAnims("fadeIn")
-	start_game()
+	start_game(Game)
 
-func on_restart_pressed():
+func on_restart_pressed(Game : int):
 	await playFadeAnims("fadeIn")
 	randomize()
 	GameManager.currentSeed = randi()
-	restartGame.rpc()
+	restartGame.rpc(Game)
 
 func on_game_end():
 	$PermaUI/ReturnButton.show()
@@ -127,10 +127,10 @@ func _on_start_pressed():
 	start_game.rpc()
 
 @rpc("any_peer", "call_local")
-func start_game():
+func start_game(Game : int):
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
-	currentGame = MainGame.instantiate()
+	currentGame = MainGame[Game].instantiate()
 	currentGame.restartGame.connect(on_restart_pressed)
 	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)
@@ -140,9 +140,9 @@ func start_game():
 	$PermaUI/TouchScreenControls.show()
 
 @rpc("any_peer", "call_local")
-func restartGame():
+func restartGame(Game : int):
 	currentGame.queue_free()
-	start_game()
+	start_game(Game)
 
 func _on_host_pressed():
 	# Start as server.
@@ -418,6 +418,13 @@ func _on_tsu_game_pressed():
 	await localMpMenuHide()
 	await mpOptionsShow()
 
+
+func _on_fever_game_pressed():
+	GameManager.matchInfo.gamemode = "Fever"
+	currentMenu = MenuSets.MULTIPLAYER_LOCAL_PREGAME
+	await localMpMenuHide()
+	await mpOptionsShow()
+
 # ======== Other Menu Buttons ========
 
 func _on_back_button_pressed():
@@ -488,7 +495,10 @@ func _on_solo_start_btn_pressed():
 		startSoloGame(1)
 
 func _on_mp_start_btn_pressed():
-	startLocalMpGame()
+	if GameManager.matchSettings.gamemode == "TSU":
+		startLocalMpGame(0)
+	elif GameManager.matchSettings.gamemode == "Fever":
+		startLocalMpGame(1)
 
 func _on_char_list_item_selected(index):
 	GameManager.soloMatchSettings.character = $UI/SoloOptionsPanel/CharList.get_item_text(index)
@@ -498,3 +508,4 @@ func _on_mp_char_list_item_selected(index):
 
 func _on_mp_char_list_2_item_selected(index):
 	GameManager.matchSettings.p2Char = $UI/MultiplayerOptionsPanel/MPCharList2.get_item_text(index)
+

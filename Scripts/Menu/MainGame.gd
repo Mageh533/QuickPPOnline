@@ -1,6 +1,6 @@
 extends Control
 
-signal restartGame
+signal restartGame(Game)
 signal gameEnd
 
 var matchStarted = false
@@ -55,7 +55,7 @@ func roundEnd():
 	if GameManager.matchInfo.p1Wins >= GameManager.matchSettings.roundsToWin or GameManager.matchInfo.p2Wins >= GameManager.matchSettings.roundsToWin:
 		emit_signal("gameEnd")
 	else:
-		emit_signal("restartGame")
+		emit_signal("restartGame", 0)
 
 func _on_player_1_lost():
 	matchStarted = false

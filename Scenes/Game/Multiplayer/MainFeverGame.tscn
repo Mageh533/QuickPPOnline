@@ -1,21 +1,21 @@
-[gd_scene load_steps=51 format=3 uid="uid://5rjlbqosjvt2"]
+[gd_scene load_steps=51 format=3 uid="uid://cgf7q6l8m4gs3"]
 
-[ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_3biiw"]
-[ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_sflig"]
-[ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="3_qhxpw"]
-[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="4_l7oes"]
-[ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/SFX/lose.wav" id="5_usqnd"]
-[ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/SFX/matchStart.wav" id="6_a231b"]
-[ext_resource type="AudioStream" uid="uid://ccfbkpfv8psaa" path="res://Assets/SFX/attack1.wav" id="7_7nt5n"]
-[ext_resource type="AudioStream" uid="uid://2ap3imurmp4a" path="res://Assets/SFX/attack2.wav" id="8_s1n35"]
-[ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/SFX/attack3.wav" id="9_1pcht"]
-[ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/SFX/attack4.wav" id="10_clq5v"]
-[ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/SFX/win.wav" id="11_vybnl"]
-[ext_resource type="Texture2D" uid="uid://c50bisg8juta5" path="res://Assets/Sprites/matrix/ready.png" id="12_3kp25"]
-[ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/SFX/prepare.wav" id="12_7n662"]
-[ext_resource type="Texture2D" uid="uid://bka4v05qcc3ja" path="res://Assets/Sprites/matrix/go.png" id="13_7mrld"]
-[ext_resource type="Texture2D" uid="uid://c6t18jm83jdcc" path="res://Assets/Sprites/matrix/lose.png" id="13_y8uym"]
-[ext_resource type="Texture2D" uid="uid://cq3cmuy5pjw2s" path="res://Assets/Sprites/matrix/win.png" id="14_rogje"]
+[ext_resource type="Script" path="res://Scripts/Menu/MainGame.gd" id="1_iot8m"]
+[ext_resource type="Texture2D" uid="uid://dgl0otlicwp01" path="res://Assets/Sprites/bg/bg02.png" id="2_qbulx"]
+[ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="3_tvmbb"]
+[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="4_nt0qg"]
+[ext_resource type="AudioStream" uid="uid://jkyjc0upx73i" path="res://Assets/SFX/lose.wav" id="5_d6orh"]
+[ext_resource type="AudioStream" uid="uid://clg3k2aent457" path="res://Assets/SFX/matchStart.wav" id="6_x1hfs"]
+[ext_resource type="AudioStream" uid="uid://ccfbkpfv8psaa" path="res://Assets/SFX/attack1.wav" id="7_ksexo"]
+[ext_resource type="AudioStream" uid="uid://2ap3imurmp4a" path="res://Assets/SFX/attack2.wav" id="8_vyfcb"]
+[ext_resource type="AudioStream" uid="uid://bhse4n8as321j" path="res://Assets/SFX/attack3.wav" id="9_32kpe"]
+[ext_resource type="AudioStream" uid="uid://cb1rbb7hdpayk" path="res://Assets/SFX/attack4.wav" id="10_f28p1"]
+[ext_resource type="AudioStream" uid="uid://c512b8h32oufr" path="res://Assets/SFX/win.wav" id="11_5hy67"]
+[ext_resource type="Texture2D" uid="uid://c50bisg8juta5" path="res://Assets/Sprites/matrix/ready.png" id="12_nec2c"]
+[ext_resource type="Texture2D" uid="uid://bka4v05qcc3ja" path="res://Assets/Sprites/matrix/go.png" id="13_ki0q4"]
+[ext_resource type="AudioStream" uid="uid://dmmht5rtsq11a" path="res://Assets/SFX/prepare.wav" id="14_ml412"]
+[ext_resource type="Texture2D" uid="uid://c6t18jm83jdcc" path="res://Assets/Sprites/matrix/lose.png" id="15_44vtd"]
+[ext_resource type="Texture2D" uid="uid://cq3cmuy5pjw2s" path="res://Assets/Sprites/matrix/win.png" id="16_jpp42"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
@@ -106,31 +106,31 @@ _data = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75rf2"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(855, 512, 119, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2muoe"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(720, 792, 65, 72)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qftdl"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(1008, 787, 67, 71)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tdvsh"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(792, 788, 66, 71)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wh4ww"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(936, 787, 66, 71)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mouuq"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(1080, 798, 67, 61)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_856k7"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(864, 788, 66, 71)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_86ko7"]
@@ -228,7 +228,7 @@ _data = {
 font_color = Color(0.184314, 0.184314, 0.184314, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3fek1"]
-atlas = ExtResource("4_l7oes")
+atlas = ExtResource("4_nt0qg")
 region = Rect2(1293, 68, 71, 68)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lcqxn"]
@@ -305,11 +305,11 @@ tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("12_7n662")
+"stream": ExtResource("14_ml412")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("6_a231b")
+"stream": ExtResource("6_x1hfs")
 }],
 "times": PackedFloat32Array(0.5, 2)
 }
@@ -437,7 +437,7 @@ _data = {
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_y8uym")
+"texture": ExtResource("15_44vtd")
 }],
 "loop": true,
 "name": &"Lose",
@@ -445,7 +445,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("14_rogje")
+"texture": ExtResource("16_jpp42")
 }],
 "loop": true,
 "name": &"Win",
@@ -456,7 +456,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_y8uym")
+"texture": ExtResource("15_44vtd")
 }],
 "loop": true,
 "name": &"Lose",
@@ -464,7 +464,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("14_rogje")
+"texture": ExtResource("16_jpp42")
 }],
 "loop": true,
 "name": &"Win",
@@ -502,7 +502,7 @@ offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_yuydl")
-script = ExtResource("1_3biiw")
+script = ExtResource("1_iot8m")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -511,12 +511,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_sflig")
+texture = ExtResource("2_qbulx")
 expand_mode = 2
 
-[node name="Player1" parent="." instance=ExtResource("3_qhxpw")]
+[node name="Player1" parent="." instance=ExtResource("3_tvmbb")]
 position = Vector2(71, 0)
-feverMode = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
 libraries = {
@@ -562,11 +561,10 @@ scale = Vector2(0.65, 0.65)
 sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
 
-[node name="Player2" parent="." instance=ExtResource("3_qhxpw")]
+[node name="Player2" parent="." instance=ExtResource("3_tvmbb")]
 position = Vector2(733, 2)
 currentPlayer = 1
 playerColor = Color(0.0980392, 0.72549, 0, 1)
-feverMode = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
 libraries = {
@@ -615,27 +613,27 @@ animation = &"small"
 [node name="SoundEffects" type="Node" parent="."]
 
 [node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("5_usqnd")
+stream = ExtResource("5_d6orh")
 
 [node name="Prepare" type="AudioStreamPlayer2D" parent="SoundEffects"]
 
 [node name="Start" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("6_a231b")
+stream = ExtResource("6_x1hfs")
 
 [node name="Attack1" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("7_7nt5n")
+stream = ExtResource("7_ksexo")
 
 [node name="Attack2" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("8_s1n35")
+stream = ExtResource("8_vyfcb")
 
 [node name="Attack3" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("9_1pcht")
+stream = ExtResource("9_32kpe")
 
 [node name="Attack4" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("10_clq5v")
+stream = ExtResource("10_f28p1")
 
 [node name="Win" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = ExtResource("11_vybnl")
+stream = ExtResource("11_5hy67")
 
 [node name="P1Queue" type="Label" parent="."]
 layout_mode = 0
@@ -746,14 +744,14 @@ vertical_alignment = 1
 visible = false
 modulate = Color(1, 1, 1, 0)
 position = Vector2(176, 128)
-texture = ExtResource("12_3kp25")
+texture = ExtResource("12_nec2c")
 
 [node name="Start" type="Sprite2D" parent="UIAnims"]
 visible = false
 modulate = Color(1, 1, 1, 0)
 position = Vector2(181, 245)
 scale = Vector2(0.415, 0.415)
-texture = ExtResource("13_7mrld")
+texture = ExtResource("13_ki0q4")
 
 [node name="Anims" type="AnimationPlayer" parent="UIAnims"]
 libraries = {
