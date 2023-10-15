@@ -22,6 +22,7 @@ var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 
 var scoreToAdd = false
 var defeated = false
+var feverActive = false
 
 var loseTileTime = 0
 var chainCooldown = 0
@@ -86,6 +87,11 @@ func _process(delta):
 	if feverMode:
 		$FeverGauge/FeverBG1/FeverTime.text = str(feverTime)
 		$FeverGauge/FeverBG2/FeverTime.text = str(feverTime)
+		if feverActive:
+			feverGauge -= delta
+			if feverGauge <= 0:
+				feverGauge = 15
+				feverActive = false
 	
 	if !defeated:
 		var movingPuyos = false

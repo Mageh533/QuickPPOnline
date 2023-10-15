@@ -42,7 +42,7 @@ var startingRot
 
 # Set up the puyo group with bunch of stuff 
 func _ready():
-	owner = get_parent().get_parent()
+	owner = get_parent().get_parent() # Two parents behind past the tilemap. Dont hate me please.
 	setUpPuyoGroup()
 
 func _physics_process(delta):
@@ -183,6 +183,7 @@ func playerControls(controlsToUse):
 		if GameManager.generalSettings.hardDrop:
 			pieceLand(true)
 
+# Large puyos cycle colours instead of rotating
 func cycleColours(dir : int):
 	if dir == 0:
 		if currentPuyos[0] == PuyoScenes[0]:
