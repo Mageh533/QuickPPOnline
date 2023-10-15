@@ -132,3 +132,9 @@ func _on_player_1_attacking(attacking):
 
 func _on_player_2_attacking(attacking):
 	player2Attacked = attacking
+
+func _on_player_1_offsetting_garbase():
+	$Player2.feverTime += 1
+
+func _on_player_2_offsetting_garbase():
+	$Player1.feverTime += 1

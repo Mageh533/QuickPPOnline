@@ -4,6 +4,7 @@ signal sendDamage(damage)
 signal sendPoppedPuyos(puyos)
 signal attackingDamage(attack)
 signal attacking(attacking)
+signal offsettingGarbase
 signal lost
 
 @export var currentPlayer : int
@@ -12,6 +13,7 @@ signal lost
 @export var playerColor : Color
 @export var character : String
 @export var feverMode : bool
+@export var dropSets : bool
 
 var puyosObjectArray = []
 var puyosToPop = []
@@ -36,6 +38,7 @@ var colourBonus = 0
 var coloursCleared = 0
 var groupBonus = 0
 var feverGauge = 0
+var feverTime = 15
 
 func _ready():
 	setPlayerColor()
@@ -79,6 +82,10 @@ func _process(delta):
 			score += chainScore
 			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
 			nuisanceProcess()
+	
+	if feverMode:
+		$FeverGauge/FeverBG1/FeverTime.text = str(feverTime)
+		$FeverGauge/FeverBG2/FeverTime.text = str(feverTime)
 	
 	if !defeated:
 		var movingPuyos = false
@@ -330,6 +337,7 @@ func calculateNuisance(chainScore, targetPoints):
 	if nuisanceQueue > 0:
 		var temp = nuisanceQueue
 		if feverMode:
+			emit_signal("offsettingGarbase")
 			increaseFeverGauge()
 		nuisanceQueue -= nuisanceToSend
 		nuisanceToSend -= temp
