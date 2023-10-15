@@ -124,7 +124,7 @@ func setUpPuyoGroup():
 	sendPuyoSignal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 1, 0, currentDropSet.size()))
 	sendPuyoSignal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 2, 0, currentDropSet.size()))
 	fallSpeed = GameManager.generalSettings.speed * 10
-	if get_parent().get_parent().dropSets:
+	if get_parent().get_parent().dropSets: get_parent()
 		currentDropSet = GameManager.setDropset(get_parent().get_parent().character)
 
 func playerControls(controlsToUse):

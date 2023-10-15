@@ -4,7 +4,7 @@ signal sendDamage(damage)
 signal sendPoppedPuyos(puyos)
 signal attackingDamage(attack)
 signal attacking(attacking)
-signal offsettingGarbase
+signal offsettingGarbage
 signal lost
 
 @export var currentPlayer : int
