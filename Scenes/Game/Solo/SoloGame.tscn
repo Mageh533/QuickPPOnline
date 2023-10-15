@@ -363,6 +363,7 @@ expand_mode = 2
 
 [node name="PuyoGame" parent="." instance=ExtResource("2_flro5")]
 position = Vector2(179, 0)
+feverMode = false
 
 [node name="GameAnims" type="AnimationPlayer" parent="PuyoGame"]
 libraries = {

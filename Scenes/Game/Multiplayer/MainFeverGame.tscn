@@ -516,6 +516,7 @@ expand_mode = 2
 
 [node name="Player1" parent="." instance=ExtResource("3_tvmbb")]
 position = Vector2(71, 0)
+dropSets = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1"]
 libraries = {
@@ -565,6 +566,7 @@ animation = &"small"
 position = Vector2(733, 2)
 currentPlayer = 1
 playerColor = Color(0.0980392, 0.72549, 0, 1)
+dropSets = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
 libraries = {
@@ -840,8 +842,10 @@ replication_config = SubResource("SceneReplicationConfig_g7mdf")
 [connection signal="attacking" from="Player1" to="." method="_on_player_1_attacking"]
 [connection signal="attackingDamage" from="Player1" to="." method="_on_player_1_attacking_damage"]
 [connection signal="lost" from="Player1" to="." method="_on_player_1_lost"]
+[connection signal="offsettingGarbase" from="Player1" to="." method="_on_player_1_offsetting_garbase"]
 [connection signal="sendDamage" from="Player1" to="." method="_on_player_1_send_damage"]
 [connection signal="attacking" from="Player2" to="." method="_on_player_2_attacking"]
 [connection signal="attackingDamage" from="Player2" to="." method="_on_player_2_attacking_damage"]
 [connection signal="lost" from="Player2" to="." method="_on_player_2_lost"]
+[connection signal="offsettingGarbase" from="Player2" to="." method="_on_player_2_offsetting_garbase"]
 [connection signal="sendDamage" from="Player2" to="." method="_on_player_2_send_damage"]

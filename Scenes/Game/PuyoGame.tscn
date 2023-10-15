@@ -869,19 +869,19 @@ offset_bottom = -52.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
 position = Vector2(28, 32)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGLarge"
 
-[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
 position = Vector2(65, 79)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGMedium"
 
-[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
 position = Vector2(89, 129)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
@@ -893,19 +893,19 @@ scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGSmall"
 
-[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
 position = Vector2(46, 220)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGSmall"
 
-[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
 position = Vector2(24, 257)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGSmol"
 
-[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
 position = Vector2(21, 298)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
@@ -989,19 +989,19 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(-1, 1)
 
-[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
 position = Vector2(28, 32)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGLarge"
 
-[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
 position = Vector2(65, 79)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGMedium"
 
-[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
 position = Vector2(89, 129)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
@@ -1013,19 +1013,19 @@ scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGSmall"
 
-[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
 position = Vector2(46, 220)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGSmall"
 
-[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
 position = Vector2(24, 257)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")
 animation = &"BGSmol"
 
-[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
 position = Vector2(21, 298)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_0jav3")

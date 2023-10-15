@@ -364,6 +364,8 @@ expand_mode = 2
 [node name="PuyoGame" parent="." instance=ExtResource("3_prqse")]
 position = Vector2(179, 180)
 scale = Vector2(0.665, 0.665)
+feverMode = false
+dropSets = true
 
 [node name="GameAnims" type="AnimationPlayer" parent="PuyoGame"]
 libraries = {

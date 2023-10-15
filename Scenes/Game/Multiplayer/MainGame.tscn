@@ -565,7 +565,7 @@ animation = &"small"
 [node name="Player2" parent="." instance=ExtResource("3_qhxpw")]
 position = Vector2(733, 2)
 currentPlayer = 1
-playerColor = Color(0.0980392, 0.72549, 0, 1)
+playerColor = Color(0.211765, 0.792157, 0, 1)
 feverMode = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player2"]
