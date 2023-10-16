@@ -15,6 +15,8 @@ signal lost
 @export var feverMode : bool
 @export var dropSets : bool
 
+var initModulate
+
 var puyosObjectArray = []
 var puyosToPop = []
 var connectedPuyos = []
@@ -39,7 +41,7 @@ var chainPower = 0
 var colourBonus = 0
 var coloursCleared = 0
 var groupBonus = 0
-var feverGauge = 0
+var feverGauge = 6
 var feverTime = 15
 
 func _ready():
@@ -126,17 +128,17 @@ func _physics_process(delta):
 
 func processFeverMode(delta):
 	if feverMode:
-		$FeverGauge/FeverBG1/FeverTime.text = str(feverTime)
-		$FeverGauge/FeverBG2/FeverTime.text = str(feverTime)
+		$FeverGauge/FeverBG1/FeverTime.text = str(floor(feverTime))
+		$FeverGauge/FeverBG2/FeverTime.text = str(floor(feverTime))
 		if feverActive:
 			$FeverBackground.show()
 			feverTime -= delta
 			if feverTime <= 0:
-				feverGauge = 15
+				feverTime = 15
 				feverActive = false
 				for i in range(feverGauge):
-					get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = Color.WHITE
-					get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = Color.WHITE
+					get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = initModulate
+					get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
 				feverGauge = 0
 		else:
 			$FeverBackground.hide()
@@ -361,7 +363,7 @@ func calculateNuisance(chainScore, targetPoints):
 	if nuisanceQueue > 0:
 		var temp = nuisanceQueue
 		if feverMode:
-			emit_signal("offsettingGarbase")
+			emit_signal("offsettingGarbage")
 			increaseFeverGauge()
 		nuisanceQueue -= nuisanceToSend
 		nuisanceToSend -= temp
@@ -445,6 +447,7 @@ func disablePlayer(disable : bool):
 		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = true
 
 func setPlayerColor():
+	initModulate = $FeverGauge/FeverBG1/Fever1.modulate
 	$TileMap.set_layer_modulate(0, playerColor)
 	$ScorePanel.self_modulate = playerColor
 	$PuyoDropBG1.self_modulate = playerColor
