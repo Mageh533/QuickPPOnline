@@ -809,6 +809,7 @@ offset_right = 312.0
 offset_bottom = 574.0
 
 [node name="FeverBackground" type="TextureRect" parent="."]
+visible = false
 offset_left = 43.0
 offset_top = 44.0
 offset_right = 312.0

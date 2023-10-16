@@ -84,17 +84,7 @@ func _process(delta):
 			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
 			nuisanceProcess()
 	
-	if feverMode:
-		$FeverGauge/FeverBG1/FeverTime.text = str(feverTime)
-		$FeverGauge/FeverBG2/FeverTime.text = str(feverTime)
-		if feverActive:
-			feverGauge -= delta
-			if feverGauge <= 0:
-				feverGauge = 15
-				feverActive = false
-				for i in range(feverGauge):
-					get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = Color.WHITE
-					get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = Color.WHITE
+	processFeverMode(delta)
 	
 	if !defeated:
 		var movingPuyos = false
@@ -131,6 +121,23 @@ func _physics_process(delta):
 			emit_signal("lost")
 			disablePlayer(true)
 
+func processFeverMode(delta):
+	if feverMode:
+		$FeverGauge/FeverBG1/FeverTime.text = str(feverTime)
+		$FeverGauge/FeverBG2/FeverTime.text = str(feverTime)
+		if feverActive:
+			$FeverBackground.show()
+			feverTime -= delta
+			if feverTime <= 0:
+				feverGauge = 15
+				feverActive = false
+				for i in range(feverGauge):
+					get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = Color.WHITE
+					get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = Color.WHITE
+				feverGauge = 0
+		else:
+			$FeverBackground.hide()
+
 # Connects their signals
 func connectPuyosToGame():
 	puyosObjectArray = $TileMap.get_children()
@@ -145,6 +152,10 @@ func connectPuyosToGame():
 			puyoDropPlayer[currentPlayer].sendNextPuyos.connect(_on_next_puyo_sent)
 			puyoDropPlayer[currentPlayer].sendAfterPuyos.connect(_on_after_puyo_sent)
 			puyoDropPlayer[currentPlayer].pieceLanded.connect(_on_piece_landed)
+			puyoDropPlayer[currentPlayer].fastDropBonus.connect(_on_fast_drop_bonus)
+
+func _on_fast_drop_bonus():
+	score += 1
 
 func displayPuyoQueue(bg : String, pSet : String, puyos):
 	# randomize nothing to a random int so they wont match up as actual puyos

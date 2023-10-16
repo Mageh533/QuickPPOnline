@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal sendNextPuyos(puyos)
 signal sendAfterPuyos(puyos)
+signal fastDropBonus
 signal pieceLanded
 
 var tile_size = 58
@@ -49,6 +50,7 @@ func _physics_process(delta):
 	if fastDrop:
 		velocity.y = (fallSpeed + 500) * delta * (get_parent().global_scale.y * 75) * 2
 		move_and_slide()
+		emit_signal("fastDropBonus")
 	else:
 		velocity.y = fallSpeed * delta * (get_parent().global_scale.y * 75) * 2
 		move_and_slide()
