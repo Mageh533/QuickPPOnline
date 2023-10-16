@@ -33,6 +33,7 @@ var leftOverNuisance = 0
 @export var nuisanceQueue = 0
 
 var score = 0
+var dropScore = 0
 var puyosClearedInChain = 0
 var chainPower = 0
 var colourBonus = 0
@@ -81,7 +82,9 @@ func _process(delta):
 			scoreToAdd = false
 			var chainScore = calculateScore()
 			score += chainScore
-			emit_signal("sendDamage", calculateNuisance(chainScore, nuisanceTarget))
+			# Fast drop counts towards nuisance similarly to pp 20th and ppt
+			emit_signal("sendDamage", calculateNuisance(chainScore + dropScore, nuisanceTarget))
+			dropScore = 0
 			nuisanceProcess()
 	
 	processFeverMode(delta)
@@ -155,6 +158,7 @@ func connectPuyosToGame():
 			puyoDropPlayer[currentPlayer].fastDropBonus.connect(_on_fast_drop_bonus)
 
 func _on_fast_drop_bonus():
+	dropScore += 1
 	score += 1
 
 func displayPuyoQueue(bg : String, pSet : String, puyos):
@@ -458,4 +462,6 @@ func setPlayerCharacter(iCharacter : String = ""):
 
 func _on_piece_landed():
 	await get_tree().create_timer(0.2).timeout
+	if !checkForChain():
+		dropScore = 0
 	nuisanceProcess()

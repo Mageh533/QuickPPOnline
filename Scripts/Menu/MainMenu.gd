@@ -1,7 +1,7 @@
 extends Node
 
 @export var SoloGames : Array[PackedScene]
-@export var MainGame : Array[PackedScene]
+@export var MainGames : Array[PackedScene]
 
 var currentGame
 var masterVolumeIndex = AudioServer.get_bus_index("Master")
@@ -130,7 +130,7 @@ func _on_start_pressed():
 func start_game(Game : int):
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
-	currentGame = MainGame[Game].instantiate()
+	currentGame = MainGames[Game].instantiate()
 	currentGame.restartGame.connect(on_restart_pressed)
 	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)

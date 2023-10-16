@@ -1,9 +1,11 @@
-[gd_scene load_steps=67 format=3 uid="uid://cb5vpkwc2mhn3"]
+[gd_scene load_steps=69 format=3 uid="uid://cb5vpkwc2mhn3"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.gd" id="1_bnywg"]
 [ext_resource type="Texture2D" uid="uid://bria0ksci2p0a" path="res://Assets/Sprites/bg/bg01.png" id="1_kgxbb"]
 [ext_resource type="PackedScene" uid="uid://caeh4snxqjfaa" path="res://Scenes/Game/Solo/SoloGame.tscn" id="2_nehnh"]
 [ext_resource type="PackedScene" uid="uid://bgpmhkt3uc611" path="res://Scenes/Game/Solo/TinySoloGame.tscn" id="3_nia5t"]
+[ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/Multiplayer/MainGame.tscn" id="4_pnnny"]
+[ext_resource type="PackedScene" uid="uid://cgf7q6l8m4gs3" path="res://Scenes/Game/Multiplayer/MainFeverGame.tscn" id="5_f88r6"]
 [ext_resource type="Texture2D" uid="uid://c18tyq86m5k1o" path="res://Assets/Sprites/particles/red.png" id="5_iygt7"]
 [ext_resource type="Texture2D" uid="uid://bnh6g8rof482p" path="res://Assets/Sprites/icons/github-mark-white.svg" id="5_l3gvt"]
 [ext_resource type="Texture2D" uid="uid://b1blsckwuoghl" path="res://Assets/Sprites/particles/green.png" id="6_5k27g"]
@@ -264,6 +266,7 @@ outline_color = Color(0, 0, 0, 1)
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_bnywg")
 SoloGames = Array[PackedScene]([ExtResource("2_nehnh"), ExtResource("3_nia5t")])
+MainGames = Array[PackedScene]([ExtResource("4_pnnny"), ExtResource("5_f88r6")])
 
 [node name="UI" type="Control" parent="."]
 process_mode = 3
