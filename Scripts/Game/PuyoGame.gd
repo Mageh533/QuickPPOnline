@@ -14,6 +14,7 @@ signal lost
 @export var character : String
 @export var feverMode : bool
 @export var dropSets : bool
+@export var feverGauge = 0
 
 var initModulate
 
@@ -41,7 +42,6 @@ var chainPower = 0
 var colourBonus = 0
 var coloursCleared = 0
 var groupBonus = 0
-var feverGauge = 0
 var feverTime = 15
 
 func _ready():
@@ -131,6 +131,8 @@ func processFeverMode(delta):
 		$FeverGauge/FeverBG1/FeverTime.text = str(floor(feverTime))
 		$FeverGauge/FeverBG2/FeverTime.text = str(floor(feverTime))
 		if feverActive:
+			$TileMap.set_layer_enabled(1, false)
+			$TileMap.set_layer_enabled(2, true)
 			$FeverBackground.show()
 			feverTime -= delta
 			if feverTime <= 0:
@@ -141,6 +143,8 @@ func processFeverMode(delta):
 					get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
 				feverGauge = 0
 		else:
+			$TileMap.set_layer_enabled(1, true)
+			$TileMap.set_layer_enabled(2, false)
 			$FeverBackground.hide()
 
 # Connects their signals
