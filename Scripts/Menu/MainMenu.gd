@@ -413,14 +413,14 @@ func _on_local_mp_pressed():
 # ======== Multiplayer Local Menu Buttons ========
 
 func _on_tsu_game_pressed():
-	GameManager.matchInfo.gamemode = "TSU"
+	GameManager.matchSettings.gamemode = "TSU"
 	currentMenu = MenuSets.MULTIPLAYER_LOCAL_PREGAME
 	await localMpMenuHide()
 	await mpOptionsShow()
 
 
 func _on_fever_game_pressed():
-	GameManager.matchInfo.gamemode = "Fever"
+	GameManager.matchSettings.gamemode = "Fever"
 	currentMenu = MenuSets.MULTIPLAYER_LOCAL_PREGAME
 	await localMpMenuHide()
 	await mpOptionsShow()
