@@ -92,6 +92,9 @@ func _process(delta):
 			if feverGauge <= 0:
 				feverGauge = 15
 				feverActive = false
+				for i in range(feverGauge):
+					get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = Color.WHITE
+					get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = Color.WHITE
 	
 	if !defeated:
 		var movingPuyos = false
@@ -356,6 +359,9 @@ func increaseFeverGauge():
 	for i in range(feverGauge):
 		get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = playerColor
 		get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = playerColor
+	if feverGauge >= 7:
+		feverGauge = 0
+		feverActive = true
 
 func queueNuisance(nuisanceNum):
 	nuisanceQueue += nuisanceNum
