@@ -41,7 +41,7 @@ var chainPower = 0
 var colourBonus = 0
 var coloursCleared = 0
 var groupBonus = 0
-var feverGauge = 6
+var feverGauge = 0
 var feverTime = 15
 
 func _ready():
