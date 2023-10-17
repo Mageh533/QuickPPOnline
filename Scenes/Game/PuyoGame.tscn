@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=93 format=3 uid="uid://ceg6rbarwcvi8"]
 
 [ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
@@ -72,6 +72,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84oas"]
 
+[sub_resource type="TileMapPattern" id="TileMapPattern_f4kas"]
+tile_data = PackedInt32Array(0, 1, 327680, 65536, 1, 196608, 131072, 1, 196608, 196608, 1, 196608, 1, 1, 393216, 65537, 1, 327680, 131073, 1, 327680, 196609, 1, 327680, 2, 1, 262144, 65538, 1, 393216, 131074, 1, 393216, 196610, 1, 393216, 3, 1, 131072, 65539, 1, 262144, 131075, 1, 262144, 196611, 1, 262144, 65540, 1, 131072, 131076, 1, 131072, 196612, 1, 131072)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3prtr"]
 texture = ExtResource("1_3by7s")
 texture_region_size = Vector2i(58, 59)
@@ -141,6 +144,7 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_3prtr")
 sources/1 = SubResource("TileSetScenesCollectionSource_ip3n8")
+pattern_0 = SubResource("TileMapPattern_f4kas")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_no4om"]
 atlas = ExtResource("13_5h8ft")
@@ -843,12 +847,12 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "FeverPuyos"
-layer_2/enabled = false
+layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 0
-layer_2/tile_data = PackedInt32Array(65541, 1, 196608)
+layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Player"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
