@@ -89,7 +89,8 @@ func _process(delta):
 			dropScore = 0
 			nuisanceProcess()
 	
-	processFeverMode(delta)
+	if feverMode:
+		processFeverMode(delta)
 	
 	if !defeated:
 		var movingPuyos = false
@@ -127,25 +128,24 @@ func _physics_process(delta):
 			disablePlayer(true)
 
 func processFeverMode(delta):
-	if feverMode:
-		$FeverGauge/FeverBG1/FeverTime.text = str(floor(feverTime))
-		$FeverGauge/FeverBG2/FeverTime.text = str(floor(feverTime))
-		if feverActive:
-			$TileMap.set_layer_enabled(1, false)
-			$TileMap.set_layer_enabled(2, true)
-			$FeverBackground.show()
-			feverTime -= delta
-			if feverTime <= 0:
-				feverTime = 15
-				feverActive = false
-				for i in range(feverGauge):
-					get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = initModulate
-					get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
-				feverGauge = 0
-		else:
-			$TileMap.set_layer_enabled(1, true)
-			$TileMap.set_layer_enabled(2, false)
-			$FeverBackground.hide()
+	$FeverGauge/FeverBG1/FeverTime.text = str(floor(feverTime))
+	$FeverGauge/FeverBG2/FeverTime.text = str(floor(feverTime))
+	if feverActive:
+		$TileMap.set_layer_enabled(1, false)
+		$TileMap.set_layer_enabled(2, true)
+		$FeverBackground.show()
+		feverTime -= delta
+		if feverTime <= 0:
+			feverTime = 15
+			feverActive = false
+			for i in range(feverGauge):
+				get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = initModulate
+				get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
+			feverGauge = 0
+	else:
+		$TileMap.set_layer_enabled(1, true)
+		$TileMap.set_layer_enabled(2, false)
+		$FeverBackground.hide()
 
 # Connects their signals
 func connectPuyosToGame():
