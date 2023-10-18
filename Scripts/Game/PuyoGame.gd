@@ -22,10 +22,12 @@ var puyosObjectArray = []
 var puyosToPop = []
 var connectedPuyos = []
 var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
+var puyoStoreArray = []
 
 var scoreToAdd = false
 var defeated = false
 var feverActive = false
+var puyoBoardStored = false
 
 var loseTileTime = 0
 var chainCooldown = 0
@@ -133,9 +135,23 @@ func processFeverMode(delta):
 	if feverActive:
 		$FeverBackground.show()
 		feverTime -= delta
+		if !puyoBoardStored:
+			puyoStoreArray.clear()
+			for puyo in $TileMap.get_children():
+				if puyo is StaticBody2D:
+					puyoStoreArray.append(puyo.duplicate())
+					puyo.queue_free()
+			puyoBoardStored = true
 		if feverTime <= 0:
 			feverTime = 15
 			feverActive = false
+			if puyoBoardStored:
+				for puyo in $TileMap.get_children():
+					if puyo is StaticBody2D:
+						puyo.queue_free()
+				for puyo in puyoStoreArray:
+					$TileMap.add_child(puyo)
+				puyoBoardStored = false
 			for i in range(feverGauge):
 				get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = initModulate
 				get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
