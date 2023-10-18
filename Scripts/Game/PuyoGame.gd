@@ -139,18 +139,20 @@ func processFeverMode(delta):
 			puyoStoreArray.clear()
 			for puyo in $TileMap.get_children():
 				if puyo is StaticBody2D:
-					puyoStoreArray.append(puyo.duplicate())
-					puyo.queue_free()
+					puyoStoreArray.append(puyo)
+					puyo.process_mode = Node.PROCESS_MODE_DISABLED
+					puyo.hide()
 			puyoBoardStored = true
 		if feverTime <= 0:
 			feverTime = 15
 			feverActive = false
 			if puyoBoardStored:
 				for puyo in $TileMap.get_children():
-					if puyo is StaticBody2D:
+					if puyo is StaticBody2D and !puyo in puyoStoreArray:
 						puyo.queue_free()
 				for puyo in puyoStoreArray:
-					$TileMap.add_child(puyo)
+					puyo.process_mode = Node.PROCESS_MODE_INHERIT
+					puyo.show()
 				puyoBoardStored = false
 			for i in range(feverGauge):
 				get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = initModulate
