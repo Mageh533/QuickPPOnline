@@ -131,8 +131,6 @@ func processFeverMode(delta):
 	$FeverGauge/FeverBG1/FeverTime.text = str(floor(feverTime))
 	$FeverGauge/FeverBG2/FeverTime.text = str(floor(feverTime))
 	if feverActive:
-		$TileMap.set_layer_enabled(1, false)
-		$TileMap.set_layer_enabled(2, true)
 		$FeverBackground.show()
 		feverTime -= delta
 		if feverTime <= 0:
@@ -143,8 +141,6 @@ func processFeverMode(delta):
 				get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
 			feverGauge = 0
 	else:
-		$TileMap.set_layer_enabled(1, true)
-		$TileMap.set_layer_enabled(2, false)
 		$FeverBackground.hide()
 
 # Connects their signals
