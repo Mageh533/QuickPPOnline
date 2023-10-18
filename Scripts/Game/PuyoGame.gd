@@ -90,6 +90,10 @@ func _process(delta):
 			emit_signal("sendDamage", calculateNuisance(chainScore + dropScore, nuisanceTarget))
 			dropScore = 0
 			nuisanceProcess()
+			# Clear fever board if the player did a chain of 2 or more. E.g., they didnt do the fever chain properly
+			if currentChain > 1 and feverActive:
+				clearFeverBoard()
+				sendNextFeverChain()
 	
 	if feverMode:
 		processFeverMode(delta)
@@ -134,7 +138,8 @@ func processFeverMode(delta):
 	$FeverGauge/FeverBG2/FeverTime.text = str(floor(feverTime))
 	if feverActive:
 		$FeverBackground.show()
-		feverTime -= delta
+		if currentChain == 0:
+			feverTime -= delta
 		if !puyoBoardStored:
 			get_tree().get_nodes_in_group("Player")[currentPlayer].resetPlayer()
 			puyoStoreArray.clear()
@@ -143,15 +148,14 @@ func processFeverMode(delta):
 					puyoStoreArray.append(puyo)
 					puyo.process_mode = Node.PROCESS_MODE_DISABLED
 					puyo.hide()
+			sendNextFeverChain()
 			puyoBoardStored = true
 		if feverTime <= 0:
 			feverTime = 15
 			feverActive = false
 			if puyoBoardStored:
 				get_tree().get_nodes_in_group("Player")[currentPlayer].resetPlayer()
-				for puyo in $TileMap.get_children():
-					if puyo is StaticBody2D and !puyo in puyoStoreArray:
-						puyo.queue_free()
+				clearFeverBoard()
 				for puyo in puyoStoreArray:
 					puyo.process_mode = Node.PROCESS_MODE_INHERIT
 					puyo.show()
@@ -162,6 +166,16 @@ func processFeverMode(delta):
 			feverGauge = 0
 	else:
 		$FeverBackground.hide()
+
+func sendNextFeverChain():
+	var tileSet = $TileMap.tile_set
+	var randomChain = tileSet.get_pattern(randi() % tileSet.get_patterns_count())
+	$TileMap.set_pattern(1, Vector2i(0, -10), randomChain)
+
+func clearFeverBoard():
+	for puyo in $TileMap.get_children():
+		if puyo is StaticBody2D and !puyo in puyoStoreArray:
+			puyo.queue_free()
 
 # Connects their signals
 func connectPuyosToGame():
