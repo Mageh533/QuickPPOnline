@@ -90,10 +90,6 @@ func _process(delta):
 			emit_signal("sendDamage", calculateNuisance(chainScore + dropScore, nuisanceTarget))
 			dropScore = 0
 			nuisanceProcess()
-			# Clear fever board if the player did a chain of 2 or more. E.g., they didnt do the fever chain properly
-			if currentChain > 1 and feverActive:
-				clearFeverBoard()
-				sendNextFeverChain()
 	
 	if feverMode:
 		processFeverMode(delta)
@@ -112,6 +108,10 @@ func _process(delta):
 					checkChainTime = 0
 					startChain()
 		else:
+			# Clear fever board if the player did a chain of 2 or more. E.g., they didnt do the fever chain properly
+			if currentChain > 1 and feverActive:
+				clearFeverBoard()
+				sendNextFeverChain()
 			currentChain = 0
 			emit_signal("attacking", false)
 			disablePlayer(false)
