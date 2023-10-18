@@ -136,6 +136,7 @@ func processFeverMode(delta):
 		$FeverBackground.show()
 		feverTime -= delta
 		if !puyoBoardStored:
+			get_tree().get_nodes_in_group("Player")[currentPlayer].resetPlayer()
 			puyoStoreArray.clear()
 			for puyo in $TileMap.get_children():
 				if puyo is StaticBody2D:
@@ -147,6 +148,7 @@ func processFeverMode(delta):
 			feverTime = 15
 			feverActive = false
 			if puyoBoardStored:
+				get_tree().get_nodes_in_group("Player")[currentPlayer].resetPlayer()
 				for puyo in $TileMap.get_children():
 					if puyo is StaticBody2D and !puyo in puyoStoreArray:
 						puyo.queue_free()
