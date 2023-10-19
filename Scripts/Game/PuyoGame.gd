@@ -24,11 +24,16 @@ var connectedPuyos = []
 var colours = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE"]
 var puyoStoreArray = []
 
+var puyoSpriteBG1InitPos = []
+var puyoSpriteBG2InitPos = []
+
 var scoreToAdd = false
 var defeated = false
 var feverActive = false
 var puyoBoardStored = false
 
+var firstPuyoSet = 0
+var puyoQueueAfterPos = 3
 var loseTileTime = 0
 var chainCooldown = 0
 var nuisanceCooldown = 0
@@ -49,6 +54,14 @@ var feverTime = 15
 func _ready():
 	setPlayerColor()
 	setPlayerCharacter()
+	puyoSpriteBG1InitPos.append($PuyoDropBG1/SpriteSet1.position + (Vector2.UP * 100))
+	puyoSpriteBG1InitPos.append($PuyoDropBG1/SpriteSet1.position)
+	puyoSpriteBG1InitPos.append($PuyoDropBG1/SpriteSet2.position)
+	puyoSpriteBG1InitPos.append($PuyoDropBG1/SpriteSet3.position)
+	puyoSpriteBG2InitPos.append($PuyoDropBG2/SpriteSet1.position + (Vector2.UP * 100))
+	puyoSpriteBG2InitPos.append($PuyoDropBG2/SpriteSet1.position)
+	puyoSpriteBG2InitPos.append($PuyoDropBG2/SpriteSet2.position)
+	puyoSpriteBG2InitPos.append($PuyoDropBG2/SpriteSet3.position)
 	
 	if feverMode:
 		$FeverGauge.show()
@@ -288,12 +301,33 @@ func displayPuyoQueue(bg : String, pSet : String, puyos):
 		get_node("PuyoDrop" + bg +  "/SpriteSet" + pSet +"/Puyo2").play(puyosI[1])
 
 func _on_next_puyo_sent(puyos):
-	displayPuyoQueue("BG1", "1", puyos)
-	displayPuyoQueue("BG2", "1", puyos)
+	if firstPuyoSet < 2:
+		displayPuyoQueue("BG1", "1", puyos)
+		displayPuyoQueue("BG2", "1", puyos)
 
 func _on_after_puyo_sent(puyos):
-	displayPuyoQueue("BG1", "2", puyos)
-	displayPuyoQueue("BG2", "2", puyos)
+	if firstPuyoSet < 2:
+		displayPuyoQueue("BG1", "2", puyos)
+		displayPuyoQueue("BG2", "2", puyos)
+		firstPuyoSet += 1
+	else:
+		displayPuyoQueue("BG1", str(puyoQueueAfterPos), puyos)
+		displayPuyoQueue("BG2", str(puyoQueueAfterPos), puyos)
+		cyclePuyoQueue("BG1")
+		await cyclePuyoQueue("BG2")
+		puyoQueueAfterPos += 1
+		if puyoQueueAfterPos > 3:
+			puyoQueueAfterPos = 1
+
+func cyclePuyoQueue(BG : String):
+	var topTween = get_tree().create_tween()
+	topTween.tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))), "position", puyoSpriteBG1InitPos[0], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "position", puyoSpriteBG1InitPos[1], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "scale", Vector2(1, 1), 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(puyoQueueAfterPos)), "position", puyoSpriteBG1InitPos[2], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(puyoQueueAfterPos)), "scale", Vector2(0.75, 0.75), 0.3)
+	await topTween.finished
+	get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))).position = puyoSpriteBG1InitPos[3]
 
 func checkForChain():
 	var canChain = false
