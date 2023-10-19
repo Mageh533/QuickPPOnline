@@ -55,7 +55,10 @@ func roundEnd():
 	if GameManager.matchInfo.p1Wins >= GameManager.matchSettings.roundsToWin or GameManager.matchInfo.p2Wins >= GameManager.matchSettings.roundsToWin:
 		emit_signal("gameEnd")
 	else:
-		emit_signal("restartGame", 0)
+		if GameManager.matchSettings.gamemode == "TSU":
+			emit_signal("restartGame", 0)
+		elif GameManager.matchSettings.gamemode == "Fever":
+			emit_signal("restartGame", 1)
 
 func _on_player_1_lost():
 	matchStarted = false
