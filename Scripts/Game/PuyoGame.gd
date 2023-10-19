@@ -313,21 +313,28 @@ func _on_after_puyo_sent(puyos):
 	else:
 		displayPuyoQueue("BG1", str(puyoQueueAfterPos), puyos)
 		displayPuyoQueue("BG2", str(puyoQueueAfterPos), puyos)
-		cyclePuyoQueue("BG1")
-		await cyclePuyoQueue("BG2")
+		await cyclePuyoQueue()
 		puyoQueueAfterPos += 1
 		if puyoQueueAfterPos > 3:
 			puyoQueueAfterPos = 1
 
-func cyclePuyoQueue(BG : String):
+func cyclePuyoQueue():
 	var topTween = get_tree().create_tween()
-	topTween.tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))), "position", puyoSpriteBG1InitPos[0], 0.3)
-	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "position", puyoSpriteBG1InitPos[1], 0.3)
-	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "scale", Vector2(1, 1), 0.3)
-	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(puyoQueueAfterPos)), "position", puyoSpriteBG1InitPos[2], 0.3)
-	get_tree().create_tween().tween_property(get_node("PuyoDrop" + BG + "/SpriteSet" + str(puyoQueueAfterPos)), "scale", Vector2(0.75, 0.75), 0.3)
+	var topTween2 = get_tree().create_tween()
+	topTween.tween_property(get_node("PuyoDropBG1/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))), "position", puyoSpriteBG1InitPos[0], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG1/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "position", puyoSpriteBG1InitPos[1], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG1/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "scale", Vector2(1, 1), 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG1/SpriteSet" + str(puyoQueueAfterPos)), "position", puyoSpriteBG1InitPos[2], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG1/SpriteSet" + str(puyoQueueAfterPos)), "scale", Vector2(0.75, 0.75), 0.3)
+	topTween2.tween_property(get_node("PuyoDropBG2/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))), "position", puyoSpriteBG2InitPos[0], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG2/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "position", puyoSpriteBG2InitPos[1], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG2/SpriteSet" + str(wrapi(puyoQueueAfterPos - 1, 1, 4))), "scale", Vector2(1, 1), 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG2/SpriteSet" + str(puyoQueueAfterPos)), "position", puyoSpriteBG2InitPos[2], 0.3)
+	get_tree().create_tween().tween_property(get_node("PuyoDropBG2/SpriteSet" + str(puyoQueueAfterPos)), "scale", Vector2(0.75, 0.75), 0.3)
 	await topTween.finished
-	get_node("PuyoDrop" + BG + "/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))).position = puyoSpriteBG1InitPos[3]
+	get_node("PuyoDropBG1/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))).position = puyoSpriteBG1InitPos[3]
+	await topTween2.finished
+	get_node("PuyoDropBG2/SpriteSet" + str(wrapi(puyoQueueAfterPos - 2, 1, 4))).position = puyoSpriteBG2InitPos[3]
 
 func checkForChain():
 	var canChain = false
