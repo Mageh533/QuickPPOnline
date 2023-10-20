@@ -107,7 +107,7 @@ func _process(delta):
 # Massive set up, too much going on here
 func setUpPuyoGroup():
 	rng.seed = GameManager.currentSeed
-	startingPos = position
+	startingPos = position + (Vector2.DOWN * (tile_size * get_parent().global_scale.x))
 	startingRot = rotation
 	if owner.dropSets:
 		currentDropSet = GameManager.setDropset(owner.character)
