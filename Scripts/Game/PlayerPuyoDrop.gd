@@ -40,19 +40,21 @@ var interpolate = false
 
 var startingPos
 var startingRot
+var tileMap
 
 # Set up the puyo group with bunch of stuff 
 func _ready():
 	owner = get_parent().get_parent() # Two parents behind past the tilemap. Dont hate me please.
+	tileMap = get_parent()
 	setUpPuyoGroup()
 
 func _physics_process(delta):
 	if fastDrop:
-		velocity.y = (fallSpeed + 350) * delta * (get_parent().global_scale.y * 75) * 2
+		velocity.y = (fallSpeed + 350) * delta * (tileMap.global_scale.y * 75) * 2
 		move_and_slide()
 		emit_signal("fastDropBonus")
 	else:
-		velocity.y = fallSpeed * delta * (get_parent().global_scale.y * 75) * 2
+		velocity.y = fallSpeed * delta * (tileMap.global_scale.y * 75) * 2
 		move_and_slide()
 	
 	$SpritesTransforms.global_position.y = global_position.y
@@ -107,7 +109,7 @@ func _process(delta):
 # Massive set up, too much going on here
 func setUpPuyoGroup():
 	rng.seed = GameManager.currentSeed
-	startingPos = position + (Vector2.DOWN * (tile_size * get_parent().global_scale.x))
+	startingPos = position + (Vector2.DOWN * (tile_size * tileMap.global_scale.x))
 	startingRot = rotation
 	if owner.dropSets:
 		currentDropSet = GameManager.setDropset(owner.character)
@@ -139,7 +141,7 @@ func playerControls(controlsToUse):
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !rightWallCollide and !ceilingCollide:
 				$SoundEffects/PieceMove.play()
-				move_and_collide(Vector2.RIGHT * (tile_size * get_parent().global_scale.x))
+				move_and_collide(Vector2.RIGHT * (tile_size * tileMap.global_scale.x))
 			moveCooldown = false
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_left"):
 		if !moveCooldown:
@@ -147,7 +149,7 @@ func playerControls(controlsToUse):
 			await get_tree().create_timer(moveCooldownTime).timeout
 			if !leftWallCollide and !ceilingCollide:
 				$SoundEffects/PieceMove.play()
-				move_and_collide(Vector2.LEFT * (tile_size * get_parent().global_scale.x))
+				move_and_collide(Vector2.LEFT * (tile_size * tileMap.global_scale.x))
 			moveCooldown = false
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_down") or !Input.is_action_pressed("p" + str(currentPlayer) + "_down"):
 		fastDrop = false
