@@ -109,6 +109,8 @@ func setUpPuyoGroup():
 	rng.seed = GameManager.currentSeed
 	startingPos = position
 	startingRot = rotation
+	if owner.dropSets:
+		currentDropSet = GameManager.setDropset(owner.character)
 	if currentDropSet.is_empty():
 		currentPuyos = getNewPuyos()
 		nextPuyos = getNewPuyos()
@@ -124,11 +126,11 @@ func setUpPuyoGroup():
 	await get_tree().create_timer(0.01).timeout # Wait for the signals to be connected
 	$SpritesTransforms.global_position = global_position
 	interpolate = true
-	sendPuyoSignal("sendNextPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 1, 0, currentDropSet.size()))
-	sendPuyoSignal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 2, 0, currentDropSet.size()))
 	fallSpeed = GameManager.generalSettings.speed * 10
-	if owner.dropSets:
-		currentDropSet = GameManager.setDropset(owner.character)
+	sendPuyoSignal("sendNextPuyos", [currentPuyos[0]._bundled.get("names")[0], currentPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 1, 0, currentDropSet.size()))
+	sendPuyoSignal("sendAfterPuyos", [nextPuyos[0]._bundled.get("names")[0], nextPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 2, 0, currentDropSet.size()))
+	await get_tree().create_timer(0.1).timeout
+	sendPuyoSignal("sendAfterPuyos", [afterPuyos[0]._bundled.get("names")[0], afterPuyos[1]._bundled.get("names")[0]], wrapi(dropsetNum + 2, 0, currentDropSet.size()))
 
 func playerControls(controlsToUse):
 	if Input.is_action_pressed("p" + str(controlsToUse) + "_right"):

@@ -613,6 +613,7 @@ sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
 
 [node name="SoundEffects" type="Node" parent="."]
+process_mode = 3
 
 [node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource("5_usqnd")
@@ -638,6 +639,7 @@ stream = ExtResource("10_clq5v")
 stream = ExtResource("11_vybnl")
 
 [node name="P1Queue" type="Label" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 64.0
 offset_top = 46.0
@@ -652,6 +654,7 @@ scale = Vector2(0.445, 0.445)
 sprite_frames = SubResource("SpriteFrames_lcqxn")
 
 [node name="P2Queue" type="Label" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 1060.0
 offset_top = 47.0
@@ -667,6 +670,7 @@ scale = Vector2(0.445, 0.445)
 sprite_frames = SubResource("SpriteFrames_lcqxn")
 
 [node name="MatchTimer" type="Label" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 481.0
 offset_top = 10.0
@@ -676,6 +680,7 @@ text = "00:00"
 label_settings = SubResource("LabelSettings_f6vhb")
 
 [node name="UIAnims" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5

@@ -877,7 +877,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(-65534, 1, 65536)
+layer_1/tile_data = PackedInt32Array(-131070, 1, 65536)
 
 [node name="FeverGauge" type="Control" parent="."]
 layout_mode = 3
@@ -1138,7 +1138,6 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("12_70b0l")
 
 [node name="SpriteSet1" type="Node2D" parent="PuyoDropBG1"]
-scale = Vector2(1, 1)
 
 [node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
 position = Vector2(25.6, 40.8)
@@ -1408,7 +1407,6 @@ texture = ExtResource("14_dakh1")
 
 [node name="SpriteSet1" type="Node2D" parent="PuyoDropBG2"]
 position = Vector2(16.8, -4.8)
-scale = Vector2(1, 1)
 
 [node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
 position = Vector2(25.6, 40.8)

@@ -17,12 +17,10 @@ func _ready():
 	$Player1.setPlayerCharacter(GameManager.matchSettings.p1Char)
 	$Player2.setPlayerCharacter(GameManager.matchSettings.p2Char)
 	await get_tree().create_timer(0.05).timeout
-	$Player1.process_mode = Node.PROCESS_MODE_DISABLED
-	$Player2.process_mode = Node.PROCESS_MODE_DISABLED
+	get_tree().paused = true
 	$UIAnims/Anims.play("matchStart")
 	await $UIAnims/Anims.animation_finished
-	$Player1.process_mode = Node.PROCESS_MODE_INHERIT
-	$Player2.process_mode = Node.PROCESS_MODE_INHERIT
+	get_tree().paused = false
 	matchStarted = true
 	GameManager.matchInfo.matchTime = 0
 

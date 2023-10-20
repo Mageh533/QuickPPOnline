@@ -15,10 +15,10 @@ func _ready():
 	$GameModePanel/ModeContainer/Mode.text = GameManager.soloMatchSettings.gamemode
 	clearNuisanceQueue()
 	await get_tree().create_timer(0.05).timeout
-	$PuyoGame.process_mode = Node.PROCESS_MODE_DISABLED
+	get_tree().paused = true
 	$UIAnims/AnimationPlayer.play("Start")
 	await $UIAnims/AnimationPlayer.animation_finished
-	$PuyoGame.process_mode = Node.PROCESS_MODE_INHERIT
+	get_tree().paused = false
 	matchStarted = true
 	GameManager.soloInfo.active = true
 	GameManager.soloInfo.matchTime = GameManager.soloMatchSettings.timeLimit

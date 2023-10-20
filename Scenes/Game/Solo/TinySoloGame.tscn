@@ -373,6 +373,7 @@ libraries = {
 }
 
 [node name="GameModePanel" type="Panel" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 600.0
 offset_top = 74.0
@@ -396,6 +397,7 @@ layout_mode = 2
 text = "Endless"
 
 [node name="InfoPanel" type="Panel" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 599.0
 offset_top = 147.0
@@ -448,6 +450,7 @@ text = "Time:"
 layout_mode = 2
 
 [node name="GarbageSentPanel" type="Panel" parent="."]
+process_mode = 3
 layout_mode = 0
 offset_left = 512.0
 offset_top = 561.0
@@ -506,6 +509,7 @@ sprite_frames = SubResource("SpriteFrames_unfs1")
 animation = &"small"
 
 [node name="UIAnims" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -536,6 +540,7 @@ libraries = {
 }
 
 [node name="SoundEffects" type="Node" parent="."]
+process_mode = 3
 
 [node name="Lose" type="AudioStreamPlayer2D" parent="SoundEffects"]
 
@@ -569,6 +574,7 @@ stream = ExtResource("14_223le")
 stream = ExtResource("15_a3toa")
 
 [node name="TimeOutFX" type="Timer" parent="."]
+process_mode = 3
 one_shot = true
 
 [connection signal="lost" from="PuyoGame" to="." method="_on_puyo_game_lost"]
