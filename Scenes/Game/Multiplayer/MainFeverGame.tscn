@@ -515,6 +515,7 @@ texture = ExtResource("2_qbulx")
 expand_mode = 2
 
 [node name="Player1" parent="." instance=ExtResource("3_tvmbb")]
+process_mode = 1
 position = Vector2(71, 0)
 dropSets = true
 
@@ -563,6 +564,7 @@ sprite_frames = SubResource("SpriteFrames_86ko7")
 animation = &"small"
 
 [node name="Player2" parent="." instance=ExtResource("3_tvmbb")]
+process_mode = 1
 position = Vector2(733, 2)
 currentPlayer = 1
 playerColor = Color(0.0980392, 0.72549, 0, 1)

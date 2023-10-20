@@ -342,6 +342,7 @@ _data = {
 }
 
 [node name="SoloGame" type="Control"]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -362,6 +363,7 @@ texture = ExtResource("1_pr7mx")
 expand_mode = 2
 
 [node name="PuyoGame" parent="." instance=ExtResource("2_flro5")]
+process_mode = 1
 position = Vector2(179, 0)
 feverMode = false
 

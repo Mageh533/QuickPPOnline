@@ -23,7 +23,6 @@ const PORT = 4433
 
 func _ready():
 	$PermaUI/PauseButton.hide()
-	get_tree().paused = false
 	menuStartAnims()
 	$PermaUI/PausedPanel.hide()
 	$PermaUI/TouchScreenControls.hide()
@@ -66,7 +65,6 @@ func startSoloGame(Game : int):
 	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)
 	await playFadeAnims("fadeOut")
-	get_tree().paused = false
 	$PermaUI/TouchScreenControls.show()
 
 func startLocalMpGame(Game : int):
@@ -135,7 +133,6 @@ func start_game(Game : int):
 	currentGame.gameEnd.connect(on_game_end)
 	$GameContainer.add_child(currentGame)
 	await playFadeAnims("fadeOut")
-	get_tree().paused = false
 	print("Second player is: " + str(GameManager.secondPlayerId))
 	$PermaUI/TouchScreenControls.show()
 
