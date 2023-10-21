@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal setUpPlayer(player)
 signal sendNextPuyos(puyos)
 signal sendAfterPuyos(puyos)
 signal fastDropBonus
@@ -44,7 +45,7 @@ var tileMap
 
 # Set up the puyo group with bunch of stuff 
 func _ready():
-	owner = get_parent().get_parent() # Two parents behind past the tilemap. Dont hate me please.
+	owner = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent() # What the hell do i do here
 	tileMap = get_parent()
 	setUpPuyoGroup()
 

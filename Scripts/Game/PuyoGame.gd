@@ -76,7 +76,7 @@ func _ready():
 		$PuyoDropBG1.hide()
 		$FeverGauge/FeverBG1.hide()
 		$FeverGauge/FeverOverlay1.hide()
-		$CharacterBackground.flip_h = true
+		$GamePanel/GameContainer/GameView/PuyoGameBoard/CharacterBackground.flip_h = true
 	
 	$AllClear.visible = false
 
@@ -133,7 +133,7 @@ func _process(delta):
 func _physics_process(delta):
 	if !defeated:
 		var loseTileTouch = false
-		for losetileSprite in $LoseTiles.get_children():
+		for losetileSprite in $GamePanel/GameContainer/GameView/PuyoGameBoard/LoseTiles.get_children():
 			if losetileSprite.get_child(0).is_colliding():
 				loseTileTime += delta
 				loseTileTouch = true
@@ -150,7 +150,7 @@ func processFeverMode(delta):
 	$FeverGauge/FeverBG1/FeverTime.text = str(floor(feverTime))
 	$FeverGauge/FeverBG2/FeverTime.text = str(floor(feverTime))
 	if feverActive:
-		$FeverBackground.show()
+		$GamePanel/GameContainer/GameView/PuyoGameBoard/FeverBackground.show()
 		if currentChain == 0:
 			feverTime -= delta
 		if !puyoBoardStored:
@@ -178,7 +178,7 @@ func processFeverMode(delta):
 				get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
 			feverGauge = 0
 	else:
-		$FeverBackground.hide()
+		$GamePanel/GameContainer/GameView/PuyoGameBoard/FeverBackground.hide()
 
 func sendNextFeverChain():
 	var tileSet = $TileMap.tile_set
@@ -192,7 +192,7 @@ func clearFeverBoard():
 
 # Connects their signals
 func connectPuyosToGame():
-	puyosObjectArray = $TileMap.get_children()
+	puyosObjectArray = $GamePanel/GameContainer/GameView/PuyoGameBoard/TileMap.get_children()
 	var puyoDropPlayer = get_tree().get_nodes_in_group("Player")
 	for puyo in puyosObjectArray:
 		if !puyo.active and !puyo.type == "Player" and !puyo.type == "Nuisance":
@@ -461,13 +461,13 @@ func queueNuisance(nuisanceNum):
 # Function to get all spawn points in the case grid is bigger or smaller e.g, tiny puyo and mega puyo gamemodes
 func getNuisanceSpawnPoints():
 	var freeSpawnPoints = []
-	for nuisanceSpawn in $NuisanceSpawns.get_children():
+	for nuisanceSpawn in $GamePanel/GameContainer/GameView/PuyoGameBoard/NuisanceSpawns.get_children():
 		freeSpawnPoints.append(nuisanceSpawn.name.to_int())
 	return freeSpawnPoints
 
 # Nuisance spawns in rows and stack up
 func spawnNuisance(nuisanceNum):
-	var nuisanceSpawnPoints = $NuisanceSpawns.get_children()
+	var nuisanceSpawnPoints = $GamePanel/GameContainer/GameView/PuyoGameBoard/NuisanceSpawns.get_children()
 	var tile_size = 58
 	var stack = 0
 	var freeSpawnPoints = getNuisanceSpawnPoints()
@@ -490,7 +490,7 @@ func spawnNuisance(nuisanceNum):
 
 func checkAllClear():
 	var allClear = true
-	for puyo in $TileMap.get_children():
+	for puyo in $GamePanel/GameContainer/GameView/PuyoGameBoard/TileMap.get_children():
 		if puyo.type != "Player" and !puyo.popped:
 			allClear = false
 	return allClear
@@ -523,7 +523,7 @@ func disablePlayer(disable : bool):
 
 func setPlayerColor():
 	initModulate = $FeverGauge/FeverBG1/Fever1.modulate
-	$TileMap.set_layer_modulate(0, playerColor)
+	$GamePanel.self_modulate = playerColor
 	$ScorePanel.self_modulate = playerColor
 	$PuyoDropBG1.self_modulate = playerColor
 	$PuyoDropBG2.self_modulate = playerColor
@@ -531,12 +531,12 @@ func setPlayerColor():
 func setPlayerCharacter(iCharacter : String = ""):
 	if !iCharacter.is_empty():
 		character = iCharacter
-		$CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
-		$CharacterBackground.show()
+		$GamePanel/GameContainer/GameView/PuyoGameBoard/CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
+		$GamePanel/GameContainer/GameView/PuyoGameBoard/CharacterBackground.show()
 	else:
 		if !character.is_empty():
-			$CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
-			$CharacterBackground.show()
+			$GamePanel/GameContainer/GameView/PuyoGameBoard/CharacterBackground.texture = load("res://Assets/Characters/" + character + "/field.png")
+			$GamePanel/GameContainer/GameView/PuyoGameBoard/CharacterBackground.show()
 
 func _on_piece_landed():
 	await get_tree().create_timer(0.2).timeout

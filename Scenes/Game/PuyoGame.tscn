@@ -1,15 +1,7 @@
-[gd_scene load_steps=101 format=3 uid="uid://ceg6rbarwcvi8"]
+[gd_scene load_steps=77 format=3 uid="uid://ceg6rbarwcvi8"]
 
-[ext_resource type="Texture2D" uid="uid://ddk6fpjvc7tvt" path="res://Assets/Tiles/gridTileset.png" id="1_3by7s"]
 [ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_tfcgd"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_t6ghk"]
-[ext_resource type="Texture2D" uid="uid://he26l3hfdd7e" path="res://Assets/Sprites/matrix/ffield.png" id="3_82u8y"]
-[ext_resource type="PackedScene" uid="uid://4b8n5t827yci" path="res://Scenes/Objects/Puyos/BluePuyo.tscn" id="3_syxk4"]
-[ext_resource type="PackedScene" uid="uid://4t300lgrkwhu" path="res://Scenes/Objects/Puyos/GreenPuyo.tscn" id="4_0opt5"]
-[ext_resource type="PackedScene" uid="uid://dvcfytgr321jq" path="res://Scenes/Objects/Puyos/YellowPuyo.tscn" id="5_b2mlv"]
-[ext_resource type="PackedScene" uid="uid://rq2bwcbvu8p4" path="res://Scenes/Game/Player/player_puyo_drop.tscn" id="5_txj1e"]
-[ext_resource type="PackedScene" uid="uid://b526hnm8iba4l" path="res://Scenes/Objects/Puyos/RedPuyo.tscn" id="6_rg22k"]
-[ext_resource type="PackedScene" uid="uid://bn4xxyrsqwh2g" path="res://Scenes/Objects/Puyos/PurplePuyo.tscn" id="7_xer8m"]
 [ext_resource type="PackedScene" uid="uid://dhcsxdylpaexb" path="res://Scenes/Objects/Puyos/NuisancePuyo.tscn" id="10_7qs3i"]
 [ext_resource type="Texture2D" uid="uid://ytu3q106ve2l" path="res://Assets/Sprites/matrix/nextR.png" id="12_70b0l"]
 [ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/SFX/chain1.wav" id="12_w1lio"]
@@ -26,157 +18,12 @@
 [ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/SFX/damage3.wav" id="21_4thcd"]
 [ext_resource type="AudioStream" uid="uid://ccqnv7lvh8drs" path="res://Assets/SFX/allClear.wav" id="22_5khce"]
 [ext_resource type="Texture2D" uid="uid://r64olssw0i2l" path="res://Assets/Sprites/matrix/allclear.png" id="23_0my3u"]
+[ext_resource type="PackedScene" uid="uid://btjbyfyikyaim" path="res://Scenes/Game/PuyoGameBoard.tscn" id="27_awyd1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
-atlas = ExtResource("2_t6ghk")
-region = Rect2(357, 787, 70, 71)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8hdei"]
-atlas = ExtResource("2_t6ghk")
-region = Rect2(430, 792, 68, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lndgx"]
-atlas = ExtResource("2_t6ghk")
-region = Rect2(502, 792, 68, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qt50v"]
-atlas = ExtResource("2_t6ghk")
-region = Rect2(572, 793, 71, 61)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_74owv"]
-atlas = ExtResource("2_t6ghk")
-region = Rect2(644, 793, 71, 61)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wxp1r"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sl8be")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8hdei")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lndgx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qt50v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74owv")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_84oas"]
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_yjpec"]
-tile_data = PackedInt32Array(0, 1, 393216, 65536, 1, 196608, 131072, 1, 196608, 196608, 1, 262144, 262144, 1, 327680, 327680, 1, 196608, 393216, 1, 131072, 458752, 1, 196608, 524288, 1, 327680, 589824, 1, 262144, 655360, 1, 196608, 720896, 1, 393216, 393217, 1, 131072, 458753, 1, 196608, 524289, 1, 327680, 589825, 1, 262144, 655361, 1, 196608, 720897, 1, 393216, 393218, 1, 131072, 458754, 1, 196608, 524290, 1, 327680, 589826, 1, 262144, 655362, 1, 327680, 720898, 1, 393216, 655363, 1, 393216, 720899, 1, 327680, 589828, 1, 393216, 655364, 1, 327680, 720900, 1, 327680, 655365, 1, 393216, 720901, 1, 393216)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_ekafh"]
-tile_data = PackedInt32Array(0, 1, 131072, 65536, 1, 262144, 131072, 1, 131072, 196608, 1, 262144, 262144, 1, 262144, 327680, 1, 262144, 393216, 1, 131072, 458752, 1, 131072, 1, 1, 131072, 65537, 1, 131072, 131073, 1, 393216, 196609, 1, 131072, 262145, 1, 393216, 327681, 1, 393216, 393217, 1, 131072, 458753, 1, 393216, 2, 1, 393216, 65538, 1, 196608, 131074, 1, 393216, 196610, 1, 393216, 262146, 1, 196608, 327682, 1, 196608, 393218, 1, 393216, 458754, 1, 196608, 3, 1, 196608, 65539, 1, 196608, 131075, 1, 327680, 196611, 1, 196608, 262147, 1, 327680, 327683, 1, 196608, 393219, 1, 327680, 458755, 1, 327680, 131076, 1, 327680, 196612, 1, 327680, 262148, 1, 262144, 327684, 1, 262144, 393220, 1, 327680, 458756, 1, 262144, 196613, 1, 131072, 262149, 1, 131072, 327685, 1, 262144, 393221, 1, 131072, 458757, 1, 131072)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_axm23"]
-tile_data = PackedInt32Array(0, 1, 262144, 65536, 1, 393216, 131072, 1, 393216, 196608, 1, 131072, 262144, 1, 262144, 327680, 1, 393216, 393216, 1, 327680, 458752, 1, 393216, 524288, 1, 262144, 589824, 1, 131072, 655360, 1, 393216, 720896, 1, 262144, 393217, 1, 327680, 458753, 1, 393216, 524289, 1, 262144, 589825, 1, 131072, 655361, 1, 393216, 720897, 1, 262144, 393218, 1, 327680, 458754, 1, 393216, 524290, 1, 262144, 589826, 1, 131072, 655362, 1, 196608, 720898, 1, 262144, 458755, 1, 327680, 524291, 1, 131072, 589827, 1, 196608, 655363, 1, 262144, 720899, 1, 196608, 393220, 1, 327680, 458756, 1, 131072, 524292, 1, 196608, 589828, 1, 262144, 655364, 1, 196608, 720900, 1, 196608, 262149, 1, 327680, 327685, 1, 327680, 393221, 1, 131072, 458757, 1, 131072, 524293, 1, 196608, 589829, 1, 196608, 655365, 1, 262144, 720901, 1, 262144)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_l4xyi"]
-tile_data = PackedInt32Array(0, 1, 131072, 65536, 1, 262144, 131072, 1, 262144, 196608, 1, 196608, 262144, 1, 262144, 327680, 1, 327680, 393216, 1, 196608, 458752, 1, 327680, 524288, 1, 262144, 589824, 1, 196608, 655360, 1, 262144, 720896, 1, 131072, 393217, 1, 196608, 458753, 1, 327680, 524289, 1, 262144, 589825, 1, 196608, 655361, 1, 262144, 720897, 1, 131072, 393218, 1, 196608, 458754, 1, 327680, 524290, 1, 262144, 589826, 1, 196608, 655362, 1, 393216, 720898, 1, 131072, 524291, 1, 327680, 589827, 1, 393216, 655363, 1, 131072, 720899, 1, 393216, 458756, 1, 327680, 524292, 1, 393216, 589828, 1, 131072, 655364, 1, 393216, 720900, 1, 393216, 393221, 1, 327680, 458757, 1, 327680, 524293, 1, 393216, 589829, 1, 393216, 655365, 1, 131072, 720901, 1, 131072)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_665hw"]
-tile_data = PackedInt32Array(0, 1, 131072, 65536, 1, 262144, 131072, 1, 131072, 196608, 1, 131072, 262144, 1, 131072, 327680, 1, 262144, 393216, 1, 262144, 458752, 1, 262144, 262145, 1, 196608, 327681, 1, 131072, 393217, 1, 131072, 458753, 1, 131072, 262146, 1, 327680, 327682, 1, 196608, 393218, 1, 196608, 458754, 1, 196608, 196611, 1, 393216, 262147, 1, 262144, 327683, 1, 327680, 393219, 1, 327680, 458755, 1, 327680, 196612, 1, 196608, 262148, 1, 393216, 327684, 1, 262144, 393220, 1, 262144, 458756, 1, 262144, 196613, 1, 393216, 262149, 1, 393216, 327685, 1, 196608, 393221, 1, 196608, 458757, 1, 196608)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_mvya0"]
-tile_data = PackedInt32Array(131072, 1, 262144, 196608, 1, 327680, 262144, 1, 131072, 327680, 1, 327680, 393216, 1, 393216, 458752, 1, 393216, 524288, 1, 262144, 131073, 1, 393216, 196609, 1, 327680, 262145, 1, 131072, 327681, 1, 327680, 393217, 1, 393216, 458753, 1, 262144, 524289, 1, 196608, 196610, 1, 131072, 262146, 1, 196608, 327682, 1, 131072, 393218, 1, 196608, 458754, 1, 262144, 524290, 1, 196608, 196611, 1, 196608, 262147, 1, 131072, 327683, 1, 196608, 393219, 1, 393216, 458755, 1, 196608, 524291, 1, 393216, 65540, 1, 196608, 131076, 1, 196608, 196612, 1, 262144, 262148, 1, 131072, 327684, 1, 196608, 393220, 1, 327680, 458756, 1, 393216, 524292, 1, 327680, 5, 1, 131072, 65541, 1, 262144, 131077, 1, 196608, 196613, 1, 262144, 262149, 1, 262144, 327685, 1, 131072, 393221, 1, 327680, 458757, 1, 393216, 524293, 1, 327680)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_6htqq"]
-tile_data = PackedInt32Array(0, 1, 393216, 65536, 1, 131072, 131072, 1, 131072, 196608, 1, 262144, 262144, 1, 196608, 327680, 1, 327680, 393216, 1, 262144, 458752, 1, 327680, 524288, 1, 196608, 589824, 1, 262144, 655360, 1, 131072, 720896, 1, 393216, 393217, 1, 262144, 458753, 1, 327680, 524289, 1, 196608, 589825, 1, 262144, 655361, 1, 131072, 720897, 1, 393216, 393218, 1, 262144, 458754, 1, 327680, 524290, 1, 196608, 589826, 1, 262144, 655362, 1, 196608, 720898, 1, 393216, 589827, 1, 327680, 655363, 1, 393216, 720899, 1, 196608, 524292, 1, 327680, 589828, 1, 393216, 655364, 1, 196608, 720900, 1, 196608, 524293, 1, 327680, 589829, 1, 327680, 655365, 1, 393216, 720901, 1, 393216)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_jitlr"]
-tile_data = PackedInt32Array(0, 1, 327680, 65536, 1, 196608, 131072, 1, 327680, 196608, 1, 327680, 262144, 1, 393216, 327680, 1, 327680, 393216, 1, 327680, 458752, 1, 196608, 524288, 1, 196608, 589824, 1, 196608, 131073, 1, 393216, 196609, 1, 393216, 262145, 1, 131072, 327681, 1, 393216, 393217, 1, 131072, 458753, 1, 327680, 524289, 1, 327680, 589825, 1, 327680, 262146, 1, 131072, 327682, 1, 131072, 393218, 1, 262144, 458754, 1, 131072, 524290, 1, 131072, 589826, 1, 131072, 327683, 1, 262144, 393219, 1, 393216, 458755, 1, 262144, 524291, 1, 262144, 589827, 1, 262144, 327684, 1, 196608, 393220, 1, 262144, 458756, 1, 393216, 524292, 1, 393216, 589828, 1, 393216, 327685, 1, 262144, 393221, 1, 262144, 458757, 1, 196608, 524293, 1, 196608, 589829, 1, 196608)
-
-[sub_resource type="TileMapPattern" id="TileMapPattern_vu4dv"]
-tile_data = PackedInt32Array(0, 1, 327680, 65536, 1, 196608, 131072, 1, 196608, 196608, 1, 196608, 1, 1, 393216, 65537, 1, 327680, 131073, 1, 327680, 196609, 1, 327680, 2, 1, 262144, 65538, 1, 393216, 131074, 1, 393216, 196610, 1, 393216, 3, 1, 131072, 65539, 1, 262144, 131075, 1, 262144, 196611, 1, 262144, 65540, 1, 131072, 131076, 1, 131072, 196612, 1, 131072)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3prtr"]
-texture = ExtResource("1_3by7s")
-texture_region_size = Vector2i(58, 59)
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-4:0/0 = 0
-4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:0/0/physics_layer_0/angular_velocity = 0.0
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-3:1/0 = 0
-3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-4:1/0 = 0
-4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:1/0/physics_layer_0/angular_velocity = 0.0
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-5:0/0 = 0
-5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:0/0/physics_layer_0/angular_velocity = 0.0
-5:1/0 = 0
-5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:1/0/physics_layer_0/angular_velocity = 0.0
-6:0/0 = 0
-6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:0/0/physics_layer_0/angular_velocity = 0.0
-6:1/0 = 0
-6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-29, -29, 29, -29, 29, 29, -29, 29)
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ip3n8"]
-scenes/1/scene = ExtResource("5_txj1e")
-scenes/2/scene = ExtResource("3_syxk4")
-scenes/3/scene = ExtResource("4_0opt5")
-scenes/4/scene = ExtResource("5_b2mlv")
-scenes/5/scene = ExtResource("6_rg22k")
-scenes/6/scene = ExtResource("7_xer8m")
-scenes/8/scene = ExtResource("10_7qs3i")
-
-[sub_resource type="TileSet" id="TileSet_nr84w"]
-tile_size = Vector2i(58, 58)
-physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_3prtr")
-sources/1 = SubResource("TileSetScenesCollectionSource_ip3n8")
-pattern_0 = SubResource("TileMapPattern_yjpec")
-pattern_1 = SubResource("TileMapPattern_ekafh")
-pattern_2 = SubResource("TileMapPattern_axm23")
-pattern_3 = SubResource("TileMapPattern_l4xyi")
-pattern_4 = SubResource("TileMapPattern_665hw")
-pattern_5 = SubResource("TileMapPattern_mvya0")
-pattern_6 = SubResource("TileMapPattern_6htqq")
-pattern_7 = SubResource("TileMapPattern_jitlr")
-pattern_8 = SubResource("TileMapPattern_vu4dv")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8qti"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_no4om"]
 atlas = ExtResource("13_5h8ft")
@@ -743,6 +590,11 @@ MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 0
 Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgy5h"]
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+
 [sub_resource type="LabelSettings" id="LabelSettings_rx3dw"]
 font_size = 44
 outline_size = 6
@@ -829,55 +681,32 @@ playerColor = Color(0, 0.713726, 0.996078, 1)
 feverMode = true
 metadata/_edit_horizontal_guides_ = [-51.0]
 
-[node name="Background" type="ColorRect" parent="."]
-offset_left = 36.0
-offset_top = 36.0
-offset_right = 312.0
-offset_bottom = 574.0
-color = Color(0.164706, 0.164706, 0.164706, 1)
+[node name="GamePanel" type="Panel" parent="."]
+offset_left = 31.0
+offset_top = 32.0
+offset_right = 318.0
+offset_bottom = 577.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d8qti")
 
-[node name="CharacterBackground" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.501961)
-offset_left = 36.0
-offset_top = 36.0
-offset_right = 312.0
-offset_bottom = 574.0
+[node name="GameContainer" type="SubViewportContainer" parent="GamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = -13.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
-[node name="FeverBackground" type="TextureRect" parent="."]
-visible = false
-offset_left = 43.0
-offset_top = 44.0
-offset_right = 312.0
-offset_bottom = 572.0
-texture = ExtResource("3_82u8y")
+[node name="GameView" type="SubViewport" parent="GamePanel/GameContainer"]
+handle_input_locally = false
+size = Vector2i(261, 522)
+render_target_update_mode = 4
 
-[node name="LoseTiles" type="Node2D" parent="."]
-
-[node name="LoseTileSprite" type="AnimatedSprite2D" parent="LoseTiles"]
-position = Vector2(152, 65)
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_wxp1r")
-frame_progress = 0.255278
-
-[node name="LoseCollision" type="ShapeCast2D" parent="LoseTiles/LoseTileSprite"]
-shape = SubResource("RectangleShape2D_84oas")
-target_position = Vector2(0, 0)
-
-[node name="TileMap" type="TileMap" parent="."]
-position = Vector2(44, 44)
-scale = Vector2(0.75, 0.75)
-tile_set = SubResource("TileSet_nr84w")
-format = 2
-layer_0/name = "Grid"
-layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, 786432, 196608, 0, -65535, 65536, 0, 786433, 196608, 0, -65534, 65536, 0, 786434, 196608, 0, 786435, 196608, 0, -65532, 65536, 0, 786436, 196608, 0, -65531, 65536, 0, 786437, 196608, 0, 6, 262144, 0, 65542, 262144, 0, 131078, 262144, 0, 196614, 262144, 0, 262150, 262144, 0, 327686, 262144, 0, 393222, 262144, 0, 458758, 262144, 0, 524294, 262144, 0, 589830, 262144, 0, 655366, 262144, 0, 720902, 262144, 0, 851967, 196608, 1, 786438, 262144, 1, -1, 65536, 1, -65530, 131072, 1, -65533, 65536, 0, 786439, 0, 1, 720903, 0, 1, 655367, 0, 1, 589831, 0, 1, 524295, 0, 1, 458759, 0, 1, 393223, 0, 1, 327687, 0, 1, 262151, 0, 1, 196615, 0, 1, 131079, 0, 1, 65543, 0, 1, 7, 0, 1, 851975, 0, 1, 851974, 0, 1, 851973, 0, 1, 851972, 0, 1, 851971, 0, 1, 851970, 0, 1, 851969, 0, 1, 851968, 0, 1, 917503, 0, 1, 917502, 0, 1, 851966, 0, 1, 786430, 0, 1, 720894, 0, 1, 655358, 0, 1, 589822, 0, 1, 524286, 0, 1, 458750, 0, 1, 393214, 0, 1, 327678, 0, 1, 262142, 0, 1, 196606, 0, 1, 131070, 0, 1, 65534, 0, 1, -65529, 0, 1, -2, 0, 1)
-layer_1/name = "Puyos"
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
-layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(-131070, 1, 65536)
+[node name="PuyoGameBoard" parent="GamePanel/GameContainer/GameView" instance=ExtResource("27_awyd1")]
 
 [node name="FeverGauge" type="Control" parent="."]
 layout_mode = 3
@@ -1671,6 +1500,7 @@ offset_top = 577.0
 offset_right = 318.0
 offset_bottom = 621.0
 theme = SubResource("Theme_ef3rp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hgy5h")
 
 [node name="ScoreLabel" type="Label" parent="ScorePanel"]
 layout_mode = 0
@@ -1733,27 +1563,6 @@ stream = ExtResource("20_gkmbh")
 
 [node name="Damage3" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
 stream = ExtResource("21_4thcd")
-
-[node name="NuisanceSpawns" type="Node2D" parent="."]
-position = Vector2(-3, 0)
-
-[node name="0" type="Marker2D" parent="NuisanceSpawns"]
-position = Vector2(63, 21)
-
-[node name="1" type="Marker2D" parent="NuisanceSpawns"]
-position = Vector2(108, 21)
-
-[node name="2" type="Marker2D" parent="NuisanceSpawns"]
-position = Vector2(152, 21)
-
-[node name="3" type="Marker2D" parent="NuisanceSpawns"]
-position = Vector2(254, 21)
-
-[node name="4" type="Marker2D" parent="NuisanceSpawns"]
-position = Vector2(298, 21)
-
-[node name="5" type="Marker2D" parent="NuisanceSpawns"]
-position = Vector2(344, 21)
 
 [node name="AllClear" type="Sprite2D" parent="."]
 position = Vector2(172, 247)
