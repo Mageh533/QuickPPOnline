@@ -11,6 +11,51 @@
 [ext_resource type="PackedScene" uid="uid://dhcsxdylpaexb" path="res://Scenes/Objects/Puyos/NuisancePuyo.tscn" id="9_qjqig"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="10_2yvtj"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
+atlas = ExtResource("10_2yvtj")
+region = Rect2(357, 787, 70, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hdei"]
+atlas = ExtResource("10_2yvtj")
+region = Rect2(430, 792, 68, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lndgx"]
+atlas = ExtResource("10_2yvtj")
+region = Rect2(502, 792, 68, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt50v"]
+atlas = ExtResource("10_2yvtj")
+region = Rect2(572, 793, 71, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74owv"]
+atlas = ExtResource("10_2yvtj")
+region = Rect2(644, 793, 71, 61)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n3sbx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl8be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hdei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lndgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt50v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74owv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gepfl"]
+
 [sub_resource type="TileMapPattern" id="TileMapPattern_yjpec"]
 tile_data = PackedInt32Array(0, 1, 393216, 65536, 1, 196608, 131072, 1, 196608, 196608, 1, 262144, 262144, 1, 327680, 327680, 1, 196608, 393216, 1, 131072, 458752, 1, 196608, 524288, 1, 327680, 589824, 1, 262144, 655360, 1, 196608, 720896, 1, 393216, 393217, 1, 131072, 458753, 1, 196608, 524289, 1, 327680, 589825, 1, 262144, 655361, 1, 196608, 720897, 1, 393216, 393218, 1, 131072, 458754, 1, 196608, 524290, 1, 327680, 589826, 1, 262144, 655362, 1, 327680, 720898, 1, 393216, 655363, 1, 393216, 720899, 1, 327680, 589828, 1, 393216, 655364, 1, 327680, 720900, 1, 327680, 655365, 1, 393216, 720901, 1, 393216)
 
@@ -117,51 +162,6 @@ pattern_6 = SubResource("TileMapPattern_6htqq")
 pattern_7 = SubResource("TileMapPattern_jitlr")
 pattern_8 = SubResource("TileMapPattern_vu4dv")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
-atlas = ExtResource("10_2yvtj")
-region = Rect2(357, 787, 70, 71)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8hdei"]
-atlas = ExtResource("10_2yvtj")
-region = Rect2(430, 792, 68, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lndgx"]
-atlas = ExtResource("10_2yvtj")
-region = Rect2(502, 792, 68, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qt50v"]
-atlas = ExtResource("10_2yvtj")
-region = Rect2(572, 793, 71, 61)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_74owv"]
-atlas = ExtResource("10_2yvtj")
-region = Rect2(644, 793, 71, 61)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n3sbx"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sl8be")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8hdei")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lndgx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qt50v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74owv")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gepfl"]
-
 [node name="PuyoGameBoard" type="Node2D"]
 
 [node name="Background" type="ColorRect" parent="."]
@@ -183,6 +183,18 @@ offset_right = 269.0
 offset_bottom = 528.0
 texture = ExtResource("1_og0bp")
 
+[node name="LoseTiles" type="Node2D" parent="."]
+position = Vector2(-44, -42)
+
+[node name="LoseTileSprite" type="AnimatedSprite2D" parent="LoseTiles"]
+position = Vector2(152, 65)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_n3sbx")
+
+[node name="LoseCollision" type="ShapeCast2D" parent="LoseTiles/LoseTileSprite"]
+shape = SubResource("RectangleShape2D_gepfl")
+target_position = Vector2(0, 0)
+
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(0.75, 0.75)
 tile_set = SubResource("TileSet_rcjkf")
@@ -196,18 +208,6 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(-131070, 1, 65536)
-
-[node name="LoseTiles" type="Node2D" parent="."]
-position = Vector2(-44, -42)
-
-[node name="LoseTileSprite" type="AnimatedSprite2D" parent="LoseTiles"]
-position = Vector2(152, 65)
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_n3sbx")
-
-[node name="LoseCollision" type="ShapeCast2D" parent="LoseTiles/LoseTileSprite"]
-shape = SubResource("RectangleShape2D_gepfl")
-target_position = Vector2(0, 0)
 
 [node name="NuisanceSpawns" type="Node2D" parent="."]
 position = Vector2(-47, -46)
