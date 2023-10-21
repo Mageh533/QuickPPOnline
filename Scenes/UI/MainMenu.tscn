@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://caeh4snxqjfaa" path="res://Scenes/Game/Solo/SoloGame.tscn" id="2_nehnh"]
 [ext_resource type="PackedScene" uid="uid://bgpmhkt3uc611" path="res://Scenes/Game/Solo/TinySoloGame.tscn" id="3_nia5t"]
 [ext_resource type="PackedScene" uid="uid://5rjlbqosjvt2" path="res://Scenes/Game/Multiplayer/MainGame.tscn" id="4_pnnny"]
-[ext_resource type="PackedScene" uid="uid://cgf7q6l8m4gs3" path="res://Scenes/Game/Multiplayer/MainFeverGame.tscn" id="5_f88r6"]
+[ext_resource type="PackedScene" uid="uid://bbty4o4wm7kcn" path="res://Scenes/Game/Multiplayer/MainFeverGame.tscn" id="5_f88r6"]
 [ext_resource type="Texture2D" uid="uid://c18tyq86m5k1o" path="res://Assets/Sprites/particles/red.png" id="5_iygt7"]
 [ext_resource type="Texture2D" uid="uid://bnh6g8rof482p" path="res://Assets/Sprites/icons/github-mark-white.svg" id="5_l3gvt"]
 [ext_resource type="Texture2D" uid="uid://b1blsckwuoghl" path="res://Assets/Sprites/particles/green.png" id="6_5k27g"]
@@ -46,14 +46,14 @@
 [sub_resource type="SystemFont" id="SystemFont_ha0fw"]
 subpixel_positioning = 0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qebv7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p1qx"]
 bg_color = Color(0.290196, 0.447059, 0.823529, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b83h"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6l8n"]
 bg_color = Color(0.14902, 0.627451, 0.972549, 1)
 border_width_left = 1
 border_width_top = 1
@@ -61,7 +61,7 @@ border_width_right = 1
 border_width_bottom = 1
 shadow_size = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4hmw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6l16"]
 bg_color = Color(0.317647, 0.513726, 0.470588, 1)
 border_width_left = 1
 border_width_top = 1
@@ -75,7 +75,7 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1b8c"]
 bg_color = Color(0, 0.713726, 0.996078, 1)
 border_width_left = 1
 border_width_top = 1
@@ -87,7 +87,7 @@ shadow_color = Color(0, 0, 0, 0.160784)
 shadow_size = 1
 shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baad8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o40qv"]
 bg_color = Color(0.509804, 0.552941, 0.980392, 1)
 border_width_left = 2
 border_width_top = 2
@@ -128,9 +128,9 @@ Button/constants/outline_size = 3
 Button/fonts/font = SubResource("SystemFont_ha0fw")
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource("StyleBoxFlat_qebv7")
-Button/styles/normal = SubResource("StyleBoxFlat_0b83h")
-Button/styles/pressed = SubResource("StyleBoxFlat_d4hmw")
+Button/styles/hover = SubResource("StyleBoxFlat_2p1qx")
+Button/styles/normal = SubResource("StyleBoxFlat_k6l8n")
+Button/styles/pressed = SubResource("StyleBoxFlat_a6l16")
 ItemList/styles/panel = SubResource("StyleBoxFlat_stvvn")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
@@ -139,8 +139,8 @@ MarginContainer/constants/margin_bottom = 0
 MarginContainer/constants/margin_left = 0
 MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 0
-Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
-PopupPanel/styles/panel = SubResource("StyleBoxFlat_baad8")
+Panel/styles/panel = SubResource("StyleBoxFlat_i1b8c")
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_o40qv")
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_bscks")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_gqn2y")
 
