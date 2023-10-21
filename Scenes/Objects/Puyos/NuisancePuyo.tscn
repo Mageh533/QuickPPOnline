@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="1_hy5h8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyw6y"]
-size = Vector2(51, 46)
+size = Vector2(57, 58)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2j6p5"]
 properties/0/path = NodePath(".:position")
