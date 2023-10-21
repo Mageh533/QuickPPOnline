@@ -1,182 +1,1584 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn4gmuydyqp6y"]
+[gd_scene load_steps=78 format=3 uid="uid://dn4gmuydyqp6y"]
 
-[ext_resource type="PackedScene" uid="uid://ceg6rbarwcvi8" path="res://Scenes/Game/PuyoGame.tscn" id="1_86dyu"]
+[ext_resource type="Script" path="res://Scripts/Game/PuyoGame.gd" id="1_fm7f2"]
+[ext_resource type="PackedScene" uid="uid://dhcsxdylpaexb" path="res://Scenes/Objects/Puyos/NuisancePuyo.tscn" id="2_61xja"]
 [ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_fkmlm"]
+[ext_resource type="PackedScene" uid="uid://c7arjhu6fxe0b" path="res://Scenes/Game/Boards/TinyPuyoGameBoard.tscn" id="3_x27x8"]
+[ext_resource type="Texture2D" uid="uid://dfq7f3msqjhcp" path="res://Assets/Sprites/matrix/fgauge.png" id="4_a5ghb"]
+[ext_resource type="Texture2D" uid="uid://ytu3q106ve2l" path="res://Assets/Sprites/matrix/nextR.png" id="5_j4asn"]
+[ext_resource type="Texture2D" uid="uid://pvmeh0cvtjed" path="res://Assets/Sprites/matrix/nextL.png" id="7_h43gm"]
+[ext_resource type="AudioStream" uid="uid://qr8xesani6t3" path="res://Assets/SFX/chain1.wav" id="8_f0jah"]
+[ext_resource type="AudioStream" uid="uid://mwxcrh8yylc6" path="res://Assets/SFX/chain2.wav" id="9_12171"]
+[ext_resource type="AudioStream" uid="uid://tvki8clelukf" path="res://Assets/SFX/chain3.wav" id="10_fmi6p"]
+[ext_resource type="AudioStream" uid="uid://gmnfjf5to2nx" path="res://Assets/SFX/chain4.wav" id="11_u8fr1"]
+[ext_resource type="AudioStream" uid="uid://i48fl00ahthh" path="res://Assets/SFX/chain5.wav" id="12_mwx3s"]
+[ext_resource type="AudioStream" uid="uid://27mspu334ol5" path="res://Assets/SFX/chain6.wav" id="13_m1afl"]
+[ext_resource type="AudioStream" uid="uid://cg4mht1v1w3dy" path="res://Assets/SFX/chain7plus.wav" id="14_iu1yk"]
+[ext_resource type="AudioStream" uid="uid://bxjndxr7gtii7" path="res://Assets/SFX/damage1.wav" id="15_468vr"]
+[ext_resource type="AudioStream" uid="uid://boqfbxkyhsey1" path="res://Assets/SFX/damage2.wav" id="16_3wptp"]
+[ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/SFX/damage3.wav" id="17_nr7rq"]
+[ext_resource type="Texture2D" uid="uid://r64olssw0i2l" path="res://Assets/Sprites/matrix/allclear.png" id="18_hs3we"]
+[ext_resource type="AudioStream" uid="uid://ccqnv7lvh8drs" path="res://Assets/SFX/allClear.wav" id="19_oi57u"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
-atlas = ExtResource("2_fkmlm")
-region = Rect2(357, 787, 70, 71)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84oas"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8hdei"]
-atlas = ExtResource("2_fkmlm")
-region = Rect2(430, 792, 68, 66)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8qti"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lndgx"]
-atlas = ExtResource("2_fkmlm")
-region = Rect2(502, 792, 68, 66)
+[sub_resource type="AtlasTexture" id="AtlasTexture_no4om"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(0, 0, 40, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qt50v"]
-atlas = ExtResource("2_fkmlm")
-region = Rect2(572, 793, 71, 61)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdvyi"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(40, 0, 40, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_74owv"]
-atlas = ExtResource("2_fkmlm")
-region = Rect2(644, 793, 71, 61)
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7kr7"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(120, 0, 40, 40)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wxp1r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_et2rh"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ect0d"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skl1a"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(40, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgx7c"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(80, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uajy8"]
+atlas = ExtResource("4_a5ghb")
+region = Rect2(120, 40, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jav3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sl8be")
+"texture": SubResource("AtlasTexture_no4om")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8hdei")
+"texture": SubResource("AtlasTexture_qdvyi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lndgx")
+"texture": SubResource("AtlasTexture_n7kr7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qt50v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74owv")
+"texture": SubResource("AtlasTexture_et2rh")
 }],
 "loop": true,
-"name": &"default",
+"name": &"BGLarge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdvyi")
+}],
+"loop": true,
+"name": &"BGMedium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et2rh")
+}],
+"loop": true,
+"name": &"BGSmall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7kr7")
+}],
+"loop": true,
+"name": &"BGSmol",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ect0d")
+}],
+"loop": true,
+"name": &"FeverLarge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skl1a")
+}],
+"loop": true,
+"name": &"FeverMedium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgx7c")
+}],
+"loop": true,
+"name": &"FeverSmall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uajy8")
+}],
+"loop": true,
+"name": &"FeverSmol",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_84oas"]
+[sub_resource type="LabelSettings" id="LabelSettings_qlnw2"]
+font_size = 32
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wec6"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(140, 360, 70, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myw6o"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(70, 360, 70, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vaq7q"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(284, 360, 71, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gcvl"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(0, 360, 70, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lvjf"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(213, 360, 71, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6d1wm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wec6")
+}],
+"loop": false,
+"name": &"BluePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myw6o")
+}],
+"loop": false,
+"name": &"GreenPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vaq7q")
+}],
+"loop": false,
+"name": &"PurplePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gcvl")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lvjf")
+}],
+"loop": false,
+"name": &"YellowPuyo",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oht6q"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(215, 858, 70, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4knmu"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(70, 936, 70, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlfed"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(355, 858, 70, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tfb2"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(70, 858, 70, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oq8p2"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(215, 936, 70, 78)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ece8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oht6q")
+}],
+"loop": true,
+"name": &"BluePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4knmu")
+}],
+"loop": true,
+"name": &"GreenPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlfed")
+}],
+"loop": true,
+"name": &"PurplePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tfb2")
+}],
+"loop": true,
+"name": &"RedPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oq8p2")
+}],
+"loop": true,
+"name": &"YellowPuyo",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8egq"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(721, 852, 80, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1axpm"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(577, 852, 82, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iwl7"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(1010, 852, 77, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et7si"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(430, 852, 86, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45uxf"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(866, 852, 78, 142)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_223gc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8egq")
+}],
+"loop": false,
+"name": &"BluePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1axpm")
+}],
+"loop": false,
+"name": &"GreenPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iwl7")
+}],
+"loop": false,
+"name": &"PurplePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et7si")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45uxf")
+}],
+"loop": false,
+"name": &"YellowPuyo",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uke6m"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(213, 360, 71, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0n2nq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wec6")
+}],
+"loop": false,
+"name": &"BluePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myw6o")
+}],
+"loop": false,
+"name": &"GreenPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vaq7q")
+}],
+"loop": false,
+"name": &"PurplePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gcvl")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uke6m")
+}],
+"loop": false,
+"name": &"YellowPuyo",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfpk1"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(428, 500, 141, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w42xa"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(649, 360, 129, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llnth"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(283, 500, 139, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tac32"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(504, 360, 125, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1kl7"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(715, 500, 142, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr0dq"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(935, 360, 133, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti2ta"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(141, 500, 136, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paro2"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(364, 360, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j20kr"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(569, 500, 141, 125)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsyc4"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(790, 360, 131, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gymys"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfpk1")
+}],
+"loop": false,
+"name": &"BluePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w42xa")
+}],
+"loop": true,
+"name": &"BluePuyoL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llnth")
+}],
+"loop": false,
+"name": &"GreenPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tac32")
+}],
+"loop": true,
+"name": &"GreenPuyoL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1kl7")
+}],
+"loop": false,
+"name": &"PurplePuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr0dq")
+}],
+"loop": true,
+"name": &"PurplePuyoL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti2ta")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paro2")
+}],
+"loop": true,
+"name": &"RedPuyoL",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j20kr")
+}],
+"loop": false,
+"name": &"YellowPuyo",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsyc4")
+}],
+"loop": true,
+"name": &"YellowPuyoL",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs3e0"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(0, 141, 64, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnhu7"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(0, 68, 66, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5cw3"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(1536, 512, 512, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqvlf"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(0, 283, 66, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkbay"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtghr"]
+atlas = ExtResource("2_fkmlm")
+region = Rect2(0, 210, 68, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqu15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs3e0")
+}],
+"loop": true,
+"name": &"BluePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnhu7")
+}],
+"loop": true,
+"name": &"GreenPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5cw3")
+}],
+"loop": true,
+"name": &"Nothing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqvlf")
+}],
+"loop": true,
+"name": &"PurplePuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkbay")
+}],
+"loop": false,
+"name": &"RedPuyo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtghr")
+}],
+"loop": true,
+"name": &"YellowPuyo",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks2fx"]
+bg_color = Color(0, 0.713726, 0.996078, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_detail = 15
+shadow_color = Color(0, 0, 0, 0.160784)
+shadow_size = 1
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="Theme" id="Theme_ef3rp"]
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+Panel/styles/panel = SubResource("StyleBoxFlat_ks2fx")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgy5h"]
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_swbwa"]
 font_size = 70
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
-[node name="PuyoGame" instance=ExtResource("1_86dyu")]
+[sub_resource type="LabelSettings" id="LabelSettings_ttl81"]
+font_size = 24
+font_color = Color(0.882353, 1, 0.054902, 1)
+outline_size = 5
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_dinbi"]
+resource_name = "all_clear"
+length = 2.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChainSoundEffects/AllClear")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("19_oi57u")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllClear:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AllClear:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(172, 247), Vector2(172, 293)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AllClear:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.64), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtlpq"]
+_data = {
+"all_clear": SubResource("Animation_dinbi")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_or1r5"]
+properties/0/path = NodePath(".:nuisanceQueue")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+
+[node name="PuyoGame" type="Node2D" groups=["Game"]]
 position = Vector2(0, -25)
+script = ExtResource("1_fm7f2")
+nuisanceTarget = 70.0
+nuisanceScene = ExtResource("2_61xja")
+playerColor = Color(0, 0.713726, 0.996078, 1)
+dropSets = true
+metadata/_edit_horizontal_guides_ = [-51.0]
 
-[node name="Background" parent="." index="0"]
-offset_top = -220.0
-offset_right = 479.0
-
-[node name="CharacterBackground" parent="." index="1"]
-offset_top = -214.0
-offset_right = 477.0
-
-[node name="FeverBackground" parent="." index="2"]
-offset_left = 39.0
-offset_top = -208.0
-offset_right = 475.0
-
-[node name="LoseTiles" parent="." index="3"]
-position = Vector2(69, -256)
-
-[node name="LoseTileSprite" parent="LoseTiles" index="0"]
-position = Vector2(165, 64)
-
-[node name="LoseTileSprite2" type="AnimatedSprite2D" parent="LoseTiles" index="1"]
-position = Vector2(209, 64)
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_wxp1r")
-frame_progress = 0.255278
-
-[node name="LoseCollision" type="ShapeCast2D" parent="LoseTiles/LoseTileSprite2" index="0"]
+[node name="LoseTiles@LoseTileSprite2@LoseCollision" type="ShapeCast2D" parent="."]
 shape = SubResource("RectangleShape2D_84oas")
 target_position = Vector2(0, 0)
 
-[node name="TileMap" parent="." index="4"]
-position = Vector2(39, -213)
-cell_quadrant_size = 18
-layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, -65535, 65536, 0, -65531, 65536, 0, -1, 65536, 1, 917503, 131072, 0, 917502, 0, 1, 851966, 0, 1, 786430, 0, 1, 720894, 0, 1, 655358, 0, 1, 589822, 0, 1, 524286, 0, 1, 458750, 0, 1, 393214, 0, 1, 327678, 0, 1, 262142, 0, 1, 196606, 0, 1, 131070, 0, 1, 65534, 0, 1, -2, 0, 1, -65530, 65536, 0, -65528, 65536, 0, -65527, 65536, 0, 10, 262144, 0, 65546, 262144, 0, 131082, 262144, 0, 196618, 262144, 0, 262154, 262144, 0, 327690, 262144, 0, 393226, 262144, 0, 458762, 262144, 0, 524298, 262144, 0, 589834, 262144, 0, 655370, 262144, 0, 720906, 262144, 0, 786442, 262144, 0, 851978, 262144, 0, 917514, 262144, 0, 983050, 262144, 0, 1048586, 262144, 0, 1114122, 262144, 0, 851967, 131072, 0, 983039, 131072, 0, 1048575, 131072, 0, 1114111, 131072, 0, 1179647, 131072, 0, -65526, 131072, 1, 1179648, 196608, 0, 1179649, 196608, 0, 1179650, 196608, 0, 1179651, 196608, 0, 1179652, 196608, 0, 1179653, 196608, 0, 1179654, 196608, 0, 1179655, 196608, 0, 1179656, 196608, 0, 1179657, 196608, 0, 1245183, 196608, 1, 1179658, 262144, 1, -65529, 65536, 0, 1179646, 0, 1, 1114110, 0, 1, 1048574, 0, 1, 983038, 0, 1, 11, 0, 1, 65547, 0, 1, 131083, 0, 1, 196619, 0, 1, 262155, 0, 1, 327691, 0, 1, 393227, 0, 1, 458763, 0, 1, 524299, 0, 1, 589835, 0, 1, 655371, 0, 1, 720907, 0, 1, 786443, 0, 1, 851979, 0, 1, 917515, 0, 1, 983051, 0, 1, 1048587, 0, 1, 1114123, 0, 1, 1179659, 0, 1, 1245182, 0, 1, -65525, 0, 1, -65533, 65536, 0, -65532, 65536, 0, -65534, 65536, 0)
-layer_1/tile_data = PackedInt32Array(-65532, 1, 65536)
+[node name="GamePanel" type="Panel" parent="."]
+offset_left = 26.0
+offset_top = -229.0
+offset_right = 487.0
+offset_bottom = 577.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d8qti")
 
-[node name="FeverGauge" parent="." index="5"]
+[node name="GameContainer" type="SubViewportContainer" parent="GamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 12.0
+offset_right = -13.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="GameView" type="SubViewport" parent="GamePanel/GameContainer"]
+handle_input_locally = false
+size = Vector2i(435, 783)
+render_target_update_mode = 4
+
+[node name="PuyoGameBoard" parent="GamePanel/GameContainer/GameView" instance=ExtResource("3_x27x8")]
+
+[node name="FeverGauge" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = -136.0
 offset_top = -139.0
 offset_right = 647.0
+offset_bottom = 577.0
 
-[node name="FeverTime" parent="FeverGauge/FeverBG2" index="7"]
-offset_left = 0.0
-offset_top = 0.0
+[node name="FeverBG1" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = 265.0
+offset_right = -22.0
+offset_bottom = 52.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGLarge"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG1"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="FeverTime" type="Label" parent="FeverGauge/FeverBG1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 107.0
+offset_right = 42.0
+offset_bottom = 155.0
+text = "15"
+label_settings = SubResource("LabelSettings_qlnw2")
+
+[node name="FeverOverlay1" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = 265.0
+offset_right = -22.0
+offset_bottom = 52.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverLarge"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay1"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
+
+[node name="FeverBG2" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -655.0
+offset_top = 267.0
+offset_right = -535.0
+offset_bottom = 54.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(-1, 1)
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGLarge"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmall"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverBG2"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"BGSmol"
+
+[node name="FeverTime" type="Label" parent="FeverGauge/FeverBG2"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 48.0
+scale = Vector2(-1, 1)
+text = "15"
+label_settings = SubResource("LabelSettings_qlnw2")
 
-[node name="PuyoDropBG1" parent="." index="6"]
+[node name="FeverOverlay2" type="Control" parent="FeverGauge"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -655.0
+offset_top = 267.0
+offset_right = -535.0
+offset_bottom = 54.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(-1, 1)
+
+[node name="Fever1" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(28, 32)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverLarge"
+
+[node name="Fever2" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(65, 79)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever3" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(89, 129)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverMedium"
+
+[node name="Fever4" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(68, 179)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever5" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(46, 220)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmall"
+
+[node name="Fever6" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(24, 257)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
+
+[node name="Fever7" type="AnimatedSprite2D" parent="FeverGauge/FeverOverlay2"]
+position = Vector2(21, 298)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0jav3")
+animation = &"FeverSmol"
+
+[node name="PuyoDropBG1" type="TextureRect" parent="."]
+clip_children = 2
 offset_left = 500.0
 offset_top = -210.0
 offset_right = 565.0
 offset_bottom = -86.0
 scale = Vector2(1.8, 1.8)
+texture = ExtResource("5_j4asn")
 expand_mode = 1
 
-[node name="PuyoVerticalSet2" parent="PuyoDropBG1" index="8"]
-position = Vector2(45.3554, 95.1444)
+[node name="SpriteSet1" type="Node2D" parent="PuyoDropBG1"]
 
-[node name="PuyoDich1Set2" parent="PuyoDropBG1" index="9"]
-position = Vector2(37.9354, 95.9444)
+[node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(25.6, 40.8)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_6d1wm")
+animation = &"RedPuyo"
 
-[node name="PuyoDich2Set2" parent="PuyoDropBG1" index="10"]
-position = Vector2(52.5556, 97.5444)
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1/PuyoVertical"]
+position = Vector2(1.66663, -28.3333)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
 
-[node name="PuyoHorizontalSet2" parent="PuyoDropBG1" index="11"]
-position = Vector2(56.5555, 109.445)
+[node name="PuyoDich1" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(21.6, 41.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
 
-[node name="PuyoMonoSet2" parent="PuyoDropBG1" index="12"]
-position = Vector2(45.9356, 91.9445)
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1/PuyoDich1"]
+position = Vector2(8.33331, -25)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
 
-[node name="Puyo1Set2" parent="PuyoDropBG1" index="13"]
-position = Vector2(46.4755, 84.8844)
+[node name="PuyoDich2" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(41.6, 43.2)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+flip_h = true
+flip_v = true
 
-[node name="Puyo2Set2" parent="PuyoDropBG1" index="14"]
-position = Vector2(46.6354, 109.344)
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1/PuyoDich2"]
+position = Vector2(-5, 35)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
 
-[node name="Puyo4Set2" parent="PuyoDropBG1" index="15"]
-position = Vector2(70.6354, 109.344)
+[node name="PuyoHorizontal" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(39.2, 57.6)
+rotation = -1.5708
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_0n2nq")
+animation = &"BluePuyo"
 
-[node name="PuyoDropBG2" parent="." index="7"]
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1/PuyoHorizontal"]
+position = Vector2(-8.33331, -28.3333)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoMono" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(29.6, 37.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_gymys")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1/PuyoMono"]
+visible = false
+position = Vector2(-32.7222, -26.9444)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="Puyo1" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(26.08, 27.84)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo2" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(26.8801, 58.24)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo4" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet1"]
+position = Vector2(57.2801, 59.04)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="SpriteSet2" type="Node2D" parent="PuyoDropBG1"]
+position = Vector2(31.2, 64.8)
+scale = Vector2(0.75, 0.75)
+
+[node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(25.6, 40.8)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_6d1wm")
+animation = &"RedPuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2/PuyoVertical"]
+position = Vector2(1.66663, -28.3333)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich1" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(21.6, 41.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2/PuyoDich1"]
+position = Vector2(8.33331, -25)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich2" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(41.6, 43.2)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+flip_h = true
+flip_v = true
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2/PuyoDich2"]
+position = Vector2(-5, 35)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoHorizontal" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(39.2, 57.6)
+rotation = -1.5708
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_0n2nq")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2/PuyoHorizontal"]
+position = Vector2(-8.33331, -28.3333)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoMono" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(29.6, 37.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_gymys")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2/PuyoMono"]
+visible = false
+position = Vector2(-32.7222, -26.9444)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="Puyo1" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(26.08, 27.84)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo2" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(26.8801, 58.24)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo4" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet2"]
+position = Vector2(57.2801, 59.04)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="SpriteSet3" type="Node2D" parent="PuyoDropBG1"]
+position = Vector2(60.8, 120.8)
+scale = Vector2(0.75, 0.75)
+
+[node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(25.6, 40.8)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_6d1wm")
+animation = &"RedPuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3/PuyoVertical"]
+position = Vector2(1.66663, -28.3333)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich1" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(21.6, 41.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3/PuyoDich1"]
+position = Vector2(8.33331, -25)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich2" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(41.6, 43.2)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+flip_h = true
+flip_v = true
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3/PuyoDich2"]
+position = Vector2(-5, 35)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoHorizontal" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(39.2, 57.6)
+rotation = -1.5708
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_0n2nq")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3/PuyoHorizontal"]
+position = Vector2(-8.33331, -28.3333)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoMono" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(29.6, 37.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_gymys")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3/PuyoMono"]
+visible = false
+position = Vector2(-32.7222, -26.9444)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="Puyo1" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(26.08, 27.84)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo2" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(26.8801, 58.24)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo4" type="AnimatedSprite2D" parent="PuyoDropBG1/SpriteSet3"]
+position = Vector2(57.2801, 59.04)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="PuyoDropBG2" type="TextureRect" parent="."]
+clip_children = 2
 offset_left = -105.0
 offset_top = -213.0
 offset_right = -40.0
 offset_bottom = -89.0
 scale = Vector2(1.8, 1.8)
+texture = ExtResource("7_h43gm")
 expand_mode = 1
 
-[node name="PuyoVerticalSet2" parent="PuyoDropBG2" index="8"]
-position = Vector2(17.5778, 90.1445)
+[node name="SpriteSet1" type="Node2D" parent="PuyoDropBG2"]
+position = Vector2(16.8, -4.8)
 
-[node name="PuyoDich1Set2" parent="PuyoDropBG2" index="9"]
-position = Vector2(10.1578, 90.9445)
+[node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(25.6, 40.8)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_6d1wm")
+animation = &"RedPuyo"
 
-[node name="PuyoDich2Set2" parent="PuyoDropBG2" index="10"]
-position = Vector2(24.7778, 92.5445)
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1/PuyoVertical"]
+position = Vector2(1.66663, -28.3333)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
 
-[node name="PuyoHorizontalSet2" parent="PuyoDropBG2" index="11"]
-position = Vector2(30.3778, 104.444)
+[node name="PuyoDich1" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(21.6, 41.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
 
-[node name="PuyoMonoSet2" parent="PuyoDropBG2" index="12"]
-position = Vector2(18.1578, 86.9444)
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1/PuyoDich1"]
+position = Vector2(8.33331, -25)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
 
-[node name="Puyo1Set2" parent="PuyoDropBG2" index="13"]
-position = Vector2(18.6978, 79.8844)
+[node name="PuyoDich2" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(41.6, 43.2)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+flip_h = true
+flip_v = true
 
-[node name="Puyo2Set2" parent="PuyoDropBG2" index="14"]
-position = Vector2(18.8577, 104.344)
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1/PuyoDich2"]
+position = Vector2(-5, 35)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
 
-[node name="Puyo4Set2" parent="PuyoDropBG2" index="15"]
-position = Vector2(42.8577, 104.344)
+[node name="PuyoHorizontal" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(39.2, 57.6)
+rotation = -1.5708
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_0n2nq")
+animation = &"BluePuyo"
 
-[node name="ScorePanel" parent="." index="8"]
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1/PuyoHorizontal"]
+position = Vector2(-8.33331, -28.3333)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoMono" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(29.6, 37.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_gymys")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1/PuyoMono"]
+visible = false
+position = Vector2(-32.7222, -26.9444)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="Puyo1" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(26.08, 27.84)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo2" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(26.8801, 58.24)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo4" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet1"]
+position = Vector2(57.2801, 59.04)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="SpriteSet2" type="Node2D" parent="PuyoDropBG2"]
+position = Vector2(1.6, 64.8)
+scale = Vector2(0.75, 0.75)
+
+[node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(25.6, 40.8)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_6d1wm")
+animation = &"RedPuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2/PuyoVertical"]
+position = Vector2(1.66663, -28.3333)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich1" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(21.6, 41.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2/PuyoDich1"]
+position = Vector2(8.33331, -25)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich2" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(41.6, 43.2)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+flip_h = true
+flip_v = true
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2/PuyoDich2"]
+position = Vector2(-5, 35)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoHorizontal" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(39.2, 57.6)
+rotation = -1.5708
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_0n2nq")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2/PuyoHorizontal"]
+position = Vector2(-8.33331, -28.3333)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoMono" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(29.6, 37.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_gymys")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2/PuyoMono"]
+visible = false
+position = Vector2(-32.7222, -26.9444)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="Puyo1" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(26.08, 27.84)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo2" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(26.8801, 58.24)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo4" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet2"]
+position = Vector2(57.2801, 59.04)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="SpriteSet3" type="Node2D" parent="PuyoDropBG2"]
+position = Vector2(-8.80001, 132.8)
+scale = Vector2(0.75, 0.75)
+
+[node name="PuyoVertical" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(25.6, 40.8)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_6d1wm")
+animation = &"RedPuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3/PuyoVertical"]
+position = Vector2(1.66663, -28.3333)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich1" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(21.6, 41.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3/PuyoDich1"]
+position = Vector2(8.33331, -25)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoDich2" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(41.6, 43.2)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_223gc")
+animation = &"BluePuyo"
+flip_h = true
+flip_v = true
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3/PuyoDich2"]
+position = Vector2(-5, 35)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoHorizontal" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(39.2, 57.6)
+rotation = -1.5708
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_0n2nq")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3/PuyoHorizontal"]
+position = Vector2(-8.33331, -28.3333)
+rotation = 1.5708
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="PuyoMono" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(29.6, 37.6)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_gymys")
+animation = &"BluePuyo"
+
+[node name="Eyes" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3/PuyoMono"]
+visible = false
+position = Vector2(-32.7222, -26.9444)
+scale = Vector2(0.85, 0.85)
+sprite_frames = SubResource("SpriteFrames_ece8a")
+animation = &"BluePuyo"
+
+[node name="Puyo1" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(26.08, 27.84)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo2" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(26.8801, 58.24)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="Puyo4" type="AnimatedSprite2D" parent="PuyoDropBG2/SpriteSet3"]
+position = Vector2(57.2801, 59.04)
+scale = Vector2(0.48, 0.48)
+sprite_frames = SubResource("SpriteFrames_oqu15")
+animation = &"BluePuyo"
+
+[node name="ScorePanel" type="Panel" parent="."]
 offset_left = 26.0
+offset_top = 577.0
 offset_right = 487.0
 offset_bottom = 662.0
+theme = SubResource("Theme_ef3rp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hgy5h")
 
-[node name="ScoreLabel" parent="ScorePanel" index="0"]
+[node name="ScoreLabel" type="Label" parent="ScorePanel"]
+layout_mode = 0
 offset_left = -2.0
 offset_top = -10.0
 offset_right = 454.0
 offset_bottom = 89.0
+text = "00000000"
 label_settings = SubResource("LabelSettings_swbwa")
+horizontal_alignment = 1
 
-[node name="NuisanceSpawns" parent="." index="12"]
-position = Vector2(-3, -268)
+[node name="ChainLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 324.0
+offset_top = 579.0
+offset_right = 417.0
+offset_bottom = 616.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0 Chain!"
+label_settings = SubResource("LabelSettings_ttl81")
+
+[node name="ChainSoundEffects" type="Node" parent="."]
+
+[node name="Chain1" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("8_f0jah")
+
+[node name="Chain2" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("9_12171")
+
+[node name="Chain3" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("10_fmi6p")
+
+[node name="Chain4" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("11_u8fr1")
+
+[node name="Chain5" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("12_mwx3s")
+
+[node name="Chain6" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("13_m1afl")
+
+[node name="Chain7" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+stream = ExtResource("14_iu1yk")
+
+[node name="AllClear" type="AudioStreamPlayer" parent="ChainSoundEffects"]
+
+[node name="MultiplayerSoundEffects" type="Node" parent="."]
+
+[node name="Damage1" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+stream = ExtResource("15_468vr")
+
+[node name="Damage2" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+stream = ExtResource("16_3wptp")
+
+[node name="Damage3" type="AudioStreamPlayer2D" parent="MultiplayerSoundEffects"]
+stream = ExtResource("17_nr7rq")
+
+[node name="AllClear" type="Sprite2D" parent="."]
+position = Vector2(172, 247)
+texture = ExtResource("18_hs3we")
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gtlpq")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_or1r5")

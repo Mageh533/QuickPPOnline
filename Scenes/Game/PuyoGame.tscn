@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://d2525op265ilk" path="res://Assets/SFX/damage3.wav" id="21_4thcd"]
 [ext_resource type="AudioStream" uid="uid://ccqnv7lvh8drs" path="res://Assets/SFX/allClear.wav" id="22_5khce"]
 [ext_resource type="Texture2D" uid="uid://r64olssw0i2l" path="res://Assets/Sprites/matrix/allclear.png" id="23_0my3u"]
-[ext_resource type="PackedScene" uid="uid://btjbyfyikyaim" path="res://Scenes/Game/PuyoGameBoard.tscn" id="27_awyd1"]
+[ext_resource type="PackedScene" uid="uid://btjbyfyikyaim" path="res://Scenes/Game/Boards/PuyoGameBoard.tscn" id="27_awyd1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8qti"]
 border_width_left = 1

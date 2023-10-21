@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7arjhu6fxe0b"]
+
+[ext_resource type="PackedScene" uid="uid://btjbyfyikyaim" path="res://Scenes/Game/Boards/PuyoGameBoard.tscn" id="1_t3yaw"]
+[ext_resource type="Texture2D" uid="uid://b1lgs81wy67hp" path="res://Assets/Sprites/puyo_aqua_spritesheet.png" id="2_butr3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl8be"]
+atlas = ExtResource("2_butr3")
+region = Rect2(357, 787, 70, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hdei"]
+atlas = ExtResource("2_butr3")
+region = Rect2(430, 792, 68, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lndgx"]
+atlas = ExtResource("2_butr3")
+region = Rect2(502, 792, 68, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt50v"]
+atlas = ExtResource("2_butr3")
+region = Rect2(572, 793, 71, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74owv"]
+atlas = ExtResource("2_butr3")
+region = Rect2(644, 793, 71, 61)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n3sbx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl8be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hdei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lndgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt50v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74owv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gepfl"]
+
+[node name="PuyoGameBoard" instance=ExtResource("1_t3yaw")]
+
+[node name="Background" parent="." index="0"]
+offset_right = 440.0
+offset_bottom = 788.0
+
+[node name="CharacterBackground" parent="." index="1"]
+offset_right = 442.0
+offset_bottom = 790.0
+
+[node name="FeverBackground" parent="." index="2"]
+offset_right = 438.0
+offset_bottom = 788.0
+
+[node name="LoseTiles" parent="." index="3"]
+position = Vector2(8, -42)
+
+[node name="LoseTileSprite" parent="LoseTiles" index="0"]
+position = Vector2(188.25, 64.625)
+
+[node name="LoseTileSprite2" type="AnimatedSprite2D" parent="LoseTiles" index="1"]
+position = Vector2(232.25, 64.625)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_n3sbx")
+
+[node name="LoseCollision" type="ShapeCast2D" parent="LoseTiles/LoseTileSprite2" index="0"]
+shape = SubResource("RectangleShape2D_gepfl")
+target_position = Vector2(0, 0)
+
+[node name="TileMap" parent="." index="4"]
+collision_visibility_mode = 1
+layer_0/tile_data = PackedInt32Array(65535, 131072, 0, 131071, 131072, 0, 196607, 131072, 0, 262143, 131072, 0, 327679, 131072, 0, 393215, 131072, 0, 458751, 131072, 0, 524287, 131072, 0, 589823, 131072, 0, 655359, 131072, 0, 720895, 131072, 0, 786431, 131072, 0, -65536, 65536, 0, -65535, 65536, 0, -65534, 65536, 0, -65532, 65536, 0, -65531, 65536, 0, -1, 65536, 1, -65530, 65536, 0, -65533, 65536, 0, 917503, 131072, 0, 917502, 0, 1, 851966, 0, 1, 786430, 0, 1, 720894, 0, 1, 655358, 0, 1, 589822, 0, 1, 524286, 0, 1, 458750, 0, 1, 393214, 0, 1, 327678, 0, 1, 262142, 0, 1, 196606, 0, 1, 131070, 0, 1, 65534, 0, 1, -65529, 65536, 0, -2, 0, 1, 851967, 131072, 0, 983039, 131072, 0, 1048575, 131072, 0, 1114111, 131072, 0, 1179647, 131072, 0, 1179648, 196608, 0, 1179649, 196608, 0, 1179650, 196608, 0, 1179651, 196608, 0, 1179652, 196608, 0, 1179653, 196608, 0, 1179654, 196608, 0, 1179655, 196608, 0, 1179657, 196608, 0, 1179656, 196608, 0, -65528, 65536, 0, -65527, 65536, 0, 10, 262144, 0, 65546, 262144, 0, 131082, 262144, 0, 196618, 262144, 0, 262154, 262144, 0, 327690, 262144, 0, 393226, 262144, 0, 458762, 262144, 0, 524298, 262144, 0, 589834, 262144, 0, 655370, 262144, 0, 720906, 262144, 0, 786442, 262144, 0, 851978, 262144, 0, 917514, 262144, 0, 983050, 262144, 0, 1048586, 262144, 0, 1114122, 262144, 0, 1179658, 262144, 1, 1245183, 196608, 1, -65526, 131072, 1, -65525, 0, 1, 11, 0, 1, 65547, 0, 1, 131083, 0, 1, 196619, 0, 1, 262155, 0, 1, 327691, 0, 1, 393227, 0, 1, 458763, 0, 1, 524299, 0, 1, 655371, 0, 1, 589835, 0, 1, 720907, 0, 1, 786443, 0, 1, 851979, 0, 1, 917515, 0, 1, 983051, 0, 1, 983038, 0, 1, 1048574, 0, 1, 1114110, 0, 1, 1179646, 0, 1, 1245182, 0, 1, 1048587, 0, 1, 1114123, 0, 1, 1179659, 0, 1)
