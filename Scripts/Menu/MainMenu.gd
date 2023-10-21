@@ -22,6 +22,7 @@ var currentMenu = MenuSets.MAIN_MENU
 const PORT = 4433
 
 func _ready():
+	get_tree().paused = false
 	$PermaUI/PauseButton.hide()
 	menuStartAnims()
 	$PermaUI/PausedPanel.hide()
