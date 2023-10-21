@@ -478,7 +478,7 @@ func spawnNuisance(nuisanceNum):
 			var spawnToUse = freeSpawnPoints[randi() % freeSpawnPoints.size()]
 			freeSpawnPoints.erase(spawnToUse)
 			nuisance.position = nuisanceSpawnPoints[spawnToUse].position + (stack * (Vector2.UP * tile_size))
-			$TileMap.add_child(nuisance)
+			$GamePanel/GameContainer/GameView/PuyoGameBoard/TileMap.add_child(nuisance)
 			nuisanceToSpawn += -1
 		else:
 			stack += 1
