@@ -27,6 +27,7 @@ var puyoSpawnsInitPos = []
 var timeOnGround = 0
 var currentPlayer = 0
 var dropsetNum = 0
+var quickRotatiom = 0
 
 var fastDrop = false
 var ceilingCollide = false
@@ -59,6 +60,8 @@ func _physics_process(delta):
 		move_and_slide()
 	
 	$SpritesTransforms.global_position.y = global_position.y
+	if quickRotatiom > 0:
+		quickRotatiom -= delta
 	
 	if (groundCollide or is_on_floor()) and !ceilingCollide:
 		timeOnGround += delta
@@ -170,7 +173,9 @@ func playerControls(controlsToUse):
 			elif !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
 				rotateOPiece(0)
 			else:
-				rotate180()
+				quickRotatiom += 1
+				if quickRotatiom >= 2:
+					rotate180()
 	if Input.is_action_just_released("p" + str(controlsToUse) + "_turnLeft"):
 		$SoundEffects/PieceRotate.play()
 		if checkForRoationClipping():
@@ -185,7 +190,9 @@ func playerControls(controlsToUse):
 			elif !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.DICH_O:
 				rotateOPiece(1)
 			else:
-				rotate180()
+				quickRotatiom += 1
+				if quickRotatiom >= 2:
+					rotate180()
 	if Input.is_action_just_pressed("p" + str(controlsToUse) + "_up"):
 		if GameManager.generalSettings.hardDrop:
 			pieceLand(true)
@@ -294,13 +301,12 @@ func checkForRoationClipping():
 	return canRotate
 
 func rotate180():
+	quickRotatiom = 0
 	var tween = get_tree().create_tween()
-	var tween2 = get_tree().create_tween()
-	var temp = $Puyo1Spawn.position
-	$Puyo1Spawn.position = $Puyo2Spawn.position
-	$Puyo2Spawn.position = temp
-	tween.tween_property($SpritesTransforms/PuyoSprite1, "position", $Puyo1Spawn.position, 0.1)
-	tween2.tween_property($SpritesTransforms/PuyoSprite2, "position", $Puyo2Spawn.position, 0.1)
+	var newRot = $SpritesTransforms.rotation + PI
+	rotate(PI)
+	$Transforms.rotate(PI)
+	tween.tween_property($SpritesTransforms, "rotation", newRot, 0.1)
 
 func rotateOPiece(dir):
 	var tween = get_tree().create_tween()
