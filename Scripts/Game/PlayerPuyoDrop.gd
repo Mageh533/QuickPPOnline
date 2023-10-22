@@ -166,7 +166,7 @@ func playerControls(controlsToUse):
 			var tween2 = get_tree().create_tween()
 			rotate(PI / 2)
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
-			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
+			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($SpritesTransforms.rotation, rotation, 1), 0.1)
 		else:
 			if !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours(0)
@@ -183,7 +183,7 @@ func playerControls(controlsToUse):
 			var tween2 = get_tree().create_tween()
 			rotate(-PI / 2)
 			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
-			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.1)
+			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($SpritesTransforms.rotation, rotation, 1), 0.1)
 		else:
 			if !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours(1)
