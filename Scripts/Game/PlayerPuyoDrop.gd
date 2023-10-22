@@ -28,6 +28,7 @@ var timeOnGround = 0
 var currentPlayer = 0
 var dropsetNum = 0
 var quickRotatiom = 0
+var xPosAtTurning = 0
 
 var fastDrop = false
 var ceilingCollide = false
@@ -39,6 +40,7 @@ var rightWallCollide = false
 var active = false
 var playerSet = false
 var interpolate = false
+var turning = false
 
 var startingPos
 var startingRot
@@ -58,6 +60,9 @@ func _physics_process(delta):
 	else:
 		velocity.y = fallSpeed * delta * (tileMap.global_scale.y * 75) * 2
 		move_and_slide()
+	
+	if turning and is_on_floor():
+		global_position.x = xPosAtTurning
 	
 	$SpritesTransforms.global_position.y = global_position.y
 	if quickRotatiom > 0:
@@ -165,8 +170,12 @@ func playerControls(controlsToUse):
 			var tween = get_tree().create_tween()
 			var tween2 = get_tree().create_tween()
 			rotate(PI / 2)
-			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
+			xPosAtTurning = global_position.x
+			turning = true
+			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.05)
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($SpritesTransforms.rotation, rotation, 1), 0.1)
+			await tween.finished
+			turning = false
 		else:
 			if !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours(0)
@@ -182,8 +191,12 @@ func playerControls(controlsToUse):
 			var tween = get_tree().create_tween()
 			var tween2 = get_tree().create_tween()
 			rotate(-PI / 2)
-			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1),0.1)
+			xPosAtTurning = global_position.x
+			turning = true
+			tween.tween_property($Transforms, "rotation", lerp_angle($Transforms.rotation, rotation, 1), 0.05)
 			tween2.tween_property($SpritesTransforms, "rotation", lerp_angle($SpritesTransforms.rotation, rotation, 1), 0.1)
+			await tween.finished
+			turning = false
 		else:
 			if !currentDropSet.is_empty() and currentDropSet[dropsetNum] == GameManager.dropSetVar.MONO_O:
 				cycleColours(1)
