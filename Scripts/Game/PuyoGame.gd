@@ -297,8 +297,8 @@ func displayPuyoQueue(bg : String, pSet : String, puyos):
 		get_node("PuyoDrop" + bg +  "/SpriteSet" + pSet +"/Puyo2").show()
 		get_node("PuyoDrop" + bg +  "/SpriteSet" + pSet +"/Puyo4").hide()
 		# Play anims
-		get_node("PuyoDrop" + bg +  "/SpriteSet" + pSet +"/Puyo1").play(puyosI[0])
-		get_node("PuyoDrop" + bg +  "/SpriteSet" + pSet +"/Puyo2").play(puyosI[1])
+		get_node("PuyoDrop" + bg +  "/SpriteSet" + pSet +"/Puyo1").play(puyosI[1])
+		get_node("PuyoDrop" + bg +  "/SpriteSet" + pSet +"/Puyo2").play(puyosI[0])
 
 func _on_next_puyo_sent(puyos):
 	if firstPuyoSet < 2:
