@@ -299,10 +299,8 @@ func rotate180():
 	var temp = $Puyo1Spawn.position
 	$Puyo1Spawn.position = $Puyo2Spawn.position
 	$Puyo2Spawn.position = temp
-	var p1 = $SpritesTransforms/PuyoSprite1.position
-	var p2 = $SpritesTransforms/PuyoSprite2.position
-	tween.tween_property($SpritesTransforms/PuyoSprite1, "position", p2, 0.1)
-	tween2.tween_property($SpritesTransforms/PuyoSprite2, "position", p1, 0.1)
+	tween.tween_property($SpritesTransforms/PuyoSprite1, "position", $Puyo1Spawn.position, 0.1)
+	tween2.tween_property($SpritesTransforms/PuyoSprite2, "position", $Puyo2Spawn.position, 0.1)
 
 func rotateOPiece(dir):
 	var tween = get_tree().create_tween()
