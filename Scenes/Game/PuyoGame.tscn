@@ -684,8 +684,8 @@ metadata/_edit_horizontal_guides_ = [-51.0]
 [node name="GamePanel" type="Panel" parent="."]
 offset_left = 31.0
 offset_top = 32.0
-offset_right = 318.0
-offset_bottom = 577.0
+offset_right = 320.0
+offset_bottom = 579.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_d8qti")
 
 [node name="GameContainer" type="SubViewportContainer" parent="GamePanel"]
@@ -703,7 +703,7 @@ stretch = true
 
 [node name="GameView" type="SubViewport" parent="GamePanel/GameContainer"]
 handle_input_locally = false
-size = Vector2i(261, 522)
+size = Vector2i(263, 524)
 render_target_update_mode = 4
 
 [node name="PuyoGameBoard" parent="GamePanel/GameContainer/GameView" instance=ExtResource("27_awyd1")]
@@ -1497,7 +1497,7 @@ animation = &"BluePuyo"
 [node name="ScorePanel" type="Panel" parent="."]
 offset_left = 31.0
 offset_top = 577.0
-offset_right = 318.0
+offset_right = 320.0
 offset_bottom = 621.0
 theme = SubResource("Theme_ef3rp")
 theme_override_styles/panel = SubResource("StyleBoxFlat_hgy5h")

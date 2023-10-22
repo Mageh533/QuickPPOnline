@@ -163,6 +163,7 @@ pattern_7 = SubResource("TileMapPattern_jitlr")
 pattern_8 = SubResource("TileMapPattern_vu4dv")
 
 [node name="PuyoGameBoard" type="Node2D"]
+position = Vector2(1, 1)
 
 [node name="Background" type="ColorRect" parent="."]
 offset_right = 276.0
