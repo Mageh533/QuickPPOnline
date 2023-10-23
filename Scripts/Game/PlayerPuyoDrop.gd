@@ -14,7 +14,6 @@ var type = "Player"
 var rng = RandomNumberGenerator.new()
 
 var topRaycasts = []
-var bottomRaycasts = []
 var leftRaycasts = []
 var rightRaycasts = []
 var currentPuyos = []
@@ -235,7 +234,6 @@ func cycleColours(dir : int):
 # Function to find out where raycasts are after rotating
 func setRayCastsPositions():
 	topRaycasts.clear()
-	bottomRaycasts.clear()
 	leftRaycasts.clear()
 	rightRaycasts.clear()
 	leftWallCollide = false
@@ -244,13 +242,11 @@ func setRayCastsPositions():
 	var currentAngle = round(transform.get_rotation())
 	if currentAngle == 2:
 		topRaycasts.append($RayCasts/RayLeft)
-		bottomRaycasts.append($RayCasts/RayRight)
 		leftRaycasts.append($RayCasts/RayBLeft)
 		leftRaycasts.append($RayCasts/RayBRight)
 		rightRaycasts.append($RayCasts/RayTLeft)
 		rightRaycasts.append($RayCasts/RayTRight)
 		topRaycasts.append($RayCasts2/RayLeft)
-		bottomRaycasts.append($RayCasts2/RayRight)
 		leftRaycasts.append($RayCasts2/RayBLeft)
 		leftRaycasts.append($RayCasts2/RayBRight)
 		rightRaycasts.append($RayCasts2/RayTLeft)
@@ -258,25 +254,17 @@ func setRayCastsPositions():
 	if currentAngle == 0:
 		topRaycasts.append($RayCasts/RayTLeft)
 		topRaycasts.append($RayCasts/RayTRight)
-		bottomRaycasts.append($RayCasts/RayBLeft)
-		bottomRaycasts.append($RayCasts/RayBRight)
 		leftRaycasts.append($RayCasts/RayLeft)
 		rightRaycasts.append($RayCasts/RayRight)
 		topRaycasts.append($RayCasts2/RayTLeft)
 		topRaycasts.append($RayCasts2/RayTRight)
-		bottomRaycasts.append($RayCasts2/RayBLeft)
-		bottomRaycasts.append($RayCasts2/RayBRight)
 		leftRaycasts.append($RayCasts2/RayLeft)
 		rightRaycasts.append($RayCasts2/RayRight)
 	if currentAngle == -2:
-		bottomRaycasts.append($RayCasts/RayRight)
-		bottomRaycasts.append($RayCasts/RayLeft)
 		rightRaycasts.append($RayCasts/RayBLeft)
 		rightRaycasts.append($RayCasts/RayBRight)
 		leftRaycasts.append($RayCasts/RayTLeft)
 		leftRaycasts.append($RayCasts/RayTRight)
-		bottomRaycasts.append($RayCasts2/RayRight)
-		bottomRaycasts.append($RayCasts2/RayLeft)
 		rightRaycasts.append($RayCasts2/RayBLeft)
 		rightRaycasts.append($RayCasts2/RayBRight)
 		leftRaycasts.append($RayCasts2/RayTLeft)
@@ -284,14 +272,10 @@ func setRayCastsPositions():
 	if currentAngle == -3 or currentAngle == 3:
 		topRaycasts.append($RayCasts/RayBLeft)
 		topRaycasts.append($RayCasts/RayBRight)
-		bottomRaycasts.append($RayCasts/RayTLeft)
-		bottomRaycasts.append($RayCasts/RayTRight)
 		rightRaycasts.append($RayCasts/RayLeft)
 		leftRaycasts.append($RayCasts/RayRight)
 		topRaycasts.append($RayCasts2/RayBLeft)
 		topRaycasts.append($RayCasts2/RayBRight)
-		bottomRaycasts.append($RayCasts2/RayTLeft)
-		bottomRaycasts.append($RayCasts2/RayTRight)
 		rightRaycasts.append($RayCasts2/RayLeft)
 		leftRaycasts.append($RayCasts2/RayRight)
 
