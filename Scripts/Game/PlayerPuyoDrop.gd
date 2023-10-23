@@ -32,7 +32,6 @@ var xPosAtTurning = 0
 
 var fastDrop = false
 var ceilingCollide = false
-var groundCollide = false
 var moveCooldown = false
 var landCooldown = false
 var leftWallCollide = false
@@ -68,7 +67,7 @@ func _physics_process(delta):
 	if quickRotatiom > 0:
 		quickRotatiom -= delta
 	
-	if (groundCollide or is_on_floor()) and !ceilingCollide:
+	if is_on_floor() and !ceilingCollide:
 		timeOnGround += delta
 		if fastDrop:
 			timeOnGround += 0.1
@@ -96,9 +95,6 @@ func _process(delta):
 	for rayCast in rightRaycasts:
 		if rayCast.is_colliding():
 			rightWallCollide = true
-	for rayCast in bottomRaycasts:
-		if rayCast.is_colliding():
-			groundCollide = true
 	for rayCast in topRaycasts:
 		if rayCast.is_colliding():
 			ceilingCollide = true
@@ -244,7 +240,6 @@ func setRayCastsPositions():
 	rightRaycasts.clear()
 	leftWallCollide = false
 	rightWallCollide = false
-	groundCollide = false
 	ceilingCollide = false
 	var currentAngle = round(transform.get_rotation())
 	if currentAngle == 2:
