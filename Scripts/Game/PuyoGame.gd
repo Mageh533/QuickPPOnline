@@ -35,6 +35,7 @@ var puyoQueueAfterPos = 3
 var loseTileTime = 0
 var chainCooldown = 0
 var nuisanceCooldown = 0
+var landCooldown = 0
 var checkChainTime = 0
 var currentChain = 0
 var leftOverNuisance = 0
@@ -113,6 +114,7 @@ func _process(delta):
 					movingPuyos = true
 		if movingPuyos or nuisanceCooldown > 0 or chainCooldown > 0 or checkForChain():
 			disablePlayer(true)
+			landCooldown = 0.2
 			if checkForChain():
 				checkChainTime += delta
 				if checkChainTime > 0.5:
@@ -125,6 +127,12 @@ func _process(delta):
 				sendNextFeverChain()
 			currentChain = 0
 			emit_signal("attacking", false)
+			disablePlayer(false)
+		
+		if landCooldown > 0:
+			landCooldown -= delta
+			disablePlayer(true)
+		else:
 			disablePlayer(false)
 
 # Check if a puyo is on the losetile, then emit a lost signal if true
