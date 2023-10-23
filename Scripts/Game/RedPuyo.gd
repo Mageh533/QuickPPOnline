@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 var tile_size = 58
-var gravityTime = 0.03
+var gravityTime = 0.05
 var gravityCooldown = 0
 
 @onready var startingScale = $PuyoSprites.scale.x
@@ -22,7 +22,7 @@ func _ready():
 
 func _process(delta):
 	if interpolate:
-		$Transform.global_position = lerp($Transform.global_position, global_position, 50 * delta)
+		$Transform.global_position.y = lerpf($Transform.global_position.y, global_position.y, 50 * delta)
 	
 	if !moving and !popped:
 		searchOtherPuyos()
