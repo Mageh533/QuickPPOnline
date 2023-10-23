@@ -16,8 +16,6 @@ signal lost
 @export var dropSets : bool
 @export var feverGauge = 0
 
-var initModulate
-
 var puyosObjectArray = []
 var puyosToPop = []
 var connectedPuyos = []
@@ -173,9 +171,6 @@ func processFeverMode(delta):
 					puyo.process_mode = Node.PROCESS_MODE_INHERIT
 					puyo.show()
 				puyoBoardStored = false
-			for i in range(feverGauge):
-				get_node('FeverGauge/FeverBG1/Fever' + str(i + 1)).modulate = initModulate
-				get_node('FeverGauge/FeverBG2/Fever' + str(i + 1)).modulate = initModulate
 			feverGauge = 0
 	else:
 		$GamePanel/GameContainer/GameView/PuyoGameBoard/FeverBackground.hide()
@@ -522,7 +517,6 @@ func disablePlayer(disable : bool):
 		get_tree().get_nodes_in_group("Player")[currentPlayer].visible = true
 
 func setPlayerColor():
-	initModulate = $FeverGauge/FeverBG1/Fever1.modulate
 	$GamePanel.self_modulate = playerColor
 	$ScorePanel.self_modulate = playerColor
 	$PuyoDropBG1.self_modulate = playerColor
