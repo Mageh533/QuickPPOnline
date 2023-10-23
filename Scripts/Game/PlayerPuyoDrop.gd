@@ -454,9 +454,9 @@ func setUpMonoLPiece(hardDrop : bool = false):
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
 	get_parent().add_child(puyo3)
-	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
@@ -478,10 +478,10 @@ func setUpMonoOPiece(hardDrop : bool = false):
 	get_parent().add_child(puyo2)
 	get_parent().add_child(puyo3)
 	get_parent().add_child(puyo4)
-	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo4.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo4.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
@@ -505,10 +505,10 @@ func setUpDichOPiece(hardDrop : bool = false):
 	get_parent().add_child(puyo2)
 	get_parent().add_child(puyo3)
 	get_parent().add_child(puyo4)
-	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo4.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo3.global_position = $Puyo3Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo4.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
@@ -529,9 +529,9 @@ func setUpVertLPiece(hardDrop : bool = false):
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
 	get_parent().add_child(puyo3)
-	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo3.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo3.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
@@ -550,9 +550,9 @@ func setUpHorLPiece(hardDrop : bool = false):
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
 	get_parent().add_child(puyo3)
-	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo3.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo3.global_position = $Puyo4Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
@@ -568,8 +568,8 @@ func setUpIPiece(hardDrop : bool = false):
 	puyo2 = currentPuyos[1].instantiate()
 	get_parent().add_child(puyo1)
 	get_parent().add_child(puyo2)
-	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1)
-	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1)
+	puyo1.global_position = $Puyo1Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
+	puyo2.global_position = $Puyo2Spawn.global_position + (Vector2.RIGHT * 1) + (Vector2.UP * 1)
 	if hardDrop:
 		puyo1.hardDrop = hardDrop
 		puyo2.hardDrop = hardDrop
