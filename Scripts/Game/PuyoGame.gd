@@ -114,7 +114,7 @@ func _process(delta):
 					movingPuyos = true
 		if movingPuyos or nuisanceCooldown > 0 or chainCooldown > 0 or checkForChain():
 			disablePlayer(true)
-			landCooldown = 0.2
+			landCooldown = 0.1
 			if checkForChain():
 				checkChainTime += delta
 				if checkChainTime > 0.5:
