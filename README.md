@@ -15,3 +15,7 @@ Building:
 This is made within Godot 4.1.x and to build simply load the project within godot and export using the web preset. Other future versions like 4.2 might break this project so I would not recommend to use any other version.
 
 This uses the normal version of godot, not mono but it wouldnt cause issues if you were to use it.
+
+Note:
+
+Assets are property of Sega and if they require me to remove them or take this entire project down I would be willing to do so.
